@@ -1,15 +1,14 @@
 package poi;
 
+import java.util.List;
+
 import calculo.Calculo;
 import usuario.Posicion;
 
-public class ParadaColectivo implements POI{
-	private Posicion posicion;
+public class ParadaColectivo extends POI{
 
-	public ParadaColectivo() {
-	}
-
-	public void setPosicion(Posicion posicion) {
+	public ParadaColectivo(List<String> etiquetas,Posicion posicion) {
+		this.etiquetas = etiquetas;
 		this.posicion = posicion;
 	}
 

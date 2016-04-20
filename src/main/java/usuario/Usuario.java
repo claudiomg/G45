@@ -25,5 +25,11 @@ public class Usuario {
 		consultas.add(unaConsulta);
 		return unaConsulta.sonCercanos(posicion, poi);
 	}
+	
+	public List<POI> buscarPOIPorPalabra(String palabra,List<POI> ListaPOIs){
+		Consulta unaConsulta = new Consulta();
+		consultas.add(unaConsulta);
+		return unaConsulta.buscarPorPalabra(palabra,ListaPOIs);
+	}
 
 }

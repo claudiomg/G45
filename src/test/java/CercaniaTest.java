@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -22,7 +23,8 @@ public class CercaniaTest {
 	Posicion posicionCinco = new Posicion(40.453, -3.703);
 	Posicion posicionSeis = new Posicion(40.400, -3.730);	
 	Usuario unUsuario = new Usuario();
-	POI unPOI = new ParadaColectivo(); 
+	List<String> etiquetasColectivo = new ArrayList<String>();
+	POI unPOI = new ParadaColectivo(etiquetasColectivo,posicionDos); 
 	List<Posicion> vertices = new ArrayList<Posicion>();
 	
 	@Before
@@ -32,6 +34,10 @@ public class CercaniaTest {
 		vertices.add(posicionDos);
 		vertices.add(posicionCuatro);
 		vertices.add(posicionCinco);
+		
+		unPOI.agregarEtiqueta("7");
+		unPOI.agregarEtiqueta("retiro");
+		unPOI.agregarEtiqueta("samore");
 	}
 
 	@Test
@@ -39,7 +45,8 @@ public class CercaniaTest {
 		//Según Google Earth a estos valores el cálculo es igual a 4,2 km
 		//Según el algoritmo utilizado 4,45 (error de solo 250 metros)
 		//Distancia entre puntos 4,45 kms
-		unPOI.setPosicion(posicionDos);
+		
+		//unPOI.setPosicion(posicionDos);
 		Assert.assertFalse(unUsuario.estoyCercaDe(unPOI));
 	}	
 
@@ -54,14 +61,16 @@ public class CercaniaTest {
 	public void unCGPEstaLejos(){
 		unUsuario.setPosicion(posicionSeis);
 		//Posicion 6 por fuera del area de cobertura del CGP
-		unPOI = new CGP(vertices); 
+		List<String> etiquetasCGP = Arrays.asList("comuna 1","retiro","san telmo","san nicolas","puerto madero","constitucion");
+		unPOI = new CGP(etiquetasCGP,null,vertices); 
 		Assert.assertFalse(unUsuario.estoyCercaDe(unPOI));
 	}	
 
 	@Test
 	public void unCGPEstaCerca(){
 		//Posicion 1 en el borde del area de cobertura del CGP
-		unPOI = new CGP(vertices); 
+		List<String> etiquetasCGP = Arrays.asList("comuna 1","retiro","san telmo","san nicolas","puerto madero","constitucion");
+		unPOI = new CGP(etiquetasCGP,null,vertices); 
 		Assert.assertTrue(unUsuario.estoyCercaDe(unPOI));
 	}
 

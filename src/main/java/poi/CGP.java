@@ -6,16 +6,13 @@ import java.util.List;
 import calculo.Calculo;
 import usuario.Posicion;
 
-public class CGP implements POI{
-	private Posicion posicion;
+public class CGP extends POI{
 	private List<Posicion> verticesComuna = new ArrayList<Posicion>();
 	
-	public CGP(List<Posicion> verticesComuna) {
-		this.verticesComuna = verticesComuna;
-	}
-
-	public void setPosicion(Posicion posicion) {
+	public CGP(List<String> etiquetas,Posicion posicion,List<Posicion> verticesComuna) {
+		this.etiquetas = etiquetas;
 		this.posicion = posicion;
+		this.verticesComuna = verticesComuna;
 	}
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){

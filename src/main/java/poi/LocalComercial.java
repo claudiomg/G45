@@ -1,5 +1,5 @@
 package poi;
 
-public interface LocalComercial extends POI{
+public abstract class LocalComercial extends POI{
 
 }

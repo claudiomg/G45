@@ -1,16 +1,14 @@
 package poi;
 
+import java.util.List;
+
 import usuario.Posicion;
 
-public class SucursalBanco implements POI{
+public class SucursalBanco extends POI{
 	
-	private Posicion posicion;
-
-	public void setPosicion(Posicion posicion) {
+	public SucursalBanco(List<String> etiquetas,Posicion posicion) {
+		this.etiquetas = etiquetas;
 		this.posicion = posicion;
 	}
 
-	public boolean estaCercaDe(Posicion posicion){
-		return true;
-	};
 }
