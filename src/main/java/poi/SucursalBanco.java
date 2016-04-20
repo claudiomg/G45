@@ -6,14 +6,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import calculo.Calculo;
 import usuario.Posicion;
 
 public class SucursalBanco extends POI{
 	
-	private ArrayList<DayOfWeek> diasDeAtencion;
+	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
 	private LocalTime horaCierre;
 	private LocalTime horaApertura;
-	
+
 	public SucursalBanco(List<String> etiquetas,Posicion posicion) {
 		this.etiquetas = etiquetas;
 		this.posicion = posicion;
@@ -45,7 +46,8 @@ public class SucursalBanco extends POI{
 				unaFechaHora.getMinute(),
 				unaFechaHora.getSecond()
 				);
-		return ((this.getHoraApertura().isBefore(horaActual) ) && (this.getHoraCierre().isAfter(horaActual)));
+		return ((this.getHoraApertura().isBefore(horaActual) || this.getHoraApertura().equals(horaActual)) 
+				&& (this.getHoraCierre().isAfter(horaActual) || this.getHoraCierre().equals(horaActual)));
 	}
 	private LocalTime getHoraCierre() {
 		return this.horaCierre;

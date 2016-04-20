@@ -3,6 +3,7 @@ package poi;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import calculo.Calculo;
 import usuario.Posicion;
 
 public abstract class POI {
@@ -11,8 +12,10 @@ public abstract class POI {
 
 	public POI() {
 	}
-	public boolean estaCercaDe(Posicion posicion){
-		return true;
+	
+	public boolean estaCercaDe(Posicion posicionUsuario){
+		double distancia = Calculo.distanciaEnKilometros(this.posicion, posicionUsuario);
+		return distancia < 0.5;
 	}
 	
 	public List<String> getEtiquetas(){
@@ -30,4 +33,5 @@ public abstract class POI {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }

@@ -16,24 +16,29 @@ public class Calculo {
 		distancia = distancia * 1.609344;
 		return (distancia);
 	}
-
-	public static boolean coordenadasEnComuna(List<Posicion> zona, Posicion posicion) {
-		int i, j;
-	    boolean dentro = false;
-	    //create an array of coordinates from the region boundary list
-//	    Posicion[] verts = zona.getBoundary().toArray(new Posicion[zona.size()]);
-	    Posicion[] vertices = new Posicion[zona.size()];
-	    vertices = zona.toArray(vertices);
-	    int sides = vertices.length;
-	    for (i = 0, j = sides - 1; i < sides; j = i++) {
-	    	//verifying if your coordinate is inside your region
-	        if ((((vertices[i].getLongitud() <= posicion.getLongitud()) && (posicion.getLongitud() < vertices[j].getLongitud())
-	                 ) || ((vertices[j].getLongitud() <= posicion.getLongitud()) && (posicion.getLongitud() < vertices[i].getLongitud()))) 
-	        		&& (posicion.getLatitud() < (vertices[j].getLatitud() - vertices[i].getLatitud()) * 
-	        				(posicion.getLongitud() - vertices[i].getLongitud()) / (vertices[j].getLongitud() - vertices[i].getLongitud()) + vertices[i].getLatitud())) {
-	                dentro = !dentro;
-	            }
-	        }
-	        return dentro;
-	    }
+	
+	public static boolean coordenadasEnComuna(List<Posicion> vertices, Posicion tap) {
+        int intersectCount = 0;
+        for(int j=0; j<vertices.size()-1; j++) {
+            if( LineIntersect(tap, vertices.get(j), vertices.get(j+1)) ) {
+                intersectCount++;
+            }
+        }
+        return (intersectCount%2) == 1; // odd = inside, even = outside;
+    }
+    
+	public static boolean LineIntersect(Posicion tap, Posicion vertA, Posicion vertB) {
+        double aY = vertA.getLatitud();
+        double bY = vertB.getLatitud();
+        double aX = vertA.getLongitud();
+        double bX = vertB.getLongitud();
+        double pY = tap.getLatitud();
+        double pX = tap.getLongitud();
+        if ( (aY>pY && bY>pY) || (aY<pY && bY<pY) || (aX<pX && bX<pX) ) {
+            return false; }
+        double m = (aY-bY) / (aX-bX);               
+        double bee = (-aX) * m + aY;                // y = mx + b
+        double x = (pY - bee) / m;                 
+        return x > pX;
+    }	
 }
