@@ -16,7 +16,7 @@ public class DisponiblidadParadaColectivoTest {
 	
 	ArrayList<String> arrayEtiquetas = new ArrayList<String>();
 	Posicion unaPosicion = new Posicion(40.417, -3.703);
-	POI unaParadaDeColectivo = new ParadaColectivo(arrayEtiquetas,unaPosicion);
+	ParadaColectivo unaParadaDeColectivo = new ParadaColectivo(arrayEtiquetas,unaPosicion);
 	LocalDateTime unaHora;
 	
 	@Test
