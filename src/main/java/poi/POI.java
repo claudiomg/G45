@@ -1,5 +1,6 @@
 package poi;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import usuario.Posicion;
@@ -24,5 +25,9 @@ public abstract class POI {
 
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
+	}
+	public boolean estaDisponible(LocalDateTime unaHora) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

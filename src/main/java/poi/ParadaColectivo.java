@@ -1,5 +1,6 @@
 package poi;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import calculo.Calculo;
@@ -16,5 +17,9 @@ public class ParadaColectivo extends POI{
 		double distancia = Calculo.distanciaEnKilometros(this.posicion, posicionUsuario);
 		return distancia < 0.1;
 	};
+	public boolean estaDisponible(LocalDateTime unaHora) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }
