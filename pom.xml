@@ -24,5 +24,26 @@
       		<version>4.12</version>
       		<scope>test</scope>
     	</dependency>
+    	<dependency>
+    		<groupId>org.uqbar-project</groupId>
+    		<artifactId>jpa-java8-extras</artifactId>
+    		<version>1.0-alpha-1</version>
+    	</dependency>
+     	<dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<version>5.1.26</version>
+    	</dependency>
+		<!-- UI dependencies -->
+		<dependency>
+	    	<groupId>com.sparkjava</groupId>
+	    	<artifactId>spark-core</artifactId>
+	    	<version>2.2</version>
+		</dependency>	
+		<dependency>
+	    	<groupId>com.sparkjava</groupId>
+	    	<artifactId>spark-template-handlebars</artifactId>
+	    	<version>2.3</version>
+		</dependency>
   </dependencies>
 </project>
