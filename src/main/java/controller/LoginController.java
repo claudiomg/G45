@@ -22,7 +22,7 @@ public class LoginController implements WithGlobalEntityManager{
 				.createQuery("from Usuario u where u.login like :login and u.password = :password", Usuario.class) 
 				.setParameter("login", "%" + nombreUsuario + "%") //
 				.setParameter("password", passwordUsuario)
-				.getResultList()) != null){		
+				.getResultList().size()) != 0){	
 			return new ModelAndView(viewModel, "loginSuccess.html");
 		}
 		else {
