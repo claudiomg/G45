@@ -14,7 +14,9 @@ import poi.Kiosco;
 import poi.LibreriaEscolar;
 import poi.POI;
 import poi.ParadaColectivo;
+import poi.RepositorioPOI;
 import poi.SucursalBanco;
+import usuario.Consulta;
 import usuario.Posicion;
 import usuario.Usuario;
 
@@ -28,6 +30,8 @@ public class CercaniaCGPTest {
 	Posicion posicionSeis = new Posicion(40.430, 3.69);
 	Posicion posicionSiete = new Posicion(40.417, 3.69);	
 	Usuario unUsuario = new Usuario();
+	RepositorioPOI repositorio;
+	Consulta unaConsulta = new Consulta(repositorio);
 	List<Posicion> vertices = new ArrayList<Posicion>();
 	List<String> etiquetasCGP = Arrays.asList("comuna 1","puerto madero","constitucion");
 	POI cgp = new CGP(etiquetasCGP, posicionUno, vertices);
@@ -35,6 +39,7 @@ public class CercaniaCGPTest {
 	@Before
 	public void inicializarEscenario(){
 		unUsuario.setPosicion(posicionSiete);
+		unUsuario.agregarConsulta(unaConsulta);
 		vertices.add(posicionUno);
 		vertices.add(posicionDos);
 		vertices.add(posicionCuatro);

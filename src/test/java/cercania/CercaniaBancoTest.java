@@ -7,7 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import poi.POI;
+import poi.RepositorioPOI;
 import poi.SucursalBanco;
+import usuario.Consulta;
 import usuario.Posicion;
 import usuario.Usuario;
 
@@ -16,12 +18,15 @@ public class CercaniaBancoTest {
 	Posicion posicionSucursal = new Posicion(40.417, 3.703);
 	Posicion posicionUsuario = new Posicion(40.453, 3.68);		
 	Usuario unUsuario = new Usuario();
+	RepositorioPOI repositorio;
+	Consulta unaConsulta = new Consulta(repositorio);
 	List<String> etiquetas = new ArrayList<String>();
 	POI sucursal = new SucursalBanco(etiquetas, posicionSucursal); 
 	
 	@Before
 	public void inicializarEscenario(){
 		unUsuario.setPosicion(posicionUsuario);
+		unUsuario.agregarConsulta(unaConsulta);
 	}
 
 	@Test

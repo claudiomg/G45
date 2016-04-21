@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,18 +12,15 @@ import poi.CGP;
 import poi.Kiosco;
 import poi.POI;
 import poi.ParadaColectivo;
+import poi.RepositorioPOI;
+import usuario.Consulta;
 import usuario.Posicion;
 import usuario.Usuario;
 
-
 public class BuscarPorNombreTest {
 
-	Posicion posicionUno = new Posicion(40.417, -3.703);
-	Posicion posicionDos = new Posicion(40.453, -3.68);		
-	Posicion posicionTres = new Posicion(40.417, -3.702);
-	Posicion posicionCuatro = new Posicion(40.417, -3.68);
+	RepositorioPOI repositorio = RepositorioPOI.getInstance();
 	Usuario unUsuario = new Usuario();
-	ArrayList<POI> ListaPuntos = new ArrayList<POI>();
 	
 	ArrayList<String> etiquetasColectivo = new ArrayList<String>();
 	ArrayList<String> etiquetasCGP = new ArrayList<String>();
@@ -34,38 +32,49 @@ public class BuscarPorNombreTest {
 	
 	@Before
 	public void inicializar(){
-
-
 		paradaColectivo.agregarEtiqueta("7");
 		paradaColectivo.agregarEtiqueta("retiro");
-		paradaColectivo.agregarEtiqueta("samore");
-		
+		paradaColectivo.agregarEtiqueta("samore");		
 		CGP1.agregarEtiqueta("comuna 7");
 		CGP1.agregarEtiqueta("flores");
-		CGP1.agregarEtiqueta("parque chacabuco");
-		
+		CGP1.agregarEtiqueta("parque chacabuco");		
 		kiosco.etiquetas = etiquetasKiosco;
 		kiosco.agregarEtiqueta("golosinas");
 		kiosco.agregarEtiqueta("cigarrillos");
 		kiosco.agregarEtiqueta("fotocopias");
-		
-		ListaPuntos.add(paradaColectivo);
-		ListaPuntos.add(CGP1);
-		ListaPuntos.add(kiosco);
+		repositorio.agregarPOI(paradaColectivo);
+		repositorio.agregarPOI(kiosco);
+		repositorio.agregarPOI(CGP1);
+	}
+	
+	@After
+	public void vaciarRepositorio(){
+		repositorio.removerPOI(paradaColectivo);
+		repositorio.removerPOI(kiosco);
+		repositorio.removerPOI(CGP1);
 	}
 	
 	@Test
 	public void buscarColectivo7(){
-		Assert.assertTrue(unUsuario.buscarPOIPorPalabra("7", ListaPuntos ).contains(paradaColectivo));
+		Consulta consulta7 =  new Consulta(repositorio);
+		unUsuario.agregarConsulta(consulta7);		
+		unUsuario.buscarPOIPorPalabra("7");
+		Assert.assertEquals(unUsuario.getConsultaActiva().getPoisEncontrados().size(), 1);
 	}
 	
 	@Test
 	public void buscarPorFlores(){
-		Assert.assertTrue(unUsuario.buscarPOIPorPalabra("flores", ListaPuntos).contains(CGP1));
+		Consulta consultaFlores =  new Consulta(repositorio);
+		unUsuario.agregarConsulta(consultaFlores);		
+		unUsuario.buscarPOIPorPalabra("flores");		
+		Assert.assertEquals(unUsuario.getConsultaActiva().getPoisEncontrados().size(), 1);		
 	}
 	
 	@Test
 	public void buscarPorFotocopias(){
-		Assert.assertTrue(unUsuario.buscarPOIPorPalabra("fotocopias", ListaPuntos).contains(kiosco));
+		Consulta consultaFotocopias =  new Consulta(repositorio);
+		unUsuario.agregarConsulta(consultaFotocopias);		
+		unUsuario.buscarPOIPorPalabra("fotocopias");		
+		Assert.assertEquals(unUsuario.getConsultaActiva().getPoisEncontrados().size(), 1);		
 	}
 }

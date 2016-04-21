@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import poi.POI;
 import poi.ParadaColectivo;
+import poi.RepositorioPOI;
+import usuario.Consulta;
 import usuario.Posicion;
 import usuario.Usuario;
 
@@ -16,6 +18,8 @@ public class CercanicaParadaColectivoTest {
 
 	Posicion posicionParada = new Posicion(40.417, -3.703);
 	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
+	RepositorioPOI repositorio;
+	Consulta unaConsulta = new Consulta(repositorio);
 	Usuario unUsuario = new Usuario();
 	List<String> etiquetas = new ArrayList<String>();
 	POI parada = new ParadaColectivo(etiquetas, posicionParada); 
@@ -23,6 +27,7 @@ public class CercanicaParadaColectivoTest {
 	@Before
 	public void inicializarEscenario(){
 		unUsuario.setPosicion(posicionUsuario);
+		unUsuario.agregarConsulta(unaConsulta);
 	}
 
 	@Test

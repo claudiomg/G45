@@ -8,6 +8,7 @@ import poi.POI;
 public class Usuario {
 	private Posicion posicion;
 	private static List<Consulta> consultas = new ArrayList<Consulta>();
+	private Consulta consultaActiva;
 
 	public Usuario() {
 	}
@@ -21,15 +22,19 @@ public class Usuario {
 	}
 
 	public boolean estoyCercaDe(POI poi) {
-		Consulta unaConsulta = new Consulta();
-		consultas.add(unaConsulta);
-		return unaConsulta.sonCercanos(posicion, poi);
-	}
-	
-	public List<POI> buscarPOIPorPalabra(String palabra,List<POI> ListaPOIs){
-		Consulta unaConsulta = new Consulta();
-		consultas.add(unaConsulta);
-		return unaConsulta.buscarPorPalabra(palabra,ListaPOIs);
+		return this.consultaActiva.sonCercanos(this.posicion, poi);
 	}
 
+	public void buscarPOIPorPalabra(String palabra){
+		this.consultaActiva.buscarPorPalabra(palabra);
+	}
+	
+	public Consulta getConsultaActiva() {
+		return consultaActiva;
+	}
+
+	public void agregarConsulta(Consulta unaConsulta){
+		consultas.add(unaConsulta);
+		this.consultaActiva = unaConsulta;
+	}
 }

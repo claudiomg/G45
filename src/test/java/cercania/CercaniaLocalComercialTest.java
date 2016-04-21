@@ -12,6 +12,8 @@ import poi.CGP;
 import poi.Kiosco;
 import poi.LibreriaEscolar;
 import poi.POI;
+import poi.RepositorioPOI;
+import usuario.Consulta;
 import usuario.Posicion;
 import usuario.Usuario;
 
@@ -20,6 +22,8 @@ public class CercaniaLocalComercialTest {
 	Posicion posicionLocal = new Posicion(40.417, -3.703);
 	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
 	Usuario unUsuario = new Usuario();
+	RepositorioPOI repositorio;
+	Consulta unaConsulta = new Consulta(repositorio);
 	List<String> etiquetas = new ArrayList<String>();
 	POI kiosco = new Kiosco();
 	POI libreria = new LibreriaEscolar();
@@ -27,6 +31,7 @@ public class CercaniaLocalComercialTest {
 	@Before
 	public void inicializarEscenario(){
 		unUsuario.setPosicion(posicionUsuario);
+		unUsuario.agregarConsulta(unaConsulta);
 	}
 
 	@Test
