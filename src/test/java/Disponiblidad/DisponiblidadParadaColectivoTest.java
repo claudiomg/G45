@@ -1,14 +1,11 @@
 package Disponiblidad;
 
-import java.nio.charset.UnmappableCharacterException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import poi.POI;
 import poi.ParadaColectivo;
 import usuario.Posicion;
 
