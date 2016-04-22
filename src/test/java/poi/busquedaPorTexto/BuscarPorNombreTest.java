@@ -1,4 +1,4 @@
-package busquedaPorTexto;
+package poi.busquedaPorTexto;
 import java.util.ArrayList;
 
 import org.junit.After;

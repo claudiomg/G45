@@ -1,4 +1,4 @@
-package cercania;
+package poi.calculoDeCercania;
 import java.util.ArrayList;
 import java.util.List;
 
