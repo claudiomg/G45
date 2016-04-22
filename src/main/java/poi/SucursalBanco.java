@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import G45.Utilidades.TimeRange;
 import usuario.Posicion;
 
 public class SucursalBanco extends POI{
 	
 	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
-	private LocalTime horaCierre;
-	private LocalTime horaApertura;
+	private TimeRange horarioDeAtencion;
 
 	public SucursalBanco(List<String> etiquetas,Posicion posicion) {
 		this.etiquetas = etiquetas;
@@ -21,14 +22,10 @@ public class SucursalBanco extends POI{
 		this.agregarDiaDeAtencion(DayOfWeek.WEDNESDAY);
 		this.agregarDiaDeAtencion(DayOfWeek.THURSDAY);
 		this.agregarDiaDeAtencion(DayOfWeek.FRIDAY);
-		this.setHoraApertura(LocalTime.of(10,0,0));
-		this.setHoraCierre(LocalTime.of(15,0,0));
+		this.setHorarioDeAtencion(new TimeRange(LocalTime.of(10,0,0),LocalTime.of(15,00,0)));
 	}
-	private void setHoraCierre(LocalTime hora) {
-		this.horaCierre = hora;		
-	}
-	private void setHoraApertura(LocalTime hora) {
-		this.horaApertura = hora;
+	private void setHorarioDeAtencion(TimeRange timeRange) {
+		this.horarioDeAtencion = timeRange;
 	}
 	private void agregarDiaDeAtencion(DayOfWeek unDia) {
 		this.diasDeAtencion.add(unDia);
@@ -44,14 +41,10 @@ public class SucursalBanco extends POI{
 				unaFechaHora.getMinute(),
 				unaFechaHora.getSecond()
 				);
-		return ((this.getHoraApertura().isBefore(horaActual) || this.getHoraApertura().equals(horaActual)) 
-				&& (this.getHoraCierre().isAfter(horaActual) || this.getHoraCierre().equals(horaActual)));
+		return (this.getHorarioDeAtencion().isValidValue(horaActual));
 	}
-	private LocalTime getHoraCierre() {
-		return this.horaCierre;
-	}
-	private LocalTime getHoraApertura() {
-		return this.horaApertura;
+	private TimeRange getHorarioDeAtencion() {
+		return this.horarioDeAtencion;
 	}
 	private boolean esUnDiaDisponible(LocalDateTime unaFechaHora) {
 		return this.getDiasDeAtencion().contains(unaFechaHora.getDayOfWeek());
