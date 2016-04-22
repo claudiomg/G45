@@ -9,13 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.CGP;
-import poi.modelo.puntoDeInteres.Kiosco;
-import poi.modelo.puntoDeInteres.LibreriaEscolar;
 import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.puntoDeInteres.ParadaColectivo;
-import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Usuario;
-import poi.utilidades.Calculo;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
 import poi.utilidades.RepositorioPOI;
