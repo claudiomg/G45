@@ -1,4 +1,4 @@
-package usuario;
+package poi.modelo.usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,9 @@ import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import poi.POI;
+import poi.modelo.puntoDeInteres.POI;
+import poi.utilidades.Consulta;
+import poi.utilidades.Posicion;
 
 @Entity
 @Table(name = "usuarios")

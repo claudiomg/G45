@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import poi.CGP;
-import usuario.Posicion;
+import poi.modelo.puntoDeInteres.CGP;
+import poi.utilidades.Posicion;
 
 public class DisponiblidadCgpTest {
 	ArrayList<String> arrayEtiquetas = new ArrayList<String>();

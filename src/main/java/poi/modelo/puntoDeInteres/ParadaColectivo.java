@@ -1,10 +1,10 @@
-package poi;
+package poi.modelo.puntoDeInteres;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import calculo.Calculo;
-import usuario.Posicion;
+import poi.utilidades.Calculo;
+import poi.utilidades.Posicion;
 
 public class ParadaColectivo extends POI{
 

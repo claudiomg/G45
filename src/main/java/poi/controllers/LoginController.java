@@ -1,13 +1,13 @@
-package controller;
+package poi.controllers;
 
 import java.util.HashMap;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import poi.modelo.usuario.Usuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Usuario;
 
 public class LoginController implements WithGlobalEntityManager{
 	

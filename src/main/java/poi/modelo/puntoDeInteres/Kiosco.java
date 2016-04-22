@@ -1,4 +1,4 @@
-package poi;
+package poi.modelo.puntoDeInteres;
 
 public class Kiosco extends TipoDeLocalComercial{	
 	

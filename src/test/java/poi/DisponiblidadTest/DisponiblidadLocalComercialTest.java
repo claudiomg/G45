@@ -8,9 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import G45.Utilidades.TimeRange;
-import poi.Kiosco;
-import poi.LocalComercial;
+import poi.modelo.puntoDeInteres.Kiosco;
+import poi.modelo.puntoDeInteres.LocalComercial;
+import poi.utilidades.TimeRange;
 
 public class DisponiblidadLocalComercialTest {
 	

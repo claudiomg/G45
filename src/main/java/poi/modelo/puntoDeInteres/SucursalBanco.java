@@ -1,4 +1,4 @@
-package poi;
+package poi.modelo.puntoDeInteres;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import G45.Utilidades.TimeRange;
-import usuario.Posicion;
+import poi.utilidades.Posicion;
+import poi.utilidades.TimeRange;
 
 public class SucursalBanco extends POI{
 	

@@ -1,10 +1,10 @@
-package poi;
+package poi.modelo.puntoDeInteres;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import calculo.Calculo;
-import usuario.Posicion;
+import poi.utilidades.Calculo;
+import poi.utilidades.Posicion;
 
 public class CGP extends POI{
 	private List<Posicion> verticesComuna = new ArrayList<Posicion>();

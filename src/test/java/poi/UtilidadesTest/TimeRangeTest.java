@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import org.junit.Assert;
 import org.junit.Test;
 
-import G45.Utilidades.TimeRange;
+import poi.utilidades.TimeRange;
 
 public class TimeRangeTest {
 	LocalTime unaHora;

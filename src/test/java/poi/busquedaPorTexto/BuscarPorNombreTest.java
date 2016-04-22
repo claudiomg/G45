@@ -6,14 +6,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.CGP;
-import poi.Kiosco;
-import poi.LocalComercial;
-import poi.POI;
-import poi.ParadaColectivo;
-import poi.RepositorioPOI;
-import usuario.Consulta;
-import usuario.Usuario;
+import poi.modelo.puntoDeInteres.CGP;
+import poi.modelo.puntoDeInteres.Kiosco;
+import poi.modelo.puntoDeInteres.LocalComercial;
+import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.usuario.Usuario;
+import poi.utilidades.Consulta;
+import poi.utilidades.RepositorioPOI;
 
 public class BuscarPorNombreTest {
 

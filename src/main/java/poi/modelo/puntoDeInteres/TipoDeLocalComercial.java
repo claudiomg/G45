@@ -1,4 +1,4 @@
-package poi;
+package poi.modelo.puntoDeInteres;
 
 public abstract class TipoDeLocalComercial implements Cloneable {
 	

@@ -1,7 +1,9 @@
-package poi;
+package poi.utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import poi.modelo.puntoDeInteres.POI;
 
 public class RepositorioPOI {
 

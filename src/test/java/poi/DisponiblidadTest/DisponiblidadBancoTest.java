@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import poi.SucursalBanco;
-import usuario.Posicion;
+import poi.modelo.puntoDeInteres.SucursalBanco;
+import poi.utilidades.Posicion;
 
 public class DisponiblidadBancoTest {
 	ArrayList<String> arrayEtiquetas = new ArrayList<String>();

@@ -1,4 +1,4 @@
-package usuario;
+package poi.utilidades;
 
 public class Posicion {
 	public double latitud;

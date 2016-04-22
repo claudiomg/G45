@@ -1,13 +1,13 @@
-package poi;
+package poi.modelo.puntoDeInteres;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import G45.Utilidades.TimeRange;
-import calculo.Calculo;
-import usuario.Posicion;
+import poi.utilidades.Calculo;
+import poi.utilidades.Posicion;
+import poi.utilidades.TimeRange;
 
 public class LocalComercial extends POI{
 

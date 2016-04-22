@@ -1,4 +1,4 @@
-package main;
+package poi.utilidades;
 
 import static spark.Spark.after;
 import static spark.Spark.get;
@@ -10,10 +10,10 @@ import javax.persistence.*;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import controller.HomeController;
-import controller.LoginController;
+import poi.controllers.HomeController;
+import poi.controllers.LoginController;
+import poi.modelo.usuario.Usuario;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-import usuario.Usuario;
 
 
 public class Main implements WithGlobalEntityManager{

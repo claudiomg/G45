@@ -1,8 +1,6 @@
-package calculo;
+package poi.utilidades;
 
 import java.util.List;
-
-import usuario.Posicion;
 
 public class Calculo {
 

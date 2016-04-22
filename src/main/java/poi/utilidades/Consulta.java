@@ -1,12 +1,11 @@
-package usuario;
+package poi.utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import poi.POI;
-import poi.RepositorioPOI;
+import poi.modelo.puntoDeInteres.POI;
 
 public class Consulta {
 	

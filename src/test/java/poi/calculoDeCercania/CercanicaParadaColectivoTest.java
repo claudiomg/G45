@@ -7,12 +7,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.POI;
-import poi.ParadaColectivo;
-import poi.RepositorioPOI;
-import usuario.Consulta;
-import usuario.Posicion;
-import usuario.Usuario;
+import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.usuario.Usuario;
+import poi.utilidades.Consulta;
+import poi.utilidades.Posicion;
+import poi.utilidades.RepositorioPOI;
 
 public class CercanicaParadaColectivoTest {
 

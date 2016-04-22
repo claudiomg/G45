@@ -6,12 +6,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.POI;
-import poi.RepositorioPOI;
-import poi.SucursalBanco;
-import usuario.Consulta;
-import usuario.Posicion;
-import usuario.Usuario;
+import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.SucursalBanco;
+import poi.modelo.usuario.Usuario;
+import poi.utilidades.Consulta;
+import poi.utilidades.Posicion;
+import poi.utilidades.RepositorioPOI;
 
 public class CercaniaBancoTest {
 

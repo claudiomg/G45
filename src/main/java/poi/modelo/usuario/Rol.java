@@ -1,4 +1,4 @@
-package usuario;
+package poi.modelo.usuario;
 
 public enum Rol {
 	USUARIO, ADMINISTRADOR;

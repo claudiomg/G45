@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import poi.ParadaColectivo;
-import usuario.Posicion;
+import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.utilidades.Posicion;
 
 public class DisponiblidadParadaColectivoTest {
 	

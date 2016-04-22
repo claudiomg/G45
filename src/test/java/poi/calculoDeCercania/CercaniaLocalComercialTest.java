@@ -7,13 +7,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.Kiosco;
-import poi.LibreriaEscolar;
-import poi.LocalComercial;
-import poi.RepositorioPOI;
-import usuario.Consulta;
-import usuario.Posicion;
-import usuario.Usuario;
+import poi.modelo.puntoDeInteres.Kiosco;
+import poi.modelo.puntoDeInteres.LibreriaEscolar;
+import poi.modelo.puntoDeInteres.LocalComercial;
+import poi.modelo.usuario.Usuario;
+import poi.utilidades.Consulta;
+import poi.utilidades.Posicion;
+import poi.utilidades.RepositorioPOI;
 
 public class CercaniaLocalComercialTest {
 
