@@ -3,15 +3,17 @@ package poi;
 import calculo.Calculo;
 import usuario.Posicion;
 
-public abstract class LocalComercial extends POI{
-protected double RADIO_CERCANIA;
+public class LocalComercial extends POI{
+
+	private TipoDeLocalComercial tipo;
 	
-	public LocalComercial(){
+	public LocalComercial(TipoDeLocalComercial tipoDeLocal){
+		this.tipo = tipoDeLocal;
 	}
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
 		double distancia = Calculo.distanciaEnKilometros(this.posicion, posicionUsuario);
-		return distancia < RADIO_CERCANIA;
+		return distancia < this.tipo.getRadioDeCercania();
 	}
 	
 }

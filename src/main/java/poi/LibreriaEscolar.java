@@ -1,10 +1,8 @@
 package poi;
 
-
-public class LibreriaEscolar extends LocalComercial{
+public class LibreriaEscolar extends TipoDeLocalComercial{	
 	
-	public LibreriaEscolar(){
-	this.RADIO_CERCANIA = 0.5;
+	public LibreriaEscolar() {
+		this.setRadioDeCercania(0.5);
 	}
-
 }

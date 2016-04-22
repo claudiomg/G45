@@ -1,10 +1,8 @@
 package poi;
 
-
-public class Kiosco extends LocalComercial{	
+public class Kiosco extends TipoDeLocalComercial{	
 	
-	public Kiosco(){
-	this. RADIO_CERCANIA = 0.2;
+	public Kiosco() {
+		this.setRadioDeCercania(0.2);
 	}
-	
 }
