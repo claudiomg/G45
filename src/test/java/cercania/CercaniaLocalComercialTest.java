@@ -1,17 +1,15 @@
 package cercania;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.CGP;
 import poi.Kiosco;
 import poi.LibreriaEscolar;
-import poi.POI;
+import poi.LocalComercial;
 import poi.RepositorioPOI;
 import usuario.Consulta;
 import usuario.Posicion;
@@ -25,8 +23,8 @@ public class CercaniaLocalComercialTest {
 	RepositorioPOI repositorio;
 	Consulta unaConsulta = new Consulta(repositorio);
 	List<String> etiquetas = new ArrayList<String>();
-	POI kiosco = new Kiosco();
-	POI libreria = new LibreriaEscolar();
+	LocalComercial kiosco = new LocalComercial(new Kiosco());
+	LocalComercial libreria = new LocalComercial(new LibreriaEscolar());
 	
 	@Before
 	public void inicializarEscenario(){

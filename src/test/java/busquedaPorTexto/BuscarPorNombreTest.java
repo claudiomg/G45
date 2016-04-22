@@ -1,7 +1,5 @@
 package busquedaPorTexto;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -10,11 +8,11 @@ import org.junit.Test;
 
 import poi.CGP;
 import poi.Kiosco;
+import poi.LocalComercial;
 import poi.POI;
 import poi.ParadaColectivo;
 import poi.RepositorioPOI;
 import usuario.Consulta;
-import usuario.Posicion;
 import usuario.Usuario;
 
 public class BuscarPorNombreTest {
@@ -28,7 +26,7 @@ public class BuscarPorNombreTest {
 	
 	POI paradaColectivo = new ParadaColectivo(etiquetasColectivo,null);
 	POI CGP1 = new CGP(etiquetasCGP, null, null);
-	POI kiosco = new Kiosco();
+	LocalComercial kiosco = new LocalComercial(new Kiosco());
 	
 	@Before
 	public void inicializar(){
