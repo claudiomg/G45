@@ -25,6 +25,10 @@ public abstract class POI {
 	public void agregarEtiqueta(String etiqueta){
 		this.etiquetas.add(etiqueta);
 	}
+	
+	public void eliminarEtiqueta (String etiqueta){
+		this.etiquetas.remove(etiqueta);
+	}
 
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
@@ -32,6 +36,12 @@ public abstract class POI {
 	public boolean estaDisponible(LocalDateTime unaHora) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public void modificarAtributos (Posicion posicion, String etiqueta, String etiqueta2){
+		this.setPosicion(posicion);
+		this.agregarEtiqueta(etiqueta);
+		this.eliminarEtiqueta(etiqueta2);
 	}
 	
 }
