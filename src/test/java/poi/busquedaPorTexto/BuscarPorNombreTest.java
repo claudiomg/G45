@@ -26,7 +26,7 @@ public class BuscarPorNombreTest {
 	
 	POI paradaColectivo = new ParadaColectivo(etiquetasColectivo,null);
 	POI CGP1 = new CGP(etiquetasCGP, null, null);
-	LocalComercial kiosco = new LocalComercial(new Kiosco());
+	LocalComercial kiosco = new Kiosco();
 	
 	@Before
 	public void inicializar(){

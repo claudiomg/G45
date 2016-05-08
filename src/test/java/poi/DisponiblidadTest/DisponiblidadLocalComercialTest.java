@@ -17,7 +17,7 @@ public class DisponiblidadLocalComercialTest {
 	LocalDateTime unaFechaHora;
 	TimeRange rangoInferior = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 	TimeRange rangoSuperior = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
-	LocalComercial unKiosco = new LocalComercial(new Kiosco());
+	LocalComercial unKiosco = new Kiosco();
 	
 	@Before
 	public void inicializarEscenario(){

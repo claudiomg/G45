@@ -23,8 +23,8 @@ public class CercaniaLocalComercialTest {
 	RepositorioPOI repositorio;
 	Consulta unaConsulta = new Consulta(repositorio);
 	List<String> etiquetas = new ArrayList<String>();
-	LocalComercial kiosco = new LocalComercial(new Kiosco());
-	LocalComercial libreria = new LocalComercial(new LibreriaEscolar());
+	LocalComercial kiosco = new Kiosco();
+	LocalComercial libreria = new LibreriaEscolar();
 	
 	@Before
 	public void inicializarEscenario(){
