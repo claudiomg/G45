@@ -1,8 +1,8 @@
 package poi.modelo.puntoDeInteres;
 
-public class LibreriaEscolar extends TipoDeLocalComercial{	
+public class LibreriaEscolar extends LocalComercial{	
 	
 	public LibreriaEscolar() {
-		this.setRadioDeCercania(0.5);
+		this.RADIO_CERCANIA =0.5;
 	}
 }

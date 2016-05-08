@@ -1,8 +1,8 @@
 package poi.modelo.puntoDeInteres;
 
-public class Kiosco extends TipoDeLocalComercial{	
+public class Kiosco extends LocalComercial{	
 	
 	public Kiosco() {
-		this.setRadioDeCercania(0.2);
+		this.RADIO_CERCANIA= 0.2 ;
 	}
 }
