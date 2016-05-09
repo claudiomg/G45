@@ -15,8 +15,9 @@ public abstract class POI {
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
 		double distancia = Calculo.distanciaEnKilometros(this.posicion, posicionUsuario);
-		return distancia < 0.5;
-	}
+		double distanciaLineal = Calculo.distanciaLineal(this.posicion, posicionUsuario);
+		return distancia < 0.5 && distanciaLineal < 0.5;
+	} 
 	
 	public List<String> getEtiquetas(){
 		return this.etiquetas;

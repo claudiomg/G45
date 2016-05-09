@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Calculo {
 
+
 	public static double distanciaEnKilometros(Posicion unaPosicion, Posicion otraPosicion){
 		double theta = unaPosicion.longitud - otraPosicion.longitud;
 		double distancia = Math.sin((unaPosicion.latitud * Math.PI)/180.0) * Math.sin((otraPosicion.latitud * Math.PI)/180.0) 
@@ -13,6 +14,26 @@ public class Calculo {
 		distancia = distancia * 60 * 1.1515;
 		distancia = distancia * 1.609344;
 		return (distancia);
+		
+}
+	public static double distanciaLineal(Posicion unaPosicion, Posicion otraPosicion){
+		//latutud == 
+		double theta = unaPosicion.longitud - otraPosicion.longitud;
+		double cateto1 = Math.sin((unaPosicion.latitud * Math.PI)/180.0) * Math.sin((unaPosicion.latitud * Math.PI)/180.0) 
+				+ Math.cos((unaPosicion.latitud * Math.PI)/180.0) * Math.cos((unaPosicion.latitud * Math.PI)/180.0) * Math.cos((theta * Math.PI)/180.0);
+		cateto1 = Math.acos(cateto1);
+		cateto1 = cateto1 * 180.0/ Math.PI;
+		cateto1 = cateto1 * 60 * 1.1515;
+		cateto1 = cateto1 * 1.609344;
+		//longitud == 
+		double theta1 = unaPosicion.longitud - unaPosicion.longitud;
+		double cateto2 = Math.sin((unaPosicion.latitud * Math.PI)/180.0) * Math.sin((otraPosicion.latitud * Math.PI)/180.0) 
+				+ Math.cos((unaPosicion.latitud * Math.PI)/180.0) * Math.cos((otraPosicion.latitud * Math.PI)/180.0) * Math.cos((theta1 * Math.PI)/180.0);
+		cateto2 = Math.acos(cateto2);
+		cateto2 = cateto2 * 180.0/ Math.PI;
+		cateto2 = cateto2 * 60 * 1.1515;
+		cateto2 = cateto2 * 1.609344;
+		return cateto1 + cateto2;
 	}
 	
 	public static boolean coordenadasEnComuna(List<Posicion> vertices, Posicion tap) {
