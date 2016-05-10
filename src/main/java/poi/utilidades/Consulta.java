@@ -26,8 +26,16 @@ public class Consulta {
 	}
 
 	public List<POI> buscarPorPalabra(String palabra) {
-		Stream<POI> listaFiltrada = repositorio.getPois().stream().filter(unPOI -> unPOI.getEtiquetas().contains(palabra) );
-		return this.poisEncontrados = listaFiltrada.collect(Collectors.toCollection(ArrayList::new));
+		Stream<POI> listaFiltrada = filtrarPorParlabra(palabra);
+		return asignarAPoisEncontrados(listaFiltrada);
+	}
+	
+	public Stream<POI> filtrarPorParlabra(String palabra){
+		return repositorio.getPois().stream().filter(unPOI -> unPOI.getEtiquetas().contains(palabra));
+		}
+	
+	public List<POI> asignarAPoisEncontrados(Stream<POI> lista){
+		return this.poisEncontrados = lista.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 }
