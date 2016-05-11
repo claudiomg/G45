@@ -81,8 +81,7 @@ public class Usuario  implements WithGlobalEntityManager {
 	}
 	
 
-	public long numeroDePoisEncontrados() {
-		// TODO Auto-generated method stub
+	public int numeroDePoisEncontrados() {
        return this.getConsultaActiva().getPoisEncontrados().size();
 	}
 
