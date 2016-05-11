@@ -57,7 +57,7 @@ public class BuscarPorNombreTest {
 		Consulta consulta7 =  new Consulta(repositorio);
 		unUsuario.agregarConsulta(consulta7);		
 		unUsuario.buscarPOIPorPalabra("7");
-		Assert.assertEquals(unUsuario.getConsultaActiva().getPoisEncontrados().size(), 1);
+		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class BuscarPorNombreTest {
 		Consulta consultaFlores =  new Consulta(repositorio);
 		unUsuario.agregarConsulta(consultaFlores);		
 		unUsuario.buscarPOIPorPalabra("flores");		
-		Assert.assertEquals(unUsuario.getConsultaActiva().getPoisEncontrados().size(), 1);		
+		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
 	}
 	
 	@Test
@@ -73,6 +73,6 @@ public class BuscarPorNombreTest {
 		Consulta consultaFotocopias =  new Consulta(repositorio);
 		unUsuario.agregarConsulta(consultaFotocopias);		
 		unUsuario.buscarPOIPorPalabra("fotocopias");		
-		Assert.assertEquals(unUsuario.getConsultaActiva().getPoisEncontrados().size(), 1);		
+		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
 	}
 }

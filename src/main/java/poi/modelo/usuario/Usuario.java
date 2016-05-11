@@ -78,5 +78,12 @@ public class Usuario  implements WithGlobalEntityManager {
 		entityManager().getTransaction().begin();
 		entityManager().persist(usuario);
 		entityManager().getTransaction().commit();
-	}	
-}
+	}
+	
+
+	public long numeroDePoisEncontrados() {
+		// TODO Auto-generated method stub
+       return this.getConsultaActiva().getPoisEncontrados().size();
+	}
+
+	}
