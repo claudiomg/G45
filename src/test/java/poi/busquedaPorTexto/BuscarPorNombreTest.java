@@ -7,10 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.CGP;
-import poi.modelo.puntoDeInteres.Kiosco;
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Usuario;
 import poi.utilidades.Consulta;
 import poi.utilidades.RepositorioPOI;
@@ -28,7 +28,7 @@ public class BuscarPorNombreTest {
 	POI paradaColectivo = new ParadaColectivo(etiquetasColectivo,null);
 	POI paradaColectivo2 = new ParadaColectivo(etiquetasColectivo2,null);
 	POI CGP1 = new CGP(etiquetasCGP, null, null);
-	LocalComercial kiosco = new Kiosco();
+	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
 	
 	@Before
 	public void inicializar(){
