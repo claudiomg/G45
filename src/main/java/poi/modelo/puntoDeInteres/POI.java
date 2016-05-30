@@ -1,5 +1,6 @@
 package poi.modelo.puntoDeInteres;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.DayOfWeek;
 
@@ -10,7 +11,7 @@ import poi.utilidades.Posicion;
 public abstract class POI {
 	public List<String> etiquetas;
 	public Posicion posicion;
-	public List<DisponibilidadHoraria> horariosDisponibles;
+	public ArrayList<DisponibilidadHoraria> horariosDisponibles = new ArrayList<DisponibilidadHoraria>();
 
 	public POI() {
 	}
@@ -36,7 +37,7 @@ public abstract class POI {
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
-	public boolean estaDisponible(LocalTime unaHora, DayOfWeek unDia) {
+	public boolean estaDisponible1(LocalTime unaHora, DayOfWeek unDia) {
 		return this.horariosDisponibles.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaHora, unDia));
 	}
 	
