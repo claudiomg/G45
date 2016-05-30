@@ -7,9 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.modelo.puntoDeInteres.Kiosco;
-import poi.modelo.puntoDeInteres.LibreriaEscolar;
 import poi.modelo.puntoDeInteres.LocalComercial;
+import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Usuario;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
@@ -23,8 +22,8 @@ public class CercaniaLocalComercialTest {
 	RepositorioPOI repositorio;
 	Consulta unaConsulta = new Consulta(repositorio);
 	List<String> etiquetas = new ArrayList<String>();
-	LocalComercial kiosco = new Kiosco();
-	LocalComercial libreria = new LibreriaEscolar();
+	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
+	LocalComercial libreria = new LocalComercial(RadioCercania.LibreriaEscolar);
 	
 	@Before
 	public void inicializarEscenario(){
