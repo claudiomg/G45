@@ -9,18 +9,19 @@ import poi.utilidades.Calculo;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
 
-public abstract class LocalComercial extends POI{
+public class LocalComercial extends POI{
     
-	protected double RADIO_CERCANIA;
+	private RadioCercania radioDeCercania;
 	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
 	private ArrayList<TimeRange> horariosDeAtencion = new ArrayList<TimeRange>();
 	
-	public LocalComercial(){
+	public LocalComercial(RadioCercania	radioDeLocal){
+		this.radioDeCercania = radioDeLocal;
 	}
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
 		double distancia = Calculo.distanciaEnKilometros(this.posicion, posicionUsuario);
-		return distancia < RADIO_CERCANIA;
+		return distancia < radioDeCercania.getValue();
 	}
 
 	public void agregarDiaDeAtencion(DayOfWeek unDia) {
