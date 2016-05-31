@@ -57,4 +57,28 @@ public class SucursalBanco extends POI{
 	private ArrayList<DayOfWeek> getDiasDeAtencion() {
 		return this.diasDeAtencion;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
+	}
+	public String getGerente() {
+		return gerente;
+	}
+	public void setGerente(String gerente) {
+		this.gerente = gerente;
+	}
+	public List<String> getServicios() {
+		return servicios;
+	}
+	public void setServicios(List<String> servicios) {
+		this.servicios = servicios;
+	}
 }
