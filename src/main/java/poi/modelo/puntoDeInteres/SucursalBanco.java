@@ -13,6 +13,11 @@ public class SucursalBanco extends POI{
 	
 	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
 	private TimeRange horarioDeAtencion;
+	private String nombre;
+	private String sucursal;
+	private String gerente;
+	private List<String> servicios;
+	
 
 	public SucursalBanco(List<String> etiquetas,Posicion posicion) {
 		this.etiquetas = etiquetas;
