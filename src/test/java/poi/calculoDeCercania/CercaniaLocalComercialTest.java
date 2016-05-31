@@ -10,9 +10,9 @@ import org.junit.Test;
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Usuario;
+import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
-import poi.utilidades.RepositorioPOI;
 
 public class CercaniaLocalComercialTest {
 

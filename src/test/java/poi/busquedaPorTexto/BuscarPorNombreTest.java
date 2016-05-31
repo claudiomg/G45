@@ -12,8 +12,8 @@ import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Usuario;
+import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
-import poi.utilidades.RepositorioPOI;
 
 public class BuscarPorNombreTest {
 

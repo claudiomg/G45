@@ -1,9 +1,10 @@
-package poi.utilidades;
+package poi.repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import poi.modelo.puntoDeInteres.POI;
+import poi.utilidades.Posicion;
 
 public class RepositorioPOI {
 

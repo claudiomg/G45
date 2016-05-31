@@ -1,8 +1,8 @@
 package poi.modelo.usuario;
 
-import poi.utilidades.RepositorioPOI;
 import poi.utilidades.Posicion;
 import poi.modelo.puntoDeInteres.POI;
+import poi.repositorios.RepositorioPOI;
 
 public class Administrador {
 	

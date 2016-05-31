@@ -1,4 +1,4 @@
-package poi.utilidades;
+package poi.servicioExternoCGP;
 
 public class RangoServicioDTO {
 	private int numeroDia;
