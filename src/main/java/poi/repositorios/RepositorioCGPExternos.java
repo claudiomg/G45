@@ -17,6 +17,8 @@ public class RepositorioCGPExternos {
 		return CGPs;
 	}
 	
+	public void actualizarRepositorio(){
+		//TODO obtener CGPs de biblioteca externa
+	}
 	
-	//TODO obtener CGPs de biblioteca externa
 }
