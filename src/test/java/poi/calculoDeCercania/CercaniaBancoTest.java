@@ -9,9 +9,9 @@ import org.junit.Test;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Usuario;
+import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
-import poi.utilidades.RepositorioPOI;
 
 public class CercaniaBancoTest {
 
