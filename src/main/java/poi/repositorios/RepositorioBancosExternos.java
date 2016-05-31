@@ -26,7 +26,7 @@ public class RepositorioBancosExternos {
 		return bancos;
 	}
 	
-	public void actualizarBancosExternos() throws Exception {
+	public void actualizarRepositorio() throws Exception {
 		
 		String uri =
 			    "http://private-96b476-ddsutn.apiary-mock.com/banks?banco=banco&servicio=servicio";
@@ -69,6 +69,7 @@ public class RepositorioBancosExternos {
 			
 			connection.disconnect();
 		}
+	
 	
 	private void agregarBanco(SucursalBanco sucursalBanco) {
 		bancos.add(sucursalBanco);
