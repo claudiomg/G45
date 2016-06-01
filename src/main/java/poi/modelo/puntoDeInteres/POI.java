@@ -37,7 +37,7 @@ public abstract class POI {
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
-	public boolean estaDisponible1(LocalTime unaHora, DayOfWeek unDia) {
+	public boolean estaDisponible(LocalTime unaHora, DayOfWeek unDia) {
 		return this.horariosDisponibles.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaHora, unDia));
 	}
 	
@@ -50,8 +50,7 @@ public abstract class POI {
 		return this.horariosDisponibles;
 		
 	}
-	
-	
+		
 	public void modificarAtributos (Posicion posicion, String etiqueta, String etiqueta2){
 		this.setPosicion(posicion);
 		this.agregarEtiqueta(etiqueta);
