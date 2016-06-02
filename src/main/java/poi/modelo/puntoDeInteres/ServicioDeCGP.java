@@ -11,6 +11,7 @@ public class ServicioDeCGP {
 
 	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
 	private ArrayList<TimeRange> horariosDeAtencion = new ArrayList<TimeRange>();
+	private String nombre;
 
 	public void agregarDiaDeAtencion(DayOfWeek unDia) {
 		this.diasDeAtencion.add(unDia);
@@ -18,6 +19,12 @@ public class ServicioDeCGP {
 
 	public void agregarHorarioDeAtencion(TimeRange unRango) {
 		this.horariosDeAtencion.add(unRango);
+	}
+	public void setNombre(String unNombre){
+		this.nombre = unNombre;
+	}
+	public String getNombre(){
+		return this.nombre;
 	}
 
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
