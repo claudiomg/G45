@@ -1,24 +1,26 @@
 package poi.modelo.puntoDeInteres;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
-import poi.utilidades.TimeRange;
+import poi.utilidades.DisponibilidadHoraria;
+
 
 public class ServicioDeCGP {
 
-	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
-	private ArrayList<TimeRange> horariosDeAtencion = new ArrayList<TimeRange>();
+	private ArrayList<DisponibilidadHoraria> horariosDisponibles = new ArrayList<DisponibilidadHoraria>();
 	private String nombre;
 
-	public void agregarDiaDeAtencion(DayOfWeek unDia) {
-		this.diasDeAtencion.add(unDia);
+	public void setDisponibilidadHoraria(DisponibilidadHoraria diaYHora ){
+		this.horariosDisponibles.add(diaYHora);
+		
 	}
-
-	public void agregarHorarioDeAtencion(TimeRange unRango) {
-		this.horariosDeAtencion.add(unRango);
+	
+	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){
+		return this.horariosDisponibles;
+		
 	}
 	public void setNombre(String unNombre){
 		this.nombre = unNombre;
@@ -27,31 +29,8 @@ public class ServicioDeCGP {
 		return this.nombre;
 	}
 
-	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		// verifico tanto el dia como la hora
-		
-		return this.esUnDiaDisponible(unaFechaHora) && this.esUnaHoraDisponible(unaFechaHora);
+	public boolean estaDisponible(LocalTime unaHora, DayOfWeek unDia) {
+		return this.horariosDisponibles.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaHora, unDia));
 	}
-	private boolean esUnaHoraDisponible(LocalDateTime unaFechaHora) {
-		LocalTime horaActual = LocalTime.of(
-				unaFechaHora.getHour(),
-				unaFechaHora.getMinute(),
-				unaFechaHora.getSecond()
-				);
-		
-		return (this.getHorariosDeAtencion().stream().anyMatch(
-	            range -> range.isValidValue(horaActual)));
-	}
-
-	private ArrayList<TimeRange> getHorariosDeAtencion() {
-		return this.horariosDeAtencion;
-	}
-
-	private boolean esUnDiaDisponible(LocalDateTime unaFechaHora) {
-		return this.getDiasDeAtencion().contains(unaFechaHora.getDayOfWeek());
-	}
-
-	private ArrayList<DayOfWeek> getDiasDeAtencion() {
-		return this.diasDeAtencion;
-	}
+	
 }

@@ -3,9 +3,12 @@ package poi.repositorios;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalTime;
 
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
+import poi.utilidades.DisponibilidadHoraria;
+import poi.utilidades.TimeRange;
 import poi.servicioExternoCGP.CentroDTO;
 import poi.servicioExternoCGP.ComponenteExterno;
 import poi.servicioExternoCGP.RangoServicioDTO;
@@ -53,10 +56,12 @@ public class RepositorioCGPExternos {
 		servicioDeCGP.setNombre(unServicioDTO.getNombre());
 		//No estoy cargando el rango porque no lo permite,
 		//tiene q permitir rangos por dia
-		//TimeRange rango = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
+		TimeRange rango = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 		//servicioDeCGP.agregarHorarioDeAtencion(rango);
 		for ( RangoServicioDTO rangoDTO : unServicioDTO.getRangosDiasServicio()){
-			servicioDeCGP.agregarDiaDeAtencion(this.createDayFrom(rangoDTO.getNumeroDia()));
+			DisponibilidadHoraria unHorarioDisponible = new DisponibilidadHoraria (this.createDayFrom(rangoDTO.getNumeroDia()));
+			unHorarioDisponible.agregarNuevoRango(rango);
+			servicioDeCGP.setDisponibilidadHoraria(unHorarioDisponible);
 		}
 		return servicioDeCGP;
 	}

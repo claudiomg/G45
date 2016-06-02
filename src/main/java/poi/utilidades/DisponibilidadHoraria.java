@@ -9,6 +9,7 @@ public class DisponibilidadHoraria {
 	private ArrayList<TimeRange> rangoHorario= new ArrayList<TimeRange>() ;
 	private DayOfWeek dia;
 	
+	
 	public DisponibilidadHoraria(DayOfWeek unDia){
 		this.dia = unDia; 
 		
