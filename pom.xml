@@ -60,6 +60,11 @@
     		<artifactId>gson</artifactId>
    			<version>2.6.2</version>
 		</dependency>
+		<dependency>
+    <groupId>com.google.oauth-client</groupId>
+    <artifactId>google-oauth-client</artifactId>
+    <version>1.19.0</version>
+</dependency>
 		<!-- tareas cron -->
 		<dependency>
       		<groupId>org.quartz-scheduler</groupId>

@@ -1,0 +1,20 @@
+http://algoimagen.blogspot.com.ar/2013/10/java-api-google-maps-para-java.html
+
+https://github.com/googlemaps/google-maps-services-java
+
+
+https://developers.google.com/maps/web-services/client-library?hl=es#uso_java
+
+
+maven 
+
+<dependency>
+    <groupId>com.google.maps</groupId>
+    <artifactId>google-maps-services</artifactId>
+    <version>(insert latest version)</version>
+</dependency>
+
+
+ AIzaSyDV2WMczZfNd2j01NNBByj75mBRz7AFeac 
+
+clave api google 
