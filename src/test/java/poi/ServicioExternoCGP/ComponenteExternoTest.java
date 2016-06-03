@@ -1,23 +1,16 @@
 package poi.ServicioExternoCGP;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.modelo.puntoDeInteres.CGP;
-import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.usuario.Usuario;
-import poi.repositorios.RepositorioPOI;
 import poi.servicioExternoCGP.CentroDTO;
 import poi.servicioExternoCGP.ComponenteExterno;
 import poi.servicioExternoCGP.RangoServicioDTO;
 import poi.servicioExternoCGP.ServicioDTO;
-import poi.utilidades.Consulta;
-import poi.utilidades.Posicion;
 
 public class ComponenteExternoTest {
 

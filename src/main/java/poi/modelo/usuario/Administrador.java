@@ -7,21 +7,24 @@ import poi.repositorios.RepositorioPOI;
 public class Administrador {
 	
 	private RepositorioPOI repositorio;
+	private Rol rol = Rol.ADMINISTRADOR;
 	
 	public Administrador(RepositorioPOI repositorio){
 		this.repositorio = repositorio;
 	}
-		public void agregarPOI(POI poi){
-			this.repositorio.agregarPOI(poi);			
+	
+	public void agregarPOI(POI poi){
+		this.repositorio.agregarPOI(poi);			
 	}	
-		public void removerPOI (POI poi){
-			this.repositorio.removerPOI(poi);
+	
+	public void removerPOI (POI poi){
+		this.repositorio.removerPOI(poi);
 	}
-		public void modificarPOI(POI poi, Posicion posicion, String etiqueta, String etiqueta2){
-			this.repositorio.modificarPOI(poi, posicion, etiqueta, etiqueta2);
+	
+	public void modificarPOI(POI poi, Posicion posicion, String etiqueta, String etiqueta2){
+		this.repositorio.modificarPOI(poi, posicion, etiqueta, etiqueta2);
 	}
-		
-			
+
 }
 		
 

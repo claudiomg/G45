@@ -38,6 +38,8 @@ public class Usuario  implements WithGlobalEntityManager {
 	@Transient
 	private Consulta consultaActiva;
 
+	private Rol rol = Rol.USUARIO;
+	
 	public Usuario() {
 	}
 
