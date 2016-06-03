@@ -18,7 +18,7 @@ public class CercanicaParadaColectivoTest {
 
 	Posicion posicionParada = new Posicion(40.417, -3.703);
 	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
-	RepositorioPOI repositorio;
+	RepositorioPOI repositorio = RepositorioPOI.getInstance();
 	Consulta unaConsulta = new Consulta(repositorio);
 	Usuario unUsuario = new Usuario();
 	List<String> etiquetas = new ArrayList<String>();

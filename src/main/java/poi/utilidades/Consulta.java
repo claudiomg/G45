@@ -10,12 +10,16 @@ import poi.repositorios.RepositorioPOI;
 
 public class Consulta {
 	
-	private RepositorioPOI repositorio;
+	private List<RepositorioPOI> repositorios;
 	private List<POI> poisEncontrados = new ArrayList<POI>();	
 
 	
 	public Consulta(RepositorioPOI repositorio) {
-		this.repositorio = repositorio;
+		this.agregarRepositorio(repositorio);
+	}
+
+	private void agregarRepositorio(RepositorioPOI repositorio) {
+		this.repositorios.add(repositorio);
 	}
 
 	public List<POI> getPoisEncontrados() {
@@ -27,16 +31,20 @@ public class Consulta {
 	}
 
 	public List<POI> buscarPorPalabra(String palabra) {
-		Stream<POI> listaFiltrada = filtrarPorParlabra(palabra);
-		return asignarAPoisEncontrados(listaFiltrada);
+		for ( RepositorioPOI unRepo : this.repositorios ) {
+			this.agregarResultados(this.buscarEnRepositorio(palabra, unRepo));
+		}
+		return this.poisEncontrados;
 	}
 	
-	public Stream<POI> filtrarPorParlabra(String palabra){
-		return repositorio.getPois().stream().filter(unPOI -> unPOI.getEtiquetas().contains(palabra));
-		}
-	
-	public List<POI> asignarAPoisEncontrados(Stream<POI> lista){
-		return this.poisEncontrados = lista.collect(Collectors.toCollection(ArrayList::new));
+	private List<POI> buscarEnRepositorio(String palabra, RepositorioPOI unRepo) {
+		Stream<POI> resultados;
+		resultados = unRepo.getPois().stream().filter(unPOI -> unPOI.getEtiquetas().contains(palabra));
+		return resultados.collect(Collectors.toList());
+	}
+
+	private void agregarResultados(List<POI> resultados) {
+		this.poisEncontrados.addAll(resultados);
 	}
 	
 }
