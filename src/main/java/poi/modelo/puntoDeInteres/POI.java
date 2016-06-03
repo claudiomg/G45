@@ -49,6 +49,14 @@ public abstract class POI {
 		return this.disponibilidadesDeAtencion;
 		
 	}
+
+	public ArrayList<DisponibilidadHoraria> getDisponibilidadesDeAtencion() {
+		return disponibilidadesDeAtencion;
+	}
+
+	public void setDisponibilidadesDeAtencion(ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion) {
+		this.disponibilidadesDeAtencion = disponibilidadesDeAtencion;
+	}
 		
 	public void modificarAtributos (Posicion posicion, String etiqueta, String etiqueta2){
 		this.setPosicion(posicion);

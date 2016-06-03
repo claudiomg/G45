@@ -10,13 +10,15 @@ import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
+import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Posicion;
 
-public class RepositorioBancosExternos {
+public class RepositorioBancosExternos implements Repositorio {
 
 	private static RepositorioBancosExternos instance = new RepositorioBancosExternos();
 	private List<SucursalBanco> bancos = new ArrayList<SucursalBanco>();
+	private List<POI> Pois = new ArrayList<POI>();
 	
 	public static RepositorioBancosExternos getInstance(){
 		return instance;
@@ -25,7 +27,9 @@ public class RepositorioBancosExternos {
 	public List<SucursalBanco> getBancos() {
 		return bancos;
 	}
-	
+	public List<POI> getPois(){
+		return Pois;
+	}
 	public void actualizarRepositorio() throws Exception {
 		
 		String uri =
@@ -73,7 +77,10 @@ public class RepositorioBancosExternos {
 	
 	private void agregarBanco(SucursalBanco sucursalBanco) {
 		bancos.add(sucursalBanco);
-		
+	}
+	
+	private void agregarPOI (SucursalBanco sucursalBanco){
+		Pois.add(sucursalBanco);
 	}
 
 	static String convertStreamToString(java.io.InputStream is) {
