@@ -81,4 +81,9 @@ public class SucursalBanco extends POI{
 	public void setServicios(List<String> servicios) {
 		this.servicios = servicios;
 	}
+	public boolean haceEsteServicio(String servicio){
+		
+		return this.getServicios().contains(servicio);
+		
+	}
 }
