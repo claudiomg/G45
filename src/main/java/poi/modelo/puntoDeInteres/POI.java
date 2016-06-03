@@ -6,11 +6,13 @@ import java.time.LocalDateTime;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
 import poi.utilidades.Posicion;
+import poi.utilidades.Feriados;
 
 public abstract class POI {
 	public List<String> etiquetas;
 	public Posicion posicion;
 	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	public Feriados feriados;
 
 	public POI() {
 	}
@@ -37,7 +39,7 @@ public abstract class POI {
 		this.posicion = posicion;
 	}
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
+		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
 	}
 	
 	public void addDisponibilidadDeAtencion(DisponibilidadHoraria diaYHora ){
@@ -56,6 +58,15 @@ public abstract class POI {
 
 	public void setDisponibilidadesDeAtencion(ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion) {
 		this.disponibilidadesDeAtencion = disponibilidadesDeAtencion;
+	}
+	
+	public void setFeriados(Feriados feriados){
+		this.feriados = feriados;
+	}
+	
+	public void agregarFeriados(LocalDateTime unFeriado){
+		this.feriados.agregarFeriados(unFeriado);
+	
 	}
 		
 	public void modificarAtributos (Posicion posicion, String etiqueta, String etiqueta2){

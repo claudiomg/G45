@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poi.utilidades.DisponibilidadHoraria;
+import poi.utilidades.Feriados;
 
 
 public class ServicioDeCGP {
 
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+    private Feriados feriados;
 	private String nombre;
 	
 	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){
@@ -22,9 +24,13 @@ public class ServicioDeCGP {
 	public String getNombre(){
 		return this.nombre;
 	}
+	
+	public void setFeriados (){
+		
+	}
 
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
+		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
 	}
 
 	public void agregarDisponibilidadDeAtencion(DisponibilidadHoraria disponibilidadHoraria) {
