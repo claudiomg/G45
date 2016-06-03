@@ -1,18 +1,15 @@
 package poi.modelo.puntoDeInteres;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
+import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
 
 public class SucursalBanco extends POI{
 	
-	private ArrayList<DayOfWeek> diasDeAtencion = new ArrayList<DayOfWeek>();
-	private TimeRange horarioDeAtencion;
 	private String nombre;
 	private String sucursal;
 	private String gerente;
@@ -22,41 +19,30 @@ public class SucursalBanco extends POI{
 	public SucursalBanco(List<String> etiquetas,Posicion posicion) {
 		this.etiquetas = etiquetas;
 		this.posicion = posicion;
-		this.agregarDiaDeAtencion(DayOfWeek.MONDAY);
-		this.agregarDiaDeAtencion(DayOfWeek.TUESDAY);
-		this.agregarDiaDeAtencion(DayOfWeek.WEDNESDAY);
-		this.agregarDiaDeAtencion(DayOfWeek.THURSDAY);
-		this.agregarDiaDeAtencion(DayOfWeek.FRIDAY);
-		this.setHorarioDeAtencion(new TimeRange(LocalTime.of(10,0,0),LocalTime.of(15,00,0)));
-	}
-	private void setHorarioDeAtencion(TimeRange timeRange) {
-		this.horarioDeAtencion = timeRange;
-	}
-	private void agregarDiaDeAtencion(DayOfWeek unDia) {
-		this.diasDeAtencion.add(unDia);
-	}
-	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		// verifico tanto el dia como la hora
+		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
+		DisponibilidadHoraria martes = new DisponibilidadHoraria(DayOfWeek.TUESDAY);
+		DisponibilidadHoraria miercoles = new DisponibilidadHoraria(DayOfWeek.WEDNESDAY);
+		DisponibilidadHoraria jueves = new DisponibilidadHoraria (DayOfWeek.THURSDAY);	
+		DisponibilidadHoraria viernes = new DisponibilidadHoraria (DayOfWeek.FRIDAY);
 		
-		return this.esUnDiaDisponible(unaFechaHora) && this.esUnaHoraDisponible(unaFechaHora);
+		TimeRange rango = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(15,00,0));
+		
+		lunes.agregarNuevoRango(rango);
+		martes.agregarNuevoRango(rango);
+		miercoles.agregarNuevoRango(rango);
+		jueves.agregarNuevoRango(rango);
+		viernes.agregarNuevoRango(rango);
+		
+		
+		this.addDisponibilidadDeAtencion(lunes);
+		this.addDisponibilidadDeAtencion(martes);
+		this.addDisponibilidadDeAtencion(miercoles);
+		this.addDisponibilidadDeAtencion(jueves);
+		this.addDisponibilidadDeAtencion(viernes);
+		
 	}
-	private boolean esUnaHoraDisponible(LocalDateTime unaFechaHora) {
-		LocalTime horaActual = LocalTime.of(
-				unaFechaHora.getHour(),
-				unaFechaHora.getMinute(),
-				unaFechaHora.getSecond()
-				);
-		return (this.getHorarioDeAtencion().isValidValue(horaActual));
-	}
-	private TimeRange getHorarioDeAtencion() {
-		return this.horarioDeAtencion;
-	}
-	private boolean esUnDiaDisponible(LocalDateTime unaFechaHora) {
-		return this.getDiasDeAtencion().contains(unaFechaHora.getDayOfWeek());
-	}
-	private ArrayList<DayOfWeek> getDiasDeAtencion() {
-		return this.diasDeAtencion;
-	}
+	
+	
 	public String getNombre() {
 		return nombre;
 	}
