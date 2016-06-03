@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
+import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
 
@@ -27,15 +28,32 @@ public class DisponiblidadCgpTest {
 	
 	@Before
 	public void inicializarEscenario(){
-		unServicio.agregarDiaDeAtencion(DayOfWeek.MONDAY);
-		unServicio.agregarDiaDeAtencion(DayOfWeek.TUESDAY);
-		unServicio.agregarDiaDeAtencion(DayOfWeek.WEDNESDAY);
-		unServicio.agregarDiaDeAtencion(DayOfWeek.THURSDAY);
-		unServicio.agregarDiaDeAtencion(DayOfWeek.FRIDAY);
-		unServicio.agregarHorarioDeAtencion(rangoInferior);
-		unServicio.agregarHorarioDeAtencion(rangoSuperior);
+		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
+		lunes.agregarNuevoRango(rangoInferior);
+		lunes.agregarNuevoRango(rangoSuperior);
+		unServicio.agregarDisponibilidadDeAtencion(lunes);
+		
+		DisponibilidadHoraria martes = new DisponibilidadHoraria(DayOfWeek.TUESDAY);
+		martes.agregarNuevoRango(rangoInferior);
+		martes.agregarNuevoRango(rangoSuperior);
+		unServicio.agregarDisponibilidadDeAtencion(martes);
+		
+		DisponibilidadHoraria miercoles = new DisponibilidadHoraria(DayOfWeek.WEDNESDAY);
+		miercoles.agregarNuevoRango(rangoInferior);
+		miercoles.agregarNuevoRango(rangoSuperior);
+		unServicio.agregarDisponibilidadDeAtencion(miercoles);
+		
+		DisponibilidadHoraria jueves = new DisponibilidadHoraria(DayOfWeek.THURSDAY);
+		jueves.agregarNuevoRango(rangoInferior);
+		jueves.agregarNuevoRango(rangoSuperior);
+		unServicio.agregarDisponibilidadDeAtencion(jueves);
+		
+		DisponibilidadHoraria viernes = new DisponibilidadHoraria(DayOfWeek.FRIDAY);
+		viernes.agregarNuevoRango(rangoInferior);
+		viernes.agregarNuevoRango(rangoSuperior);
+		unServicio.agregarDisponibilidadDeAtencion(viernes);
 	}
-	
+
 	@Test
 	public void noEstaDisponibleNoTieneServiciosDisponible(){
 		unaFechaHora = LocalDateTime.of(2016, 04, 20, 03, 00);
