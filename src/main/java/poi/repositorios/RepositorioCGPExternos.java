@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalTime;
 
+import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.utilidades.DisponibilidadHoraria;
@@ -18,7 +19,7 @@ import poi.utilidades.Posicion;
 public class RepositorioCGPExternos {
 	private static RepositorioCGPExternos instance = new RepositorioCGPExternos();
 	private List<CGP> CGPs = new ArrayList<CGP>();
-	
+	private List<POI> Pois = new ArrayList<POI>();
 	public static RepositorioCGPExternos getInstance(){
 		return instance;
 	}
@@ -26,13 +27,16 @@ public class RepositorioCGPExternos {
 	public List<CGP> getCGPs() {
 		return CGPs;
 	}
-	
+	public List<POI> getPois(){
+		return Pois;
+	}
 	public void actualizarRepositorio(){
 		this.inicializarRepositorio();
 		ComponenteExterno componenteExterno = ComponenteExterno.getInstance();
 		for ( CentroDTO dto : componenteExterno.getCgps()) {
 			CGP newCGP = this.createCGPfrom(dto);
 			this.agregarCGP(newCGP);
+			this.agregarPOI(newCGP);
 		}
 	}
 
@@ -73,6 +77,10 @@ public class RepositorioCGPExternos {
 
 	private void inicializarRepositorio() {
 		this.CGPs = new ArrayList<CGP>();		
+	}
+	
+	private void agregarPOI(POI pois){
+		Pois.add(pois);
 	}
 	
 }
