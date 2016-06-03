@@ -25,7 +25,7 @@ public class QuartzListener extends QuartzInitializerListener {
         StdSchedulerFactory factory = (StdSchedulerFactory) ctx.getAttribute(QUARTZ_FACTORY_KEY);
         try {
             Scheduler scheduler = factory.getScheduler();
-            JobDetail job = JobBuilder.newJob(MiPrimerJob.class).build();
+            JobDetail job = JobBuilder.newJob(CGPServiceJob.class).build();
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("job1").withSchedule(
                     CronScheduleBuilder.cronSchedule("0 15 0 * * ?")// se ejecuta todos los dias a las 00:15 am
             ).startNow().build();

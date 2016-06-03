@@ -4,12 +4,15 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public class MiPrimerJob implements Job {
-	public MiPrimerJob() {
+import poi.repositorios.RepositorioCGPExternos;
+
+public class CGPServiceJob implements Job {
+	public CGPServiceJob() {
     }
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		 System.err.println("Hello World!  MyJob is executing.");
+		RepositorioCGPExternos repo = RepositorioCGPExternos.getInstance();
+		repo.actualizarRepositorio();
 	}
 }
