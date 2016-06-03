@@ -25,7 +25,8 @@ public class ServicioDeCGP {
 		return this.nombre;
 	}
 	
-	public void setFeriados (){
+	public void setFeriados (Feriados feriados){
+		this.feriados= feriados;
 		
 	}
 

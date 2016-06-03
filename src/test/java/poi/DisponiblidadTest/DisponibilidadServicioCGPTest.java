@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.utilidades.DisponibilidadHoraria;
+import poi.utilidades.Feriados;
 import poi.utilidades.TimeRange;
 
 public class DisponibilidadServicioCGPTest {
@@ -17,10 +18,14 @@ public class DisponibilidadServicioCGPTest {
 	TimeRange rangoInferior = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 	TimeRange rangoSuperior = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
 	LocalDateTime unaFechaHora;
+	Feriados feriados = new Feriados();
 	
 	@Before
 	public void inicializarEscenario(){
 		
+		feriados.agregarFeriados(LocalDateTime.of(0, 7, 9, 0, 0));
+		feriados.agregarFeriados(LocalDateTime.of(0, 5, 1, 0, 0));
+				
 		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
 		lunes.agregarNuevoRango(rangoInferior);
 		lunes.agregarNuevoRango(rangoSuperior);
@@ -45,6 +50,8 @@ public class DisponibilidadServicioCGPTest {
 		viernes.agregarNuevoRango(rangoInferior);
 		viernes.agregarNuevoRango(rangoSuperior);
 		unServicio.agregarDisponibilidadDeAtencion(viernes);
+		
+		unServicio.setFeriados(feriados);
 		
 	}
 
