@@ -15,6 +15,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import poi.modelo.puntoDeInteres.POI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
+import poi.utilidades.BusquedaDeBancos;
 
 @Entity
 @Table(name = "usuarios")
@@ -65,6 +66,8 @@ public class Usuario  implements WithGlobalEntityManager {
 
 	public void buscarPOIPorPalabra(String palabra){
 		this.consultaActiva.buscarPorPalabra(palabra);
+		this.consultaActiva.buscarPorPalabraEnExterno(palabra);
+		
 	}
 	
 	public Consulta getConsultaActiva() {

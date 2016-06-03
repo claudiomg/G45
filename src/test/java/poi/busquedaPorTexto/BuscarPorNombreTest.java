@@ -12,11 +12,13 @@ import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Usuario;
+import poi.repositorios.RepositorioCGPExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 
 public class BuscarPorNombreTest {
-
+    
+	RepositorioCGPExternos repo2 = RepositorioCGPExternos.getInstance();
 	RepositorioPOI repositorio = RepositorioPOI.getInstance();
 	Usuario unUsuario = new Usuario();
 	
@@ -47,6 +49,7 @@ public class BuscarPorNombreTest {
 		repositorio.agregarPOI(kiosco);
 		repositorio.agregarPOI(CGP1);
 		repositorio.agregarPOI(paradaColectivo2);
+		
 	}
 	
 	@After
@@ -60,6 +63,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarColectivo7(){
 		Consulta consulta7 =  new Consulta(repositorio);
+		consulta7.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consulta7);		
 		unUsuario.buscarPOIPorPalabra("7");
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);
@@ -68,6 +72,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarColectivoARetiro(){
 		Consulta consultaRetiro = new Consulta(repositorio);
+		consultaRetiro.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consultaRetiro);
 		unUsuario.buscarPOIPorPalabra("retiro");
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(),2);
@@ -76,6 +81,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarPorFlores(){
 		Consulta consultaFlores =  new Consulta(repositorio);
+		consultaFlores.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consultaFlores);		
 		unUsuario.buscarPOIPorPalabra("flores");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
@@ -84,6 +90,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarPorColectivo114(){
 		Consulta consulta114 =  new Consulta(repositorio);
+		consulta114.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consulta114);		
 		unUsuario.buscarPOIPorPalabra("114");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 0);		
@@ -92,6 +99,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarPorParqueChacabuco(){
 		Consulta consultaParqueChacabuco =  new Consulta(repositorio);
+		consultaParqueChacabuco.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consultaParqueChacabuco);		
 		unUsuario.buscarPOIPorPalabra("parque chacabuco");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
@@ -100,6 +108,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarPorFotocopias(){
 		Consulta consultaFotocopias =  new Consulta(repositorio);
+		consultaFotocopias.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consultaFotocopias);		
 		unUsuario.buscarPOIPorPalabra("fotocopias");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
@@ -108,6 +117,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarPorCigarrillos(){
 		Consulta consultaCigarrillos =  new Consulta(repositorio);
+		consultaCigarrillos.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consultaCigarrillos);		
 		unUsuario.buscarPOIPorPalabra("cigarrillos");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
@@ -116,6 +126,7 @@ public class BuscarPorNombreTest {
 	@Test
 	public void buscarPorCaramelos(){
 		Consulta consultaCaramelos =  new Consulta(repositorio);
+		consultaCaramelos.setRepoExterno(repo2);
 		unUsuario.agregarConsulta(consultaCaramelos);		
 		unUsuario.buscarPOIPorPalabra("caramelos");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 0);		
