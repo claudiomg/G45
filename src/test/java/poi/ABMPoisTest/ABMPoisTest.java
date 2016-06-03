@@ -23,6 +23,7 @@ import poi.repositorios.RepositorioPOI;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
+import poi.utilidades.Feriados;
 
 public class ABMPoisTest {
 
@@ -71,6 +72,8 @@ public class ABMPoisTest {
 	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
 	SucursalBanco banco = new SucursalBanco(etiquetas, posicionDos);
 	
+	Feriados feriados = new Feriados();
+	
 	@Before
 	public void inicializar(){
 		lunes.agregarNuevoRango(rangoInferiorDeLaSemana);
@@ -109,6 +112,9 @@ public class ABMPoisTest {
 		kiosco.agregarEtiqueta("fotocopias");
 		CGP2.agregarServicio(unServicio);
 		admin.agregarPOI(CGP1);
+		kiosco.setFeriados(feriados);
+		banco.setFeriados(feriados);
+		
 	}
 	
 	@After
