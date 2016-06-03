@@ -2,14 +2,17 @@ package poi.repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Posicion;
 
 public class RepositorioPOI {
 
 	private static RepositorioPOI instance = new RepositorioPOI();
 	private List<POI> pois = new ArrayList<POI>();
+	public List<SucursalBanco> listaDeBancos = new ArrayList<SucursalBanco>();
 	
 	private RepositorioPOI(){		
 	}
@@ -29,6 +32,11 @@ public class RepositorioPOI {
 	public void agregarPOI(POI poi){
 		this.pois.add(poi);
 	}
+	
+	public void agregarPOISucursalBancaria(SucursalBanco sucursal){
+		this.pois.add(sucursal);
+		this.listaDeBancos.add(sucursal);
+	}
 
 	public void removerPOI(POI poi){
 		this.pois.remove(poi);
@@ -39,4 +47,5 @@ public class RepositorioPOI {
 			
 		
 	}
-}
+	}
+
