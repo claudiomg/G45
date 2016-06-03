@@ -26,12 +26,29 @@ public class CGP extends POI{
 		this.servicios.add(unServicio);
 	}
 	
+	public void quitarServicio(ServicioDeCGP unServicio){
+		this.servicios.remove(unServicio);
+	}
+	
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
 		return (this.getServicios().stream().anyMatch(
 	            unServicio -> unServicio.estaDisponible(unaFechaHora)));
 	}
 
-	private ArrayList<ServicioDeCGP> getServicios() {
+	public ArrayList<ServicioDeCGP> getServicios() {
 		return this.servicios;
 	}
+	
+	public void quitarVertice(Posicion posicion){
+		this.verticesComuna.remove(posicion);
+	}
+	
+	public void agregarVertice(Posicion posicion){
+		this.verticesComuna.add(posicion);
+	}
+
+	public List<Posicion> getVerticesComuna() {
+		return verticesComuna;
+	}
+	
 }
