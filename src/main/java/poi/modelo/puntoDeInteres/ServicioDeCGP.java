@@ -11,11 +11,6 @@ public class ServicioDeCGP {
 
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	private String nombre;
-
-	public void setDisponibilidadHoraria(DisponibilidadHoraria diaYHora ){
-		this.disponibilidadesDeAtencion.add(diaYHora);
-		
-	}
 	
 	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){
 		return this.disponibilidadesDeAtencion;

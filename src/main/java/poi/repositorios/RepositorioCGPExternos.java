@@ -54,29 +54,17 @@ public class RepositorioCGPExternos {
 	private ServicioDeCGP createServiceFrom(ServicioDTO unServicioDTO) {
 		ServicioDeCGP servicioDeCGP = new ServicioDeCGP();
 		servicioDeCGP.setNombre(unServicioDTO.getNombre());
-		//No estoy cargando el rango porque no lo permite,
-		//tiene q permitir rangos por dia
-		TimeRange rango = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
-		//servicioDeCGP.agregarHorarioDeAtencion(rango);
 		for ( RangoServicioDTO rangoDTO : unServicioDTO.getRangosDiasServicio()){
-			DisponibilidadHoraria unHorarioDisponible = new DisponibilidadHoraria (this.createDayFrom(rangoDTO.getNumeroDia()));
-			unHorarioDisponible.agregarNuevoRango(rango);
-			servicioDeCGP.setDisponibilidadHoraria(unHorarioDisponible);
+			TimeRange rango = new TimeRange(
+				LocalTime.of(rangoDTO.getHorarioDesde(),rangoDTO.getMinutosDesde(),0),
+				LocalTime.of(rangoDTO.getHorarioHasta(),rangoDTO.getMinutosHasta(),0)
+			);
+			DayOfWeek diaDeSemana = DayOfWeek.of(rangoDTO.getNumeroDia());
+			DisponibilidadHoraria disponibilidadHoraria = new DisponibilidadHoraria (diaDeSemana);
+			disponibilidadHoraria.agregarNuevoRango(rango);
+			servicioDeCGP.agregarDisponibilidadDeAtencion(disponibilidadHoraria);
 		}
 		return servicioDeCGP;
-	}
-
-	private DayOfWeek createDayFrom(int numeroDia) {
-		switch (numeroDia) {
-	        case 1:  return DayOfWeek.MONDAY;
-	        case 2:  return DayOfWeek.TUESDAY;
-	        case 3:  return DayOfWeek.WEDNESDAY;
-	        case 4:  return DayOfWeek.THURSDAY;
-	        case 5:  return DayOfWeek.FRIDAY;
-	        case 6:  return DayOfWeek.SATURDAY;
-	        case 7:  return DayOfWeek.SUNDAY;
-	    }
-		return null;
 	}
 
 	private void agregarCGP(CGP cgp) {
