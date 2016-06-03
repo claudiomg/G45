@@ -16,7 +16,7 @@ import poi.servicioExternoCGP.RangoServicioDTO;
 import poi.servicioExternoCGP.ServicioDTO;
 import poi.utilidades.Posicion;
 
-public class RepositorioCGPExternos {
+public class RepositorioCGPExternos implements Repositorio {
 	private static RepositorioCGPExternos instance = new RepositorioCGPExternos();
 	private List<CGP> CGPs = new ArrayList<CGP>();
 	private List<POI> Pois = new ArrayList<POI>();

@@ -6,7 +6,7 @@ import java.util.List;
 import poi.modelo.puntoDeInteres.POI;
 import poi.utilidades.Posicion;
 
-public class RepositorioPOI {
+public class RepositorioPOI implements Repositorio {
 
 	private static RepositorioPOI instance = new RepositorioPOI();
 	private List<POI> pois = new ArrayList<POI>();
