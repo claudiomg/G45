@@ -14,7 +14,7 @@ public class ObtenerBancosDelWebApiTest {
 	
 	@After
 	public void vaciarRepositorio(){
-		
+		repo.getBancos().clear();
 	}
 	
 	@Test
