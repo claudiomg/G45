@@ -2,6 +2,7 @@ package poi.modelo.usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import poi.acciones.Accion;
 import poi.modelo.puntoDeInteres.POI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
@@ -88,6 +90,14 @@ public class Usuario  implements WithGlobalEntityManager {
 
 	public int numeroDePoisEncontrados() {
        return this.getConsultaActiva().getPoisEncontrados().size();
+	}
+	
+	public void ejecutarAccion(POI poi, String nombreAccion){
+		List<Accion> accionesFiltradasPorNombre = poi.acciones.stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
+		
+		for (Accion accion : accionesFiltradasPorNombre ){
+			accion.ejecutarAccion();
+		}
 	}
 
 	}

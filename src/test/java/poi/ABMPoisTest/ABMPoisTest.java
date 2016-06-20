@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import poi.acciones.Accion;
+import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.POI;
@@ -73,6 +75,8 @@ public class ABMPoisTest {
 	SucursalBanco banco = new SucursalBanco(etiquetas, posicionDos);
 	
 	Feriados feriados = new Feriados();
+	
+	EstaDisponible verificarDisponibilidad = new EstaDisponible(kiosco,LocalDateTime.of(2016, 6, 01, 14, 10,50) );
 	
 	@Before
 	public void inicializar(){
@@ -219,7 +223,13 @@ public class ABMPoisTest {
 		disponibilidades.add(jueves1);
 		disponibilidades.add(viernes1);		
 		admin.modificarDisponibilidadHorariaAPOI(kiosco, disponibilidades);
-		Assert.assertTrue(kiosco.estaDisponible(LocalDateTime.of(2016, 6, 01, 14, 10,50)));
+		kiosco.agregarAccion(verificarDisponibilidad);
+		
+		List<Accion> accionesKiosco = kiosco.acciones;
+		for (Accion accion : accionesKiosco){
+			accion.ejecutarAccion();
+		}
+		Assert.assertTrue(verificarDisponibilidad.getDisponibilidad() );
 	}		
 	
 }

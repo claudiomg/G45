@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
+import poi.acciones.Accion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
 import poi.utilidades.Posicion;
@@ -13,6 +14,8 @@ public abstract class POI {
 	public Posicion posicion;
 	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	public Feriados feriados;
+	public List<Accion> acciones = new ArrayList<Accion>();
+	
 
 	public POI() {
 	}
@@ -38,9 +41,11 @@ public abstract class POI {
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
-	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
-	}
+	
+	//Ahora es una clase concreta del Command Acciones
+	//public boolean estaDisponible(LocalDateTime unaFechaHora) {
+	//	return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
+	//}
 	
 	public void addDisponibilidadDeAtencion(DisponibilidadHoraria diaYHora ){
 		this.disponibilidadesDeAtencion.add(diaYHora);
@@ -64,6 +69,7 @@ public abstract class POI {
 		this.feriados = feriados;
 	}
 	
+	
 	public void agregarFeriados(LocalDateTime unFeriado){
 		this.feriados.agregarFeriados(unFeriado);
 	
@@ -73,6 +79,10 @@ public abstract class POI {
 		this.setPosicion(posicion);
 		this.agregarEtiqueta(etiqueta);
 		this.eliminarEtiqueta(etiqueta2);
+	}
+	
+	public void agregarAccion(Accion accion){
+		this.acciones.add(accion);
 	}
 	
 }

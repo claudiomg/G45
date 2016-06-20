@@ -4,7 +4,10 @@ import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import poi.acciones.Accion;
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
@@ -78,6 +81,22 @@ public class Administrador {
 
 	public void modificarNombreGerenteBanco(SucursalBanco banco, String nombre){
 		banco.setGerente(nombre);
+	}
+	
+	public void habilitarAccion(POI poi, String nombreAccion){
+		List<Accion> accionesFiltradasPorNombre = poi.acciones.stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
+		
+		for (Accion accion : accionesFiltradasPorNombre ){
+			accion.habilitar();
+		}
+	}
+	
+	public void deshabilitarAccion(POI poi, String nombreAccion){
+		List<Accion> accionesFiltradasPorNombre = poi.acciones.stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
+		
+		for (Accion accion : accionesFiltradasPorNombre ){
+			accion.deshabilitar();
+		}
 	}
 
 }
