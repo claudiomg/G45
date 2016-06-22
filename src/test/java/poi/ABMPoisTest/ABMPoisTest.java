@@ -24,7 +24,7 @@ import poi.repositorios.RepositorioPOI;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
-import poi.utilidades.Feriados;
+import poi.utilidades.ExcepcionSinAtencion;
 
 public class ABMPoisTest {
 
@@ -73,7 +73,7 @@ public class ABMPoisTest {
 	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
 	SucursalBanco banco = new SucursalBanco(etiquetas, posicionDos);
 	
-	Feriados feriados = new Feriados();
+	ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
 	
 	@Before
 	public void inicializar(){
