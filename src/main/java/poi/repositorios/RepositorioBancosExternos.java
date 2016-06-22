@@ -10,26 +10,20 @@ import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
-import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Posicion;
 
-public class RepositorioBancosExternos implements Repositorio {
+public class RepositorioBancosExternos extends RepositorioAbstracto {
 
-	private static RepositorioBancosExternos instance = new RepositorioBancosExternos();
-	private List<SucursalBanco> bancos = new ArrayList<SucursalBanco>();
-	private List<POI> Pois = new ArrayList<POI>();
-	
-	public static RepositorioBancosExternos getInstance(){
+	//All GameActions are singletons
+	public static RepositorioAbstracto getInstance() {
+		if(instance == null) {
+			instance = new RepositorioBancosExternos();
+		}
 		return instance;
 	}
-	
-	public List<SucursalBanco> getBancos() {
-		return bancos;
-	}
-	public List<POI> getPois(){
-		return Pois;
-	}
+	protected RepositorioBancosExternos() { /*Existe para anular la instanciacion*/ };
+		
 	public void actualizarRepositorio() throws Exception {
 		
 		String uri =
@@ -68,27 +62,14 @@ public class RepositorioBancosExternos implements Repositorio {
 				//TODO Crear servicios para bancos
 				//List<Servicios> listaServicios = new ArrayList<Servicios>();
 				
-				agregarBanco(new SucursalBanco(etiquetas, posicion));
+				this.agregarPOI(new SucursalBanco(etiquetas, posicion));
 			}
 			
 			connection.disconnect();
 		}
-	
-	
-	private void agregarBanco(SucursalBanco sucursalBanco) {
-		bancos.add(sucursalBanco);
-	}
-	
-	private void agregarPOI (SucursalBanco sucursalBanco){
-		Pois.add(sucursalBanco);
-	}
 
 	static String convertStreamToString(java.io.InputStream is) {
 	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
 	    return s.hasNext() ? s.next() : "";
-	}
-	
-
-	}
-
-
+	}	
+}

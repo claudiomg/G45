@@ -16,20 +16,17 @@ import poi.servicioExternoCGP.RangoServicioDTO;
 import poi.servicioExternoCGP.ServicioDTO;
 import poi.utilidades.Posicion;
 
-public class RepositorioCGPExternos implements Repositorio {
-	private static RepositorioCGPExternos instance = new RepositorioCGPExternos();
-	private List<CGP> CGPs = new ArrayList<CGP>();
-	private List<POI> Pois = new ArrayList<POI>();
-	public static RepositorioCGPExternos getInstance(){
+public class RepositorioCGPExternos extends RepositorioAbstracto {
+	
+	//All GameActions are singletons
+	public static RepositorioAbstracto getInstance() {
+		if(instance == null) {
+			instance = new RepositorioCGPExternos();
+		}
 		return instance;
 	}
+	protected RepositorioCGPExternos() { /*Existe para anular la instanciacion*/ };
 	
-	public List<CGP> getCGPs() {
-		return CGPs;
-	}
-	public List<POI> getPois(){
-		return Pois;
-	}
 	public void actualizarRepositorio(){
 		this.inicializarRepositorio();
 		ComponenteExterno componenteExterno = ComponenteExterno.getInstance();
@@ -70,17 +67,4 @@ public class RepositorioCGPExternos implements Repositorio {
 		}
 		return servicioDeCGP;
 	}
-
-	private void agregarCGP(CGP cgp) {
-		CGPs.add(cgp);
-	}
-
-	private void inicializarRepositorio() {
-		this.CGPs = new ArrayList<CGP>();		
-	}
-	
-	private void agregarPOI(POI pois){
-		Pois.add(pois);
-	}
-	
 }
