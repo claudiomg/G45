@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.SucursalBanco;
-import poi.utilidades.Feriados;
+import poi.utilidades.ExcepcionSinAtencion;
 import poi.utilidades.Posicion;
 
 public class DisponiblidadBancoTest {
@@ -16,7 +16,7 @@ public class DisponiblidadBancoTest {
 	Posicion unaPosicion = new Posicion(40.417, -3.703);
 	SucursalBanco unaSucursalDeBanco = new SucursalBanco(arrayEtiquetas,unaPosicion);
 	LocalDateTime unaFechaHora;
-	Feriados feriados = new Feriados();
+	ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
 	
 	@Before
 	public void inicializar(){

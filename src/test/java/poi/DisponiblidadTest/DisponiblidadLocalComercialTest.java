@@ -12,7 +12,7 @@ import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.TimeRange;
-import poi.utilidades.Feriados;
+import poi.utilidades.ExcepcionSinAtencion;
 
 public class DisponiblidadLocalComercialTest {
 
@@ -26,7 +26,7 @@ public class DisponiblidadLocalComercialTest {
 	DisponibilidadHoraria viernes = new DisponibilidadHoraria (DayOfWeek.FRIDAY);
 	DisponibilidadHoraria sabado = new DisponibilidadHoraria (DayOfWeek.SATURDAY);
 	LocalComercial unKiosco = new LocalComercial(RadioCercania.Kiosco);
-	Feriados feriados = new Feriados();
+	ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
 		
 	@Before
 	public void inicializarEscenario(){

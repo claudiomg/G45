@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poi.utilidades.DisponibilidadHoraria;
-import poi.utilidades.Feriados;
+import poi.utilidades.ExcepcionSinAtencion;
 
 
 public class ServicioDeCGP {
 
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-    private Feriados feriados;
+    private ExcepcionSinAtencion feriados;
 	private String nombre;
 	
 	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){
@@ -25,7 +25,7 @@ public class ServicioDeCGP {
 		return this.nombre;
 	}
 	
-	public void setFeriados (Feriados feriados){
+	public void setFeriados (ExcepcionSinAtencion feriados){
 		this.feriados= feriados;
 		
 	}

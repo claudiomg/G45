@@ -5,7 +5,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import poi.utilidades.Feriados;
 
 public class DisponibilidadHoraria {
 	
@@ -30,12 +29,12 @@ public class DisponibilidadHoraria {
 		return this.dia.equals(unDia);
 	}
 	
-	public boolean noEsUnFeriado(Feriados feriados, LocalDateTime diaActual){
+	public boolean noEsUnFeriado(ExcepcionSinAtencion feriados, LocalDateTime diaActual){
 		return feriados.getFeriados().stream().noneMatch(unDia -> unDia.getDayOfMonth()== diaActual.getDayOfMonth())
 				|| feriados.getFeriados().stream().noneMatch(unDia -> unDia.getMonth() == diaActual.getMonth());
 	}
 	
-	public boolean estaDisponible(LocalDateTime unaFechaHora, Feriados feriados){
+	public boolean estaDisponible(LocalDateTime unaFechaHora, ExcepcionSinAtencion feriados){
 		DayOfWeek unDia = unaFechaHora.getDayOfWeek();
 		LocalTime unaHora = unaFechaHora.toLocalTime();
 		return  this.diaDisponible(unDia)&& this.rangoDisponible(unaHora)&& this.noEsUnFeriado(feriados, unaFechaHora);

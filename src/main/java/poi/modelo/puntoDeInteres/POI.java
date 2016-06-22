@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
 import poi.utilidades.Posicion;
-import poi.utilidades.Feriados;
+import poi.utilidades.ExcepcionSinAtencion;
 
 public abstract class POI {
 	public List<String> etiquetas;
 	public Posicion posicion;
 	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-	public Feriados feriados;
+	public ExcepcionSinAtencion feriados;
 
 	public POI() {
 	}
@@ -60,7 +60,7 @@ public abstract class POI {
 		this.disponibilidadesDeAtencion = disponibilidadesDeAtencion;
 	}
 	
-	public void setFeriados(Feriados feriados){
+	public void setFeriados(ExcepcionSinAtencion feriados){
 		this.feriados = feriados;
 	}
 	
