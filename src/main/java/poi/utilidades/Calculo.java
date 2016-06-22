@@ -16,7 +16,7 @@ import com.google.maps.GeocodingApiRequest;
 public class Calculo {
 
 	
-	public static double distanciaEnKilometros(Posicion unaPosicion, Posicion otraPosicion){
+	/*public static double distanciaEnKilometros(Posicion unaPosicion, Posicion otraPosicion){
 		double lat = unaPosicion.longitud;
 		double lon =unaPosicion.longitud ;
 		double lat2 = otraPosicion.longitud;
@@ -36,7 +36,7 @@ public class Calculo {
 		DistanceMatrixApiRequest request =	newRequest(context);
 		request = getDistanceMatrix( context,origen ,destino );
 		
-}
+}*/
 	public static double distanciaLineal(Posicion unaPosicion, Posicion otraPosicion){
 		//latutud == 
 		double theta = unaPosicion.longitud - otraPosicion.longitud;
