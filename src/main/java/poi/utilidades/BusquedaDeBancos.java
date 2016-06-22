@@ -2,6 +2,7 @@ package poi.utilidades;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
+import poi.repositorios.RepositorioCGPExternos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,24 +13,19 @@ public class BusquedaDeBancos {
 	
 	private RepositorioPOI repositorioDePois;
 	private RepositorioBancosExternos repositorioBancoExterno;
-	private List<SucursalBanco> bancosExternosFiltradosPorNombre = new ArrayList<SucursalBanco>();
+	private RepositorioCGPExternos repositorioCGPExternos;
+	private List<SucursalBanco> bancosFiltradosPorNombre = new ArrayList<SucursalBanco>();
 	private List<SucursalBanco> bancosDeRepositoriosDePOIFiltradoPorNombre = new ArrayList<SucursalBanco>();
 	
 	
-	public List<SucursalBanco> busquedaDeBancosExternosPorNombreYServicio(String nombre,String servicio){
-		
-		this.bancosExternosFiltradosPorNombre = this.busquedaDeBancosPorNombre(repositorioBancoExterno.getBancos(),nombre);
-		return busquedaBancosPorServicio(bancosExternosFiltradosPorNombre,servicio);
+
 	
-	}
-	
-     public List<SucursalBanco> busquedaDeBancoEnRepositorioPOIPorNombreYServicio(String nombre,String servicio){
-		
-		this.bancosDeRepositoriosDePOIFiltradoPorNombre = this.busquedaDeBancosPorNombre(repositorioDePois.getBancos(),nombre);
-		return busquedaBancosPorServicio(bancosDeRepositoriosDePOIFiltradoPorNombre,servicio);
-	
-		
-	}
+    
+	public List<SucursalBanco> busquedaDeBancosPorNombreYServicio(List<SucursalBanco> repoDeBancos,String nombreBanco,String Servicio){
+    	 bancosFiltradosPorNombre = this.busquedaDeBancosPorNombre(repoDeBancos, nombreBanco);
+    	 return this.busquedaBancosPorServicio(bancosFiltradosPorNombre, Servicio);
+    	 
+     }
 	
 	
      
