@@ -9,15 +9,15 @@ import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.modelo.puntoDeInteres.SucursalBanco;
-import poi.repositorios.RepositorioPOI;
+import poi.repositorios.RepositorioAbstracto;
 
 public class Administrador {
 	
-	private RepositorioPOI repositorio;
+	private RepositorioAbstracto repositorio;
 	private Rol rol = Rol.ADMINISTRADOR;
 	
-	public Administrador(RepositorioPOI repositorio){
-		this.repositorio = repositorio;
+	public Administrador(RepositorioAbstracto repositorio2){
+		this.repositorio = repositorio2;
 	}
 	
 	public void agregarPOI(POI poi){
@@ -25,7 +25,7 @@ public class Administrador {
 	}	
 	
 	public void removerPOI (POI poi){
-		this.repositorio.removerPOI(poi);
+		this.repositorio.eliminarPOI(poi);
 	}
 	
 	public void modificarPOI(POI poi, Posicion posicion, String etiqueta, String etiqueta2){
@@ -78,6 +78,14 @@ public class Administrador {
 
 	public void modificarNombreGerenteBanco(SucursalBanco banco, String nombre){
 		banco.setGerente(nombre);
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 }

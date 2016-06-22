@@ -12,14 +12,15 @@ import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Usuario;
+import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioCGPExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 
 public class BuscarPorNombreTest {
     
-	RepositorioCGPExternos repo2 = RepositorioCGPExternos.getInstance();
-	RepositorioPOI repositorio = RepositorioPOI.getInstance();
+	RepositorioAbstracto repo2 = RepositorioCGPExternos.getInstance();
+	RepositorioAbstracto repositorio = RepositorioPOI.getInstance();
 	Usuario unUsuario = new Usuario();
 	
 	ArrayList<String> etiquetasColectivo = new ArrayList<String>();
@@ -54,10 +55,10 @@ public class BuscarPorNombreTest {
 	
 	@After
 	public void vaciarRepositorio(){
-		repositorio.removerPOI(paradaColectivo2);
-		repositorio.removerPOI(paradaColectivo);
-		repositorio.removerPOI(kiosco);
-		repositorio.removerPOI(CGP1);
+		repositorio.eliminarPOI(paradaColectivo2);
+		repositorio.eliminarPOI(paradaColectivo);
+		repositorio.eliminarPOI(kiosco);
+		repositorio.eliminarPOI(CGP1);
 	}
 	
 	@Test

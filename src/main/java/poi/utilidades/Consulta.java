@@ -6,23 +6,22 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import poi.modelo.puntoDeInteres.POI;
+import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioCGPExternos;
 import poi.repositorios.RepositorioPOI;
 
 
 public class Consulta {
-	private RepositorioCGPExternos repositorio2;
-	private RepositorioPOI repositorio;
+	private RepositorioAbstracto repositorio2;
+	private RepositorioAbstracto repositorio;
 	private List<POI> poisEncontrados = new ArrayList<POI>();
 	private List<POI> poisEncontradosEnExterno= new ArrayList<POI>();
-	
 
-	
-	public Consulta(RepositorioPOI repositorio) {
-		this.repositorio = repositorio;
+	public Consulta(RepositorioAbstracto repositorio3) {
+		this.repositorio = repositorio3;
 	}
 	
-	public void setRepoExterno(RepositorioCGPExternos repo2){
+	public void setRepoExterno(RepositorioAbstracto repo2){
 		this.repositorio2=repo2;
 	}
 	
@@ -58,11 +57,21 @@ public class Consulta {
 	}
 	
 	public List<POI> asignarAPoisEncontrados2(Stream<POI> lista){
-		return this.poisEncontradosEnExterno = lista.collect(Collectors.toCollection(ArrayList::new));
+		return this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
 	} 
 	
 	public List<POI> asignarAPoisEncontrados(Stream<POI> lista){
-		return this.poisEncontrados = lista.collect(Collectors.toCollection(ArrayList::new));
+		this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
+		return this.getPoisEncontradosEnExterno();
+	}
+
+	public List<POI> getPoisEncontradosEnExterno() {
+		return poisEncontradosEnExterno;
+	}
+
+	public List<POI> setPoisEncontradosEnExterno(List<POI> poisEncontradosEnExterno) {
+		this.poisEncontradosEnExterno = poisEncontradosEnExterno;
+		return poisEncontradosEnExterno;
 	}
 	
 }

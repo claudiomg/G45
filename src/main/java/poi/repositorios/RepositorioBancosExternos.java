@@ -9,7 +9,6 @@ import java.util.List;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
-
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Posicion;
 
@@ -23,9 +22,9 @@ public class RepositorioBancosExternos extends RepositorioAbstracto {
 		return instance;
 	}
 	protected RepositorioBancosExternos() { /*Existe para anular la instanciacion*/ };
-		
+	
 	public void actualizarRepositorio() throws Exception {
-		
+		this.limpiarPOIs();
 		String uri =
 			    "http://private-96b476-ddsutn.apiary-mock.com/banks?banco=banco&servicio=servicio";
 			URL url = new URL(uri);
@@ -71,5 +70,5 @@ public class RepositorioBancosExternos extends RepositorioAbstracto {
 	static String convertStreamToString(java.io.InputStream is) {
 	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
 	    return s.hasNext() ? s.next() : "";
-	}	
+	}
 }

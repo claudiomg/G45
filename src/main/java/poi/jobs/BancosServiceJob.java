@@ -4,6 +4,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioBancosExternos;
 
 
@@ -13,9 +14,9 @@ public class BancosServiceJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		RepositorioBancosExternos repo = RepositorioBancosExternos.getInstance();
+		RepositorioAbstracto repo = RepositorioBancosExternos.getInstance();
 		try {
-			repo.actualizarRepositorio();
+			repo.limpiarPOIs();
 		} catch (Exception e) {
 			System.out.println("Error en la conexion: " + e.getMessage());
 			e.printStackTrace();

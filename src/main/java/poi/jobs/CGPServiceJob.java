@@ -4,6 +4,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioCGPExternos;
 
 public class CGPServiceJob implements Job {
@@ -12,7 +13,7 @@ public class CGPServiceJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		RepositorioCGPExternos repo = RepositorioCGPExternos.getInstance();
-		repo.actualizarRepositorio();
+		RepositorioAbstracto repo = RepositorioCGPExternos.getInstance();
+		repo.limpiarPOIs();
 	}
 }
