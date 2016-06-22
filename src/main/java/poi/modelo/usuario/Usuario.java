@@ -87,7 +87,8 @@ public class Usuario  implements WithGlobalEntityManager {
 	
 
 	public int numeroDePoisEncontrados() {
-       return this.getConsultaActiva().getPoisEncontrados().size();
+       int cantidadEncontrados= (this.getConsultaActiva().getPoisEncontrados().size() + this.getConsultaActiva().getPoisEncontradosEnExterno().size());
+       return cantidadEncontrados;
 	}
 
 	}

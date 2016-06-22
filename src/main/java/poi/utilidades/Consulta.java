@@ -57,21 +57,27 @@ public class Consulta {
 	}
 	
 	public List<POI> asignarAPoisEncontrados2(Stream<POI> lista){
-		return this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
+		this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
+		return this.getPoisEncontradosEnExterno();
 	} 
 	
 	public List<POI> asignarAPoisEncontrados(Stream<POI> lista){
 		this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
-		return this.getPoisEncontradosEnExterno();
+		return this.getPoisEncontrados();
 	}
 
 	public List<POI> getPoisEncontradosEnExterno() {
 		return poisEncontradosEnExterno;
 	}
 
-	public List<POI> setPoisEncontradosEnExterno(List<POI> poisEncontradosEnExterno) {
+	public void setPoisEncontradosEnExterno(List<POI> poisEncontrados) {
+		this.poisEncontrados = poisEncontrados;
+		
+	}
+	
+	public void setPoisEncontrados(List<POI> poisEncontradosEnExterno) {
 		this.poisEncontradosEnExterno = poisEncontradosEnExterno;
-		return poisEncontradosEnExterno;
+		
 	}
 	
 }
