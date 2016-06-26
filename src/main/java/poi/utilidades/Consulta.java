@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioCGPExternos;
 import poi.repositorios.RepositorioPOI;
@@ -15,6 +16,7 @@ public class Consulta {
 	private RepositorioAbstracto repositorio2;
 	private RepositorioAbstracto repositorio;
 	private List<POI> poisEncontrados = new ArrayList<POI>();
+	private BusquedaDeBancos busquedaDeBancos;
 	private List<POI> poisEncontradosEnExterno= new ArrayList<POI>();
 
 	public Consulta(RepositorioAbstracto repositorio3) {
@@ -78,6 +80,10 @@ public class Consulta {
 	public void setPoisEncontrados(List<POI> poisEncontradosEnExterno) {
 		this.poisEncontradosEnExterno = poisEncontradosEnExterno;
 		
+	}
+
+	public List<SucursalBanco> buscarBancosPorNombreYServicio(String nombreBanco, String servicio) {
+		return busquedaDeBancos.busquedaDeBancos(nombreBanco, servicio);
 	}
 	
 }

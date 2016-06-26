@@ -13,22 +13,23 @@ public class BusquedaDeBancos {
 	
 	private RepositorioPOI repositorioDePois;
 	private RepositorioBancosExternos repositorioBancoExterno;
-	private RepositorioCGPExternos repositorioCGPExternos;
 	private List<SucursalBanco> bancosFiltradosPorNombre = new ArrayList<SucursalBanco>();
-	private List<SucursalBanco> bancosDeRepositoriosDePOIFiltradoPorNombre = new ArrayList<SucursalBanco>();
 	
 	
-
+	public List<SucursalBanco> busquedaDeBancos(String nombreBanco,String servicio){
+		List<SucursalBanco> bancosRepositorioDePoisFiltrado = new ArrayList<SucursalBanco>();
+		List<SucursalBanco> bancosExternosFiltrado = new ArrayList<SucursalBanco>();
+		bancosRepositorioDePoisFiltrado = busquedaDeBancosPorNombreYServicio(repositorioDePois.getBancos(),nombreBanco,servicio);
+		bancosExternosFiltrado = busquedaDeBancosPorNombreYServicio(repositorioBancoExterno.getBancos(),nombreBanco,servicio);
+		return this.concatenarLista(bancosExternosFiltrado,bancosRepositorioDePoisFiltrado);
+	}
 	
-    
 	public List<SucursalBanco> busquedaDeBancosPorNombreYServicio(List<SucursalBanco> repoDeBancos,String nombreBanco,String Servicio){
     	 bancosFiltradosPorNombre = this.busquedaDeBancosPorNombre(repoDeBancos, nombreBanco);
     	 return this.busquedaBancosPorServicio(bancosFiltradosPorNombre, Servicio);
     	 
      }
-	
-	
-     
+	 
 	public List<SucursalBanco> busquedaDeBancosPorNombre(List<SucursalBanco> repoDeBancos,String nombreBanco){ 
 		return repoDeBancos
 			.stream()
@@ -44,5 +45,12 @@ public class BusquedaDeBancos {
 			.collect(Collectors.toList());
 	}
 	
+	public List<SucursalBanco> concatenarLista(List<SucursalBanco> repoDeBancos,List<SucursalBanco> repoDeBancos2){
+		List<SucursalBanco> newList = new ArrayList<SucursalBanco>();
+		newList.addAll(repoDeBancos);
+		newList.addAll(repoDeBancos2);
+		return newList;
+		
+		}
 	
 }

@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
 import poi.utilidades.BusquedaDeBancos;
@@ -89,6 +90,11 @@ public class Usuario  implements WithGlobalEntityManager {
 	public int numeroDePoisEncontrados() {
        int cantidadEncontrados= (this.getConsultaActiva().getPoisEncontrados().size() + this.getConsultaActiva().getPoisEncontradosEnExterno().size());
        return cantidadEncontrados;
+	}
+	
+	public List<SucursalBanco> buscarBancos(String nombreBanco,String servicio){
+		return consultaActiva.buscarBancosPorNombreYServicio(nombreBanco,servicio);
+		
 	}
 
 	}
