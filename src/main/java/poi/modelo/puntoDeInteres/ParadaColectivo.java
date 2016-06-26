@@ -14,7 +14,8 @@ public class ParadaColectivo extends POI{
 	}
 
 	public boolean estaCercaDe(Posicion posicionUsuario){
-		double distancia = Calculo.distanciaEnKilometros(this.posicion, posicionUsuario);
+		//TODO
+		double distancia = Calculo.distanciaLineal(this.posicion, posicionUsuario);
 		return distancia < 0.1;
 	};
 	

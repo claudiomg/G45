@@ -14,6 +14,5 @@ public class RepositorioPOI extends RepositorioAbstracto {
 	}
 	protected RepositorioPOI() { /*Existe para anular la instanciacion*/ };
 
-	
 }
 
