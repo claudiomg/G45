@@ -11,7 +11,7 @@ import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.RadioCercania;
-import poi.modelo.usuario.Usuario;
+import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioCGPExternos;
 import poi.repositorios.RepositorioPOI;
@@ -21,7 +21,7 @@ public class BuscarPorNombreTest {
     
 	RepositorioAbstracto repo2 = RepositorioCGPExternos.getInstance();
 	RepositorioAbstracto repositorio = RepositorioPOI.getInstance();
-	Usuario unUsuario = new Usuario();
+	Terminal unUsuario = new Terminal();
 	
 	ArrayList<String> etiquetasColectivo = new ArrayList<String>();
 	ArrayList<String> etiquetasColectivo2 = new ArrayList<String>();

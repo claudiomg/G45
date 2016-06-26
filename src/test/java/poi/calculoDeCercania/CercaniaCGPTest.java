@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.usuario.Usuario;
+import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
@@ -24,7 +24,7 @@ public class CercaniaCGPTest {
 	Posicion posicionCinco = new Posicion(40.453, 3.703);
 	Posicion posicionSeis = new Posicion(40.430, 3.69);
 	Posicion posicionSiete = new Posicion(40.417, 3.69);	
-	Usuario unUsuario = new Usuario();
+	Terminal unUsuario = new Terminal();
 	RepositorioPOI repositorio;
 	Consulta unaConsulta = new Consulta(repositorio);
 	List<Posicion> vertices = new ArrayList<Posicion>();

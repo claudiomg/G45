@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import poi.modelo.usuario.Usuario;
+import poi.modelo.usuario.Terminal;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -19,7 +19,7 @@ public class LoginController implements WithGlobalEntityManager{
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		if( (entityManager() 
-				.createQuery("from Usuario u where u.login like :login and u.password = :password", Usuario.class) 
+				.createQuery("from Usuario u where u.login like :login and u.password = :password", Terminal.class) 
 				.setParameter("login", "%" + nombreUsuario + "%") //
 				.setParameter("password", passwordUsuario)
 				.getResultList().size()) != 0){	

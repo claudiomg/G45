@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.RadioCercania;
-import poi.modelo.usuario.Usuario;
+import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
@@ -18,7 +18,7 @@ public class CercaniaLocalComercialTest {
 
 	Posicion posicionLocal = new Posicion(40.417, -3.703);
 	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
-	Usuario unUsuario = new Usuario();
+	Terminal unUsuario = new Terminal();
 	RepositorioPOI repositorio;
 	Consulta unaConsulta = new Consulta(repositorio);
 	List<String> etiquetas = new ArrayList<String>();

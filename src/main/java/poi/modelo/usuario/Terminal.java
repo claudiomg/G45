@@ -20,7 +20,7 @@ import poi.utilidades.BusquedaDeBancos;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario  implements WithGlobalEntityManager {
+public class Terminal  implements WithGlobalEntityManager {
 	
 	@Id
 	@GeneratedValue
@@ -42,7 +42,7 @@ public class Usuario  implements WithGlobalEntityManager {
 
 	private Rol rol = Rol.USUARIO;
 	
-	public Usuario() {
+	public Terminal() {
 	}
 
 	public void setLogin(String login) {
@@ -80,7 +80,7 @@ public class Usuario  implements WithGlobalEntityManager {
 		this.consultaActiva = unaConsulta;
 	}
 
-	public void persistir(Usuario usuario){
+	public void persistir(Terminal usuario){
 		entityManager().getTransaction().begin();
 		entityManager().persist(usuario);
 		entityManager().getTransaction().commit();

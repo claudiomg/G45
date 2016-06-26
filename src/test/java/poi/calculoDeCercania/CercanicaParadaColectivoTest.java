@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
-import poi.modelo.usuario.Usuario;
+import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
@@ -20,7 +20,7 @@ public class CercanicaParadaColectivoTest {
 	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
 	RepositorioPOI repositorio;
 	Consulta unaConsulta = new Consulta(repositorio);
-	Usuario unUsuario = new Usuario();
+	Terminal unUsuario = new Terminal();
 	List<String> etiquetas = new ArrayList<String>();
 	POI parada = new ParadaColectivo(etiquetas, posicionParada); 
 	

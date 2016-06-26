@@ -12,7 +12,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
-import poi.modelo.usuario.Usuario;
+import poi.modelo.usuario.Terminal;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 
@@ -34,7 +34,7 @@ public class Main implements WithGlobalEntityManager{
 		});
 
 		/** CREAR USR_DEFAULT **/
-		Usuario usr = new Usuario();
+		Terminal usr = new Terminal();
 		
 		usr.setLogin("Kevin01");
 		usr.setPassword("Abc123");
