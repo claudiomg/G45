@@ -2,7 +2,6 @@ package poi.utilidades;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
-import poi.repositorios.RepositorioCGPExternos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,10 @@ import java.util.stream.Collectors;
 
 
 public class BusquedaDeBancos {
+	
+	public BusquedaDeBancos(){
+		
+	}
 	
 	private RepositorioPOI repositorioDePois;
 	private RepositorioBancosExternos repositorioBancoExterno;
@@ -52,5 +55,21 @@ public class BusquedaDeBancos {
 		return newList;
 		
 		}
+
+	public RepositorioPOI getRepositorioDePois() {
+		return repositorioDePois;
+	}
+
+	public void setRepositorioDePois(RepositorioPOI repositorioDePois) {
+		this.repositorioDePois = repositorioDePois;
+	}
+
+	public RepositorioBancosExternos getRepositorioBancoExterno() {
+		return repositorioBancoExterno;
+	}
+
+	public void setRepositorioBancoExterno(RepositorioBancosExternos repositorioBancoExterno) {
+		this.repositorioBancoExterno = repositorioBancoExterno;
+	}
 	
 }
