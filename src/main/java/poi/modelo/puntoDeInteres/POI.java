@@ -2,17 +2,20 @@ package poi.modelo.puntoDeInteres;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
 import poi.utilidades.Posicion;
 import poi.utilidades.ExcepcionSinAtencion;
+import poi.utilidades.ExcepcionHorarioCambiado;
 
 public abstract class POI {
 	public List<String> etiquetas;
 	public Posicion posicion;
 	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	public ExcepcionSinAtencion feriados;
+	public ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 
 	public POI() {
 	}
@@ -40,6 +43,10 @@ public abstract class POI {
 		this.posicion = posicion;
 	}
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
+		if (this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(unaFechaHora))){
+			return this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
+		}
+		else
 		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados))
 				 && this.feriados.noEsUnFeriado(unaFechaHora);
 	}

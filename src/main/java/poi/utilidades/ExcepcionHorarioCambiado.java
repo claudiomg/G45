@@ -20,6 +20,7 @@ public class ExcepcionHorarioCambiado {
 			
 	}
 	
+		
 	public boolean rangoDisponible (LocalTime unaHora){
 		return this.rangoCambiado.stream().anyMatch(unRango -> unRango.isValidValue(unaHora));
 	}
