@@ -1,8 +1,12 @@
 package poi.modelo.usuario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RepositorioTerminal {
 
 	public static RepositorioTerminal instance = null;
+	public List<Terminal> pois = new ArrayList <Terminal>(); 
 
 	private RepositorioTerminal(){		
 	};

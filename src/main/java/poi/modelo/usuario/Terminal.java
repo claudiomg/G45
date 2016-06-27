@@ -65,6 +65,10 @@ public class Terminal  implements WithGlobalEntityManager {
 		return this.consultaActiva.sonCercanos(this.posicion, poi);
 	}
 
+	public boolean estaDisponible(POI poi){
+		return this.consultaActiva.estaDisponible(poi);
+	}
+	
 	public void buscarPOIPorPalabra(String palabra){
 		this.consultaActiva.buscarPorPalabra(palabra);
 		this.consultaActiva.buscarPorPalabraEnExterno(palabra);

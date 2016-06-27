@@ -1,5 +1,6 @@
 package poi.utilidades;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,9 +9,6 @@ import java.util.stream.Stream;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.repositorios.RepositorioAbstracto;
-import poi.repositorios.RepositorioCGPExternos;
-import poi.repositorios.RepositorioPOI;
-
 
 public class Consulta {
 	private RepositorioAbstracto repositorio2;
@@ -18,7 +16,12 @@ public class Consulta {
 	private List<POI> poisEncontrados = new ArrayList<POI>();
 	private BusquedaDeBancos busquedaDeBancos;
 	private List<POI> poisEncontradosEnExterno= new ArrayList<POI>();
-
+	//Expresados en milisegundos
+	private long comienzoProceso;
+	private long finProceso;
+	private long tiempoProceso;
+	
+	
 	public Consulta(RepositorioAbstracto repositorio3) {
 		this.repositorio = repositorio3;
 	}
@@ -31,21 +34,25 @@ public class Consulta {
 		return poisEncontrados;
 	}
 
-	public boolean sonCercanos(Posicion posicion, POI poi) {		
-		return poi.estaCercaDe(posicion);
+	public boolean sonCercanos(Posicion posicion, POI poi) {
+		comienzoProceso = System.currentTimeMillis();
+		boolean cercanos = poi.estaCercaDe(posicion);
+		finProceso = System.currentTimeMillis();
+		calcularTiempoProceso(comienzoProceso, finProceso);
+		return cercanos;
 	}
 
 	public List<POI> buscarPorPalabra(String palabra) {
-		Stream<POI> listaFiltrada = filtrarPorParlabra(palabra);
-	
-				
-		return asignarAPoisEncontrados(listaFiltrada);
+		comienzoProceso = System.currentTimeMillis();
+		Stream<POI> listaFiltrada = filtrarPorParlabra(palabra);				
+		List<POI> poisEncontrados = asignarAPoisEncontrados(listaFiltrada);
+		finProceso = System.currentTimeMillis();
+		calcularTiempoProceso(comienzoProceso, finProceso);		
+		return poisEncontrados;
 	}
 	
 	public List<POI> buscarPorPalabraEnExterno(String palabra){
-		Stream<POI> listaFiltrada2 = filtrarPorParlabraExternos(palabra);
-	
-	
+		Stream<POI> listaFiltrada2 = filtrarPorParlabraExternos(palabra);	
 	    return asignarAPoisEncontrados2(listaFiltrada2);
 		
 	}
@@ -84,6 +91,18 @@ public class Consulta {
 
 	public List<SucursalBanco> buscarBancosPorNombreYServicio(String nombreBanco, String servicio) {
 		return busquedaDeBancos.busquedaDeBancos(nombreBanco, servicio);
+	}
+
+	public boolean estaDisponible(POI poi) {
+		comienzoProceso = System.currentTimeMillis();
+		boolean disponibilidad = poi.estaDisponible(LocalDateTime.now());
+		finProceso = System.currentTimeMillis();
+		calcularTiempoProceso(comienzoProceso, finProceso);
+		return disponibilidad;
+	}
+
+	private void calcularTiempoProceso(long comienzo, long fin) {
+		this.tiempoProceso = fin - comienzo;
 	}
 	
 }
