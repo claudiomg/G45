@@ -1,5 +1,6 @@
 package poi.modelo.usuario;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
 import poi.utilidades.BusquedaDeBancos;
+import poi.utilidades.HistorialConsulta;
 
 @Entity
 @Table(name = "usuarios")
@@ -42,15 +44,21 @@ public class Terminal  implements WithGlobalEntityManager {
 
 	private Rol rol = Rol.USUARIO;
 	
+	private String nombre;
+	
 	public Terminal() {
 	}
-
+    
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void setNombre(String nombre){
+		this.nombre = nombre;
 	}
 	
 	public Posicion getPosicion() {
@@ -79,10 +87,13 @@ public class Terminal  implements WithGlobalEntityManager {
 		return consultaActiva;
 	}
 
-	public void agregarConsulta(Consulta unaConsulta){
+	public void agregarConsulta(Consulta unaConsulta, LocalDate fecha){
 		consultas.add(unaConsulta);
 		this.consultaActiva = unaConsulta;
+		HistorialConsulta historial = new HistorialConsulta(fecha, this.nombre);
+		
 	}
+	
 
 	public void persistir(Terminal usuario){
 		entityManager().getTransaction().begin();
