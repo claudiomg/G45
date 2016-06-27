@@ -15,4 +15,9 @@ public class ExcepcionSinAtencion {
 	public void agregarFeriados(LocalDateTime unFeriado){
 		feriados.add(unFeriado);
 	}
+	
+	public boolean noEsUnFeriado(LocalDateTime diaActual){
+		return this.feriados.stream().noneMatch(unDia -> unDia.getDayOfMonth()== diaActual.getDayOfMonth())
+				|| this.feriados.stream().noneMatch(unDia -> unDia.getMonth() == diaActual.getMonth());
+	}
 }

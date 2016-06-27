@@ -40,7 +40,8 @@ public abstract class POI {
 		this.posicion = posicion;
 	}
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
+		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados))
+				 && this.feriados.noEsUnFeriado(unaFechaHora);
 	}
 	
 	public void addDisponibilidadDeAtencion(DisponibilidadHoraria diaYHora ){

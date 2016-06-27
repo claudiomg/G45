@@ -29,15 +29,15 @@ public class DisponibilidadHoraria {
 		return this.dia.equals(unDia);
 	}
 	
-	public boolean noEsUnFeriado(ExcepcionSinAtencion feriados, LocalDateTime diaActual){
-		return feriados.getFeriados().stream().noneMatch(unDia -> unDia.getDayOfMonth()== diaActual.getDayOfMonth())
-				|| feriados.getFeriados().stream().noneMatch(unDia -> unDia.getMonth() == diaActual.getMonth());
-	}
+	//public boolean noEsUnFeriado(ExcepcionSinAtencion feriados, LocalDateTime diaActual){
+	// feriados.getFeriados().stream().noneMatch(unDia -> unDia.getDayOfMonth()== diaActual.getDayOfMonth())
+		//		|| feriados.getFeriados().stream().noneMatch(unDia -> unDia.getMonth() == diaActual.getMonth());
+	//}
 	
 	public boolean estaDisponible(LocalDateTime unaFechaHora, ExcepcionSinAtencion feriados){
 		DayOfWeek unDia = unaFechaHora.getDayOfWeek();
 		LocalTime unaHora = unaFechaHora.toLocalTime();
-		return  this.diaDisponible(unDia)&& this.rangoDisponible(unaHora)&& this.noEsUnFeriado(feriados, unaFechaHora);
+		return  this.diaDisponible(unDia)&& this.rangoDisponible(unaHora);//&& this.noEsUnFeriado(feriados, unaFechaHora);
 	}
 	
 	
