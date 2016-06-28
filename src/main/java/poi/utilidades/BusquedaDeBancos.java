@@ -1,4 +1,5 @@
 package poi.utilidades;
+import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
@@ -14,8 +15,8 @@ public class BusquedaDeBancos {
 		
 	}
 	
-	private RepositorioPOI repositorioDePois;
-	private RepositorioBancosExternos repositorioBancoExterno;
+	private RepositorioAbstracto repositorioDePois;
+	private RepositorioAbstracto repositorioBancoExterno;
 	private List<SucursalBanco> bancosFiltradosPorNombre = new ArrayList<SucursalBanco>();
 	
 	
@@ -56,19 +57,19 @@ public class BusquedaDeBancos {
 		
 		}
 
-	public RepositorioPOI getRepositorioDePois() {
+	public RepositorioAbstracto getRepositorioDePois() {
 		return repositorioDePois;
 	}
 
-	public void setRepositorioDePois(RepositorioPOI repositorioDePois) {
+	public void setRepositorioDePois(RepositorioAbstracto repositorioDePois) {
 		this.repositorioDePois = repositorioDePois;
 	}
 
-	public RepositorioBancosExternos getRepositorioBancoExterno() {
+	public RepositorioAbstracto getRepositorioBancoExterno() {
 		return repositorioBancoExterno;
 	}
 
-	public void setRepositorioBancoExterno(RepositorioBancosExternos repositorioBancoExterno) {
+	public void setRepositorioBancoExterno(RepositorioAbstracto repositorioBancoExterno) {
 		this.repositorioBancoExterno = repositorioBancoExterno;
 	}
 	
