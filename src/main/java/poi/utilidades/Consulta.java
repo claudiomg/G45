@@ -115,5 +115,13 @@ public class Consulta {
 	public void setTiempoProcesamientoMaximo(double tiempoProcesamientoMaximo) {
 		this.tiempoProcesamientoMaximo = tiempoProcesamientoMaximo;
 	}
+
+	public BusquedaDeBancos getBusquedaDeBancos() {
+		return busquedaDeBancos;
+	}
+
+	public void setBusquedaDeBancos(BusquedaDeBancos busquedaDeBancos) {
+		this.busquedaDeBancos = busquedaDeBancos;
+	}
 	
 }

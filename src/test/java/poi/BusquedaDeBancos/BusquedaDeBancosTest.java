@@ -1,6 +1,7 @@
 package poi.BusquedaDeBancos;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -15,21 +16,22 @@ import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.BusquedaDeBancos;
+import poi.utilidades.Consulta;
 
 public class BusquedaDeBancosTest {
 	
 
-	RepositorioBancosExternos repositorioBancos;
-	RepositorioPOI repositorioPoi;
+	RepositorioAbstracto repositorioBancos = RepositorioBancosExternos.getInstance() ;
+	RepositorioAbstracto repositorioPoi = RepositorioPOI.getInstance();
 	Terminal unUsuario = new Terminal();
 	BusquedaDeBancos busquedaBancos = new BusquedaDeBancos();
 	
 	SucursalBanco bancoSantander = new SucursalBanco(null,null);
 	SucursalBanco bancoGalicia = new SucursalBanco(null,null);
 	SucursalBanco bancoProvincia = new SucursalBanco(null,null);
-	List<String> servicios1;
-	List<String> servicios2;	
-	List<String> servicios3;
+	ArrayList<String> servicios1 = new ArrayList<String>();
+	ArrayList<String> servicios2 = new ArrayList<String>();	
+	ArrayList<String> servicios3 = new ArrayList<String>();
 	
 	@Before
 	public void inicializar(){
@@ -41,33 +43,59 @@ public class BusquedaDeBancosTest {
 		servicios2.add("prestamo");
 		servicios3.add("prestamo");
 		servicios3.add("cajero");
-		
 		bancoSantander.setNombre("Santander");
 		bancoSantander.setSucursal("Flores");
 		bancoSantander.setGerente("Perez");
 		bancoSantander.setServicios(servicios1);
-		
-		bancoGalicia.setNombre("Galicia");
+		bancoGalicia.setNombre("Provincia");
 		bancoGalicia.setServicios(servicios2);
-		
-		bancoProvincia.setNombre("Provincia");
+		bancoProvincia.setNombre("Galicia");
 		bancoProvincia.setServicios(servicios3);
-		
 		repositorioPoi.agregarPOI(bancoGalicia);
 		repositorioPoi.agregarPOI(bancoProvincia);
 		repositorioBancos.agregarPOI(bancoSantander);
-		
-		busquedaBancos.setRepositorioBancoExterno(repositorioBancos);
-		busquedaBancos.setRepositorioDePois(repositorioPoi);
-	}
-		@After
-		public void vaciarRepositorio(){
-			
-				repositorioPoi.eliminarPOI(bancoGalicia);
-				repositorioPoi.eliminarPOI(bancoProvincia);
-				repositorioBancos.eliminarPOI(bancoSantander);
-				
+		busquedaBancos.setRepositorioBancoExterno(repositorioPoi);
+		busquedaBancos.setRepositorioDePois(repositorioBancos);
 	}
 	
+	@After
+	public void vaciarRepositorio(){
+		
+			repositorioPoi.eliminarPOI(bancoGalicia);
+			repositorioPoi.eliminarPOI(bancoProvincia);
+			repositorioBancos.eliminarPOI(bancoSantander);
+			
+			
+}
+
+		
+		@Test
+		public void buscarBancosPorNombreSantanderYServicioCajero(){
+			Consulta consulta1 = new Consulta(null);
+			consulta1.setBusquedaDeBancos(busquedaBancos);
+			unUsuario.agregarConsulta(consulta1,null);
+			Assert.assertEquals(unUsuario.buscarBancos("Santander", "cajero").size(),1);
+			
+		}
+		
+		@Test
+		public void buscarBancosPorNombreGaliciaYCajero(){
+			Consulta consulta2 = new Consulta(null);
+			consulta2.setBusquedaDeBancos(busquedaBancos);
+			unUsuario.agregarConsulta(consulta2,null);
+			Assert.assertEquals(unUsuario.buscarBancos("Galicia", "cajero").size(),1);
+			
+		}
+		
+		@Test
+		public void buscarBancosPorNombreSantanderYPrestamo(){
+			Consulta consulta3 = new Consulta(null);
+			consulta3.setBusquedaDeBancos(busquedaBancos);
+			unUsuario.agregarConsulta(consulta3,null);
+			Assert.assertEquals(unUsuario.buscarBancos("Santander", "prestamo").size(),0);
+			
+		}
+		
+		
 }
 
