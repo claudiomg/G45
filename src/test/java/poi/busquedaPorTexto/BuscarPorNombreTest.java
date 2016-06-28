@@ -1,4 +1,5 @@
 package poi.busquedaPorTexto;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -32,6 +33,8 @@ public class BuscarPorNombreTest {
 	POI paradaColectivo2 = new ParadaColectivo(etiquetasColectivo2,null);
 	POI CGP1 = new CGP(etiquetasCGP, null, null);
 	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
+	LocalDate fechaHora;
+	
 	
 	@Before
 	public void inicializar(){
@@ -65,7 +68,7 @@ public class BuscarPorNombreTest {
 	public void buscarColectivo7(){
 		Consulta consulta7 =  new Consulta(repositorio);
 		consulta7.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consulta7);		
+		unUsuario.agregarConsulta(consulta7, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("7");
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);
 	}
@@ -74,7 +77,7 @@ public class BuscarPorNombreTest {
 	public void buscarColectivoARetiro(){
 		Consulta consultaRetiro = new Consulta(repositorio);
 		consultaRetiro.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consultaRetiro);
+		unUsuario.agregarConsulta(consultaRetiro, LocalDate.of(2016, 6, 27));
 		unUsuario.buscarPOIPorPalabra("retiro");
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(),2);
 	}
@@ -83,7 +86,7 @@ public class BuscarPorNombreTest {
 	public void buscarPorFlores(){
 		Consulta consultaFlores =  new Consulta(repositorio);
 		consultaFlores.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consultaFlores);		
+		unUsuario.agregarConsulta(consultaFlores, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("flores");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
 	}
@@ -92,7 +95,7 @@ public class BuscarPorNombreTest {
 	public void buscarPorColectivo114(){
 		Consulta consulta114 =  new Consulta(repositorio);
 		consulta114.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consulta114);		
+		unUsuario.agregarConsulta(consulta114, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("114");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 0);		
 	}
@@ -101,7 +104,7 @@ public class BuscarPorNombreTest {
 	public void buscarPorParqueChacabuco(){
 		Consulta consultaParqueChacabuco =  new Consulta(repositorio);
 		consultaParqueChacabuco.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consultaParqueChacabuco);		
+		unUsuario.agregarConsulta(consultaParqueChacabuco, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("parque chacabuco");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
 	}
@@ -110,7 +113,7 @@ public class BuscarPorNombreTest {
 	public void buscarPorFotocopias(){
 		Consulta consultaFotocopias =  new Consulta(repositorio);
 		consultaFotocopias.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consultaFotocopias);		
+		unUsuario.agregarConsulta(consultaFotocopias, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("fotocopias");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
 	}
@@ -119,7 +122,7 @@ public class BuscarPorNombreTest {
 	public void buscarPorCigarrillos(){
 		Consulta consultaCigarrillos =  new Consulta(repositorio);
 		consultaCigarrillos.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consultaCigarrillos);		
+		unUsuario.agregarConsulta(consultaCigarrillos, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("cigarrillos");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 1);		
 	}
@@ -128,7 +131,7 @@ public class BuscarPorNombreTest {
 	public void buscarPorCaramelos(){
 		Consulta consultaCaramelos =  new Consulta(repositorio);
 		consultaCaramelos.setRepoExterno(repo2);
-		unUsuario.agregarConsulta(consultaCaramelos);		
+		unUsuario.agregarConsulta(consultaCaramelos, LocalDate.of(2016, 6, 27));		
 		unUsuario.buscarPOIPorPalabra("caramelos");		
 		Assert.assertEquals(unUsuario.numeroDePoisEncontrados(), 0);		
 	}

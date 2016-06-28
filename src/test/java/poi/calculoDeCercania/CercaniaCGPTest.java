@@ -1,5 +1,6 @@
 package poi.calculoDeCercania;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,7 @@ public class CercaniaCGPTest {
 	@Before
 	public void inicializarEscenario(){
 		unUsuario.setPosicion(posicionSiete);
-		unUsuario.agregarConsulta(unaConsulta);
+		unUsuario.agregarConsulta(unaConsulta,LocalDate.of(2016, 6, 27));
 		vertices.add(posicionUno);
 		vertices.add(posicionDos);
 		vertices.add(posicionCuatro);
