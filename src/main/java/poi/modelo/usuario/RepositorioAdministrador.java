@@ -6,8 +6,8 @@ import java.util.List;
 public class RepositorioAdministrador {
 
 	public static RepositorioAdministrador instance = null;
-	public List<Administrador> pois = new ArrayList <Administrador>(); 
-	
+	public List<Administrador> administradores = new ArrayList <Administrador>(); 
+
 	private RepositorioAdministrador(){		
 	};
 
@@ -16,6 +16,14 @@ public class RepositorioAdministrador {
 			instance = new RepositorioAdministrador();
 		}
 		return instance;
+	}
+	
+	public List<Administrador> getAdministradores() {
+		return administradores;
+	}
+
+	public void setAdministradores(List<Administrador> administradores) {
+		this.administradores = administradores;
 	}
 
 }

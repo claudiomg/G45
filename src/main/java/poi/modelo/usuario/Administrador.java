@@ -15,7 +15,8 @@ public class Administrador {
 	
 	private RepositorioAbstracto repositorio;
 	private Rol rol = Rol.ADMINISTRADOR;
-	
+	private String mail;
+
 	public Administrador(RepositorioAbstracto repositorio2){
 		this.repositorio = repositorio2;
 	}
@@ -86,6 +87,14 @@ public class Administrador {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+	
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 }

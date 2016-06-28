@@ -6,7 +6,7 @@ import java.util.List;
 public class RepositorioTerminal {
 
 	public static RepositorioTerminal instance = null;
-	public List<Terminal> pois = new ArrayList <Terminal>(); 
+	public List<Terminal> terminales = new ArrayList <Terminal>(); 
 
 	private RepositorioTerminal(){		
 	};

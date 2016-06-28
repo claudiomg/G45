@@ -17,11 +17,11 @@ public class Consulta {
 	private BusquedaDeBancos busquedaDeBancos;
 	private List<POI> poisEncontradosEnExterno= new ArrayList<POI>();
 	//Expresados en milisegundos
-	private long comienzoProceso;
-	private long finProceso;
-	private long tiempoProceso;
-	
-	
+	private double comienzoProceso;
+	private double finProceso;
+	private double tiempoProceso;
+	private double tiempoProcesamientoMaximo = 10.0;
+
 	public Consulta(RepositorioAbstracto repositorio3) {
 		this.repositorio = repositorio3;
 	}
@@ -35,18 +35,18 @@ public class Consulta {
 	}
 
 	public boolean sonCercanos(Posicion posicion, POI poi) {
-		comienzoProceso = System.currentTimeMillis();
+		comienzoProceso = System.currentTimeMillis()/1000;
 		boolean cercanos = poi.estaCercaDe(posicion);
-		finProceso = System.currentTimeMillis();
+		finProceso = System.currentTimeMillis()/1000;
 		calcularTiempoProceso(comienzoProceso, finProceso);
 		return cercanos;
 	}
 
 	public List<POI> buscarPorPalabra(String palabra) {
-		comienzoProceso = System.currentTimeMillis();
+		comienzoProceso = System.currentTimeMillis()/1000;
 		Stream<POI> listaFiltrada = filtrarPorParlabra(palabra);				
 		List<POI> poisEncontrados = asignarAPoisEncontrados(listaFiltrada);
-		finProceso = System.currentTimeMillis();
+		finProceso = System.currentTimeMillis()/1000;
 		calcularTiempoProceso(comienzoProceso, finProceso);		
 		return poisEncontrados;
 	}
@@ -94,15 +94,26 @@ public class Consulta {
 	}
 
 	public boolean estaDisponible(POI poi) {
-		comienzoProceso = System.currentTimeMillis();
+		comienzoProceso = System.currentTimeMillis()/1000;
 		boolean disponibilidad = poi.estaDisponible(LocalDateTime.now());
-		finProceso = System.currentTimeMillis();
+		finProceso = System.currentTimeMillis()/1000;
 		calcularTiempoProceso(comienzoProceso, finProceso);
 		return disponibilidad;
 	}
 
-	private void calcularTiempoProceso(long comienzo, long fin) {
+	private void calcularTiempoProceso(double comienzo, double fin) {
 		this.tiempoProceso = fin - comienzo;
+		if (this.tiempoProceso > this.tiempoProcesamientoMaximo){
+			Notificador.informarProcesamientoExcesivo(this.tiempoProceso - this.tiempoProcesamientoMaximo);
+		}
+	}
+	
+	public double getTiempoProcesamientoMaximo() {
+		return tiempoProcesamientoMaximo;
+	}
+
+	public void setTiempoProcesamientoMaximo(double tiempoProcesamientoMaximo) {
+		this.tiempoProcesamientoMaximo = tiempoProcesamientoMaximo;
 	}
 	
 }
