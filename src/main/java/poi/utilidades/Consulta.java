@@ -123,5 +123,15 @@ public class Consulta {
 	public void setBusquedaDeBancos(BusquedaDeBancos busquedaDeBancos) {
 		this.busquedaDeBancos = busquedaDeBancos;
 	}
-	
+	public double getComienzoProceso() {
+		return comienzoProceso;
+	}
+
+	public double getFinProceso() {
+		return finProceso;
+	}
+
+	public double getTiempoProceso() {
+		return tiempoProceso;
+	}	
 }
