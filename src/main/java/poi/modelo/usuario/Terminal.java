@@ -75,10 +75,12 @@ public class Terminal  implements WithGlobalEntityManager {
 	}
 
 	public boolean estaDisponible(POI poi){
+		this.consultaActiva.generarHistorial(poi.toString());
 		return this.consultaActiva.estaDisponible(poi);
 	}
 	
 	public void buscarPOIPorPalabra(String palabra){
+		this.consultaActiva.generarHistorial(palabra);
 		this.consultaActiva.buscarPorPalabra(palabra);
 		this.consultaActiva.buscarPorPalabraEnExterno(palabra);
 		
@@ -109,6 +111,7 @@ public class Terminal  implements WithGlobalEntityManager {
 	}
 	
 	public List<SucursalBanco> buscarBancos(String nombreBanco,String servicio){
+		this.consultaActiva.generarHistorial(nombreBanco+' '+servicio);
 		return consultaActiva.buscarBancosPorNombreYServicio(nombreBanco,servicio);
 		
 	}

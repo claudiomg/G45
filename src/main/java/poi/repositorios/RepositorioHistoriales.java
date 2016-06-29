@@ -3,6 +3,7 @@ package poi.repositorios;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import poi.utilidades.HistorialConsulta;
 
 public class RepositorioHistoriales {
@@ -17,6 +18,7 @@ public class RepositorioHistoriales {
 		return instance;
 	}
 	
+	
 	public void agregarHistorial(HistorialConsulta historial){
 		historialesConsultas.add(historial);
 	}
@@ -24,5 +26,7 @@ public class RepositorioHistoriales {
 	public List<HistorialConsulta> getHistoriales (){
 		return this.historialesConsultas;
 	}
+
+	
 
 }

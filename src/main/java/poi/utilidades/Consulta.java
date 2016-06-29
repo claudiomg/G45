@@ -105,6 +105,7 @@ public class Consulta {
 
 	private void calcularTiempoProceso(double comienzo, double fin) {
 		this.tiempoProceso = fin - comienzo;
+		this.historial.setTiempoProceso(this.tiempoProceso);
 		if (this.tiempoProceso > this.tiempoProcesamientoMaximo){
 			Notificador.informarProcesamientoExcesivo(this.tiempoProceso - this.tiempoProcesamientoMaximo);
 		}
@@ -136,15 +137,17 @@ public class Consulta {
 	public double getTiempoProceso() {
 		return tiempoProceso;
 	}
+	public void setHistorial(LocalDate fecha, String nombre) {
+		this.historial = new HistorialConsulta(fecha, nombre);
+		this.historial.agregarARepositorio();
+		
+	}	
 
-	public void generarHistorial(String string) {
+	public void generarHistorial(String frase) {
+		this.historial.setFraseBuscada(frase);
 		
 		
 		
 	}
 
-	public void setHistorial(LocalDate fecha, String nombre) {
-		HistorialConsulta historial = new HistorialConsulta(fecha, nombre);
-		
-	}	
 }
