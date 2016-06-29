@@ -28,7 +28,6 @@ public class Terminal  implements WithGlobalEntityManager {
 	@GeneratedValue
 	@Column(name = "USUARIO_ID")
 	private Long usuarioId;
-	
 	@Column(name = "Login_Usuario")
 	private String login;
 
@@ -63,6 +62,18 @@ public class Terminal  implements WithGlobalEntityManager {
 	
 	public Posicion getPosicion() {
 		return posicion;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getNombre() {
+		return nombre;
 	}
 
 	public void setPosicion(Posicion posicion) {
