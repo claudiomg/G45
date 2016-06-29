@@ -81,14 +81,17 @@ public class Terminal  implements WithGlobalEntityManager {
 	}
 
 	public boolean estoyCercaDe(POI poi) {
+		this.consultaActiva.generarHistorial(poi.toString());
 		return this.consultaActiva.sonCercanos(this.posicion, poi);
 	}
 
 	public boolean estaDisponible(POI poi){
+		this.consultaActiva.generarHistorial(poi.toString());
 		return this.consultaActiva.estaDisponible(poi);
 	}
 	
 	public void buscarPOIPorPalabra(String palabra){
+		this.consultaActiva.generarHistorial(palabra);
 		this.consultaActiva.buscarPorPalabra(palabra);
 		this.consultaActiva.buscarPorPalabraEnExterno(palabra);
 		
@@ -101,7 +104,7 @@ public class Terminal  implements WithGlobalEntityManager {
 	public void agregarConsulta(Consulta unaConsulta, LocalDate fecha){
 		consultas.add(unaConsulta);
 		this.consultaActiva = unaConsulta;
-		HistorialConsulta historial = new HistorialConsulta(fecha, this.nombre);
+		this.consultaActiva.setHistorial(fecha, this.nombre);
 		
 	}
 	
@@ -119,6 +122,7 @@ public class Terminal  implements WithGlobalEntityManager {
 	}
 	
 	public List<SucursalBanco> buscarBancos(String nombreBanco,String servicio){
+		this.consultaActiva.generarHistorial(nombreBanco+' '+servicio);
 		return consultaActiva.buscarBancosPorNombreYServicio(nombreBanco,servicio);
 		
 	}

@@ -1,5 +1,6 @@
 package poi.reportes;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -7,21 +8,40 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import poi.modelo.usuario.Terminal;
+import poi.repositorios.RepositorioHistoriales;
 
 public class ReporteBusquedasPorFechaTerminal extends ReporteAbstracto {
+	
+	RepositorioHistoriales repositorioDeHistorial;
 
 	@Override
 	public JsonArray dumpReport() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public JsonObject consultasHechasEnTerminalEnciertaFecha(String unaTerminal,LocalDate unaFecha){
+		Long unaCantidad;
+		unaCantidad = repositorioDeHistorial.cantidaDeConsultasHechasEnUnaTerminalEnUnaFecha(unaTerminal,unaFecha);
+		return createResult(unaTerminal,unaFecha,unaCantidad);
+		}
+	
+	
 
-	private JsonObject createResult(Terminal unaTerminal ,Date unaFecha, Long unaCantidad) {
+	private JsonObject createResult(String unaTerminal ,LocalDate unaFecha, Long unaCantidad) {
 		HashMap<String, String> columns = new HashMap<String, String>();
 		columns.put("Terminal", unaTerminal.toString());
 		columns.put("Fecha", unaFecha.toString());
 		columns.put("Cantidad", unaCantidad.toString());
 		return super.createResult(columns);
+	}
+
+	public RepositorioHistoriales getRepositorioDeHistorial() {
+		return repositorioDeHistorial;
+	}
+
+	public void setRepositorioDeHistorial(RepositorioHistoriales repositorioDeHistorial) {
+		this.repositorioDeHistorial = repositorioDeHistorial;
 	}
 
 }

@@ -15,11 +15,13 @@ import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioAbstracto;
 import poi.repositorios.RepositorioCGPExternos;
+import poi.repositorios.RepositorioHistoriales;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 
 public class BuscarPorNombreTest {
     
+	
 	RepositorioAbstracto repo2 = RepositorioCGPExternos.getInstance();
 	RepositorioAbstracto repositorio = RepositorioPOI.getInstance();
 	Terminal unUsuario = new Terminal();
