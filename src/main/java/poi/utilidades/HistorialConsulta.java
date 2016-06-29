@@ -19,6 +19,22 @@ public class HistorialConsulta  {
 		
 	}
 	
+	public String getNombreTerminal() {
+		return nombreTerminal;
+	}
+
+	public void setNombreTerminal(String nombreTerminal) {
+		this.nombreTerminal = nombreTerminal;
+	}
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+
 	public void setFraseBuscada(String frase){
 		this.fraseBuscada = frase;
 	}
