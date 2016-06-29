@@ -70,6 +70,7 @@ public class Terminal  implements WithGlobalEntityManager {
 	}
 
 	public boolean estoyCercaDe(POI poi) {
+		this.consultaActiva.generarHistorial(poi.toString());
 		return this.consultaActiva.sonCercanos(this.posicion, poi);
 	}
 
@@ -90,7 +91,7 @@ public class Terminal  implements WithGlobalEntityManager {
 	public void agregarConsulta(Consulta unaConsulta, LocalDate fecha){
 		consultas.add(unaConsulta);
 		this.consultaActiva = unaConsulta;
-		HistorialConsulta historial = new HistorialConsulta(fecha, this.nombre);
+		this.consultaActiva.setHistorial(fecha, this.nombre);
 		
 	}
 	

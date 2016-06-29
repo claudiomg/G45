@@ -1,5 +1,6 @@
 package poi.utilidades;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Consulta {
 	private double finProceso;
 	private double tiempoProceso;
 	private double tiempoProcesamientoMaximo = 10.0;
+	private HistorialConsulta historial;
 
 	public Consulta(RepositorioAbstracto repositorio3) {
 		this.repositorio = repositorio3;
@@ -133,5 +135,16 @@ public class Consulta {
 
 	public double getTiempoProceso() {
 		return tiempoProceso;
+	}
+
+	public void generarHistorial(String string) {
+		
+		
+		
+	}
+
+	public void setHistorial(LocalDate fecha, String nombre) {
+		HistorialConsulta historial = new HistorialConsulta(fecha, nombre);
+		
 	}	
 }

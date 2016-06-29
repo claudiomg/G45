@@ -10,6 +10,7 @@ public class HistorialConsulta {
 	
 	public HistorialConsulta(LocalDate fecha, String nombreTerminal){
 		this.fecha = fecha;
+		
 	}
 	
 	public void setFraseBuscada(String frase){
