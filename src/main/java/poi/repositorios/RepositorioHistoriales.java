@@ -37,7 +37,7 @@ public class RepositorioHistoriales {
 	}
 
 
-	private List<HistorialConsulta> filtrarConsultaPorFecha(List<HistorialConsulta> consultas2, LocalDate unaFecha) {
+	public List<HistorialConsulta> filtrarConsultaPorFecha(List<HistorialConsulta> consultas2, LocalDate unaFecha) {
         
 		return consultas2
 		.stream()
@@ -46,7 +46,7 @@ public class RepositorioHistoriales {
 	}
 
 
-	private List<HistorialConsulta> filtraConsultaPorTerminal(List<HistorialConsulta> consultas,String unaTerminal) {
+	public List<HistorialConsulta> filtraConsultaPorTerminal(List<HistorialConsulta> consultas,String unaTerminal) {
 		
 		return consultas
 			.stream()

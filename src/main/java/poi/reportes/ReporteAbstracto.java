@@ -5,9 +5,12 @@ import java.util.HashMap;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import poi.repositorios.RepositorioHistoriales;
+
 public abstract class ReporteAbstracto {
 	
 	JsonArray results = new JsonArray();
+	RepositorioHistoriales repositorioDeHistorial;
 
 	public abstract JsonArray dumpReport();
 	//este metodo debe ser llamado desde el controller para armar la grilla de resultados, devuelve this.results
@@ -27,5 +30,14 @@ public abstract class ReporteAbstracto {
 		this.addResult(result);//agrego el json object a la lista de resultados
 		return result;
 	}
+	
+	public RepositorioHistoriales getRepositorioDeHistorial() {
+		return repositorioDeHistorial;
+	}
+
+	public void setRepositorioDeHistorial(RepositorioHistoriales repositorioDeHistorial) {
+		this.repositorioDeHistorial = repositorioDeHistorial;
+	}
+
 }
 

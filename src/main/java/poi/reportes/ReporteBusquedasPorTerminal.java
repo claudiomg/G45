@@ -14,8 +14,18 @@ public class ReporteBusquedasPorTerminal extends ReporteAbstracto {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public JsonObject consultasTotalesPorTerminal(String unaTerminal){
+		int unaCantidad;
+		unaCantidad = repositorioDeHistorial
+					  .filtraConsultaPorTerminal(repositorioDeHistorial.getHistoriales(),unaTerminal)
+					  .size();
+		Long unLong = new Long(unaCantidad);
+		return createResult(unaTerminal,unLong);
+		
+		}
 
-	private JsonObject createResult(Terminal unaTerminal, Long unaCantidad) {
+	private JsonObject createResult(String unaTerminal, Long unaCantidad) {
 		HashMap<String, String> columns = new HashMap<String, String>();
 		columns.put("Terminal", unaTerminal.toString());
 		columns.put("Cantidad", unaCantidad.toString());

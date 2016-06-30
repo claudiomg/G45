@@ -12,7 +12,7 @@ import poi.repositorios.RepositorioHistoriales;
 
 public class ReporteBusquedasPorFechaTerminal extends ReporteAbstracto {
 	
-	RepositorioHistoriales repositorioDeHistorial;
+	
 
 	@Override
 	public JsonArray dumpReport() {
@@ -36,12 +36,5 @@ public class ReporteBusquedasPorFechaTerminal extends ReporteAbstracto {
 		return super.createResult(columns);
 	}
 
-	public RepositorioHistoriales getRepositorioDeHistorial() {
-		return repositorioDeHistorial;
-	}
-
-	public void setRepositorioDeHistorial(RepositorioHistoriales repositorioDeHistorial) {
-		this.repositorioDeHistorial = repositorioDeHistorial;
-	}
-
+	
 }
