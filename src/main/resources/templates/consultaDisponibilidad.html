@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Consultar disponibilidad</title>
+</head>
+<body>
+
+	<div class="container">
+		<a href="/index.html">Volver a intentar</a>
+	</div>
+
+	<h2>Consultar disponibilidad</h2>
+	<h3>Puntos en sistema</h3>
+	
+		<div>
+		
+			<tb>
+				<tr>
+					<td>
+					 	Cantidad De Pois: {{cantidadPois}} <br /><br />	
+					</td>
+					<td>
+						Lista: <br /><br />
+						{{#pois}}
+							Nombre de POI: {{nombre}}  <input type="submit" value="Disponible?"> <br />
+						{{/pois}}
+					</td>
+				</tr>	
+			</tb>
+					
+		</div>
+				
+</body>
+</html>

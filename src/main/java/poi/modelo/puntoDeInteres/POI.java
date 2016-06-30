@@ -11,6 +11,7 @@ import poi.utilidades.ExcepcionSinAtencion;
 import poi.utilidades.ExcepcionHorarioCambiado;
 
 public abstract class POI {
+	public String nombre;
 	public List<String> etiquetas;
 	public Posicion posicion;
 	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
@@ -83,5 +84,13 @@ public abstract class POI {
 		this.agregarEtiqueta(etiqueta);
 		this.eliminarEtiqueta(etiqueta2);
 	}
-	
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 }
