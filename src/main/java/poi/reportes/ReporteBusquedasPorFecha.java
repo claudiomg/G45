@@ -19,15 +19,14 @@ public class ReporteBusquedasPorFecha extends ReporteAbstracto {
 	}
 	
 
-	public JsonObject consultasHechasEnciertaFecha(Date unaFecha){
+	public JsonObject consultasHechasEnciertaFecha(LocalDate unaFecha){
 		Long unaCantidad;
-		String buscar;
-		buscar = unaFecha.toString();
-		unaCantidad = (long) repositorioDeHistorial.filtraConsultaPorTerminal(repositorioDeHistorial.getHistoriales(),buscar).size();
+
+		unaCantidad = (long) repositorioDeHistorial.filtrarConsultaPorFecha(repositorioDeHistorial.getHistoriales(),unaFecha).size();
 		return createResult(unaFecha,unaCantidad);
 		}
 
-	private JsonObject createResult(Date unaFecha, Long unaCantidad) {
+	private JsonObject createResult(LocalDate unaFecha, Long unaCantidad) {
 		HashMap<String, String> columns = new HashMap<String, String>();
 		columns.put("Fecha", unaFecha.toString());
 		columns.put("Cantidad", unaCantidad.toString());
