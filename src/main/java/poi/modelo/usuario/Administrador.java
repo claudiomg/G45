@@ -19,9 +19,28 @@ public class Administrador {
 	private RepositorioAbstracto repositorio;
 	private Rol rol = Rol.ADMINISTRADOR;
 	private String mail;
+	private String login;
+	private String password;
+	
 
 	public Administrador(RepositorioAbstracto repositorio2){
 		this.repositorio = repositorio2;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 	
 	public void agregarPOI(POI poi){

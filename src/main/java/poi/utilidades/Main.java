@@ -23,6 +23,8 @@ import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.RadioCercania;
+import poi.modelo.usuario.Administrador;
+import poi.modelo.usuario.RepositorioAdministrador;
 import poi.modelo.usuario.RepositorioTerminal;
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioAbstracto;
@@ -49,12 +51,22 @@ public class Main implements WithGlobalEntityManager{
 //		});
 
 		/** CREAR USR_DEFAULT **/
+		RepositorioAbstracto repoPOI = RepositorioPOI.getInstance();
 		Terminal usr = new Terminal();
+		Administrador adm = new Administrador(repoPOI);
+		
+		RepositorioAdministrador repoAdm = RepositorioAdministrador.getInstance();
+		
+		adm.setLogin("Claudio02");
+		adm.setPassword("12345");
+		repoAdm.administradores.add(adm);
 		
 		usr.setLogin("Kevin01");
 		usr.setPassword("Abc123");
 		RepositorioTerminal repo = RepositorioTerminal.getInstance();
 		repo.terminales.add(usr);
+		
+		
 		
 		ArrayList<String> arrayEtiquetas = new ArrayList<String>();
 		Posicion posicion1 = new Posicion(40.417, -3.703);
@@ -64,7 +76,7 @@ public class Main implements WithGlobalEntityManager{
 		parada1.setNombre("Parada 152 - 6");
 		parada2.setNombre("Parada 64 - 8");
 		usr.setPosicion(posicion1);
-		RepositorioAbstracto repoPOI = RepositorioPOI.getInstance();
+		
 		repoPOI.pois.add(parada1);
 		repoPOI.pois.add(parada2);
 		
