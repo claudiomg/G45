@@ -121,6 +121,6 @@ public class Main implements WithGlobalEntityManager{
 		});
 		get("/inicioSesion", login::validarUsrYPass, engine);
 		get("/consultaDisponibilidad", consultaDisponibilidad::listar, engine);
-
+		
 	}
 }
