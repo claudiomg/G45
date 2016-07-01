@@ -7,6 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import poi.acciones.Accion;
+import poi.acciones.EstaCerca;
+import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
@@ -40,13 +43,17 @@ public class CercaniaBancoTest {
 	public void unaSucursalBancoEstaCasiEnElLimiteDeLejania(){ //0.507 kms				
 		posicionSucursal = new Posicion(40.453, 3.686);
 		sucursal.setPosicion(posicionSucursal);
-		Assert.assertFalse(unUsuario.estoyCercaDe(sucursal));
+		EstaCerca estaCercaTest = new EstaCerca(sucursal,unUsuario.getPosicion());
+		agregarYEjecutarAccion(sucursal,estaCercaTest);
+		Assert.assertFalse(estaCercaTest.getCercania());
 	}
 
 	@Test
 	public void unaSucursalBancoEstaCasiEnElLimiteDeCercania(){ //0.499 kms				
 		posicionSucursal = new Posicion(40.453, 3.6859);
 		sucursal.setPosicion(posicionSucursal);
+		EstaCerca estaCercaTest = new EstaCerca(sucursal,unUsuario.getPosicion());
+		agregarYEjecutarAccion(sucursal,estaCercaTest);
 		Assert.assertTrue(unUsuario.estoyCercaDe(sucursal));
 	}
 	
@@ -54,6 +61,19 @@ public class CercaniaBancoTest {
 	public void unaSucursalBancoEstaDemasiadoCerca(){ // 0 kms	
 		posicionSucursal = new Posicion(40.453, 3.68);
 		sucursal.setPosicion(posicionSucursal);
+		EstaCerca estaCercaTest = new EstaCerca(sucursal,unUsuario.getPosicion());
+		agregarYEjecutarAccion(sucursal,estaCercaTest);
 		Assert.assertTrue(unUsuario.estoyCercaDe(sucursal));
 	}	
+	
+	
+	private void agregarYEjecutarAccion(POI sucursal2,
+			EstaCerca estaCercaTest) {
+		sucursal2.agregarAccion(estaCercaTest);
+		List<Accion> accionesBanco = sucursal2.acciones;
+		for (Accion accion : accionesBanco){
+			accion.ejecutarAccion();
+		}
+		
+	}
 }

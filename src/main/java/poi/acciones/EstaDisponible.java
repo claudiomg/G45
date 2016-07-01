@@ -10,32 +10,44 @@ public class EstaDisponible implements Accion {
 	private LocalDateTime fechaYHora;
 	private POI poiVerDisponibilidad;
 	public boolean estaDisponible;
-	
-	
-	public EstaDisponible(POI poi,LocalDateTime unaFechaHora){
+
+	public EstaDisponible(POI poi, LocalDateTime unaFechaHora) {
 		this.poiVerDisponibilidad = poi;
 		this.fechaYHora = unaFechaHora;
+		estaHabilitada = true; // Habilitada por defecto
 	}
 
 	@Override
-	public String getNombreAccion(){
+	public String getNombreAccion() {
 		return "EstaDisponible";
 	}
-	
+
 	@Override
 	public void ejecutarAccion() {
-		if(poiVerDisponibilidad.getClass().equals(ParadaColectivo.class )){
-			estaDisponible = true; //Los colectivos siempre estan disponibles
-		}
-		else{
-			if (poiVerDisponibilidad.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(fechaYHora))){
-				estaDisponible =  poiVerDisponibilidad.horariosCambiados.stream().anyMatch(unHorario -> unHorario.estaDisponible(fechaYHora));
-			}
-			else
-				estaDisponible =  poiVerDisponibilidad.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(fechaYHora, poiVerDisponibilidad.feriados))
-						 && poiVerDisponibilidad.feriados.noEsUnFeriado(fechaYHora);
+		if (estaHabilitada) {
+			if (poiVerDisponibilidad.getClass().equals(ParadaColectivo.class)) {
+				estaDisponible = true; // Los colectivos siempre estan
+										// disponibles
+			} else {
+				if (poiVerDisponibilidad.horariosCambiados.stream().anyMatch(
+						unHorario -> unHorario.diaDisponible(fechaYHora))) {
+					estaDisponible = poiVerDisponibilidad.horariosCambiados
+							.stream().anyMatch(
+									unHorario -> unHorario
+											.estaDisponible(fechaYHora));
+				} else
+					estaDisponible = poiVerDisponibilidad.disponibilidadesDeAtencion
+							.stream().anyMatch(
+									unHorario -> unHorario.estaDisponible(
+											fechaYHora,
+											poiVerDisponibilidad.feriados))
+							&& poiVerDisponibilidad.feriados
+									.noEsUnFeriado(fechaYHora);
 
-		}	
+			}
+		} else {
+			System.out.println("Esta accion fue inhabilitada");
+		}
 	}
 
 	@Override
@@ -46,9 +58,9 @@ public class EstaDisponible implements Accion {
 	@Override
 	public void deshabilitar() {
 		this.estaHabilitada = false;
-	} 
-	
-	public boolean getDisponibilidad(){
+	}
+
+	public boolean getDisponibilidad() {
 		return estaDisponible;
 	}
 }
