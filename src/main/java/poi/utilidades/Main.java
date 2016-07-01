@@ -8,10 +8,12 @@ import static spark.SparkBase.staticFileLocation;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.controllers.ABMcontroller;
+import poi.controllers.AdmTerminalesController;
 import poi.controllers.ConsultaDisponibilidadController;
 import poi.controllers.ConsultaPorPalabraController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
+import poi.controllers.ReportesController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main implements WithGlobalEntityManager{
@@ -58,5 +60,13 @@ public class Main implements WithGlobalEntityManager{
 		
 		//INDEX DE ADMINISTRADOR
 		ABMcontroller abm = new ABMcontroller();
-	}	
+		get("/abmPois",abm::mostrar,engine);
+		
+		ReportesController reporte = new ReportesController();
+		get("/reportes", reporte::mostrar, engine);
+		
+		AdmTerminalesController admTerminales = new AdmTerminalesController();
+		get("/admTerminales", admTerminales::mostrar, engine);
+	}
+	
 }
