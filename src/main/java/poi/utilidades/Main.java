@@ -48,13 +48,13 @@ public class Main implements WithGlobalEntityManager{
 		
 		//INDEX DE TERMINAL
 		ConsultaPorPalabraController byPalabra = new ConsultaPorPalabraController();
-		post("/consultaPorPalabra", byPalabra::mostrar, engine);
+		get("/consultaPorPalabra", byPalabra::mostrar, engine);
 		
 		ConsultaDisponibilidadController byDisponibilidad = new ConsultaDisponibilidadController();
-		post("/consultaDisponibilidad", byDisponibilidad::listar, engine);
+		get("/consultaDisponibilidad", byDisponibilidad::listar, engine);
 		
 		ConsultaPorPalabraController byCercania = new ConsultaPorPalabraController();
-		post("/consultaPorCercani", byCercania::mostrar, engine);
+		get("/consultaPorCercani", byCercania::mostrar, engine);
 		
 		//INDEX DE ADMINISTRADOR
 		ABMcontroller abm = new ABMcontroller();
