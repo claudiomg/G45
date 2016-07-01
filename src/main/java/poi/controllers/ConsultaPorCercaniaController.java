@@ -22,6 +22,7 @@ public class ConsultaPorCercaniaController {
 		HashMap<String, Object> viewModel = new HashMap<>();
 		viewModel.put("longitud", -58.465881);
 		viewModel.put("latitud", -34.670741);
+		viewModel.put("hasResults", false);
 		return new ModelAndView(viewModel, "busquedaPorCercania.html");
 	}
 	
@@ -42,6 +43,7 @@ public class ConsultaPorCercaniaController {
 		viewModel.put("longitud", longitud.toString());
 		viewModel.put("latitud", latitud.toString());
 		viewModel.put("resultados", results);
+		viewModel.put("hasResults", !results.isEmpty());
 		return new ModelAndView(viewModel, "busquedaPorCercania.html");
 	}
 	

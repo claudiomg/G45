@@ -48,12 +48,14 @@ public class CargaInicial {
 		
 		ArrayList<String> arrayEtiquetas = new ArrayList<String>();
 		Posicion posicion1 = new Posicion(40.417, -3.703);
-		Posicion posicion2 = new Posicion(40.417, -3.7031);
+		Posicion posicion2 = new Posicion(-34.670741, -58.465881);
+		Posicion posicion3 = new Posicion(-34.6708, -58.4657);
+		Posicion posicion4 = new Posicion(-34.6706, -58.4659);
 		POI parada1 = new ParadaColectivo(arrayEtiquetas,posicion1);		
-		POI parada2 = new ParadaColectivo(arrayEtiquetas,posicion2);
+		POI parada2 = new ParadaColectivo(arrayEtiquetas,posicion3);
 		parada1.setNombre("Parada 152 - 6");
 		parada2.setNombre("Parada 64 - 8");
-		usr.setPosicion(posicion1);
+		usr.setPosicion(posicion2);
 		
 		repoPOI.pois.add(parada1);
 		repoPOI.pois.add(parada2);
@@ -86,6 +88,7 @@ public class CargaInicial {
 		unKiosco.addDisponibilidadDeAtencion(viernes);
 		unKiosco.addDisponibilidadDeAtencion(sabado);
 		unKiosco.setNombre("El kiosco de Luisito");
+		unKiosco.setPosicion(posicion4);
 		repoPOI.pois.add(unKiosco);
 	}
 
