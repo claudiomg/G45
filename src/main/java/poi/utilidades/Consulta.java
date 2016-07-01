@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.repositorios.RepositorioAbstracto;
@@ -97,7 +98,12 @@ public class Consulta {
 
 	public boolean estaDisponible(POI poi) {
 		comienzoProceso = System.currentTimeMillis()/1000;
-		boolean disponibilidad = poi.estaDisponible(LocalDateTime.now());
+		LocalDateTime unaFechaHora = LocalDateTime.now();
+		EstaDisponible estaDisponibleAccion = new EstaDisponible(poi,unaFechaHora);
+		poi.agregarAccion(estaDisponibleAccion);
+		estaDisponibleAccion.ejecutarAccion();
+		
+		boolean disponibilidad = estaDisponibleAccion.estaDisponible;
 		finProceso = System.currentTimeMillis()/1000;
 		calcularTiempoProceso(comienzoProceso, finProceso);
 		return disponibilidad;

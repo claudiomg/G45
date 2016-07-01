@@ -3,11 +3,14 @@ package poi.DisponiblidadTest;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import poi.acciones.Accion;
+import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.utilidades.DisponibilidadHoraria;
@@ -56,139 +59,195 @@ public class DisponiblidadLocalComercialTest {
 	@Test
 	public void noEstaDisponibleAntesDeLas10amElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 9, 59,59);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad() );
 	}
-	
+
 	@Test
 	public void noEstaDisponibleAntesDeLas10amElMiercoles2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 9, 30,0);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALas10amElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 10, 0,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleDespuesDeLas10amYAntesDeLa1pmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 11, 30,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALa1pmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 13, 0,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleDespuesDeLa1pmYAntesDeLas5pmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 13, 0,01);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleEntreLa1pmyLas5pmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 15, 0,0);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleEntreLa1pmyLas5pmElMiercoles2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 16, 59,59);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALas5pmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 17, 0,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleEntreLas5pmyLas8yMediapmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 1, 18, 0,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleEntreLas5pmyLas8YMediapmElMiercoles2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 18, 15,25);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALas8yMediapmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 20, 30,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDespuesDeLas8yMediapmElMiercoles(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 20, 30,01);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleDespuesDeLas8yMediapmElMiercoles2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 01, 23, 0,0);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleAntesDeLas8yMediaAmElSabado(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 8, 29,59);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleAntesDeLas8yMediaAmElSabado2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 7, 0,0);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALas8yMediaAmElSabado(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 8, 30,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleDespuesDeLas8yMediaAmElSabado(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 8, 30,01);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALas8yMediaAmElSabado2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 14, 30,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleAntesDeLas4pmSabado(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 15, 59,59);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void estaDisponibleALas4pmElSabado(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 16, 0,0);
-		Assert.assertTrue( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertTrue( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleDespuesDeLas4pmElSabado(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 16, 0,01);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
 	}
 	
 	@Test
 	public void noEstaDisponibleDespuesDeLas4pmElSabado2(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 4, 19, 30,0);
-		Assert.assertFalse( unKiosco.estaDisponible(unaFechaHora));
+		EstaDisponible estaDisponibleTest = new EstaDisponible(unKiosco,unaFechaHora);
+		agregarYEjecutarAccion(unKiosco,estaDisponibleTest);
+		Assert.assertFalse( estaDisponibleTest.getDisponibilidad());
+	}
+	
+	private void agregarYEjecutarAccion(LocalComercial unKiosco,
+			EstaDisponible estaDisponibleTest) {
+		unKiosco.agregarAccion(estaDisponibleTest);
+		List<Accion> accionesBanco = unKiosco.acciones;
+		for (Accion accion : accionesBanco){
+			accion.ejecutarAccion();
+		}
+		
 	}
 	
 }
