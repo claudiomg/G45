@@ -19,8 +19,6 @@ import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
-import poi.utilidades.BusquedaDeBancos;
-import poi.utilidades.HistorialConsulta;
 
 @Entity
 @Table(name = "usuarios")
@@ -135,6 +133,13 @@ public class Terminal  implements WithGlobalEntityManager {
 		for (Accion accion : accionesFiltradasPorNombre ){
 			accion.ejecutarAccion();
 		}
+	}
+
+	public List<POI> resultados() {
+		List<POI> col = new ArrayList<POI>();
+		col.addAll(this.getConsultaActiva().getPoisEncontrados());
+		col.addAll(this.getConsultaActiva().getPoisEncontradosEnExterno());
+		return col;
 	}
 
 	}

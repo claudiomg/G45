@@ -10,6 +10,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import poi.controllers.ABMcontroller;
 import poi.controllers.AdmTerminalesController;
 import poi.controllers.ConsultaDisponibilidadController;
+import poi.controllers.ConsultaPorCercaniaController;
 import poi.controllers.ConsultaPorPalabraController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
@@ -50,13 +51,15 @@ public class Main implements WithGlobalEntityManager{
 		
 		//INDEX DE TERMINAL
 		ConsultaPorPalabraController byPalabra = new ConsultaPorPalabraController();
-		get("/consultaPorPalabra", byPalabra::mostrar, engine);
+		get("/consultaPorPalabra", byPalabra::render, engine);
+		post("/consultaPorPalabra", byPalabra::search, engine);
 		
 		ConsultaDisponibilidadController byDisponibilidad = new ConsultaDisponibilidadController();
 		get("/consultaDisponibilidad", byDisponibilidad::listar, engine);
 		
-		ConsultaPorPalabraController byCercania = new ConsultaPorPalabraController();
-		get("/consultaPorCercani", byCercania::mostrar, engine);
+		ConsultaPorCercaniaController byCercania = new ConsultaPorCercaniaController();
+		get("/consultaPorCercania", byCercania::render, engine);
+		post("/consultaPorCercania", byCercania::search, engine);
 		
 		//INDEX DE ADMINISTRADOR
 		ABMcontroller abm = new ABMcontroller();
