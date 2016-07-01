@@ -4,6 +4,7 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import poi.acciones.Accion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
 import poi.utilidades.Posicion;
@@ -17,6 +18,8 @@ public abstract class POI {
 	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	public ExcepcionSinAtencion feriados;
 	public ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+	public List<Accion> acciones = new ArrayList<Accion>();
+
 
 	public POI() {
 	}
@@ -43,14 +46,18 @@ public abstract class POI {
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
-	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		if (this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(unaFechaHora))){
-			return this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
-		}
-		else
-		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados))
-				 && this.feriados.noEsUnFeriado(unaFechaHora);
-	}
+
+	
+	//Ahora es una clase concreta del Command Acciones
+	//public boolean estaDisponible(LocalDateTime unaFechaHora) {
+	//	if (this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(unaFechaHora))){
+	//	return this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
+	//	}
+	//	else
+	//		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados))
+	//				&& this.feriados.noEsUnFeriado(unaFechaHora);
+	//}
+
 	
 	public void addDisponibilidadDeAtencion(DisponibilidadHoraria diaYHora ){
 		this.disponibilidadesDeAtencion.add(diaYHora);
@@ -74,6 +81,7 @@ public abstract class POI {
 		this.feriados = feriados;
 	}
 	
+	
 	public void agregarFeriados(LocalDateTime unFeriado){
 		this.feriados.agregarFeriados(unFeriado);
 	
@@ -93,4 +101,9 @@ public abstract class POI {
 		this.nombre = nombre;
 	}
 
+	
+	public void agregarAccion(Accion accion){
+		this.acciones.add(accion);
+	}
+	
 }
