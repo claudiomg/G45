@@ -33,7 +33,7 @@ public class ConsultaDisponibilidadController {
 		HashMap<String, Object> viewModel = new HashMap<>();
 		viewModel.put("poisTotales", poisTotales);
 		viewModel.put("poisDisponibles", poisDisponibles);
-		viewModel.put("cantidadPois", poisDisponibles.size());
+		viewModel.put("cantidadDisponibles", poisDisponibles.size());
 		viewModel.put("cantidadTotales", poisTotales.size());
 		return new ModelAndView(viewModel, "consultaDisponibilidad.html");
 	}
