@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Busqueda por palabra</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<ul class="navbar">
+	  <li><a href="index.html">Salir</a>
+	</ul>
+	<br>
+	
+	<form action="/consultaPorPalabra" method="post">
+		Palabra: <br>
+		<input type="text" name="palabra"/>
+		<br>
+		<input type="submit" value="Buscar"/>
+	</form>
+	<div id="results">
+		<table>
+			<thead>
+				<tr>
+					<th> Resultados </th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#resultados}}
+					<tr> <td>{{nombre}}</td></tr>
+				{{/resultados}}
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
