@@ -16,6 +16,7 @@ import javax.persistence.*;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import poi.controllers.ABMcontroller;
 import poi.controllers.ConsultaDisponibilidadController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
@@ -40,6 +41,7 @@ public class Main implements WithGlobalEntityManager{
 		HomeController home = new HomeController();
 		LoginController login = new LoginController();
 		ConsultaDisponibilidadController consultaDisponibilidad = new ConsultaDisponibilidadController();
+		ABMcontroller abm = new ABMcontroller();
 		
 		port(8080);
 
@@ -121,6 +123,5 @@ public class Main implements WithGlobalEntityManager{
 		});
 		get("/inicioSesion", login::validarUsrYPass, engine);
 		get("/consultaDisponibilidad", consultaDisponibilidad::listar, engine);
-		
-	}
+	}	
 }
