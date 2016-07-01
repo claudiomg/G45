@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import poi.modelo.usuario.RepositorioAdministrador;
 import poi.modelo.usuario.RepositorioTerminal;
 import poi.modelo.usuario.Terminal;
 import spark.ModelAndView;
@@ -22,6 +23,9 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		if (RepositorioTerminal.getInstance().terminales.stream()
 				.anyMatch(termi->(termi.getLogin().equals(nombreUsuario) && termi.getPassword().equals(passwordUsuario)))){
 			return new ModelAndView(viewModel, "loginSuccess.html");
+		} else if (RepositorioAdministrador.getInstance().administradores.stream()
+				.anyMatch(adm->(adm.getLogin().equals(nombreUsuario) && adm.getPassword().equals(passwordUsuario)))) {
+			return new ModelAndView(viewModel, "adminIndex.html");
 		} else {
 			return new ModelAndView(viewModel, "loginFail.html");
 		}
