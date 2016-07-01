@@ -18,14 +18,24 @@
 			<tb>
 				<tr>
 					<td>
-					 	Cantidad De Pois: {{cantidadPois}} <br /><br />	
+					 	Cantidad De Pois (totales): {{cantidadTotales}} <br /><br />	
 					</td>
 					<td>
 						Lista: <br /><br />
-						{{#pois}}
-							Nombre de POI: {{nombre}}  <input type="submit" value="Disponible?"> <br />
-						{{/pois}}
+						{{#poisTotales}}
+							Nombre de POI: {{nombre}}<br />
+						{{/poisTotales}}
 					</td>
+					<td>
+					 	<br />Cantidad De Pois (disponibles): {{cantidadDisponibles}} <br /><br />	
+					</td>
+					<td>
+						Lista: <br /><br />
+						{{#poisDisponibles}}
+							Nombre de POI: {{nombre}}<br />
+						{{/poisDisponibles}}
+					</td>
+					
 				</tr>	
 			</tb>
 					

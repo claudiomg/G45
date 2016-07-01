@@ -21,7 +21,7 @@ import poi.utilidades.Consulta;
 public class BusquedaDeBancosTest {
 	
 
-	RepositorioAbstracto repositorioBancos = RepositorioBancosExternos.getInstance() ;
+	RepositorioAbstracto repositorioBancos = RepositorioBancosExternos.getInstance();
 	RepositorioAbstracto repositorioPoi = RepositorioPOI.getInstance();
 	Terminal unUsuario = new Terminal();
 	BusquedaDeBancos busquedaBancos = new BusquedaDeBancos();
@@ -54,8 +54,8 @@ public class BusquedaDeBancosTest {
 		repositorioPoi.agregarPOI(bancoGalicia);
 		repositorioPoi.agregarPOI(bancoProvincia);
 		repositorioBancos.agregarPOI(bancoSantander);
-		busquedaBancos.setRepositorioBancoExterno(repositorioPoi);
-		busquedaBancos.setRepositorioDePois(repositorioBancos);
+		busquedaBancos.setRepositorioBancoExterno(repositorioBancos);
+		busquedaBancos.setRepositorioDePois(repositorioPoi);
 	}
 	
 	@After
@@ -63,19 +63,17 @@ public class BusquedaDeBancosTest {
 		
 			repositorioPoi.eliminarPOI(bancoGalicia);
 			repositorioPoi.eliminarPOI(bancoProvincia);
-			repositorioBancos.eliminarPOI(bancoSantander);
-			
-			
+			repositorioBancos.eliminarPOI(bancoSantander);			
 }
-
 		
 		@Test
 		public void buscarBancosPorNombreSantanderYServicioCajero(){
 			Consulta consulta1 = new Consulta(null);
 			consulta1.setBusquedaDeBancos(busquedaBancos);
 			unUsuario.agregarConsulta(consulta1,null);
-			Assert.assertEquals(unUsuario.buscarBancos("Santander", "cajero").size(),1);
-			
+			System.out.println(busquedaBancos.getRepositorioBancoExterno().pois.size());
+			System.out.println(busquedaBancos.getRepositorioDePois().pois.size());
+			Assert.assertEquals(unUsuario.buscarBancos("Santander", "cajero").size(),2);			
 		}
 		
 		@Test
@@ -83,8 +81,7 @@ public class BusquedaDeBancosTest {
 			Consulta consulta2 = new Consulta(null);
 			consulta2.setBusquedaDeBancos(busquedaBancos);
 			unUsuario.agregarConsulta(consulta2,null);
-			Assert.assertEquals(unUsuario.buscarBancos("Galicia", "cajero").size(),1);
-			
+			Assert.assertEquals(unUsuario.buscarBancos("Galicia", "cajero").size(),2);
 		}
 		
 		@Test
@@ -92,10 +89,7 @@ public class BusquedaDeBancosTest {
 			Consulta consulta3 = new Consulta(null);
 			consulta3.setBusquedaDeBancos(busquedaBancos);
 			unUsuario.agregarConsulta(consulta3,null);
-			Assert.assertEquals(unUsuario.buscarBancos("Santander", "prestamo").size(),0);
-			
+			Assert.assertEquals(unUsuario.buscarBancos("Santander", "prestamo").size(),0);			
 		}
-		
-		
 }
 

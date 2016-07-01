@@ -69,8 +69,8 @@ public class BusquedaDeBancos {
 		return repositorioBancoExterno;
 	}
 
-	public void setRepositorioBancoExterno(RepositorioAbstracto repositorioBancoExterno) {
-		this.repositorioBancoExterno = repositorioBancoExterno;
+	public void setRepositorioBancoExterno(RepositorioAbstracto repositorioPoi) {
+		this.repositorioBancoExterno = repositorioPoi;
 	}
 	
 }

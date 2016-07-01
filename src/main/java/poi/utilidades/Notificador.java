@@ -23,9 +23,6 @@ public class Notificador {
 
 	public static void informarProcesamientoExcesivo(double tiempoExcedido) {
 		String detalleMail = mensajeTiempoExcesivo + String.format ("%.2f", tiempoExcedido) + " segundos.";
-//		List<String> listaMails = RepositorioAdministrador.getInstance().getAdministradores().stream()
-//				.map(administrador->administrador.getMail()).collect(Collectors.toList());;
-//		listaMails.stream().forEach(mail->MailSender.getInstance().enviarMail(asuntoTiempoExcesivo, detalleMail, mail));
 		RepositorioAdministrador.getInstance().getAdministradores().stream()
 				.map(administrador->administrador.getMail())
 				.forEach(mail->MailSender.getInstance().enviarMail(asuntoTiempoExcesivo, detalleMail, mail));

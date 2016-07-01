@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.SucursalBanco;
+import poi.modelo.usuario.RepositorioTerminal;
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
@@ -21,15 +23,18 @@ import spark.Response;
 public class ConsultaDisponibilidadController {
 
 	public ModelAndView listar(Request request, Response response) {
-		Terminal usr = new Terminal();		
-		Posicion posicion1 = new Posicion(40.417, -3.703);
-		usr.setPosicion(posicion1);
+		Terminal usr = RepositorioTerminal.getInstance().terminales.get(0);
 		Consulta unaConsulta = new Consulta(RepositorioPOI.getInstance());
 		usr.agregarConsulta(unaConsulta,LocalDate.now());
-		List<POI> pois = RepositorioPOI.getInstance().pois;
+		List<POI> poisTotales = RepositorioPOI.getInstance().pois;
+		List<POI> poisDisponibles = 
+				RepositorioPOI.getInstance().pois.stream().filter(poi-> usr.estaDisponible(poi))
+				.collect(Collectors.toList());
 		HashMap<String, Object> viewModel = new HashMap<>();
-		viewModel.put("pois", pois);
-		viewModel.put("cantidadPois", pois.size());
+		viewModel.put("poisTotales", poisTotales);
+		viewModel.put("poisDisponibles", poisDisponibles);
+		viewModel.put("cantidadPois", poisDisponibles.size());
+		viewModel.put("cantidadTotales", poisTotales.size());
 		return new ModelAndView(viewModel, "consultaDisponibilidad.html");
 	}
 
