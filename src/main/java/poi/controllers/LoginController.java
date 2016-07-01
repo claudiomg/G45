@@ -22,7 +22,7 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		
 		if (RepositorioTerminal.getInstance().terminales.stream()
 				.anyMatch(termi->(termi.getLogin().equals(nombreUsuario) && termi.getPassword().equals(passwordUsuario)))){
-			return new ModelAndView(viewModel, "loginSuccess.html");
+			return new ModelAndView(viewModel, "terminalIndex.html");
 		} else if (RepositorioAdministrador.getInstance().administradores.stream()
 				.anyMatch(adm->(adm.getLogin().equals(nombreUsuario) && adm.getPassword().equals(passwordUsuario)))) {
 			return new ModelAndView(viewModel, "adminIndex.html");
