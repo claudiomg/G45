@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poi.utilidades.DisponibilidadHoraria;
+import poi.utilidades.ExcepcionHorarioCambiado;
 import poi.utilidades.ExcepcionSinAtencion;
 
 
@@ -12,6 +13,7 @@ public class ServicioDeCGP {
 
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
     private ExcepcionSinAtencion feriados;
+    private ArrayList<ExcepcionHorarioCambiado> horariosCammbiados = new ArrayList<ExcepcionHorarioCambiado>();
 	private String nombre;
 	
 	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){

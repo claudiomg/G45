@@ -86,6 +86,10 @@ public abstract class POI {
 		this.feriados.agregarFeriados(unFeriado);
 	
 	}
+	
+	public void agregarHorarioCambiado(ExcepcionHorarioCambiado fechaHora){
+		this.horariosCambiados.add(fechaHora);
+	}
 		
 	public void modificarAtributos (Posicion posicion, String etiqueta, String etiqueta2){
 		this.setPosicion(posicion);
