@@ -9,6 +9,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.controllers.ABMcontroller;
 import poi.controllers.AdmTerminalesController;
+import poi.controllers.BuscadorDePoiController;
 import poi.controllers.ConsultaDisponibilidadController;
 import poi.controllers.ConsultaPorCercaniaController;
 import poi.controllers.ConsultaPorPalabraController;
@@ -50,6 +51,10 @@ public class Main implements WithGlobalEntityManager{
 		
 		
 		//INDEX DE TERMINAL
+		BuscadorDePoiController poiBrowser = new BuscadorDePoiController();
+		get("/terminalHome", poiBrowser::render, engine);
+		post("/terminalSearch", poiBrowser::search, engine);
+		
 		ConsultaPorPalabraController byPalabra = new ConsultaPorPalabraController();
 		get("/consultaPorPalabra", byPalabra::render, engine);
 		post("/consultaPorPalabra", byPalabra::search, engine);

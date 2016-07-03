@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title>Puntos de Interes</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1>Puntos de Interes</h1>
+	<form action="terminalSearch" method="post">
+		<div class="filters">
+			<ul>
+				<li><input type="checkbox" name="cgpFilter" checked> Centros de Gestión Comunal </li>
+				<li><input type="checkbox" name="colectivoFilter" checked> Paradas de Colectivo </li>
+				<li><input type="checkbox" name="comercioFilter" checked> Locales Comerciales </li>
+				<li><input type="checkbox" name="bancoFilter" checked> Sucursales de Banco </li>
+			</ul>
+		</div>
+		<div class="filters">
+			<ul>
+				<li><input type="checkbox" name="disponibleFilter" checked> Solo disponible </li>
+				<li><input type="checkbox" name="cercaniaFilter" checked> Solo cercanos </li>
+			</ul>
+		</div>
+	
+		<div class="manualFilters">
+			Palabra Clave:
+			<input type="text" name="palabra"/>
+			<input type="submit" value="Buscar"/>
+		</div>
+	</form>	
+</body>
+</html>
