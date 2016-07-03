@@ -2,7 +2,6 @@ package poi.modelo.puntoDeInteres;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import poi.acciones.Accion;
 import poi.utilidades.DisponibilidadHoraria;
@@ -108,6 +107,11 @@ public abstract class POI {
 	
 	public void agregarAccion(Accion accion){
 		this.acciones.add(accion);
+	}
+
+	public boolean estaDisponible(LocalDateTime unaFechaHora) {
+		//este metodo debe ser modificado segun cada subclase
+		return true;
 	}
 	
 }

@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
+import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioAbstracto;
 
 public class Consulta {
@@ -24,9 +25,11 @@ public class Consulta {
 	private double tiempoProceso;
 	private double tiempoProcesamientoMaximo = 10.0;
 	private HistorialConsulta historial;
+	private String palabraBuscada;
+	private Terminal user;
 
-	public Consulta(RepositorioAbstracto repositorio3) {
-		this.repositorio = repositorio3;
+	public void setPalabraBuscada(String palabraBuscada) {
+		this.palabraBuscada = palabraBuscada;
 	}
 	
 	public void setRepoExterno(RepositorioAbstracto repo2){
@@ -156,4 +159,7 @@ public class Consulta {
 		
 	}
 
+	public void setUser(Terminal user) {
+		this.user = user;
+	}
 }

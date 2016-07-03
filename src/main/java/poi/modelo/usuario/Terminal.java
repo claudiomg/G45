@@ -142,4 +142,17 @@ public class Terminal  implements WithGlobalEntityManager {
 		return col;
 	}
 
+	public boolean canFilterByTag() {
+		//Modificar cuando este la parte de manejo de acciones
+		return true;
 	}
+	public boolean canFilterByDisponibility() {
+		//Modificar cuando este la parte de manejo de acciones
+		return true;
+	}
+
+	public boolean canFilterByProximity() {
+		//Modificar cuando este la parte de manejo de acciones
+		return true;
+	}
+}
