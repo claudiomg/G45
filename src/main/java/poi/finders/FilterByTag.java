@@ -13,7 +13,7 @@ public class FilterByTag implements PoiFilter {
 	@Override
 	public boolean matches(POI unPOI) {
 		//redefinir este metodo para que devuelva el valor verdadero
-		return true;
+		return unPOI.matches(palabraBuscada);
 	}
 
 	public String getPalabraBuscada() {

@@ -1,52 +1,48 @@
 package poi.modelo.puntoDeInteres;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.time.LocalDateTime;
 
 import poi.acciones.Accion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
+import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 import poi.utilidades.ExcepcionSinAtencion;
 import poi.utilidades.ExcepcionHorarioCambiado;
 
 public abstract class POI {
-	public String nombre;
-	public List<String> etiquetas;
-	public Posicion posicion;
-	public ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-	public ExcepcionSinAtencion feriados;
-	public ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
-	public List<Accion> acciones = new ArrayList<Accion>();
-
-
-	public POI() {
-	}
+	private String nombre = new String();
+	private Posicion posicion;
+	private Direccion direccion;
+	private List<String> palabrasClave = new ArrayList<String>();
+	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	private ExcepcionSinAtencion feriados;
+	private ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+	private List<Accion> acciones = new ArrayList<Accion>();
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
-		//TODO
 		double distancia = Calculo.distanciaLineal(this.posicion, posicionUsuario);
 		double distanciaLineal = Calculo.distanciaLineal(this.posicion, posicionUsuario);
 		return distancia < 0.5 && distanciaLineal < 0.5;
 	} 
 	
+	public boolean matches(String palabraBuscada) {
+		//este metodo se encarga de buscar coincidencias de la palabra buscada y yo mismo
+		String palabra = palabraBuscada.toLowerCase();
+		return 
+			(this.getNombre().toLowerCase().contains(palabra)) ||
+			(this.getEtiquetas().stream().anyMatch(tag -> tag.toLowerCase().contains(palabra)));
+	}
+	
 	public List<String> getEtiquetas(){
-		return this.etiquetas;
+		List<String> lista = new ArrayList<String>();
+		lista.add(this.getNombre());
+		lista.addAll(this.getDireccion().getEtiquetas());
+		lista.addAll(this.getPalabrasClave());
+		return lista;
 	}
-	
-	public void agregarEtiqueta(String etiqueta){
-		this.etiquetas.add(etiqueta);
-	}
-	
-	public void eliminarEtiqueta (String etiqueta){
-		this.etiquetas.remove(etiqueta);
-	}
-
-	public void setPosicion(Posicion posicion) {
-		this.posicion = posicion;
-	}
-
-	
 	//Ahora es una clase concreta del Command Acciones
 	//public boolean estaDisponible(LocalDateTime unaFechaHora) {
 	//	if (this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(unaFechaHora))){
@@ -57,6 +53,11 @@ public abstract class POI {
 	//				&& this.feriados.noEsUnFeriado(unaFechaHora);
 	//}
 
+	public abstract void inicializarPalabrasClave();
+	
+	protected void addPalabraClave(String palabra) {
+		this.getPalabrasClave().add(palabra);
+	}
 	
 	public void addDisponibilidadDeAtencion(DisponibilidadHoraria diaYHora ){
 		this.disponibilidadesDeAtencion.add(diaYHora);
@@ -90,10 +91,9 @@ public abstract class POI {
 		this.horariosCambiados.add(fechaHora);
 	}
 		
-	public void modificarAtributos (Posicion posicion, String etiqueta, String etiqueta2){
+	public void modificarAtributos (Posicion posicion, Direccion direccion){
 		this.setPosicion(posicion);
-		this.agregarEtiqueta(etiqueta);
-		this.eliminarEtiqueta(etiqueta2);
+		this.setDireccion(direccion);
 	}
 
 	public String getNombre() {
@@ -112,6 +112,50 @@ public abstract class POI {
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
 		//este metodo debe ser modificado segun cada subclase
 		return true;
+	}
+	
+	public ArrayList<ExcepcionHorarioCambiado> getHorariosCambiados() {
+		return horariosCambiados;
+	}
+
+	public void setHorariosCambiados(ArrayList<ExcepcionHorarioCambiado> horariosCambiados) {
+		this.horariosCambiados = horariosCambiados;
+	}
+
+	public List<Accion> getAcciones() {
+		return acciones;
+	}
+
+	public void setAcciones(List<Accion> acciones) {
+		this.acciones = acciones;
+	}
+
+	public Posicion getPosicion() {
+		return posicion;
+	}
+
+	public ExcepcionSinAtencion getFeriados() {
+		return feriados;
+	}
+
+	public void setPosicion(Posicion posicion) {
+		this.posicion = posicion;
+	}
+
+	public List<String> getPalabrasClave() {
+		return palabrasClave;
+	}
+
+	public void setPalabrasClave(List<String> palabrasClave) {
+		this.palabrasClave = palabrasClave;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
 	}
 	
 }

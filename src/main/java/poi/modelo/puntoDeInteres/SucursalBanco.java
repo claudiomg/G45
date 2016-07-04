@@ -2,23 +2,29 @@ package poi.modelo.puntoDeInteres;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import poi.utilidades.Direccion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
 
 public class SucursalBanco extends POI{
 	
-	private String nombre;
-	private String sucursal;
-	private String gerente;
-	private List<String> servicios;
+	private String sucursal = new String();
+	private String gerente = new String();
+	private List<String> servicios = new ArrayList<String>();
 	
-
-	public SucursalBanco(List<String> etiquetas,Posicion posicion) {
-		this.etiquetas = etiquetas;
-		this.posicion = posicion;
+	public SucursalBanco(String nombre, Posicion posicion, Direccion direccion) {
+		this.setNombre(nombre);
+		this.setPosicion(posicion);
+		this.setDireccion(direccion);
+		this.inicializarPalabrasClave();
+		this.setDefaultDisponibility();
+	}
+	
+	private void setDefaultDisponibility() {
 		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
 		DisponibilidadHoraria martes = new DisponibilidadHoraria(DayOfWeek.TUESDAY);
 		DisponibilidadHoraria miercoles = new DisponibilidadHoraria(DayOfWeek.WEDNESDAY);
@@ -33,22 +39,28 @@ public class SucursalBanco extends POI{
 		jueves.agregarNuevoRango(rango);
 		viernes.agregarNuevoRango(rango);
 		
-		
 		this.addDisponibilidadDeAtencion(lunes);
 		this.addDisponibilidadDeAtencion(martes);
 		this.addDisponibilidadDeAtencion(miercoles);
 		this.addDisponibilidadDeAtencion(jueves);
 		this.addDisponibilidadDeAtencion(viernes);
-		
 	}
 	
 	
-	public String getNombre() {
-		return nombre;
+	public List<String> getEtiquetas(){
+		List<String> lista = super.getEtiquetas();
+		lista.addAll(this.getServicios());
+		lista.add(this.getSucursal());
+		lista.add(this.getGerente());
+		return lista;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	@Override
+	public void inicializarPalabrasClave() {
+		this.addPalabraClave("banco");
+		this.addPalabraClave("sucursal");
 	}
+	
 	public String getSucursal() {
 		return sucursal;
 	}
@@ -64,12 +76,9 @@ public class SucursalBanco extends POI{
 	public List<String> getServicios() {
 		return servicios;
 	}
-	public void setServicios(List<String> servicios) {
-		this.servicios = servicios;
+	
+	public void agregarServicio(String servicio) {
+		this.getServicios().add(servicio);
 	}
-	public boolean haceEsteServicio(String servicio){
-		
-		return this.getServicios().contains(servicio);
-		
-	}
+
 }

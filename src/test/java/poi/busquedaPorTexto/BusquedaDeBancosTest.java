@@ -1,4 +1,4 @@
-package poi.BusquedaDeBancos;
+package poi.busquedaPorTexto;
 
 
 import java.util.ArrayList;

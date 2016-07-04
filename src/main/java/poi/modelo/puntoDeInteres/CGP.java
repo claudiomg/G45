@@ -5,50 +5,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poi.utilidades.Calculo;
+import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
 public class CGP extends POI{
+	
 	private List<Posicion> verticesComuna = new ArrayList<Posicion>();
-	private ArrayList<ServicioDeCGP> servicios = new ArrayList<ServicioDeCGP>();
+	private List<ServicioDeCGP> servicios = new ArrayList<ServicioDeCGP>();
 	
-	public CGP(List<String> etiquetas,Posicion posicion,List<Posicion> verticesComuna) {
-		this.etiquetas = etiquetas;
-		this.posicion = posicion;
-		this.verticesComuna = verticesComuna;
-	}
-	
-	public boolean estaCercaDe(Posicion posicionUsuario){
-		boolean estaCerca = Calculo.coordenadasEnComuna(verticesComuna, posicionUsuario); 
-		return estaCerca;
+	public CGP(String nombre,Posicion posicion,Direccion direccion, List<Posicion> verticesComuna) {
+		this.setNombre(nombre);
+		this.setPosicion(posicion);
+		this.setDireccion(direccion);
+		this.setVerticesComuna(verticesComuna);
+		this.inicializarPalabrasClave();
 	}
 
-	public void agregarServicio(ServicioDeCGP unServicio) {
-		this.servicios.add(unServicio);
+	@Override
+	public void inicializarPalabrasClave() {
+		this.addPalabraClave("centro");
+		this.addPalabraClave("comuna");
+		this.addPalabraClave("asistencia");
+		this.addPalabraClave("gestion");
 	}
-	
-	public void quitarServicio(ServicioDeCGP unServicio){
-		this.servicios.remove(unServicio);
+
+	public boolean estaCercaDe(Posicion posicionUsuario){
+		boolean estaCerca = Calculo.coordenadasEnComuna(this.getVerticesComuna(), posicionUsuario); 
+		return estaCerca;
 	}
 	
 	public boolean estaDisponible(LocalDateTime unaFechaHora) {
 		return (this.getServicios().stream().anyMatch(
 	            unServicio -> unServicio.estaDisponible(unaFechaHora)));
 	}
+	public void agregarServicio(ServicioDeCGP unServicio) {
+		this.getServicios().add(unServicio);
+	}
+	
+	public void quitarServicio(ServicioDeCGP unServicio){
+		this.getServicios().remove(unServicio);
+	}
 
-	public ArrayList<ServicioDeCGP> getServicios() {
+	public List<ServicioDeCGP> getServicios() {
 		return this.servicios;
 	}
 	
 	public void quitarVertice(Posicion posicion){
-		this.verticesComuna.remove(posicion);
+		this.getVerticesComuna().remove(posicion);
 	}
 	
 	public void agregarVertice(Posicion posicion){
-		this.verticesComuna.add(posicion);
+		this.getVerticesComuna().add(posicion);
 	}
 
 	public List<Posicion> getVerticesComuna() {
-		return verticesComuna;
+		return this.verticesComuna;
 	}
+
+	public void setVerticesComuna(List<Posicion> verticesComuna) {
+		this.verticesComuna = verticesComuna;
+	}
+
+	public void setServicios(List<ServicioDeCGP> servicios) {
+		this.servicios = servicios;
+	}
+
+
 	
 }
