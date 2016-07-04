@@ -11,17 +11,24 @@ public class PoiFinder {
 
 	private Consulta consulta;
 	private List<PoiFilter> filters = new ArrayList<PoiFilter>();
-	public List<PoiFilter> getFilters() {
-		return filters;
-	}
-
 	private List<RepositorioAbstracto> repositories = new ArrayList<RepositorioAbstracto>();
 	private List<POI> results = new ArrayList<POI>();
 
 	public void search() {
+		this.startSearch();
 		for ( RepositorioAbstracto unRepositorio : this.getRepositories()){
 			this.searchOn(unRepositorio);
 		}
+		this.endSearch();
+	}
+
+	private void endSearch() {
+		this.getConsulta().setFinProceso(System.currentTimeMillis()/1000);
+		this.getConsulta().calcularTiempoProceso();
+	}
+
+	private void startSearch() {
+		this.getConsulta().setComienzoProceso(System.currentTimeMillis()/1000);
 	}
 
 	private void searchOn(RepositorioAbstracto unRepositorio) {
@@ -55,12 +62,22 @@ public class PoiFinder {
 	public void addRepository(RepositorioAbstracto unRepositorio) {
 		this.repositories.add(unRepositorio);
 	}
-	
+	public List<PoiFilter> getFilters() {
+		return filters;
+	}
 	public List<RepositorioAbstracto> getRepositories() {
 		return repositories;
 	}
 
 	public List<POI> getResults() {
 		return results;
+	}
+
+	public void initializeRepositories() {
+		this.repositories = new ArrayList<RepositorioAbstracto>();
+	}
+
+	public void initializeFilters() {
+		this.filters = new ArrayList<PoiFilter>();
 	}
 }

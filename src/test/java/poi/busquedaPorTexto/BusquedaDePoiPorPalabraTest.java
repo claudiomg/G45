@@ -3,7 +3,9 @@ package poi.busquedaPorTexto;
 import org.junit.Assert;
 import org.junit.Test;
 
+import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
@@ -81,5 +83,12 @@ public class BusquedaDePoiPorPalabraTest {
 		Posicion posicion = new Posicion(0.0, 0.0);
 		ParadaColectivo unBanco =  new ParadaColectivo("47", posicion , direccion);
 		Assert.assertFalse(unBanco.matches("57"));
+	}
+	@Test
+	public void cuandoBuscoLocalComercialPorTipoLoEncuentro(){
+		Direccion direccion = new Direccion();
+		Posicion posicion = new Posicion(0.0, 0.0);
+		LocalComercial unLocal =  new LocalComercial("Kiosco", posicion , direccion, RadioCercania.Kiosco);
+		Assert.assertTrue(unLocal.matches("kiosco"));
 	}
 }

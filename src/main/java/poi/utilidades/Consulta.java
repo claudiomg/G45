@@ -1,25 +1,9 @@
 package poi.utilidades;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import poi.acciones.EstaDisponible;
-import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioAbstracto;
 
 public class Consulta {
-	private RepositorioAbstracto repositorio2;
-	private RepositorioAbstracto repositorio;
-	private List<POI> poisEncontrados = new ArrayList<POI>();
-	private BusquedaDeBancos busquedaDeBancos;
-	private List<POI> poisEncontradosEnExterno= new ArrayList<POI>();
-	//Expresados en milisegundos
 	private double comienzoProceso;
 	private double finProceso;
 	private double tiempoProceso;
@@ -27,96 +11,57 @@ public class Consulta {
 	private HistorialConsulta historial;
 	private String palabraBuscada;
 	private Terminal user;
+	
+	public Consulta(Terminal user, String palabraBuscada) {
+		this.setUser(user);
+		this.setPalabraBuscada(palabraBuscada);
+	}
+
+
+	public HistorialConsulta getHistorial() {
+		return historial;
+	}
+
+
+	public void setHistorial(HistorialConsulta historial) {
+		this.historial = historial;
+	}
+
+
+	public String getPalabraBuscada() {
+		return palabraBuscada;
+	}
+
+
+	public Terminal getUser() {
+		return user;
+	}
+
+
+	public void setComienzoProceso(double comienzoProceso) {
+		this.comienzoProceso = comienzoProceso;
+	}
+
+
+	public void setFinProceso(double finProceso) {
+		this.finProceso = finProceso;
+	}
+
+
+	public void setTiempoProceso(double tiempoProceso) {
+		this.tiempoProceso = tiempoProceso;
+	}
 
 	public void setPalabraBuscada(String palabraBuscada) {
 		this.palabraBuscada = palabraBuscada;
 	}
-	
-	public void setRepoExterno(RepositorioAbstracto repo2){
-		this.repositorio2=repo2;
-	}
-	
-	public List<POI> getPoisEncontrados() {
-		return poisEncontrados;
-	}
 
-	public boolean sonCercanos(Posicion posicion, POI poi) {
-		comienzoProceso = System.currentTimeMillis()/1000;
-		boolean cercanos = poi.estaCercaDe(posicion);
-		finProceso = System.currentTimeMillis()/1000;
-		calcularTiempoProceso(comienzoProceso, finProceso);
-		return cercanos;
-	}
-
-	public List<POI> buscarPorPalabra(String palabra) {
-		comienzoProceso = System.currentTimeMillis()/1000;
-		Stream<POI> listaFiltrada = filtrarPorParlabra(palabra);				
-		List<POI> poisEncontrados = asignarAPoisEncontrados(listaFiltrada);
-		finProceso = System.currentTimeMillis()/1000;
-		calcularTiempoProceso(comienzoProceso, finProceso);		
-		return poisEncontrados;
-	}
-	
-	public List<POI> buscarPorPalabraEnExterno(String palabra){
-		Stream<POI> listaFiltrada2 = filtrarPorParlabraExternos(palabra);	
-	    return asignarAPoisEncontrados2(listaFiltrada2);
-		
-	}
-	
-	public Stream<POI> filtrarPorParlabra(String palabra){
-		return repositorio.getPois().stream().filter(unPOI -> unPOI.getEtiquetas().contains(palabra));
-	}
-	
-	public Stream<POI> filtrarPorParlabraExternos(String palabra){
-		return repositorio2.getPois().stream().filter(unPOI -> unPOI.getEtiquetas().contains(palabra));
-	}
-	
-	public List<POI> asignarAPoisEncontrados2(Stream<POI> lista){
-		this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
-		return this.getPoisEncontradosEnExterno();
-	} 
-	
-	public List<POI> asignarAPoisEncontrados(Stream<POI> lista){
-		this.setPoisEncontradosEnExterno(lista.collect(Collectors.toCollection(ArrayList::new)));
-		return this.getPoisEncontrados();
-	}
-
-	public List<POI> getPoisEncontradosEnExterno() {
-		return poisEncontradosEnExterno;
-	}
-
-	public void setPoisEncontradosEnExterno(List<POI> poisEncontrados) {
-		this.poisEncontrados = poisEncontrados;
-		
-	}
-	
-	public void setPoisEncontrados(List<POI> poisEncontradosEnExterno) {
-		this.poisEncontradosEnExterno = poisEncontradosEnExterno;
-		
-	}
-
-	public List<SucursalBanco> buscarBancosPorNombreYServicio(String nombreBanco, String servicio) {
-		return busquedaDeBancos.busquedaDeBancos(nombreBanco, servicio);
-	}
-
-	public boolean estaDisponible(POI poi) {
-		comienzoProceso = System.currentTimeMillis()/1000;
-		LocalDateTime unaFechaHora = LocalDateTime.now();
-		EstaDisponible estaDisponibleAccion = new EstaDisponible(poi,unaFechaHora);
-		poi.agregarAccion(estaDisponibleAccion);
-		estaDisponibleAccion.ejecutarAccion();
-		
-		boolean disponibilidad = estaDisponibleAccion.estaDisponible;
-		finProceso = System.currentTimeMillis()/1000;
-		calcularTiempoProceso(comienzoProceso, finProceso);
-		return disponibilidad;
-	}
-
-	private void calcularTiempoProceso(double comienzo, double fin) {
-		this.tiempoProceso = fin - comienzo;
-		this.historial.setTiempoProceso(this.tiempoProceso);
-		if (this.tiempoProceso > this.tiempoProcesamientoMaximo){
-			Notificador.informarProcesamientoExcesivo(this.tiempoProceso - this.tiempoProcesamientoMaximo);
+	public void calcularTiempoProceso() {
+		this.setTiempoProceso(this.getComienzoProceso() - this.getFinProceso());
+		//lo comento porque me parece que ahora ya no hace falta el historial
+		//this.getHistorial().setTiempoProceso(this.getTiempoProceso());
+		if (this.getTiempoProceso() > this.getTiempoProcesamientoMaximo()){
+			Notificador.informarProcesamientoExcesivo(this.getTiempoProceso() - this.getTiempoProcesamientoMaximo());
 		}
 	}
 	
@@ -128,13 +73,6 @@ public class Consulta {
 		this.tiempoProcesamientoMaximo = tiempoProcesamientoMaximo;
 	}
 
-	public BusquedaDeBancos getBusquedaDeBancos() {
-		return busquedaDeBancos;
-	}
-
-	public void setBusquedaDeBancos(BusquedaDeBancos busquedaDeBancos) {
-		this.busquedaDeBancos = busquedaDeBancos;
-	}
 	public double getComienzoProceso() {
 		return comienzoProceso;
 	}
@@ -149,14 +87,10 @@ public class Consulta {
 	public void setHistorial(LocalDate fecha, String nombre) {
 		this.historial = new HistorialConsulta(fecha, nombre);
 		this.historial.agregarARepositorio();
-		
 	}	
 
 	public void generarHistorial(String frase) {
 		this.historial.setFraseBuscada(frase);
-		
-		
-		
 	}
 
 	public void setUser(Terminal user) {

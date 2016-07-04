@@ -91,9 +91,7 @@ public class PoiFinderBuilder {
 	}
 
 	private void setQueryOn(PoiFinder finder) {
-		Consulta query = new Consulta();
-		query.setUser(this.getUser());
-		query.setPalabraBuscada(this.getPalabraBuscada());
+		Consulta query = new Consulta(this.getUser(),this.getPalabraBuscada());
 		//si hay mas atribubutos setearlos aca
 		finder.setConsulta(query);
 	}
