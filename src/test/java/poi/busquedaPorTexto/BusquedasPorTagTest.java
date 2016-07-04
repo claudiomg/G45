@@ -22,7 +22,7 @@ import poi.utilidades.Consulta;
 import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
-public class BuscarPorNombreTest {
+public class BusquedasPorTagTest {
     
 	Direccion direccion = new Direccion();
 	Posicion posicion = new Posicion(0.0, 0.0);
@@ -49,6 +49,48 @@ public class BuscarPorNombreTest {
 		finder.addFilter(new FilterByTag(palabra));
 		finder.search();
 		Assert.assertEquals(finder.getResults().size(), 1);
+	}
+	
+	@Test
+	public void obtengoUnBancosDelRepositorioLocalApartirDeServicioCajero(){
+		SucursalBanco banco1 = new SucursalBanco("Belgrano1", posicion, direccion);
+		SucursalBanco banco2 = new SucursalBanco("Belgrano2", posicion, direccion);
+		SucursalBanco banco3 = new SucursalBanco("Belgrano3", posicion, direccion);
+		banco1.agregarServicio("Prestamo");
+		banco2.agregarServicio("Prestamo");
+		banco3.agregarServicio("Cajero");
+		repositorioLocal.agregarRegistro(banco1);
+		repositorioLocal.agregarRegistro(banco2);
+		repositorioLocal.agregarRegistro(banco3);
+		PoiFinder finder = new PoiFinder();
+		String palabra = "cajero";
+		Consulta consulta = new Consulta(usuario,palabra);
+		finder.setConsulta(consulta);
+		finder.addRepository(repositorioLocal);
+		finder.addFilter(new FilterByTag(palabra));
+		finder.search();
+		Assert.assertEquals(finder.getResults().size(), 1);
+	}
+	
+	@Test
+	public void obtengoUnBancosDelRepositorioLocalApartirDeServicioPrestamo(){
+		SucursalBanco banco1 = new SucursalBanco("Belgrano1", posicion, direccion);
+		SucursalBanco banco2 = new SucursalBanco("Belgrano2", posicion, direccion);
+		SucursalBanco banco3 = new SucursalBanco("Belgrano3", posicion, direccion);
+		banco1.agregarServicio("Prestamo");
+		banco2.agregarServicio("Prestamo");
+		banco3.agregarServicio("Cajero");
+		repositorioLocal.agregarRegistro(banco1);
+		repositorioLocal.agregarRegistro(banco2);
+		repositorioLocal.agregarRegistro(banco3);
+		PoiFinder finder = new PoiFinder();
+		String palabra = "prestamo";
+		Consulta consulta = new Consulta(usuario,palabra);
+		finder.setConsulta(consulta);
+		finder.addRepository(repositorioLocal);
+		finder.addFilter(new FilterByTag(palabra));
+		finder.search();
+		Assert.assertEquals(finder.getResults().size(), 2);
 	}
 	
 	@Test
