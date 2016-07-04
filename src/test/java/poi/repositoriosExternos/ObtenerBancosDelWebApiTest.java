@@ -14,7 +14,7 @@ public class ObtenerBancosDelWebApiTest {
 	
 	@After
 	public void vaciarRepositorio(){
-		repo.limpiarPOIs();
+		repo.cleanRepository();
 	}
 	
 	@Test
@@ -22,6 +22,6 @@ public class ObtenerBancosDelWebApiTest {
 		//Trae de a 2 bancos que obtiene de la API provista por la catedra
 		((RepositorioBancosExternos) repo).actualizarRepositorio();
 		
-		Assert.assertEquals(2, repo.getBancos().size());
+		Assert.assertEquals(2, repo.getRegistros().size());
 	}
 }
