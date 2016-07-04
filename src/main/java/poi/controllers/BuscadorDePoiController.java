@@ -20,6 +20,7 @@ public class BuscadorDePoiController {
 		RequestMediator requestMediator = new RequestMediator(request);
 		PoiFinder finder = new PoiFinderBuilder(requestMediator).buildFinder();
 		finder.search();
+		viewModel.put("results", finder.getResults());
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 }
