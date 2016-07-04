@@ -12,18 +12,19 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
+import poi.utilidades.Direccion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.ExcepcionSinAtencion;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
 
 public class DisponiblidadCgpTest {
-	ArrayList<String> arrayEtiquetas = new ArrayList<String>();
 	List<Posicion> vertices = new ArrayList<Posicion>();
+	Direccion direccion = new Direccion();
 	Posicion unaPosicion = new Posicion(40.417, -3.703);
 	TimeRange rangoInferior = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 	TimeRange rangoSuperior = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
-	CGP unaCGP = new CGP(arrayEtiquetas,unaPosicion,vertices);
+	CGP unaCGP = new CGP("cgp1",unaPosicion,direccion,vertices);
 	ServicioDeCGP unServicio = new ServicioDeCGP();
 	LocalDateTime unaFechaHora;
 	ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();

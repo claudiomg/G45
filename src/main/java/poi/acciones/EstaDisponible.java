@@ -28,23 +28,7 @@ public class EstaDisponible implements Accion {
 			if (poiVerDisponibilidad.getClass().equals(ParadaColectivo.class)) {
 				estaDisponible = true; // Los colectivos siempre estan
 										// disponibles
-			} else {
-				if (poiVerDisponibilidad.horariosCambiados.stream().anyMatch(
-						unHorario -> unHorario.diaDisponible(fechaYHora))) {
-					estaDisponible = poiVerDisponibilidad.horariosCambiados
-							.stream().anyMatch(
-									unHorario -> unHorario
-											.estaDisponible(fechaYHora));
-				} else
-					estaDisponible = poiVerDisponibilidad.disponibilidadesDeAtencion
-							.stream().anyMatch(
-									unHorario -> unHorario.estaDisponible(
-											fechaYHora,
-											poiVerDisponibilidad.feriados))
-							&& poiVerDisponibilidad.feriados
-									.noEsUnFeriado(fechaYHora);
-
-			}
+			} else {//lo saque porque no es responsabilidad de la accion}
 		} else {
 			System.out.println("Esta accion fue inhabilitada");
 		}

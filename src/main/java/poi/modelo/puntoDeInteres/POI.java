@@ -20,13 +20,22 @@ public abstract class POI {
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	private ExcepcionSinAtencion feriados;
 	private ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
-	private List<Accion> acciones = new ArrayList<Accion>();
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
 		double distancia = Calculo.distanciaLineal(this.posicion, posicionUsuario);
 		double distanciaLineal = Calculo.distanciaLineal(this.posicion, posicionUsuario);
 		return distancia < 0.5 && distanciaLineal < 0.5;
 	} 
+	
+	public boolean estaDisponible(LocalDateTime unaFechaHora) {
+		boolean horarioCambiado = 
+			this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(unaFechaHora));
+		boolean horarioNormal =
+			this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
+		boolean feriados = this.feriados.noEsUnFeriado(unaFechaHora);
+		
+		return horarioCambiado || (horarioNormal && feriados);
+	}
 	
 	public boolean matches(String palabraBuscada) {
 		//este metodo se encarga de buscar coincidencias de la palabra buscada y yo mismo
@@ -43,15 +52,6 @@ public abstract class POI {
 		lista.addAll(this.getPalabrasClave());
 		return lista;
 	}
-	//Ahora es una clase concreta del Command Acciones
-	//public boolean estaDisponible(LocalDateTime unaFechaHora) {
-	//	if (this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.diaDisponible(unaFechaHora))){
-	//	return this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
-	//	}
-	//	else
-	//		return this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados))
-	//				&& this.feriados.noEsUnFeriado(unaFechaHora);
-	//}
 
 	public abstract void inicializarPalabrasClave();
 	
@@ -103,16 +103,6 @@ public abstract class POI {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	
-	public void agregarAccion(Accion accion){
-		this.acciones.add(accion);
-	}
-
-	public boolean estaDisponible(LocalDateTime unaFechaHora) {
-		//este metodo debe ser modificado segun cada subclase
-		return true;
-	}
 	
 	public ArrayList<ExcepcionHorarioCambiado> getHorariosCambiados() {
 		return horariosCambiados;
@@ -121,15 +111,7 @@ public abstract class POI {
 	public void setHorariosCambiados(ArrayList<ExcepcionHorarioCambiado> horariosCambiados) {
 		this.horariosCambiados = horariosCambiados;
 	}
-
-	public List<Accion> getAcciones() {
-		return acciones;
-	}
-
-	public void setAcciones(List<Accion> acciones) {
-		this.acciones = acciones;
-	}
-
+	
 	public Posicion getPosicion() {
 		return posicion;
 	}
