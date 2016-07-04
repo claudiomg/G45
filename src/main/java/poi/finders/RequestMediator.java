@@ -2,8 +2,8 @@ package poi.finders;
 
 import java.time.LocalDateTime;
 
-import poi.modelo.usuario.RepositorioTerminal;
 import poi.modelo.usuario.Terminal;
+import poi.repositorios.RepositorioTerminal;
 import poi.utilidades.Posicion;
 import spark.Request;
 

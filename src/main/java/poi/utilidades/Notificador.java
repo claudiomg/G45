@@ -3,7 +3,7 @@ package poi.utilidades;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import poi.modelo.usuario.RepositorioAdministrador;
+import poi.repositorios.RepositorioAdministrador;
 
 public class Notificador {
 	public static Notificador instance = null;

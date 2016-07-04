@@ -9,11 +9,11 @@ import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Administrador;
-import poi.modelo.usuario.RepositorioAdministrador;
-import poi.modelo.usuario.RepositorioTerminal;
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioAbstractoPOI;
+import poi.repositorios.RepositorioAdministrador;
 import poi.repositorios.RepositorioPOI;
+import poi.repositorios.RepositorioTerminal;
 
 public class CargaInicial {
 	public static CargaInicial instance = null;

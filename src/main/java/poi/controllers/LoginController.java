@@ -2,8 +2,8 @@ package poi.controllers;
 
 import java.util.HashMap;
 
-import poi.modelo.usuario.RepositorioAdministrador;
-import poi.modelo.usuario.RepositorioTerminal;
+import poi.repositorios.RepositorioAdministrador;
+import poi.repositorios.RepositorioTerminal;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -18,7 +18,7 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		if (RepositorioTerminal.getInstance().terminales.stream()
-				.anyMatch(termi->(termi.getLogin().equals(nombreUsuario) && termi.getPassword().equals(passwordUsuario)))){
+				.anyMatch(termi->(termi.getNombre().equals(nombreUsuario) && termi.getPassword().equals(passwordUsuario)))){
 			return new ModelAndView(viewModel, "terminalIndex.html");
 		} else if (RepositorioAdministrador.getInstance().administradores.stream()
 				.anyMatch(adm->(adm.getLogin().equals(nombreUsuario) && adm.getPassword().equals(passwordUsuario)))) {

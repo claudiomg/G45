@@ -1,7 +1,9 @@
-package poi.modelo.usuario;
+package poi.repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import poi.modelo.usuario.Terminal;
 
 public class RepositorioTerminal {
 
