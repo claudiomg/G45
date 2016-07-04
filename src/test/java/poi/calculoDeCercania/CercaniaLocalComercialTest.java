@@ -1,89 +1,71 @@
 package poi.calculoDeCercania;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.RadioCercania;
-import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioPOI;
-import poi.utilidades.Consulta;
+import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
 public class CercaniaLocalComercialTest {
-
-	Posicion posicionLocal = new Posicion(40.417, -3.703);
-	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
-	Terminal unUsuario = new Terminal();
-	RepositorioPOI repositorio;
-	Consulta unaConsulta = new Consulta(repositorio);
-	List<String> etiquetas = new ArrayList<String>();
-	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
-	LocalComercial libreria = new LocalComercial(RadioCercania.LibreriaEscolar);
-	
-	@Before
-	public void inicializarEscenario(){
-		unUsuario.setPosicion(posicionUsuario);
-		unUsuario.agregarConsulta(unaConsulta,LocalDate.of(2016, 6, 27));
-	}
+	Direccion direccion = new Direccion();
+	Posicion posicionUsuario = new Posicion(40.453, -3.68);
 
 	@Test
 	public void unaLibreriaEstaMuyLejos(){ //4.45 kms
-		libreria.setPosicion(posicionLocal);
-		Assert.assertFalse(unUsuario.estoyCercaDe(libreria));
+		Posicion posicionLocal = new Posicion(40.417, -3.703);
+		LocalComercial libreria = new LocalComercial("LIbreria 1",posicionLocal,direccion, RadioCercania.LibreriaEscolar);
+		Assert.assertFalse(libreria.estaCercaDe(posicionUsuario));
 	}
 
 	@Test
 	public void unalibreriaEstaCasiEnElLimiteDeLejania(){ //0.507 kms				
-		posicionLocal = new Posicion(40.453, -3.686);
-		libreria.setPosicion(posicionLocal);
-		Assert.assertFalse(unUsuario.estoyCercaDe(libreria));
+		Posicion posicionLocal = new Posicion(40.453, -3.686);
+		LocalComercial libreria = new LocalComercial("LIbreria 1",posicionLocal,direccion, RadioCercania.LibreriaEscolar);
+		Assert.assertFalse(libreria.estaCercaDe(posicionUsuario));
 	}
 
 	@Test
 	public void unalibreriaEstaCasiEnElLimiteDeCercania(){ //0.49 kms				
-		posicionLocal = new Posicion(40.453, -3.6858);
-		libreria.setPosicion(posicionLocal);
-		Assert.assertTrue(unUsuario.estoyCercaDe(libreria));
+		Posicion posicionLocal = new Posicion(40.453, -3.6858);
+		LocalComercial libreria = new LocalComercial("LIbreria 1",posicionLocal,direccion, RadioCercania.LibreriaEscolar);
+		Assert.assertTrue(libreria.estaCercaDe(posicionUsuario));
 	}
 	
 	@Test
 	public void unalibreriaEstaDemasiadoCerca(){ // 0 kms	
-		posicionLocal = new Posicion(40.453, -3.68);
-		libreria.setPosicion(posicionLocal);
-		Assert.assertTrue(unUsuario.estoyCercaDe(libreria));
+		Posicion posicionLocal = new Posicion(40.453, -3.68);
+		LocalComercial libreria = new LocalComercial("LIbreria 1",posicionLocal,direccion, RadioCercania.LibreriaEscolar);
+		Assert.assertTrue(libreria.estaCercaDe(posicionUsuario));
 	}	
 	
 	@Test
 	public void unKioscoEstaMuyLejos(){ //4.45 kms
-		kiosco.setPosicion(posicionLocal);
-		Assert.assertFalse(unUsuario.estoyCercaDe(kiosco));
+		Posicion posicionLocal = new Posicion(40.417, -3.703);
+		LocalComercial kiosco = new LocalComercial("Kiosco 1",posicionLocal,direccion, RadioCercania.Kiosco);
+		Assert.assertFalse(kiosco.estaCercaDe(posicionUsuario));
 	}
 
 	@Test
 	public void unKioscoEstaCasiEnElLimiteDeLejania(){ //0.203 kms				
-		posicionLocal = new Posicion(40.453, -3.6824);
-		kiosco.setPosicion(posicionLocal);
-		Assert.assertFalse(unUsuario.estoyCercaDe(kiosco));
+		Posicion posicionLocal = new Posicion(40.453, -3.6824);
+		LocalComercial kiosco = new LocalComercial("Kiosco 1",posicionLocal,direccion, RadioCercania.Kiosco);
+		Assert.assertFalse(kiosco.estaCercaDe(posicionUsuario));
 	}
 
 	@Test
 	public void unKioscoEstaCasiEnElLimiteDeCercania(){ //0.194 kms				
-		posicionLocal = new Posicion(40.453, -3.6823);
-		kiosco.setPosicion(posicionLocal);
-		Assert.assertTrue(unUsuario.estoyCercaDe(kiosco));
+		Posicion posicionLocal = new Posicion(40.453, -3.6823);
+		LocalComercial kiosco = new LocalComercial("Kiosco 1",posicionLocal,direccion, RadioCercania.Kiosco);
+		Assert.assertTrue(kiosco.estaCercaDe(posicionUsuario));
 	}
 	
 	@Test
-	public void unKioscoEstaDemasiadoCerca(){ // 0 kms	
-		posicionLocal = new Posicion(40.453, -3.68);
-		kiosco.setPosicion(posicionLocal);
-		Assert.assertTrue(unUsuario.estoyCercaDe(kiosco));
+	public void unKioscoEstaDemasiadoCerca(){ // 0 kms
+		Posicion posicionLocal = new Posicion(40.453, -3.68);
+		LocalComercial kiosco = new LocalComercial("Kiosco 1",posicionLocal,direccion, RadioCercania.Kiosco);
+		Assert.assertTrue(kiosco.estaCercaDe(posicionUsuario));
 	}	
 
 }

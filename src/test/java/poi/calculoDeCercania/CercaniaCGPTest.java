@@ -1,8 +1,6 @@
 package poi.calculoDeCercania;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -11,31 +9,22 @@ import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioPOI;
-import poi.utilidades.Consulta;
+import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
 public class CercaniaCGPTest {
-
+	Direccion direccion = new Direccion();
 	Posicion posicionUno = new Posicion(40.417, 3.703);
 	Posicion posicionDos = new Posicion(40.453, 3.68);		
 	Posicion posicionTres = new Posicion(40.400, 3.702);
 	Posicion posicionCuatro = new Posicion(40.417, 3.68);
 	Posicion posicionCinco = new Posicion(40.453, 3.703);
 	Posicion posicionSeis = new Posicion(40.430, 3.69);
-	Posicion posicionSiete = new Posicion(40.417, 3.69);	
-	Terminal unUsuario = new Terminal();
-	RepositorioPOI repositorio;
-	Consulta unaConsulta = new Consulta(repositorio);
+	Posicion posicionUsuario = new Posicion(40.417, 3.69);
 	List<Posicion> vertices = new ArrayList<Posicion>();
-	List<String> etiquetasCGP = Arrays.asList("comuna 1","puerto madero","constitucion");
-	POI cgp = new CGP(etiquetasCGP, posicionUno, vertices);
 	
 	@Before
 	public void inicializarEscenario(){
-		unUsuario.setPosicion(posicionSiete);
-		unUsuario.agregarConsulta(unaConsulta,LocalDate.of(2016, 6, 27));
 		vertices.add(posicionUno);
 		vertices.add(posicionDos);
 		vertices.add(posicionCuatro);
@@ -44,19 +33,20 @@ public class CercaniaCGPTest {
 
 	@Test
 	public void usuarioSobreLaLineaDeBordeDeCoberturaDelCGP(){ //Sobre borde izquierdo del poligono	
-		Assert.assertTrue(unUsuario.estoyCercaDe(cgp));
+		POI cgp = new CGP("cgp", posicionUno, direccion, vertices);
+		Assert.assertTrue(cgp.estaCercaDe(posicionUsuario));
 	}	
 
 	@Test
 	public void unCGPEstaLejos(){
-		unUsuario.setPosicion(posicionTres); //Posicion 3 por fuera del area de cobertura del CGP
-		Assert.assertFalse(unUsuario.estoyCercaDe(cgp));
+		POI cgp = new CGP("cgp", posicionUno, direccion, vertices);
+		Assert.assertFalse(cgp.estaCercaDe(posicionTres));
 	}	
 
 	@Test
 	public void unUsuarioEstaDentroDelAreaDeCobertura(){ //Posicion 6 dentro del area
-		unUsuario.setPosicion(posicionSeis);
-		Assert.assertTrue(unUsuario.estoyCercaDe(cgp));
+		POI cgp = new CGP("cgp", posicionUno, direccion, vertices);
+		Assert.assertTrue(cgp.estaCercaDe(posicionSeis));
 	}
 
 }

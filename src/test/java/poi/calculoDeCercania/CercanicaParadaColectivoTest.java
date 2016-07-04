@@ -1,59 +1,42 @@
 package poi.calculoDeCercania;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
-import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioPOI;
-import poi.utilidades.Consulta;
+import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
 public class CercanicaParadaColectivoTest {
-
-	Posicion posicionParada = new Posicion(40.417, -3.703);
-	Posicion posicionUsuario = new Posicion(40.453, -3.68);		
-	RepositorioPOI repositorio;
-	Consulta unaConsulta = new Consulta(repositorio);
-	Terminal unUsuario = new Terminal();
-	List<String> etiquetas = new ArrayList<String>();
-	POI parada = new ParadaColectivo(etiquetas, posicionParada); 
+	Direccion direccion = new Direccion();
+	Posicion posicionUsuario = new Posicion(40.453, -3.68);
 	
-	@Before
-	public void inicializarEscenario(){
-		unUsuario.setPosicion(posicionUsuario);
-		unUsuario.agregarConsulta(unaConsulta,LocalDate.of(2016, 6, 27));
-	}
-
 	@Test
-	public void unaParadaEstaMuyLejos(){ //4.45 kms				
-		Assert.assertFalse(unUsuario.estoyCercaDe(parada));
+	public void unaParadaEstaMuyLejos(){ //4.45 kms
+		Posicion posicionParada = new Posicion(40.417, -3.703);
+		POI parada = new ParadaColectivo("parada1", posicionParada,direccion); 
+		Assert.assertFalse(parada.estaCercaDe(posicionUsuario));
 	}
 
 	@Test
 	public void unaParadaEstaCasiEnElLimiteDeLejania(){ //0.109 kms				
-		posicionParada = new Posicion(40.453, -3.6813);
-		parada.setPosicion(posicionParada);
-		Assert.assertFalse(unUsuario.estoyCercaDe(parada));
+		Posicion posicionParada = new Posicion(40.453, -3.6813);
+		POI parada = new ParadaColectivo("parada1", posicionParada,direccion); 
+		Assert.assertFalse(parada.estaCercaDe(posicionUsuario));
 	}
 
 	@Test
 	public void unaParadaEstaCasiEnElLimiteDeCercania(){ //0.093 kms				
-		posicionParada = new Posicion(40.453, -3.6811);
-		parada.setPosicion(posicionParada);
-		Assert.assertTrue(unUsuario.estoyCercaDe(parada));
+		Posicion posicionParada = new Posicion(40.453, -3.6811);
+		POI parada = new ParadaColectivo("parada1", posicionParada,direccion); 
+		Assert.assertTrue(parada.estaCercaDe(posicionUsuario));
 	}
 	
 	@Test
 	public void unaParadaEstaDemasiadoCerca(){ // 0 kms	
-		posicionParada = new Posicion(40.453, -3.68);
-		parada.setPosicion(posicionParada);
-		Assert.assertTrue(unUsuario.estoyCercaDe(parada));
+		Posicion posicionParada = new Posicion(40.453, -3.68);
+		POI parada = new ParadaColectivo("parada1", posicionParada,direccion); 
+		Assert.assertTrue(parada.estaCercaDe(posicionUsuario));
 	}	
 }

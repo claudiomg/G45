@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.acciones.Accion;
 import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.LocalComercial;
@@ -23,6 +22,7 @@ import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Administrador;
 import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioPOI;
+import poi.utilidades.Direccion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
@@ -64,16 +64,18 @@ public class ABMPoisTest {
 	Posicion posicionDos = new Posicion(40.453, 3.68);		
 	Posicion posicionTres = new Posicion(40.400, 3.702);
 	Posicion posicionCuatro = new Posicion(40.417, 3.68);
-	Posicion posicionSiete = new Posicion(40.417, 3.69);	
+	Posicion posicionSiete = new Posicion(40.417, 3.69);
+	
+	Direccion direccion = new Direccion();
 
 	List<Posicion> vertices = new ArrayList<Posicion>();
 
-	POI paradaColectivo = new ParadaColectivo(etiquetasColectivo,null);
-	POI paradaColectivo2 = new ParadaColectivo(etiquetasColectivo2,null);
-	POI CGP1 = new CGP(etiquetas, posicionUno, vertices);
-	CGP CGP2 = new CGP(etiquetas, posicionUno, vertices);
-	LocalComercial kiosco = new LocalComercial(RadioCercania.Kiosco);
-	SucursalBanco banco = new SucursalBanco(etiquetas, posicionDos);
+	POI paradaColectivo = new ParadaColectivo("parada1",posicionUno,direccion);
+	POI paradaColectivo2 = new ParadaColectivo("parada2",posicionUno,direccion);
+	POI CGP1 = new CGP("cgp1",posicionUno,direccion,vertices);
+	CGP CGP2 = new CGP("cgp2",posicionUno,direccion,vertices);
+	LocalComercial kiosco = new LocalComercial("kiosco1",posicionUno,direccion,RadioCercania.Kiosco);
+	SucursalBanco banco = new SucursalBanco("sucursal1",posicionDos,direccion);
 	
 	ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
 	
@@ -103,18 +105,7 @@ public class ABMPoisTest {
 		banco.setGerente("Pablo Perez");
 		vertices.add(posicionDos);
 		vertices.add(posicionCuatro);
-		vertices.add(posicionTres);
-		paradaColectivo2.agregarEtiqueta("retiro");
-		paradaColectivo.agregarEtiqueta("7");
-		paradaColectivo.agregarEtiqueta("retiro");
-		paradaColectivo.agregarEtiqueta("samore");		
-		CGP1.agregarEtiqueta("comuna 7");
-		CGP1.agregarEtiqueta("flores");
-		CGP1.agregarEtiqueta("parque chacabuco");		
-		kiosco.etiquetas = etiquetasKiosco;
-		kiosco.agregarEtiqueta("golosinas");
-		kiosco.agregarEtiqueta("cigarrillos");
-		kiosco.agregarEtiqueta("fotocopias");
+		vertices.add(posicionTres);	
 		CGP2.agregarServicio(unServicio);
 		admin.agregarPOI(CGP1);
 		kiosco.setFeriados(feriados);
@@ -131,37 +122,26 @@ public class ABMPoisTest {
 	@Test
 	public void administradorAgregaPOI(){
 		admin.agregarPOI(kiosco);
-		Assert.assertTrue(repositorio.getPois().size() == 2);
+		Assert.assertTrue(repositorio.getRegistros().size() == 2);
 	}
 	
 	@Test
 	public void administradorBorraPOI(){
 		admin.removerPOI(CGP1);
-		Assert.assertTrue(repositorio.getPois().size() == 0);
-	}
-
-	@Test
-	public void administradorAgregaEtiqueta(){
-		admin.agregarEtiquetaAPOI(CGP1, "Villa Crespo");
-		Assert.assertTrue(CGP1.etiquetas.size() == 4);
+		Assert.assertTrue(repositorio.getRegistros().size() == 0);
 	}	
 
-	@Test
-	public void administradorEliminarEtiqueta(){
-		admin.quitarEtiquetaAPOI(CGP1, "flores");
-		Assert.assertTrue(CGP1.etiquetas.size() == 2);
-	}	
 
 	@Test
 	public void administradorModificarLatitud(){
 		admin.cambiarLatitudPOI(CGP1, 30.417);
-		Assert.assertTrue(CGP1.posicion.getLatitud() == 30.417);
+		Assert.assertTrue(CGP1.getPosicion().getLatitud() == 30.417);
 	}	
 
 	@Test
 	public void administradorModificarLongitud(){
 		admin.cambiarLongitudPOI(CGP1, 30.417);
-		Assert.assertTrue(CGP1.posicion.getLongitud() == 30.417);
+		Assert.assertTrue(CGP1.getPosicion().getLongitud() == 30.417);
 	}	
 
 	@Test
@@ -204,33 +184,5 @@ public class ABMPoisTest {
 	public void administradorModificaNombreGerenteBanco(){
 		admin.modificarNombreGerenteBanco(banco, "Jose Marmol");
 		Assert.assertTrue(banco.getGerente() == "Jose Marmol");
-	}	
-
-	@Test
-	public void administradorModificarDisponibilidadHorariaPOI(){
-		lunes1.agregarNuevoRango(rangoInferior);
-		lunes1.agregarNuevoRango(rangoSuperior);
-		martes1.agregarNuevoRango(rangoInferior);
-		martes1.agregarNuevoRango(rangoSuperior);
-		miercoles1.agregarNuevoRango(rangoInferior);
-		miercoles1.agregarNuevoRango(rangoSuperior);
-		jueves1.agregarNuevoRango(rangoSuperior);
-		jueves1.agregarNuevoRango(rangoInferior);
-		viernes1.agregarNuevoRango(rangoInferior);
-		viernes1.agregarNuevoRango(rangoSuperior);
-		disponibilidades.add(lunes1);
-		disponibilidades.add(martes1);
-		disponibilidades.add(miercoles1);
-		disponibilidades.add(jueves1);
-		disponibilidades.add(viernes1);		
-		admin.modificarDisponibilidadHorariaAPOI(kiosco, disponibilidades);
-		kiosco.agregarAccion(verificarDisponibilidad);
-		
-		List<Accion> accionesKiosco = kiosco.acciones;
-		for (Accion accion : accionesKiosco){
-			accion.ejecutarAccion();
-		}
-		Assert.assertTrue(verificarDisponibilidad.getDisponibilidad() );
 	}		
-	
 }

@@ -44,31 +44,19 @@ public class Administrador {
 	}
 	
 	public void agregarPOI(POI poi){
-		this.repositorio.agregarPOI(poi);			
+		this.repositorio.agregarRegistro(poi);			
 	}	
 	
 	public void removerPOI (POI poi){
-		this.repositorio.eliminarPOI(poi);
+		this.repositorio.eliminarRegistro(poi);
 	}
 	
-	public void modificarPOI(POI poi, Posicion posicion, String etiqueta, String etiqueta2){
-		this.repositorio.modificarPOI(poi, posicion, etiqueta, etiqueta2);
-	}
-	
-	public void agregarEtiquetaAPOI(POI poi, String etiqueta){
-		poi.agregarEtiqueta(etiqueta);
-	}
-	
-	public void quitarEtiquetaAPOI(POI poi, String etiqueta){
-		poi.eliminarEtiqueta(etiqueta);
-	}
-
 	public void cambiarLatitudPOI(POI poi, double latitud){
-		poi.posicion.setLatitud(latitud);
+		poi.getPosicion().setLatitud(latitud);
 	}
 	
 	public void cambiarLongitudPOI(POI poi, double longitud){
-		poi.posicion.setLongitud(longitud);
+		poi.getPosicion().setLongitud(longitud);
 	}
 	
 	public void modificarDisponibilidadHorariaAPOI(POI poi, ArrayList<DisponibilidadHoraria> disponibilidades){
@@ -104,7 +92,7 @@ public class Administrador {
 	}
 	
 	public void habilitarAccion(POI poi, String nombreAccion){
-		List<Accion> accionesFiltradasPorNombre = poi.acciones.stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
+		List<Accion> accionesFiltradasPorNombre = poi.getAcciones().stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
 		
 		for (Accion accion : accionesFiltradasPorNombre ){
 			accion.habilitar();
@@ -112,7 +100,7 @@ public class Administrador {
 	}
 	
 	public void deshabilitarAccion(POI poi, String nombreAccion){
-		List<Accion> accionesFiltradasPorNombre = poi.acciones.stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
+		List<Accion> accionesFiltradasPorNombre = poi.getAcciones().stream().filter(unaAccion -> unaAccion.getNombreAccion().equals(nombreAccion)).collect(Collectors.toCollection(ArrayList::new));
 		
 		for (Accion accion : accionesFiltradasPorNombre ){
 			accion.deshabilitar();
