@@ -1,6 +1,6 @@
 package poi.repositorios;
 
-public class RepositorioPOI extends RepositorioAbstracto {
+public class RepositorioPOI extends RepositorioAbstractoPOI {
 	
 	protected static RepositorioPOI instance;
 	protected RepositorioPOI() { /*Existe para anular la instanciacion*/ };

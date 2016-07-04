@@ -12,7 +12,7 @@ import org.junit.Test;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.BusquedaDeBancos;
@@ -21,8 +21,8 @@ import poi.utilidades.Consulta;
 public class BusquedaDeBancosTest {
 	
 
-	RepositorioAbstracto repositorioBancos = RepositorioBancosExternos.getInstance();
-	RepositorioAbstracto repositorioPoi = RepositorioPOI.getInstance();
+	RepositorioAbstractoPOI repositorioBancos = RepositorioBancosExternos.getInstance();
+	RepositorioAbstractoPOI repositorioPoi = RepositorioPOI.getInstance();
 	Terminal unUsuario = new Terminal();
 	BusquedaDeBancos busquedaBancos = new BusquedaDeBancos();
 	

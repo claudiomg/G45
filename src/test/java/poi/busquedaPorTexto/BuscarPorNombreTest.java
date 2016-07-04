@@ -1,13 +1,20 @@
 package poi.busquedaPorTexto;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import poi.finders.FilterByTag;
 import poi.finders.PoiFinder;
+import poi.modelo.puntoDeInteres.CGP;
+import poi.modelo.puntoDeInteres.LocalComercial;
+import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioCGPExternos;
 import poi.repositorios.RepositorioPOI;
@@ -20,14 +27,20 @@ public class BuscarPorNombreTest {
 	Direccion direccion = new Direccion();
 	Posicion posicion = new Posicion(0.0, 0.0);
 	Terminal usuario = new Terminal();
-	RepositorioAbstracto repositorioLocal = RepositorioPOI.getInstance();
-	RepositorioAbstracto repositorioExternoBancos = RepositorioBancosExternos.getInstance();
-	RepositorioAbstracto repositorioExternoCGP = RepositorioCGPExternos.getInstance();
+	RepositorioAbstractoPOI repositorioLocal = RepositorioPOI.getInstance();
+	RepositorioAbstractoPOI repositorioExternoBancos = RepositorioBancosExternos.getInstance();
+	RepositorioAbstractoPOI repositorioExternoCGP = RepositorioCGPExternos.getInstance();
+	
+	@Before
+	public void initialize(){
+		repositorioExternoBancos.cleanRepository();
+		repositorioExternoCGP.cleanRepository();
+		repositorioLocal.cleanRepository();
+	}
 	
 	@Test
 	public void obtengoUnBancoDelRepositorioLocal(){
-		repositorioLocal.limpiarPOIs();
-		repositorioLocal.agregarPOI(new SucursalBanco("Belgrano", posicion, direccion));
+		repositorioLocal.agregarRegistro(new SucursalBanco("Belgrano", posicion, direccion));
 		PoiFinder finder = new PoiFinder();
 		String palabra = "banco";
 		Consulta consulta = new Consulta(usuario,palabra);
@@ -40,23 +53,89 @@ public class BuscarPorNombreTest {
 	
 	@Test
 	public void obtengoDosBancosDelRepositorioLocalyExterno(){
-		repositorioExternoBancos.limpiarPOIs();
-		repositorioLocal.limpiarPOIs();
-		repositorioExternoBancos.agregarPOI(new SucursalBanco("Caballito", posicion, direccion));
-		repositorioLocal.agregarPOI(new SucursalBanco("Belgrano", posicion, direccion));
+		repositorioExternoBancos.agregarRegistro(new SucursalBanco("Caballito", posicion, direccion));
+		repositorioLocal.agregarRegistro(new SucursalBanco("Belgrano", posicion, direccion));
 		PoiFinder finder = new PoiFinder();
 		String palabra = "banco";
 		Consulta consulta = new Consulta(usuario,palabra);
 		finder.setConsulta(consulta);
 		finder.addRepository(repositorioLocal);
-		//finder.addRepository(repositorioExternoBancos);
+		finder.addRepository(repositorioExternoBancos);
 		finder.addFilter(new FilterByTag(palabra));
 		finder.search();
-		System.out.println(repositorioLocal.getClass().getName());
-		System.out.println(repositorioExternoBancos.getClass().getName());
-		Assert.assertEquals(repositorioLocal.getPois().size(), 2);
-		Assert.assertEquals(repositorioExternoBancos.getPois().size(), 2);
-		//Assert.assertEquals(finder.getRepositories().size(), 1);
-		//Assert.assertEquals(finder.getResults().size(), 2);
+		Assert.assertEquals(finder.getResults().size(), 2);
+	}
+	
+	@Test
+	public void obtengoDosCGPDelRepositorioLocalyExterno(){
+		repositorioExternoCGP.agregarRegistro(new CGP("Centro Belgrano", posicion, direccion, new ArrayList<Posicion>()));
+		repositorioLocal.agregarRegistro(new CGP("Centro Saavedra", posicion, direccion, new ArrayList<Posicion>()));
+		repositorioLocal.agregarRegistro(new SucursalBanco("Belgrano", posicion, direccion));
+		PoiFinder finder = new PoiFinder();
+		String palabra = "centro";
+		Consulta consulta = new Consulta(usuario,palabra);
+		finder.setConsulta(consulta);
+		finder.addRepository(repositorioLocal);
+		finder.addRepository(repositorioExternoCGP);
+		finder.addFilter(new FilterByTag(palabra));
+		finder.search();
+		Assert.assertEquals(finder.getResults().size(), 2);
+	}
+	
+	@Test
+	public void buscoPorDireccionEnPoisDeDistintoTipo(){
+		direccion.setBarrio("Chacarita");
+		repositorioLocal.agregarRegistro(new SucursalBanco("CH7", posicion, direccion));
+		repositorioLocal.agregarRegistro(new CGP("Centro Chaca", posicion, direccion, new ArrayList<Posicion>()));
+		repositorioLocal.agregarRegistro(new ParadaColectivo("Estacion Chacarita", posicion, direccion));
+		repositorioLocal.agregarRegistro(new LocalComercial("Kiosco Chaca", posicion, direccion, RadioCercania.Kiosco));
+		repositorioLocal.agregarRegistro(new LocalComercial("Libreria Chaca", posicion, direccion, RadioCercania.LibreriaEscolar));
+		PoiFinder finder = new PoiFinder();
+		String palabra = "Chacarita";
+		Consulta consulta = new Consulta(usuario,palabra);
+		finder.setConsulta(consulta);
+		finder.addRepository(repositorioLocal);
+		finder.addRepository(repositorioExternoBancos);
+		finder.addFilter(new FilterByTag(palabra));
+		finder.search();
+		Assert.assertEquals(finder.getResults().size(), 5);
+	}
+	
+	@Test
+	public void buscoPorDireccionErroneaEnPoisDeDistintoTipo(){
+		direccion.setBarrio("Chacarita");
+		repositorioLocal.agregarRegistro(new SucursalBanco("CH7", posicion, direccion));
+		repositorioLocal.agregarRegistro(new CGP("Centro Chaca", posicion, direccion, new ArrayList<Posicion>()));
+		repositorioLocal.agregarRegistro(new ParadaColectivo("Estacion Chacarita", posicion, direccion));
+		repositorioLocal.agregarRegistro(new LocalComercial("Kiosco Chaca", posicion, direccion, RadioCercania.Kiosco));
+		repositorioLocal.agregarRegistro(new LocalComercial("Libreria Chaca", posicion, direccion, RadioCercania.LibreriaEscolar));
+		PoiFinder finder = new PoiFinder();
+		String palabra = "Lugano";
+		Consulta consulta = new Consulta(usuario,palabra);
+		finder.setConsulta(consulta);
+		finder.addRepository(repositorioLocal);
+		finder.addRepository(repositorioExternoBancos);
+		finder.addFilter(new FilterByTag(palabra));
+		finder.search();
+		Assert.assertEquals(finder.getResults().size(), 0);
+	}
+	
+	@Test
+	public void buscoPorPoisDeDistintoTipo(){
+		direccion.setBarrio("Chacarita");
+		repositorioLocal.agregarRegistro(new SucursalBanco("CH7", posicion, direccion));
+		repositorioLocal.agregarRegistro(new CGP("Centro Chaca", posicion, direccion, new ArrayList<Posicion>()));
+		repositorioLocal.agregarRegistro(new ParadaColectivo("Estacion Chacarita", posicion, direccion));
+		repositorioLocal.agregarRegistro(new LocalComercial("Kiosco Chaca", posicion, direccion, RadioCercania.Kiosco));
+		repositorioLocal.agregarRegistro(new LocalComercial("Libreria Chaca", posicion, direccion, RadioCercania.LibreriaEscolar));
+		PoiFinder finder = new PoiFinder();
+		String palabra = "local";
+		Consulta consulta = new Consulta(usuario,palabra);
+		finder.setConsulta(consulta);
+		finder.addRepository(repositorioLocal);
+		finder.addRepository(repositorioExternoBancos);
+		finder.addFilter(new FilterByTag(palabra));
+		finder.search();
+		Assert.assertEquals(finder.getResults().size(), 2);
 	}
 }

@@ -15,14 +15,14 @@ import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Administrador;
 import poi.modelo.usuario.RepositorioAdministrador;
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 import poi.utilidades.Posicion;
 
 public class MailSenderTest {
 	
-	RepositorioAbstracto repoPOI = RepositorioPOI.getInstance();
+	RepositorioAbstractoPOI repoPOI = RepositorioPOI.getInstance();
 	Terminal terminal = new Terminal();
 	Administrador admin = new Administrador(repoPOI);
 	RepositorioAdministrador repoAdmin = RepositorioAdministrador.getInstance();

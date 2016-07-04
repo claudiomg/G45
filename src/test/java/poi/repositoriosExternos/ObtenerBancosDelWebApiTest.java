@@ -4,13 +4,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioBancosExternos;
 
 public class ObtenerBancosDelWebApiTest {
 
 	
-	RepositorioAbstracto repo = RepositorioBancosExternos.getInstance();
+	RepositorioAbstractoPOI repo = RepositorioBancosExternos.getInstance();
 	
 	@After
 	public void vaciarRepositorio(){

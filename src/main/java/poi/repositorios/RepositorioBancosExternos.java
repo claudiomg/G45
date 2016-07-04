@@ -12,7 +12,7 @@ import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
-public class RepositorioBancosExternos extends RepositorioAbstracto {
+public class RepositorioBancosExternos extends RepositorioAbstractoPOI {
 
 	protected static RepositorioBancosExternos instance;
 	protected RepositorioBancosExternos() { /*Existe para anular la instanciacion*/ };

@@ -12,7 +12,7 @@ import poi.modelo.usuario.Administrador;
 import poi.modelo.usuario.RepositorioAdministrador;
 import poi.modelo.usuario.RepositorioTerminal;
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioPOI;
 
 public class CargaInicial {
@@ -30,7 +30,7 @@ public class CargaInicial {
 	
 	public void inicializar(){
 		/** CREAR USR_DEFAULT **/
-		RepositorioAbstracto repoPOI = RepositorioPOI.getInstance();
+		RepositorioAbstractoPOI repoPOI = RepositorioPOI.getInstance();
 		
 		Terminal usr = new Terminal();
 		Administrador adm = new Administrador(repoPOI);

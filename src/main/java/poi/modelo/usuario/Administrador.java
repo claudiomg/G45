@@ -12,18 +12,18 @@ import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.modelo.puntoDeInteres.SucursalBanco;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 
 public class Administrador {
 	
-	private RepositorioAbstracto repositorio;
+	private RepositorioAbstractoPOI repositorio;
 	private Rol rol = Rol.ADMINISTRADOR;
 	private String mail;
 	private String login;
 	private String password;
 	
 
-	public Administrador(RepositorioAbstracto repositorio2){
+	public Administrador(RepositorioAbstractoPOI repositorio2){
 		this.repositorio = repositorio2;
 	}
 	

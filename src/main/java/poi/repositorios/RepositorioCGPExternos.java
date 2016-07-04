@@ -5,7 +5,7 @@ import poi.servicioExternoCGP.AdaptadorCGP;
 import poi.servicioExternoCGP.CentroDTO;
 import poi.servicioExternoCGP.ComponenteExterno;
 
-public class RepositorioCGPExternos extends RepositorioAbstracto {
+public class RepositorioCGPExternos extends RepositorioAbstractoPOI {
 	
 	AdaptadorCGP adaptadorCGP = AdaptadorCGP.getInstance();
 	protected static RepositorioCGPExternos instance;

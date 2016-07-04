@@ -21,7 +21,7 @@ import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Administrador;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
@@ -30,7 +30,7 @@ import poi.utilidades.ExcepcionSinAtencion;
 
 public class ABMPoisTest {
 
-	RepositorioAbstracto repositorio = RepositorioPOI.getInstance();
+	RepositorioAbstractoPOI repositorio = RepositorioPOI.getInstance();
 	Administrador admin = new Administrador(repositorio);
 	
 	ArrayList<String> etiquetasColectivo = new ArrayList<String>();

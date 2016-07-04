@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poi.modelo.puntoDeInteres.POI;
-import poi.repositorios.RepositorioAbstracto;
+import poi.repositorios.RepositorioAbstractoPOI;
 import poi.utilidades.Consulta;
 
 public class PoiFinder {
 
 	private Consulta consulta;
 	private List<PoiFilter> filters = new ArrayList<PoiFilter>();
-	private List<RepositorioAbstracto> repositories = new ArrayList<RepositorioAbstracto>();
+	private List<RepositorioAbstractoPOI> repositories = new ArrayList<RepositorioAbstractoPOI>();
 	private List<POI> results = new ArrayList<POI>();
 
 	public void search() {
 		this.startSearch();
-		for ( RepositorioAbstracto unRepositorio : this.getRepositories()){
+		for ( RepositorioAbstractoPOI unRepositorio : this.getRepositories()){
 			this.searchOn(unRepositorio);
 		}
 		this.endSearch();
@@ -25,7 +25,7 @@ public class PoiFinder {
 	public void cleanFinder() {
 		this.consulta = null;
 		this.filters = new ArrayList<PoiFilter>();
-		this.repositories = new ArrayList<RepositorioAbstracto>();
+		this.repositories = new ArrayList<RepositorioAbstractoPOI>();
 		this.results = new ArrayList<POI>();
 	}
 
@@ -38,8 +38,8 @@ public class PoiFinder {
 		this.getConsulta().setComienzoProceso(System.currentTimeMillis()/1000);
 	}
 
-	private void searchOn(RepositorioAbstracto unRepositorio) {
-		for ( POI unPoi : unRepositorio.getPois()){
+	private void searchOn(RepositorioAbstractoPOI unRepositorio) {
+		for ( POI unPoi : unRepositorio.getRegistros()){
 			boolean satisfy = this.satisfyFilters(unPoi);
 			if (satisfy){
 				this.addResult(unPoi);
@@ -66,13 +66,13 @@ public class PoiFinder {
 		this.filters.add(unFiltro);
 	}
 
-	public void addRepository(RepositorioAbstracto unRepositorio) {
+	public void addRepository(RepositorioAbstractoPOI unRepositorio) {
 		this.repositories.add(unRepositorio);
 	}
 	public List<PoiFilter> getFilters() {
 		return filters;
 	}
-	public List<RepositorioAbstracto> getRepositories() {
+	public List<RepositorioAbstractoPOI> getRepositories() {
 		return repositories;
 	}
 
