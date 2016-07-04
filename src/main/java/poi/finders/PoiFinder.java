@@ -22,6 +22,13 @@ public class PoiFinder {
 		this.endSearch();
 	}
 
+	public void cleanFinder() {
+		this.consulta = null;
+		this.filters = new ArrayList<PoiFilter>();
+		this.repositories = new ArrayList<RepositorioAbstracto>();
+		this.results = new ArrayList<POI>();
+	}
+
 	private void endSearch() {
 		this.getConsulta().setFinProceso(System.currentTimeMillis()/1000);
 		this.getConsulta().calcularTiempoProceso();
@@ -71,13 +78,5 @@ public class PoiFinder {
 
 	public List<POI> getResults() {
 		return results;
-	}
-
-	public void initializeRepositories() {
-		this.repositories = new ArrayList<RepositorioAbstracto>();
-	}
-
-	public void initializeFilters() {
-		this.filters = new ArrayList<PoiFilter>();
 	}
 }

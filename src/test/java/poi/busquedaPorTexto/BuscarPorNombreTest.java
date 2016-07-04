@@ -20,25 +20,15 @@ public class BuscarPorNombreTest {
 	Direccion direccion = new Direccion();
 	Posicion posicion = new Posicion(0.0, 0.0);
 	Terminal usuario = new Terminal();
-	Consulta consulta = new Consulta(usuario,"banco");
 	RepositorioAbstracto repositorioLocal = RepositorioPOI.getInstance();
 	RepositorioAbstracto repositorioExternoBancos = RepositorioBancosExternos.getInstance();
 	RepositorioAbstracto repositorioExternoCGP = RepositorioCGPExternos.getInstance();
-	PoiFinder finder = new PoiFinder();
-	
-	
-	public void inicializar(){
-		finder.initializeRepositories();
-		finder.initializeFilters();
-		repositorioLocal.limpiarPOIs();
-		repositorioExternoBancos.limpiarPOIs();
-		repositorioExternoCGP.limpiarPOIs();
-	}
 	
 	@Test
 	public void obtengoUnBancoDelRepositorioLocal(){
-		this.inicializar();
-		this.crearBancoEnRepositorioLocal();
+		repositorioLocal.limpiarPOIs();
+		repositorioLocal.agregarPOI(new SucursalBanco("Belgrano", posicion, direccion));
+		PoiFinder finder = new PoiFinder();
 		String palabra = "banco";
 		Consulta consulta = new Consulta(usuario,palabra);
 		finder.setConsulta(consulta);
@@ -47,29 +37,26 @@ public class BuscarPorNombreTest {
 		finder.search();
 		Assert.assertEquals(finder.getResults().size(), 1);
 	}
+	
 	@Test
 	public void obtengoDosBancosDelRepositorioLocalyExterno(){
-		this.inicializar();
-		this.crearBancoEnRepositorioLocal();
-		this.crearBancoEnRepositorioExterno();
+		repositorioExternoBancos.limpiarPOIs();
+		repositorioLocal.limpiarPOIs();
+		repositorioExternoBancos.agregarPOI(new SucursalBanco("Caballito", posicion, direccion));
+		repositorioLocal.agregarPOI(new SucursalBanco("Belgrano", posicion, direccion));
+		PoiFinder finder = new PoiFinder();
 		String palabra = "banco";
 		Consulta consulta = new Consulta(usuario,palabra);
 		finder.setConsulta(consulta);
 		finder.addRepository(repositorioLocal);
-		finder.addRepository(repositorioExternoBancos);
+		//finder.addRepository(repositorioExternoBancos);
 		finder.addFilter(new FilterByTag(palabra));
 		finder.search();
-		System.out.println(finder.getResults().size());
-		Assert.assertEquals(finder.getResults().size(), 2);
-	}
-	
-	private void crearBancoEnRepositorioExterno() {
-		SucursalBanco banco = new SucursalBanco("Caballito", posicion, direccion);
-		repositorioExternoBancos.agregarPOI(banco);
-	}
-
-	private void crearBancoEnRepositorioLocal() {
-		SucursalBanco banco = new SucursalBanco("Belgrano", posicion, direccion);
-		repositorioLocal.agregarPOI(banco);
+		System.out.println(repositorioLocal.getClass().getName());
+		System.out.println(repositorioExternoBancos.getClass().getName());
+		Assert.assertEquals(repositorioLocal.getPois().size(), 2);
+		Assert.assertEquals(repositorioExternoBancos.getPois().size(), 2);
+		//Assert.assertEquals(finder.getRepositories().size(), 1);
+		//Assert.assertEquals(finder.getResults().size(), 2);
 	}
 }

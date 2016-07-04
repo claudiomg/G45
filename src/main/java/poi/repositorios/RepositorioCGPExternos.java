@@ -8,23 +8,22 @@ import poi.servicioExternoCGP.ComponenteExterno;
 public class RepositorioCGPExternos extends RepositorioAbstracto {
 	
 	AdaptadorCGP adaptadorCGP = AdaptadorCGP.getInstance();
-	
-	//All GameActions are singletons
-	public static RepositorioAbstracto getInstance() {
+	protected static RepositorioCGPExternos instance;
+	protected RepositorioCGPExternos() { /*Existe para anular la instanciacion*/ };
+	public static RepositorioCGPExternos getInstance() {
 		if(instance == null) {
 			instance = new RepositorioCGPExternos();
 		}
 		return instance;
 	}
-	protected RepositorioCGPExternos() { /*Existe para anular la instanciacion*/ };
 	
 	public void actualizarRepositorio(){
-		this.limpiarPOIs();
+		this.cleanRepository();
 		ComponenteExterno componenteExterno = ComponenteExterno.getInstance();
 		for ( CentroDTO dto : componenteExterno.getCgps()) {
 			CGP newCGP = adaptadorCGP.createCGPfrom(dto);
 			//CGP newCGP = this.createCGPfrom(dto);
-			this.agregarPOI(newCGP);
+			this.agregarRegistro(newCGP);
 		}
 	}
 
