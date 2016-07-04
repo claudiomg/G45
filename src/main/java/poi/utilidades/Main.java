@@ -11,8 +11,6 @@ import poi.controllers.ABMcontroller;
 import poi.controllers.AdmTerminalesController;
 import poi.controllers.BuscadorDePoiController;
 import poi.controllers.ConsultaDisponibilidadController;
-import poi.controllers.ConsultaPorCercaniaController;
-import poi.controllers.ConsultaPorPalabraController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
 import poi.controllers.ReportesController;
@@ -55,16 +53,8 @@ public class Main implements WithGlobalEntityManager{
 		get("/terminalHome", poiBrowser::render, engine);
 		post("/terminalSearch", poiBrowser::search, engine);
 		
-		ConsultaPorPalabraController byPalabra = new ConsultaPorPalabraController();
-		get("/consultaPorPalabra", byPalabra::render, engine);
-		post("/consultaPorPalabra", byPalabra::search, engine);
-		
 		ConsultaDisponibilidadController byDisponibilidad = new ConsultaDisponibilidadController();
 		get("/consultaDisponibilidad", byDisponibilidad::listar, engine);
-		
-		ConsultaPorCercaniaController byCercania = new ConsultaPorCercaniaController();
-		get("/consultaPorCercania", byCercania::render, engine);
-		post("/consultaPorCercania", byCercania::search, engine);
 		
 		//INDEX DE ADMINISTRADOR
 		ABMcontroller abm = new ABMcontroller();
