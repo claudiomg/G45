@@ -79,4 +79,12 @@ public class PoiFinder {
 	public List<POI> getResults() {
 		return results;
 	}
+
+	public List<POI> getRootObjects() {
+		List<POI> list = new ArrayList<POI>();
+		for ( RepositorioAbstractoPOI unRepositorio : this.getRepositories()){
+			list.addAll(unRepositorio.getRegistros());
+		}
+		return list;
+	}
 }

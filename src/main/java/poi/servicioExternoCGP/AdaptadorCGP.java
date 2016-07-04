@@ -7,6 +7,7 @@ import java.util.List;
 
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
+import poi.utilidades.Direccion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
@@ -27,13 +28,16 @@ public class AdaptadorCGP {
 
 	public CGP createCGPfrom(CentroDTO dto) {
 		List<String> etiquetasCGP = new ArrayList<String>();
+		String nombre = dto.getNombre();
+		Direccion direccion = new Direccion();
+		Posicion posicion = new Posicion(dto.getLatitud(), dto.getLongitud());
 		etiquetasCGP.add(Integer.toString(dto.getNumeroComuna()));
 		etiquetasCGP.add(dto.getZonasIncluidas());
 		etiquetasCGP.add(dto.getNombreDirector());
 		etiquetasCGP.add(dto.getDomicilio());
 		etiquetasCGP.add(dto.getTelefono());
 		List<Posicion> vertices = new ArrayList<Posicion>();
-		CGP unCGP = new CGP(etiquetasCGP,null,vertices);
+		CGP unCGP = new CGP(nombre,posicion,direccion,vertices);
 		for ( ServicioDTO unServicioDTO : dto.getServicios() ){
 			unCGP.agregarServicio(this.createServiceFrom(unServicioDTO));
 		}

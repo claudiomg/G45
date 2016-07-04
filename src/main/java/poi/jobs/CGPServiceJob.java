@@ -14,6 +14,6 @@ public class CGPServiceJob implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		RepositorioAbstractoPOI repo = RepositorioCGPExternos.getInstance();
-		repo.limpiarPOIs();
+		repo.cleanRepository();
 	}
 }

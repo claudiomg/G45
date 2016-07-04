@@ -2,11 +2,8 @@ package poi.controllers;
 
 import java.util.HashMap;
 
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-
 import poi.modelo.usuario.RepositorioAdministrador;
 import poi.modelo.usuario.RepositorioTerminal;
-import poi.modelo.usuario.Terminal;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

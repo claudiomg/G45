@@ -16,7 +16,7 @@ public class BancosServiceJob implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		RepositorioAbstractoPOI repo = RepositorioBancosExternos.getInstance();
 		try {
-			repo.limpiarPOIs();
+			repo.cleanRepository();
 		} catch (Exception e) {
 			System.out.println("Error en la conexion: " + e.getMessage());
 			e.printStackTrace();
