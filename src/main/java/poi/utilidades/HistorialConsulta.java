@@ -3,10 +3,10 @@ package poi.utilidades;
 import java.time.LocalDate;
 
 
-import poi.repositorios.RepositorioHistoriales;
+import poi.repositorios.RepositorioConsultas;
 
 public class HistorialConsulta  {
-	private RepositorioHistoriales repositorio;
+	private RepositorioConsultas repositorio;
 	private String nombreTerminal;
 	private double tiempoProceso;
 	private LocalDate fecha;
@@ -15,7 +15,7 @@ public class HistorialConsulta  {
 	public HistorialConsulta(LocalDate fecha, String nombreTerminal){
 		this.fecha = fecha;
 		this.nombreTerminal= nombreTerminal;
-		this.repositorio= RepositorioHistoriales.getInstance();
+		this.repositorio= RepositorioConsultas.getInstance();
 		
 	}
 	

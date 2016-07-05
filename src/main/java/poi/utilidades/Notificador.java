@@ -1,19 +1,15 @@
 package poi.utilidades;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.Duration;
 
-import poi.repositorios.RepositorioAdministrador;
+import poi.modelo.usuario.Administrador;
+import poi.repositorios.RepositorioUsuarios;
 
 public class Notificador {
-	public static Notificador instance = null;
-	public static String mensajeTiempoExcesivo = 
-			"Sr Administrador: Un proceso se ha extendido más de lo permitido. Tiempo excedido: "; 
-	public static String asuntoTiempoExcesivo = "Procesamiento excedido";
-		
+	
+	public static Notificador instance;
 	private Notificador(){		
 	};
-
 	public static Notificador getInstance() {
 		if(instance == null) {
 			instance = new Notificador();
@@ -21,11 +17,17 @@ public class Notificador {
 		return instance;
 	}
 
-	public static void informarProcesamientoExcesivo(double tiempoExcedido) {
-		String detalleMail = mensajeTiempoExcesivo + String.format ("%.2f", tiempoExcedido) + " segundos.";
-		RepositorioAdministrador.getInstance().getAdministradores().stream()
-				.map(administrador->administrador.getMail())
-				.forEach(mail->MailSender.getInstance().enviarMail(asuntoTiempoExcesivo, detalleMail, mail));
+	public static void informarProcesamientoExcesivo(Consulta consulta) {
+		Duration maximoPermitido = PoiSystemConfiguration.getInstance().getTiempoProcesamientoMaximo();
+		Duration duracion = consulta.getDuracionProceso();
+		String mensaje = "Sr Administrador: Una consulta ha extendido el tiempo de procesamiento definido." +
+				"Terminal:" + String.format("\n%s", consulta.getUser().getUsuario()) +
+				"Tiempo de proceso:" + String.format ("%.2f", duracion.toMillis()) + " milisegundos." +
+				"Tiempo permitido:" + String.format ("%.2f", maximoPermitido.toMillis()) + " milisegundos."; 
+		String asunto = "Procesamiento excedido";
+		for (Administrador admin : RepositorioUsuarios.getInstance().getAdministradores()){
+			MailSender.getInstance().enviarMail(admin.getMail(), asunto, mensaje);
+		}
 	}
 	
 }

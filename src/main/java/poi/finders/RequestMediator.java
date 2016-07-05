@@ -3,7 +3,7 @@ package poi.finders;
 import java.time.LocalDateTime;
 
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioTerminal;
+import poi.repositorios.RepositorioUsuarios;
 import poi.utilidades.Posicion;
 import spark.Request;
 
@@ -50,7 +50,7 @@ public class RequestMediator {
 		// devuelvo la instancia de usuario alojada en la session
 		// cuando se agregue la session modificar este metodo
 		//return this.getConcreteRequest().session().attribute("user");
-		return RepositorioTerminal.getInstance().terminales.get(0);
+		return RepositorioUsuarios.getInstance().terminales.get(0);
 	}
 
 	private void setConcreteRequest(Request request) {

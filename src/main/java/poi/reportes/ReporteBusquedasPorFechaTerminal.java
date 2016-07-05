@@ -8,7 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import poi.modelo.usuario.Terminal;
-import poi.repositorios.RepositorioHistoriales;
+import poi.repositorios.RepositorioConsultas;
 
 public class ReporteBusquedasPorFechaTerminal extends ReporteAbstracto {
 	

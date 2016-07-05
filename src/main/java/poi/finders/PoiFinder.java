@@ -1,5 +1,6 @@
 package poi.finders;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +31,12 @@ public class PoiFinder {
 	}
 
 	private void endSearch() {
-		this.getConsulta().setFinProceso(System.currentTimeMillis()/1000);
+		this.getConsulta().setFinProceso(LocalDateTime.now());
 		this.getConsulta().calcularTiempoProceso();
 	}
 
 	private void startSearch() {
-		this.getConsulta().setComienzoProceso(System.currentTimeMillis()/1000);
+		this.getConsulta().setComienzoProceso(LocalDateTime.now());
 	}
 
 	private void searchOn(RepositorioAbstractoPOI unRepositorio) {

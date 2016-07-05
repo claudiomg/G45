@@ -4,10 +4,8 @@ import java.util.HashMap;
 
 import poi.utilidades.Posicion;
 
-public class Terminal {
+public class Terminal extends UsuarioPOI{
 	
-	private String nombre;
-	private String password;
 	private Posicion posicion;
 	private HashMap<String,Boolean> acciones ;
 	
@@ -63,24 +61,9 @@ public class Terminal {
 		return this.acciones.get(key);
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public void setNombre(String nombre){
-		this.nombre = nombre;
-	}
 	
 	public Posicion getPosicion() {
 		return posicion;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public void setPosicion(Posicion posicion) {

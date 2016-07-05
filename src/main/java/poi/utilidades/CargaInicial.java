@@ -20,7 +20,6 @@ public class CargaInicial {
 
 	private CargaInicial(){		
 	};
-
 	public static CargaInicial getInstance() {
 		if(instance == null) {
 			instance = new CargaInicial();
@@ -29,22 +28,17 @@ public class CargaInicial {
 	}
 	
 	public void inicializar(){
+		
+		this.inicializarTerminales();
+		this.inicializarAdministradores();
+		this.inicializarPOIs();
+		this.inicializarBancosExternos();
+		this.inicializarCgpExternos();
+		this.inicializarConsultas();
 		/** CREAR USR_DEFAULT **/
 		RepositorioAbstractoPOI repoPOI = RepositorioPOI.getInstance();
 		
-		Terminal usr = new Terminal();
-		Administrador adm = new Administrador(repoPOI);
 		
-		RepositorioAdministrador repoAdm = RepositorioAdministrador.getInstance();
-		
-		adm.setLogin("Claudio02");
-		adm.setPassword("12345");
-		repoAdm.administradores.add(adm);
-		
-		usr.setLogin("Kevin01");
-		usr.setPassword("Abc123");
-		RepositorioTerminal repo = RepositorioTerminal.getInstance();
-		repo.terminales.add(usr);		
 		
 		ArrayList<String> arrayEtiquetas = new ArrayList<String>();
 		Posicion posicion1 = new Posicion(40.417, -3.703);
@@ -90,6 +84,32 @@ public class CargaInicial {
 		unKiosco.setNombre("El kiosco de Luisito");
 		unKiosco.setPosicion(posicion4);
 		repoPOI.pois.add(unKiosco);
+	}
+	private void inicializarAdministradores() {
+		RepositorioAdministrador repositorio = RepositorioAdministrador.getInstance();
+		Administrador usuario;
+		
+		//admin1
+		usuario = new Administrador("admin1");
+		usuario.setPassword("admin1");
+		usuario.setMail("mujica.juancarlos@gmail.com");
+		repositorio.
+	}
+	private void inicializarTerminales() {
+		Terminal usr = new Terminal();
+		Administrador adm = new Administrador(repoPOI);
+		
+		
+		
+		adm.setLogin("Claudio02");
+		adm.setPassword("12345");
+		repoAdm.administradores.add(adm);
+		
+		usr.setLogin("Kevin01");
+		usr.setPassword("Abc123");
+		RepositorioTerminal repo = RepositorioTerminal.getInstance();
+		repo.terminales.add(usr);		
+		
 	}
 
 }

@@ -8,35 +8,19 @@ import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.modelo.puntoDeInteres.SucursalBanco;
-import poi.repositorios.RepositorioAbstractoPOI;
+import poi.repositorios.RepositorioPOI;
 
-public class Administrador {
+public class Administrador extends UsuarioPOI {
 	
-	private RepositorioAbstractoPOI repositorio;
-	private Rol rol = Rol.ADMINISTRADOR;
 	private String mail;
-	private String login;
-	private String password;
-	
+	private RepositorioPOI repositorio = RepositorioPOI.getInstance();
 
-	public Administrador(RepositorioAbstractoPOI repositorio2){
-		this.repositorio = repositorio2;
+	public boolean isAdmin() {
+		return true;
 	}
 	
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getLogin() {
-		return login;
-	}
-
-	public String getPassword() {
-		return password;
+	public Administrador(String string) {
+		this.setUsuario(string);
 	}
 	
 	public void agregarPOI(POI poi){
@@ -85,14 +69,6 @@ public class Administrador {
 
 	public void modificarNombreGerenteBanco(SucursalBanco banco, String nombre){
 		banco.setGerente(nombre);
-	}
-
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
 	}
 	
 	public String getMail() {
