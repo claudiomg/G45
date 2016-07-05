@@ -19,7 +19,7 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		
 		usuario = RepositorioUsuarios.getInstance().authenticateUser(userName,password);
 		
-		if (!usuario.equals(null)){
+		if (!(usuario == null)){
 			if (usuario.isAdmin()){
 				return new ModelAndView(viewModel, "adminIndex.html");
 			} else {
