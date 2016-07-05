@@ -11,8 +11,8 @@ public class ReporteBusquedasPorTerminal extends ReporteAbstracto {
 
 	@Override
 	public void dumpReport() {
-		HashMap<Terminal, Integer> fechas = this.recolectarTerminales();
-		this.loadResults(fechas);
+		HashMap<Terminal, Integer> terminales = this.recolectarTerminales();
+		this.loadResults(terminales);
 	}
 	
 	private void loadResults(HashMap<Terminal, Integer> terminales) {
