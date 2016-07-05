@@ -1,35 +1,42 @@
 package poi.reportes;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import poi.utilidades.Consulta;
 
 public class ReporteBusquedasPorFecha extends ReporteAbstracto {
 
 	@Override
-	public JsonArray dumpReport() {
-		// TODO Auto-generated method stub
-		return null;
+	public void dumpReport() {
+		HashMap<LocalDate, Integer> fechas = this.recolectarFechas();
+		this.loadResults(fechas);
 	}
-	
 
-	public JsonObject consultasHechasEnciertaFecha(LocalDate unaFecha){
-		Long unaCantidad;
 
-		unaCantidad = (long) repositorioDeHistorial.filtrarConsultaPorFecha(repositorioDeHistorial.getHistoriales(),unaFecha).size();
-		return createResult(unaFecha,unaCantidad);
+	private void loadResults(HashMap<LocalDate, Integer> fechas) {
+		for (LocalDate fecha : fechas.keySet()){
+			this.createResult(fecha, fechas.get(fecha));
 		}
+	}
 
-	private JsonObject createResult(LocalDate unaFecha, Long unaCantidad) {
+	private HashMap<LocalDate, Integer> recolectarFechas() {
+		//las llaves son fechas los valores son numeros
+		HashMap<LocalDate, Integer> fechas = new HashMap<LocalDate, Integer>();
+		for ( Consulta consulta : this.getRepository().getRegistros() ){
+			LocalDate fecha = consulta.getFecha();
+			Integer oldValue = fechas.getOrDefault(fecha, 0);
+			Integer newValue = Integer.sum(oldValue, 1);
+			fechas.put(fecha, newValue);
+		}
+		return fechas;
+	}
+	private JsonObject createResult(LocalDate unaFecha, Integer integer) {
 		HashMap<String, String> columns = new HashMap<String, String>();
 		columns.put("Fecha", unaFecha.toString());
-		columns.put("Cantidad", unaCantidad.toString());
+		columns.put("Cantidad", integer.toString());
 		return super.createResult(columns);
 	}
 }

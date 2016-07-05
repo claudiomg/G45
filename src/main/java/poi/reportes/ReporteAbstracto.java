@@ -10,12 +10,12 @@ import poi.repositorios.RepositorioConsultas;
 public abstract class ReporteAbstracto {
 	
 	JsonArray results = new JsonArray();
-	RepositorioConsultas repositorioDeHistorial;
+	RepositorioConsultas repository = RepositorioConsultas.getInstance();
 
-	public abstract JsonArray dumpReport();
+	public abstract void dumpReport();
 	//este metodo debe ser llamado desde el controller para armar la grilla de resultados, devuelve this.results
 	
-	private JsonArray getResults() {
+	public JsonArray getResults() {
 		return this.results;
 	}
 
@@ -30,14 +30,8 @@ public abstract class ReporteAbstracto {
 		this.addResult(result);//agrego el json object a la lista de resultados
 		return result;
 	}
-	
-	public RepositorioConsultas getRepositorioDeHistorial() {
-		return repositorioDeHistorial;
+	protected RepositorioConsultas getRepository() {
+		return this.repository;
 	}
-
-	public void setRepositorioDeHistorial(RepositorioConsultas repositorioDeHistorial) {
-		this.repositorioDeHistorial = repositorioDeHistorial;
-	}
-
 }
 

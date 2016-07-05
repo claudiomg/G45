@@ -2,33 +2,41 @@ package poi.reportes;
 
 import java.util.HashMap;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import poi.modelo.usuario.Terminal;
+import poi.utilidades.Consulta;
 
 public class ReporteBusquedasPorTerminal extends ReporteAbstracto {
 
 	@Override
-	public JsonArray dumpReport() {
-		// TODO Auto-generated method stub
-		return null;
+	public void dumpReport() {
+		HashMap<Terminal, Integer> fechas = this.recolectarTerminales();
+		this.loadResults(fechas);
 	}
 	
-	public JsonObject consultasTotalesPorTerminal(String unaTerminal){
-		int unaCantidad;
-		unaCantidad = repositorioDeHistorial
-					  .filtraConsultaPorTerminal(repositorioDeHistorial.getHistoriales(),unaTerminal)
-					  .size();
-		Long unLong = new Long(unaCantidad);
-		return createResult(unaTerminal,unLong);
-		
+	private void loadResults(HashMap<Terminal, Integer> terminales) {
+		for (Terminal terminal : terminales.keySet()){
+			this.createResult(terminal.getUsuario(), terminales.get(terminal));
 		}
+	}
 
-	private JsonObject createResult(String unaTerminal, Long unaCantidad) {
+	private HashMap<Terminal, Integer> recolectarTerminales() {
+		//las llaves son fechas los valores son numeros
+		HashMap<Terminal, Integer> terminales = new HashMap<Terminal, Integer>();
+		for ( Consulta consulta : this.getRepository().getRegistros() ){
+			Terminal terminal = consulta.getUser();
+			Integer oldValue = terminales.getOrDefault(terminal, 0);
+			Integer newValue = Integer.sum(oldValue, 1);
+			terminales.put(terminal, newValue);
+		}
+		return terminales;
+	}
+
+	private JsonObject createResult(String unaTerminal, Integer integer) {
 		HashMap<String, String> columns = new HashMap<String, String>();
 		columns.put("Terminal", unaTerminal.toString());
-		columns.put("Cantidad", unaCantidad.toString());
+		columns.put("Cantidad", integer.toString());
 		return super.createResult(columns);
 	}
 

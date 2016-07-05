@@ -15,14 +15,13 @@ public class ReporteBusquedasPorFechaTerminal extends ReporteAbstracto {
 	
 
 	@Override
-	public JsonArray dumpReport() {
-		// TODO Auto-generated method stub
-		return null;
+	public void dumpReport() {
+		//poner aqui el comportamiento
 	}
 	
 	public JsonObject consultasHechasEnTerminalEnciertaFecha(String unaTerminal,LocalDate unaFecha){
 		Long unaCantidad;
-		unaCantidad = repositorioDeHistorial.cantidaDeConsultasHechasEnUnaTerminalEnUnaFecha(unaTerminal,unaFecha);
+		unaCantidad = this.getRepository().cantidaDeConsultasHechasEnUnaTerminalEnUnaFecha(unaTerminal,unaFecha);
 		return createResult(unaTerminal,unaFecha,unaCantidad);
 		}
 	
