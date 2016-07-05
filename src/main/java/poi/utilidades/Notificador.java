@@ -3,6 +3,7 @@ package poi.utilidades;
 import java.time.Duration;
 
 import poi.modelo.usuario.Administrador;
+import poi.modelo.usuario.UsuarioPOI;
 import poi.repositorios.RepositorioUsuarios;
 
 public class Notificador {
@@ -25,8 +26,8 @@ public class Notificador {
 				"Tiempo de proceso:" + String.format ("%.2f", duracion.toMillis()) + " milisegundos." +
 				"Tiempo permitido:" + String.format ("%.2f", maximoPermitido.toMillis()) + " milisegundos."; 
 		String asunto = "Procesamiento excedido";
-		for (Administrador admin : RepositorioUsuarios.getInstance().getAdministradores()){
-			MailSender.getInstance().enviarMail(admin.getMail(), asunto, mensaje);
+		for (UsuarioPOI admin : RepositorioUsuarios.getInstance().getAdministradores()){
+			MailSender.getInstance().enviarMail(((Administrador) admin).getMail(), asunto, mensaje);
 		}
 	}
 	

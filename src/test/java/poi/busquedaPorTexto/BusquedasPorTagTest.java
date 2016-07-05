@@ -26,7 +26,7 @@ public class BusquedasPorTagTest {
     
 	Direccion direccion = new Direccion();
 	Posicion posicion = new Posicion(0.0, 0.0);
-	Terminal usuario = new Terminal();
+	Terminal usuario = new Terminal("Abasto");
 	RepositorioAbstractoPOI repositorioLocal = RepositorioPOI.getInstance();
 	RepositorioAbstractoPOI repositorioExternoBancos = RepositorioBancosExternos.getInstance();
 	RepositorioAbstractoPOI repositorioExternoCGP = RepositorioCGPExternos.getInstance();

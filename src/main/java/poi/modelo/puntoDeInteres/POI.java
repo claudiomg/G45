@@ -4,7 +4,6 @@ import java.util.List;
 
 import java.time.LocalDateTime;
 
-import poi.acciones.Accion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
 import poi.utilidades.Direccion;

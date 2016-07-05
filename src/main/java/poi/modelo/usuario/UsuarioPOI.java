@@ -7,7 +7,9 @@ public abstract class UsuarioPOI {
 	public boolean isAdmin() {
 		return false;
 	}
-	
+	public boolean hasAccess(String usuario, String password) {
+		return this.getUsuario().equals(usuario) && this.getPassword().equals(password);
+	}
 	public String getUsuario() {
 		return usuario;
 	}

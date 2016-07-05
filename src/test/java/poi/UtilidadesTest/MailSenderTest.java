@@ -1,6 +1,9 @@
 package poi.UtilidadesTest;
 
+import java.time.Duration;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import poi.finders.FilterByProximity;
@@ -10,24 +13,31 @@ import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.usuario.Administrador;
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioAbstractoPOI;
-import poi.repositorios.RepositorioAdministrador;
 import poi.repositorios.RepositorioPOI;
+import poi.repositorios.RepositorioUsuarios;
 import poi.utilidades.Consulta;
 import poi.utilidades.Direccion;
+import poi.utilidades.PoiSystemConfiguration;
 import poi.utilidades.Posicion;
 
 public class MailSenderTest {
 	RepositorioAbstractoPOI repoPOI = RepositorioPOI.getInstance();
-	RepositorioAdministrador repoAdmin = RepositorioAdministrador.getInstance();
-	Terminal terminal = new Terminal();
-	Administrador admin = new Administrador(repoPOI);
-	
+	RepositorioUsuarios repoAdmin = RepositorioUsuarios.getInstance();
+	Terminal terminal = new Terminal("Abasto");
+	Administrador admin = new Administrador("admin1");
+
+	@Before
+	public void cargaUsuarios(){
+		repoAdmin.agregarRegistro(terminal);
+		repoAdmin.agregarRegistro(admin);
+	}
 	
 	@Test
 	public void mandaMailTest(){
 		//config basicas de admin
-		admin.setMail("claudiomgerez@gmail.com");
+		admin.setMail("mujica.juancarlos@gmail.com");
 		repoAdmin.getAdministradores().add(admin);
+		Duration duracionDefecto = Duration.ofSeconds(10);
 		//config de repo
 		Direccion direccion = new Direccion();
 		Posicion posicionTerminal = new Posicion(40.4533, -3.681);	
@@ -49,7 +59,7 @@ public class MailSenderTest {
 		finder.addFilter(new FilterByProximity(posicionTerminal));
 		finder.search();
 		
-		Assert.assertTrue(consulta.getTiempoProcesamientoMaximo() == 10);
+		Assert.assertTrue(PoiSystemConfiguration.getInstance().getTiempoProcesamientoMaximo().equals(duracionDefecto) );
 	}
 
 }

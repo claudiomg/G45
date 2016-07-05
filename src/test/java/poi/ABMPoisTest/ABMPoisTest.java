@@ -1,7 +1,6 @@
 package poi.ABMPoisTest;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import poi.acciones.EstaDisponible;
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.POI;
@@ -20,7 +18,6 @@ import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Administrador;
-import poi.repositorios.RepositorioAbstractoPOI;
 import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Direccion;
 import poi.utilidades.DisponibilidadHoraria;
@@ -30,16 +27,14 @@ import poi.utilidades.ExcepcionSinAtencion;
 
 public class ABMPoisTest {
 
-	RepositorioAbstractoPOI repositorio = RepositorioPOI.getInstance();
-	Administrador admin = new Administrador(repositorio);
+	public ArrayList<DisponibilidadHoraria> disponibilidades = new ArrayList<DisponibilidadHoraria>();
 	
-	ArrayList<String> etiquetasColectivo = new ArrayList<String>();
-	ArrayList<String> etiquetasColectivo2 = new ArrayList<String>();
-	ArrayList<String> etiquetas = new ArrayList<String>();
-	ArrayList<String> etiquetasKiosco= new ArrayList<String>();
+	Administrador admin = new Administrador("Admin1");
+	RepositorioPOI repositorio = RepositorioPOI.getInstance();
 	
 	ServicioDeCGP unServicio = new ServicioDeCGP();
 	ServicioDeCGP otroServicio = new ServicioDeCGP();
+	
 	
 	TimeRange rangoInferiorDeLaSemana = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 	TimeRange rangoSuperiorDeLaSemana = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
@@ -58,7 +53,7 @@ public class ABMPoisTest {
 	DisponibilidadHoraria jueves1 = new DisponibilidadHoraria (DayOfWeek.THURSDAY);	
 	DisponibilidadHoraria viernes1 = new DisponibilidadHoraria (DayOfWeek.FRIDAY);
 	DisponibilidadHoraria sabado1 = new DisponibilidadHoraria (DayOfWeek.SATURDAY);
-	public ArrayList<DisponibilidadHoraria> disponibilidades = new ArrayList<DisponibilidadHoraria>();
+	
 	
 	Posicion posicionUno = new Posicion(40.417, 3.703);
 	Posicion posicionDos = new Posicion(40.453, 3.68);		
@@ -78,8 +73,6 @@ public class ABMPoisTest {
 	SucursalBanco banco = new SucursalBanco("sucursal1",posicionDos,direccion);
 	
 	ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
-	
-	EstaDisponible verificarDisponibilidad = new EstaDisponible(kiosco,LocalDateTime.of(2016, 6, 01, 14, 10,50) );
 	
 	@Before
 	public void inicializar(){

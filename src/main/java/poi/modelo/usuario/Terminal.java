@@ -7,9 +7,10 @@ import poi.utilidades.Posicion;
 public class Terminal extends UsuarioPOI{
 	
 	private Posicion posicion;
-	private HashMap<String,Boolean> acciones ;
+	private HashMap<String,Boolean> acciones = new HashMap<String,Boolean>();
 	
-	public Terminal() {
+	public Terminal(String usuario) {
+		this.setUsuario(usuario);
 		this.inicializarAcciones();
 	}
 
@@ -19,26 +20,19 @@ public class Terminal extends UsuarioPOI{
 		this.agregarAccion("filterByProximity",true);
 	}
 	
-	public void enableFilterByTag() {
-		this.agregarAccion("filterByTag",true);
+	public void updateFilterByTag(boolean value) {
+		this.updateAccion("filterByTag",value);
 	}
-	public void enableFilterByDisponibility() {
-		this.agregarAccion("filterByDisponibility",true);
+	public void updateFilterByDisponibility(boolean value) {
+		this.updateAccion("filterByDisponibility",value);
 	}
-	public void enableFilterByProximity() {
-		this.agregarAccion("filterByProximity",true);
+
+	public void updateFilterByProximity(boolean value) {
+		this.updateAccion("filterByProximity",value);
 	}
-	
-	public void disableFilterByTag() {
-		this.agregarAccion("filterByTag",false);
+	private void updateAccion(String key, boolean value) {
+		acciones.put(key, value);
 	}
-	public void disableFilterByDisponibility() {
-		this.agregarAccion("filterByDisponibility",false);
-	}
-	public void disableFilterByProximity() {
-		this.agregarAccion("filterByProximity",false);
-	}
-	
 	public boolean canFilterByTag() {
 		//Modificar cuando este la parte de manejo de acciones
 		return this.getAccion("filterByTag");

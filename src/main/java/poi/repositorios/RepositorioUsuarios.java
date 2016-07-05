@@ -2,8 +2,8 @@ package poi.repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import poi.modelo.usuario.Administrador;
 import poi.modelo.usuario.UsuarioPOI;
 
 public class RepositorioUsuarios {
@@ -32,9 +32,20 @@ public class RepositorioUsuarios {
 		return this.registros;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Administrador> getAdministradores() {
-		return (List<Administrador>) this.getRegistros().stream().filter(admin -> admin.isAdmin());
+	public List<UsuarioPOI> getAdministradores() {
+		return this.getRegistros()
+			.stream()
+			.filter(admin -> admin.isAdmin())
+			.collect(Collectors.toList());
+	}
+	
+	public UsuarioPOI authenticateUser(String userName, String password) {
+		for ( UsuarioPOI user : this.getRegistros()){
+			if (user.hasAccess(userName,password)){
+				return user;
+			}
+		}
+		return null;
 	}
 	
 }
