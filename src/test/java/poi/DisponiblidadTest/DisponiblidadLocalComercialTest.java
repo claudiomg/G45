@@ -71,8 +71,6 @@ public class DisponiblidadLocalComercialTest {
 	@Test
 	public void noEstaDisponibleAntesDeLas1030amElJueves2dejunio(){
 		LocalDateTime unaFechaHora = LocalDateTime.of(2016, 6, 2, 10, 0,0);
-		//hay errores revisar el metodo estaDisponible en el caso de exepciones
-		//no se estan excluyendo se estan complementando y eso esta mal
 		Assert.assertFalse(unKiosco.estaDisponible(unaFechaHora));
 	}
 	
