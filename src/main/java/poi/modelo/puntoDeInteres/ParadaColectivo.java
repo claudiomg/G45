@@ -47,5 +47,10 @@ public class ParadaColectivo extends POI{
 	public void setLinea(String linea) {
 		this.linea = linea;
 	}
+	
+	@Override
+	public String getNombre() {
+		return this.getLinea();
+	}
 
 }

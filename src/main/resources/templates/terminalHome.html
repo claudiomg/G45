@@ -3,6 +3,52 @@
 <head>
 	<title>Puntos de Interes</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBgvn_2I1NSn8nh8z3e2tgI5RUxktygzuc&sensor=false"></script>
+	<script>
+		var myCenter=new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
+		function initialize() {
+			//configuracion inicial de mi mapa
+			  	var mapProp = {
+				    center:myCenter,
+				    zoom:10,
+				    mapTypeId:google.maps.MapTypeId.ROADMAP
+			  	};
+			
+			//creo el mapa y seteo las propiedad
+		  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			
+		  	//creo un punto con sus propiedades y animaciones
+				var marker=new google.maps.Marker({
+					position:myCenter,
+					animation : google.maps.Animation.BOUNCE
+				});
+	
+			marker.setMap(map);
+	
+			//creo un popup de informacion
+			var infowindow = new google.maps.InfoWindow({
+				content : "Usted esta aquí!"
+			});
+	
+			//vinculo el pop up con el punto creado
+			infowindow.open(map, marker);
+			
+			//creo los puntos de los resultados
+			{{#hasResults}}
+				{{#each results}}
+					new google.maps.Marker({
+						position:(
+							new google.maps.LatLng(
+								parseFloat({{latitud}}),
+								parseFloat({{longitud}})
+							)
+						)
+					}).setMap(map);
+				{{~/each}}
+			{{/hasResults}}
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 </head>
 
 <body>
@@ -40,27 +86,30 @@
 						<th> POI </th>
 						<th> Longitud </th>
 						<th> Latitud </th>
+						<th> Barrio </th>
 						<th> Calle </th>
-						<th> Altura </th>
+						<th> Codigo Postal </th>
 						<th> Esta Cerca </th>
 						<th> Esta Disponible </th>
 					</tr>
 				</thead>
 				<tbody>
-					{{#results}}
+					{{#each results}}
 						<tr> 
-							<td>{{nombre.nombre}}</td>
+							<td>{{{nombre}}}</td>
 							<td>{{longitud}}</td>
 							<td>{{latitud}}</td>
+							<td>{{barrio}}</td>
 							<td>{{calle}}</td>
-							<td>{{altura}}</td>
+							<td>{{cp}}</td>
 							<td>{{estaCerca}}</td>
 							<td>{{estaDisponible}}</td>
 						</tr>
-					{{/results}}
+					{{~/each}}
 				</tbody>
 			</table>
 		</div>
 	{{/hasResults}}
+	<div id="googleMap" style="width:500px;height:380px;"></div>
 </body>
 </html>

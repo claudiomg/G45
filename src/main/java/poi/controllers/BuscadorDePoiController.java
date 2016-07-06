@@ -1,8 +1,12 @@
 package poi.controllers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -26,28 +30,31 @@ public class BuscadorDePoiController {
 	
 	public ModelAndView search(Request request, Response response){
 		HashMap<String, Object> viewModel = new HashMap<>();
+		Terminal usuario = request.session().attribute("user");
 		RequestMediator requestMediator = new RequestMediator(request);
 		PoiFinder finder = new PoiFinderBuilder(requestMediator).buildFinder();
 		finder.search();
+		viewModel.put("latitud", usuario.getPosicion().getLatitud());
+		viewModel.put("longitud", usuario.getPosicion().getLongitud());
 		viewModel.put("hasResults", !finder.getResults().isEmpty());
 		viewModel.put("results", this.convertPoi(finder.getResults(),request));
-		viewModel.put("string", this.convertPoi(finder.getResults(),request).toString());
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 
-	private JsonArray convertPoi(List<POI> results,Request request) {
+	private List<HashMap<String, Object>> convertPoi(List<POI> results,Request request) {
 		Posicion posicion = ((Terminal) request.session().attribute("user")).getPosicion();
 		LocalDateTime fechaHora = LocalDateTime.now();
-		JsonArray array = new JsonArray();
+		List<HashMap<String, Object>> array = new ArrayList<HashMap<String,Object>>();
 		for ( POI punto : results){
-			JsonObject element = new JsonObject();
-			element.addProperty("nombre", punto.getNombre());
-			element.addProperty("latitud", punto.getPosicion().getLatitud());
-			element.addProperty("longitud", punto.getPosicion().getLongitud());
-			element.addProperty("calle", punto.getPosicion().getLongitud());
-			element.addProperty("altura", punto.getPosicion().getLongitud());
-			element.addProperty("estaCerca", punto.estaCercaDe(posicion));
-			element.addProperty("estaDisponible", punto.estaDisponible(fechaHora));
+			HashMap<String,Object> element = new HashMap<String,Object>();
+			element.put("nombre", punto.getNombre());
+			element.put("latitud", punto.getPosicion().getLatitud());
+			element.put("longitud", punto.getPosicion().getLongitud());
+			element.put("barrio", punto.getDireccion().getBarrio());
+			element.put("calle", punto.getDireccion().getCalle() + " " + punto.getDireccion().getNumero());
+			element.put("cp", punto.getDireccion().getCodigoPostal());
+			element.put("estaCerca", punto.estaCercaDe(posicion));
+			element.put("estaDisponible", punto.estaDisponible(fechaHora));
 			array.add(element);
 		}
 		return array;
