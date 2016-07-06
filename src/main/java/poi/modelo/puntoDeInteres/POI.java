@@ -33,7 +33,12 @@ public abstract class POI {
 			this.disponibilidadesDeAtencion.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora, this.feriados));
 		boolean feriados = this.feriados.noEsUnFeriado(unaFechaHora);
 		
-		return horarioCambiado || (horarioNormal && feriados);
+		if (horarioCambiado){
+			boolean disponibilidadHorarioCambiado = this.horariosCambiados.stream().anyMatch(unHorario -> unHorario.estaDisponible(unaFechaHora));
+			return disponibilidadHorarioCambiado;
+		} else{
+			return  horarioNormal && feriados;
+		}
 	}
 	
 	public boolean matches(String palabraBuscada) {
