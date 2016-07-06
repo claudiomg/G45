@@ -20,10 +20,11 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		usuario = RepositorioUsuarios.getInstance().authenticateUser(userName,password);
 		
 		if (!(usuario == null)){
+			this.createSession(request,usuario);
 			if (usuario.isAdmin()){
 				return new ModelAndView(viewModel, "adminIndex.html");
 			} else {
-				return new ModelAndView(viewModel, "terminalIndex.html");
+				return new BuscadorDePoiController().render(request, response);
 			}
 		}else{
 			return new ModelAndView(viewModel, "loginFail.html");
@@ -39,5 +40,10 @@ public class LoginController{ //implements WithGlobalEntityManager{
 //		else {
 //			return new ModelAndView(viewModel, "loginFail.html");
 //		}	
+	}
+
+	private void createSession(Request request, UsuarioPOI usuario) {
+		request.session(true);
+		request.session().attribute("user", usuario);
 	}
 }

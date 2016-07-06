@@ -17,7 +17,7 @@ public abstract class POI {
 	private Direccion direccion;
 	private List<String> palabrasClave = new ArrayList<String>();
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-	private ExcepcionSinAtencion feriados;
+	private ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
 	private ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){

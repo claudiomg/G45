@@ -11,24 +11,56 @@
 	<form action="terminalSearch" method="post">
 		<div class="filters">
 			<ul>
-				<li><input type="checkbox" name="cgpFilter" checked> Centros de Gestión Comunal </li>
-				<li><input type="checkbox" name="colectivoFilter" checked> Paradas de Colectivo </li>
-				<li><input type="checkbox" name="comercioFilter" checked> Locales Comerciales </li>
-				<li><input type="checkbox" name="bancoFilter" checked> Sucursales de Banco </li>
+				<li><input type="checkbox" name="cgpServiceFilter" value="ON" checked> Centros de Gestión Comunal </li>
+				<li><input type="checkbox" name="colectivoFilter" value="ON" checked> Paradas de Colectivo </li>
+				<li><input type="checkbox" name="comercioFilter" value="ON" checked> Locales Comerciales </li>
+				<li><input type="checkbox" name="bankFilter" value="ON" checked> Sucursales de Banco </li>
 			</ul>
 		</div>
 		<div class="filters">
 			<ul>
-				<li><input type="checkbox" name="disponibleFilter" checked> Solo disponible </li>
-				<li><input type="checkbox" name="cercaniaFilter" checked> Solo cercanos </li>
+				<li><input type="checkbox" name="disponibilityFilter" value="ON" checked> Solo disponible </li>
+				<li><input type="checkbox" name="proximityFilter" value="ON" checked> Solo cercanos </li>
 			</ul>
 		</div>
 	
 		<div class="manualFilters">
 			Palabra Clave:
-			<input type="text" name="palabra"/>
+			<input type="text" name="stringFilter"/>
 			<input type="submit" value="Buscar"/>
 		</div>
-	</form>	
+	</form>
+	
+	{{#hasResults}}
+		<div id="string">{{string}}</div>
+		<div id="results">
+			<table>
+				<thead>
+					<tr>
+						<th> POI </th>
+						<th> Longitud </th>
+						<th> Latitud </th>
+						<th> Calle </th>
+						<th> Altura </th>
+						<th> Esta Cerca </th>
+						<th> Esta Disponible </th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#results}}
+						<tr> 
+							<td>{{nombre.nombre}}</td>
+							<td>{{longitud}}</td>
+							<td>{{latitud}}</td>
+							<td>{{calle}}</td>
+							<td>{{altura}}</td>
+							<td>{{estaCerca}}</td>
+							<td>{{estaDisponible}}</td>
+						</tr>
+					{{/results}}
+				</tbody>
+			</table>
+		</div>
+	{{/hasResults}}
 </body>
 </html>

@@ -30,6 +30,8 @@ public class Main implements WithGlobalEntityManager{
 //			PerThreadEntityManagers.getEntityManager(); 
 //			PerThreadEntityManagers.closeEntityManager();
 //		});
+		CargaInicial.getInstance().inicializar();
+		
 //		usr.persistir(usr);
 		
 		// INDEX PRINCIPAL

@@ -17,23 +17,39 @@ public class RequestMediator {
 	}
 	
 	public String palabraBuscada() {
-		return this.getConcreteRequest().queryParams("palabra");
+		return this.getConcreteRequest().queryParams("stringFilter");
 	}
 	
 	public boolean enabledDisponibilityFilter() {
-		return this.getConcreteRequest().queryParams("disponibilityFilter").equals("ON");
+		String val = this.getConcreteRequest().queryParams("disponibilityFilter");
+		if (val == null){
+			return false;
+		}
+		return val.equals("ON");
 	}
 	
 	public boolean enabledProximityFilter() {
-		return this.getConcreteRequest().queryParams("proximityFilter").equals("ON");
+		String val = this.getConcreteRequest().queryParams("proximityFilter");
+		if (val == null){
+			return false;
+		}
+		return val.equals("ON");
 	}
 	
 	public boolean enabledSearchOfCgpService() {
-		return this.getConcreteRequest().queryParams("cgpServiceFilter").equals("ON");
+		String val = this.getConcreteRequest().queryParams("cgpServiceFilter");
+		if (val == null){
+			return false;
+		}
+		return val.equals("ON");
 	}
 
 	public boolean enabledSearchOfBank() {
-		return this.getConcreteRequest().queryParams("bankFilter").equals("ON");
+		String val = this.getConcreteRequest().queryParams("bankFilter");
+		if (val == null){
+			return false;
+		}
+		return val.equals("ON");
 	}
 	
 	public LocalDateTime getDateAndTimeForDisponibility() {
@@ -42,9 +58,11 @@ public class RequestMediator {
 	}
 	
 	public Posicion getPositionForProximity() {
-		Double longitud = new Double(this.getConcreteRequest().queryParams("longitud"));
-		Double latitud = new Double(this.getConcreteRequest().queryParams("latitud"));
-		return new Posicion(latitud, longitud);
+		//Double longitud = new Double(this.getConcreteRequest().queryParams("longitud"));
+		//Double latitud = new Double(this.getConcreteRequest().queryParams("latitud"));
+		//return new Posicion(latitud, longitud);
+		//los metodos comentados sirven para q la proximidad sea dinamica
+		return ((Terminal) this.getConcreteRequest().session().attribute("user")).getPosicion();
 	}
 	
 	public Terminal user() {
