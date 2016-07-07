@@ -9,6 +9,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.controllers.ABMcontroller;
 import poi.controllers.AdmTerminalesController;
+import poi.controllers.AdminController;
 import poi.controllers.BuscadorDePoiController;
 import poi.controllers.ConsultaDisponibilidadController;
 import poi.controllers.HomeController;
@@ -56,14 +57,10 @@ public class Main implements WithGlobalEntityManager{
 		get("/consultaDisponibilidad", byDisponibilidad::listar, engine);
 		
 		//INDEX DE ADMINISTRADOR
-		ABMcontroller abm = new ABMcontroller();
-		get("/abmPois",abm::mostrar,engine);
-		
-		ReportesController reporte = new ReportesController();
-		get("/reportes", reporte::mostrar, engine);
-		
-		AdmTerminalesController admTerminales = new AdmTerminalesController();
-		get("/admTerminales", admTerminales::mostrar, engine);
+		AdminController admin = new AdminController();
+		get("/abmPois",admin::mostrarABM,engine);
+		get("/reportes", admin::mostrarReporte, engine);		
+		get("/admTerminales", admin::mostrarAdmTerminal, engine);
 	}
 	
 }
