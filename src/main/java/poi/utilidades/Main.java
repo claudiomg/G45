@@ -65,6 +65,20 @@ public class Main implements WithGlobalEntityManager{
 		get("/abmPois",admin::mostrarABM,engine);
 		get("/reportes", admin::mostrarReporte, engine);		
 		get("/admTerminales", admin::mostrarAdmTerminal, engine);
+		
+		//REPORTES
+		
+		ReportePorFechaController reporteFecha = new ReportePorFechaController();
+		get("/BusquedaPorFecha", reporteFecha::mostrar, engine);
+		
+		ReportePorTerminalController reporteTerminal = new ReportePorTerminalController();
+		get("/BusquedaPorTerminal", reporteTerminal::mostrar, engine);
+		
+		ReportePorFechaYTerminalController reporteFechaTerminal = new ReportePorFechaYTerminalController();
+		get("/BusquedaPorFechaYTerminal", reporteFechaTerminal::mostrar,engine);
+		
+		
+		
 	}
-	
+	 
 }
