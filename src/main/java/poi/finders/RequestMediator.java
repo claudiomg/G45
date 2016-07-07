@@ -16,40 +16,20 @@ public class RequestMediator {
 		this.setConcreteRequest(request);
 	}
 	
-	public String palabraBuscada() {
-		return this.getConcreteRequest().queryParams("stringFilter");
+	public String queryParam(String param) {
+		if (this.hasQueryParam(param)) return this.getConcreteRequest().queryParams(param);
+		return null;
 	}
 	
-	public boolean enabledDisponibilityFilter() {
-		String val = this.getConcreteRequest().queryParams("disponibilityFilter");
-		if (val == null){
-			return false;
-		}
-		return val.equals("ON");
+	public boolean hasQueryParam(String param) {
+		String val = this.getConcreteRequest().queryParams(param);
+		return !(val == null);
 	}
 	
-	public boolean enabledProximityFilter() {
-		String val = this.getConcreteRequest().queryParams("proximityFilter");
-		if (val == null){
-			return false;
-		}
-		return val.equals("ON");
-	}
-	
-	public boolean enabledSearchOfCgpService() {
-		String val = this.getConcreteRequest().queryParams("cgpServiceFilter");
-		if (val == null){
-			return false;
-		}
-		return val.equals("ON");
-	}
-
-	public boolean enabledSearchOfBank() {
-		String val = this.getConcreteRequest().queryParams("bankFilter");
-		if (val == null){
-			return false;
-		}
-		return val.equals("ON");
+	public boolean queryParam(String param, String value) {
+		String val = this.getConcreteRequest().queryParams(param);
+		if (this.hasQueryParam(param)) return val.equals(value);
+		return false;
 	}
 	
 	public LocalDateTime getDateAndTimeForDisponibility() {

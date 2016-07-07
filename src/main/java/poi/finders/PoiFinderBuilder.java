@@ -2,6 +2,10 @@ package poi.finders;
 
 import java.time.LocalDateTime;
 
+import poi.modelo.puntoDeInteres.CGP;
+import poi.modelo.puntoDeInteres.LocalComercial;
+import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioBancosExternos;
 import poi.repositorios.RepositorioCGPExternos;
@@ -40,7 +44,7 @@ public class PoiFinderBuilder {
 
 	private void addCgpServiceRepository(PoiFinder finder) {
 		//se agrega solo si se habilito la busqueda en bancos
-		boolean enable = this.getRequest().enabledSearchOfCgpService();
+		boolean enable = this.getRequest().queryParam("cgpFilter", "ON");
 		if (enable){
 			finder.addRepository(RepositorioCGPExternos.getInstance());
 		}
@@ -48,7 +52,7 @@ public class PoiFinderBuilder {
 
 	private void addBankRepository(PoiFinder finder) {
 		//se agrega solo si se habilito la busqueda en bancos
-		boolean enable = this.getRequest().enabledSearchOfBank();
+		boolean enable = this.getRequest().queryParam("bankFilter", "ON");
 		if (enable){
 			finder.addRepository(RepositorioBancosExternos.getInstance());
 		}
@@ -56,14 +60,25 @@ public class PoiFinderBuilder {
 
 	private void setFiltersOn(PoiFinder finder) {
 		//me encargo de agregar los filtros
+		this.addPoiTypeFilterOn(finder);
 		this.addTagFilterOn(finder);
 		this.addDisponibilityFilterOn(finder);
 		this.addProximityFilterOn(finder);
 	}
 
+	private void addPoiTypeFilterOn(PoiFinder finder) {
+		//el filtro contiene las clases de los tipos de poi seleccionados por el usuario
+		FilterByPoiType filter = new FilterByPoiType();
+		if (this.getRequest().queryParam("cgpFilter","ON")) filter.addType(CGP.class.getName());
+		if (this.getRequest().queryParam("localFilter","ON")) filter.addType(LocalComercial.class.getName());
+		if (this.getRequest().queryParam("busStopFilter","ON")) filter.addType(ParadaColectivo.class.getName());
+		if (this.getRequest().queryParam("bankFilter","ON")) filter.addType(SucursalBanco.class.getName());
+		finder.addFilter(filter);
+	}
+
 	private void addProximityFilterOn(PoiFinder finder) {
 		//dependo del request y el usuario
-		boolean enableFilter = this.getRequest().enabledProximityFilter();
+		boolean enableFilter = this.getRequest().queryParam("proximityFilter", "ON");
 		boolean hasAccess = this.getUser().canFilterByProximity();
 		if (enableFilter && hasAccess){
 			Posicion unaPosicion = this.getRequest().getPositionForProximity();
@@ -73,7 +88,7 @@ public class PoiFinderBuilder {
 
 	private void addDisponibilityFilterOn(PoiFinder finder) {
 		//dependo del request y el usuario
-		boolean enableFilter = this.getRequest().enabledDisponibilityFilter();
+		boolean enableFilter = this.getRequest().queryParam("disponibilityFilter", "ON");
 		boolean hasAccess = this.getUser().canFilterByDisponibility();
 		if (enableFilter && hasAccess){
 			LocalDateTime unaFechaHora = this.getRequest().getDateAndTimeForDisponibility();
@@ -97,7 +112,11 @@ public class PoiFinderBuilder {
 	}
 
 	private void setPalabraBuscada() {
-		this.palabraBuscada = this.getRequest().palabraBuscada();
+		if ( this.getRequest().hasQueryParam("stringFilter") ) {
+			this.palabraBuscada = this.getRequest().queryParam("stringFilter");
+		} else {
+			this.palabraBuscada = "";
+		}
 	}
 	private String getPalabraBuscada() {
 		return this.palabraBuscada;

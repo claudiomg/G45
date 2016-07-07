@@ -2,14 +2,8 @@ package poi.controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import poi.finders.PoiFinder;
 import poi.finders.PoiFinderBuilder;
@@ -24,7 +18,10 @@ import spark.Response;
 public class BuscadorDePoiController {
 	public ModelAndView render(Request request, Response response){
 		HashMap<String, Object> viewModel = new HashMap<>();
-		viewModel.put("results", false);
+		Terminal usuario = request.session().attribute("user");
+		viewModel.put("latitud", usuario.getPosicion().getLatitud());
+		viewModel.put("longitud", usuario.getPosicion().getLongitud());
+		viewModel.put("hasResults", false);
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 	
