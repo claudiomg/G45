@@ -27,7 +27,7 @@ public class ReporteBusquedasPorFechaTerminal extends ReporteAbstracto {
 			}
 		}
 	}
-	private HashMap<Terminal, HashMap<LocalDate, Integer>> recolectarTerminales() {
+	public HashMap<Terminal, HashMap<LocalDate, Integer>> recolectarTerminales() {
 		//las llaves son fechas los valores son numeros
 		HashMap<Terminal, HashMap<LocalDate, Integer>> terminales = new HashMap<>();
 		for ( Consulta consulta : this.getRepository().getRegistros() ){

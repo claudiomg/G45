@@ -1,5 +1,6 @@
 package poi.utilidades;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import poi.modelo.puntoDeInteres.LocalComercial;
@@ -8,6 +9,7 @@ import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.modelo.usuario.Administrador;
 import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
+import poi.repositorios.RepositorioConsultas;
 import poi.repositorios.RepositorioPOI;
 import poi.repositorios.RepositorioUsuarios;
 
@@ -16,6 +18,12 @@ public class CargaInicial {
 	RepositorioPOI repositorioPOI = RepositorioPOI.getInstance();
 	private HashMap<String, Direccion> direcciones = new HashMap<String, Direccion>();
 	private HashMap<String, Posicion> posiciones = new HashMap<String, Posicion>();
+	RepositorioConsultas repositorioConsultas = RepositorioConsultas.getInstance();
+	UsuarioPOI admin1;
+	UsuarioPOI admin2;
+	Terminal terminal1;
+	Terminal terminal2;
+	Terminal terminal3;
 	
 	private CargaInicial(){		
 	};
@@ -32,6 +40,7 @@ public class CargaInicial {
 		this.inicializarDirecciones();
 		this.inicializarPosiciones();
 		this.inicializarPOIs();
+		this.inicializarConsultas();
 		//this.inicializarBancosExternos();
 		//this.inicializarCgpExternos();
 		//this.inicializarConsultas();
@@ -84,37 +93,36 @@ public class CargaInicial {
 	}
 	private void inicializarUsuarios() {
 		RepositorioUsuarios repositorio = RepositorioUsuarios.getInstance();
-		UsuarioPOI usuario;
 		
 		//admin1
-		usuario = new Administrador("admin1");
-		usuario.setPassword("admin1");
-		((Administrador) usuario).setMail("mujica.juancarlos@gmail.com");
-		repositorio.agregarRegistro(usuario);
+		admin1 = new Administrador("admin1");
+		admin1.setPassword("admin1");
+		((Administrador) admin1).setMail("mujica.juancarlos@gmail.com");
+		repositorio.agregarRegistro(admin1);
 		
 		//admin2
-		usuario = new Administrador("admin2");
-		usuario.setPassword("admin2");
-		((Administrador) usuario).setMail("lalala@gmail.com");
-		repositorio.agregarRegistro(usuario);
+		admin2 = new Administrador("admin2");
+		admin2.setPassword("admin2");
+		((Administrador) admin2).setMail("lalala@gmail.com");
+		repositorio.agregarRegistro(admin2);
 			
 		//terminal1
-		usuario = new Terminal("Abasto");
-		usuario.setPassword("abasto");
-		((Terminal) usuario).setPosicion(new Posicion(-34.603329, -58.410789));
-		repositorio.agregarRegistro(usuario);
+		terminal1 = new Terminal("Abasto");
+		terminal1.setPassword("abasto");
+		((Terminal) terminal1).setPosicion(new Posicion(-34.603329, -58.410789));
+		repositorio.agregarRegistro(terminal1);
 		
 		//terminal2
-		usuario = new Terminal("Caballito");
-		usuario.setPassword("caballito");
-		((Terminal) usuario).setPosicion(new Posicion(-34.619155, -58.437811));
-		repositorio.agregarRegistro(usuario);
+		terminal2 = new Terminal("Caballito");
+		terminal2.setPassword("caballito");
+		((Terminal) terminal2).setPosicion(new Posicion(-34.619155, -58.437811));
+		repositorio.agregarRegistro(terminal2);
 		
 		//terminal3
-		usuario = new Terminal("Palermo");
-		usuario.setPassword("palermo");
-		((Terminal) usuario).setPosicion(new Posicion(-34.588315, -58.410690));
-		repositorio.agregarRegistro(usuario);
+		terminal3 = new Terminal("Palermo");
+		terminal3.setPassword("palermo");
+		((Terminal) terminal3).setPosicion(new Posicion(-34.588315, -58.410690));
+		repositorio.agregarRegistro(terminal3);
 	}
 	
 	private void inicializarPosiciones() {
@@ -156,6 +164,19 @@ public class CargaInicial {
 		direccion.setPais("Argentina");
 		this.setDireccion(key,direccion);		
 	}
+	
+	private void inicializarConsultas(){
+		Consulta consulta1 = new Consulta(terminal1, "palabra buscada 1");
+		consulta1.setComienzoProceso(LocalDateTime.of(2016, 06, 26, 8, 00));
+		repositorioConsultas.agregarRegistro(consulta1);
+		Consulta consulta2 = new Consulta(terminal1, "palabra buscada 2");
+		consulta2.setComienzoProceso(LocalDateTime.of(2016, 06, 26, 8, 00));
+		repositorioConsultas.agregarRegistro(consulta2);
+		Consulta consulta3 = new Consulta(terminal2, "palabra buscada 3");
+		consulta3.setComienzoProceso(LocalDateTime.of(2016, 06, 1, 15, 22));
+		repositorioConsultas.agregarRegistro(consulta3);
+	}
+	
 	private void setDireccion(String key, Direccion direccion) {
 		this.direcciones.put(key, direccion);
 	}

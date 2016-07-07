@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import poi.modelo.usuario.Terminal;
+import poi.modelo.usuario.UsuarioPOI;
 
 public class Consulta {
 	private LocalDateTime comienzoProceso;

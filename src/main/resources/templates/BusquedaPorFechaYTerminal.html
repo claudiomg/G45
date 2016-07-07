@@ -3,21 +3,37 @@
 <head>
 	<title>Busqueda por fecha y terminal</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
 </head>
 <body>
-	
-	Terminales: <select> <option> Abasto </option> 
-					<option>  Floresta </option>
-</select> 
-<br>
-<br>
-	<form action="/buscarPorTerminal	">
-
-		Fecha: <br>
-		<input id="fecah" type="text" name="fecha"/>
-		<br>
-		<input id="btnBuscar" type="submit" value="Buscar"/>
-	</form>
-
+	<h3>Búsqueda por fecha y terminal</h3></br>	
+	{{#hasResults}}
+		<div id="string">{{string}}</div>
+		<div id="results">
+			<table class="table table-striped table-bordered table-condensed table-responsive">
+				<thead>
+					<tr>
+						<th> Terminal </th>
+						<th> Fecha </th>
+						<th> Cantidad </th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each resultado}}
+						<tr> 
+							<td>{{{nombre}}}</td>
+							<td>{{fecha}}</td>
+							<td>{{cantidad}}</td>
+						</tr>
+					{{~/each}}
+				</tbody>
+			</table>
+		</div>
+	{{/hasResults}}	
 </body>
 </html>

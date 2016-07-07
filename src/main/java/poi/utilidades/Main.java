@@ -12,6 +12,8 @@ import poi.controllers.BuscadorDePoiController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
 import poi.controllers.ReportePorFechaController;
+import poi.controllers.ReportePorFechaYTerminalController;
+import poi.controllers.ReportePorTerminalController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main implements WithGlobalEntityManager{
@@ -62,6 +64,12 @@ public class Main implements WithGlobalEntityManager{
 		ReportePorFechaController reportePorFecha = new ReportePorFechaController();
 		get("/BusquedaPorFecha", reportePorFecha::mostrar, engine);
 
+		ReportePorTerminalController reportePorTerminal = new ReportePorTerminalController();
+		get("/BusquedaPorTerminal", reportePorTerminal::mostrar, engine);
+
+		ReportePorFechaYTerminalController reportePorFechaYTerminal = new ReportePorFechaYTerminalController();
+		get("/BusquedaPorFechaYTerminal", reportePorFechaYTerminal::mostrar, engine);
+				
 		AdminController admin = new AdminController();
 		get("/abmPois",admin::mostrarABM,engine);
 		get("/reportes", admin::mostrarReporte, engine);		
