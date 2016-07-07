@@ -11,6 +11,7 @@ import poi.controllers.AdminController;
 import poi.controllers.BuscadorDePoiController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
+import poi.controllers.ReportePorFechaController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main implements WithGlobalEntityManager{
@@ -55,7 +56,12 @@ public class Main implements WithGlobalEntityManager{
 		//get("/terminalHome", poiBrowser::render, engine);
 		post("/my_home_page", poiBrowser::search, engine);//post es usado para las busquedas
 		
+
 		//HOME DE ADMINISTRADOR
+
+		ReportePorFechaController reportePorFecha = new ReportePorFechaController();
+		get("/BusquedaPorFecha", reportePorFecha::mostrar, engine);
+
 		AdminController admin = new AdminController();
 		get("/abmPois",admin::mostrarABM,engine);
 		get("/reportes", admin::mostrarReporte, engine);		
