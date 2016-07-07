@@ -22,7 +22,7 @@ public class ReporteBusquedasPorFecha extends ReporteAbstracto {
 		}
 	}
 
-	private HashMap<LocalDate, Integer> recolectarFechas() {
+	public HashMap<LocalDate, Integer> recolectarFechas() {
 		//las llaves son fechas los valores son numeros
 		HashMap<LocalDate, Integer> fechas = new HashMap<LocalDate, Integer>();
 		for ( Consulta consulta : this.getRepository().getRegistros() ){

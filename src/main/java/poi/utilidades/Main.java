@@ -13,6 +13,7 @@ import poi.controllers.BuscadorDePoiController;
 import poi.controllers.ConsultaDisponibilidadController;
 import poi.controllers.HomeController;
 import poi.controllers.LoginController;
+import poi.controllers.ReportePorFechaController;
 import poi.controllers.ReportesController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -54,6 +55,9 @@ public class Main implements WithGlobalEntityManager{
 		
 		ConsultaDisponibilidadController byDisponibilidad = new ConsultaDisponibilidadController();
 		get("/consultaDisponibilidad", byDisponibilidad::listar, engine);
+		
+		ReportePorFechaController reportePorFecha = new ReportePorFechaController();
+		get("/BusquedaPorFecha", reportePorFecha::mostrar, engine);
 		
 		//INDEX DE ADMINISTRADOR
 		ABMcontroller abm = new ABMcontroller();
