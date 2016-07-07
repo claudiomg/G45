@@ -60,15 +60,6 @@ public class Main implements WithGlobalEntityManager{
 		
 
 		//HOME DE ADMINISTRADOR
-
-		ReportePorFechaController reportePorFecha = new ReportePorFechaController();
-		get("/BusquedaPorFecha", reportePorFecha::mostrar, engine);
-
-		ReportePorTerminalController reportePorTerminal = new ReportePorTerminalController();
-		get("/BusquedaPorTerminal", reportePorTerminal::mostrar, engine);
-
-		ReportePorFechaYTerminalController reportePorFechaYTerminal = new ReportePorFechaYTerminalController();
-		get("/BusquedaPorFechaYTerminal", reportePorFechaYTerminal::mostrar, engine);
 				
 		AdminController admin = new AdminController();
 		get("/abmPois",admin::mostrarABM,engine);
