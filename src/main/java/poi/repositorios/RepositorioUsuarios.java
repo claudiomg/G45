@@ -2,8 +2,10 @@ package poi.repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
 
 public class RepositorioUsuarios {
@@ -46,6 +48,12 @@ public class RepositorioUsuarios {
 			}
 		}
 		return null;
+	}
+	public List<UsuarioPOI> getTerminals() {
+		return this.getRegistros()
+				.stream()
+				.filter( terminal -> !terminal.isAdmin())
+				.collect(Collectors.toList());
 	}
 	
 }

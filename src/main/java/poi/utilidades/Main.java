@@ -14,6 +14,7 @@ import poi.controllers.LoginController;
 import poi.controllers.ReportePorFechaController;
 import poi.controllers.ReportePorFechaYTerminalController;
 import poi.controllers.ReportePorTerminalController;
+import poi.controllers.TerminalConfigurationController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main implements WithGlobalEntityManager{
@@ -63,8 +64,12 @@ public class Main implements WithGlobalEntityManager{
 				
 		AdminController admin = new AdminController();
 		get("/abmPois",admin::mostrarABM,engine);
-		get("/reportes", admin::mostrarReporte, engine);		
-		get("/admTerminales", admin::mostrarAdmTerminal, engine);
+		get("/reportes", admin::mostrarReporte, engine);
+		
+		//configuracion de terminales
+		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();
+		get("/terminal_configuration", terminalConfiguration::render, engine);
+		post("/update_configuration", terminalConfiguration::updateConfiguration, engine);
 		
 		//REPORTES
 		
