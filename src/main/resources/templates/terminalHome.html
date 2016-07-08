@@ -63,22 +63,22 @@
 	<form action="my_home_page" method="post">
 		<div class="filters">
 			<ul>
-				<li><input type="checkbox" name="cgpFilter" value="ON" checked> Centros de Gestión Comunal </li>
-				<li><input type="checkbox" name="busStopFilter" value="ON" checked> Paradas de Colectivo </li>
-				<li><input type="checkbox" name="localFilter" value="ON" checked> Locales Comerciales </li>
-				<li><input type="checkbox" name="bankFilter" value="ON" checked> Sucursales de Banco </li>
+				<li><input type="checkbox" name="cgpFilter" value="ON" {{#cgpFilterValue}}checked{{/cgpFilterValue}} > Centros de Gestión Comunal </li>
+				<li><input type="checkbox" name="busStopFilter" value="ON" {{#busStopFilterValue}}checked{{/busStopFilterValue}} > Paradas de Colectivo </li>
+				<li><input type="checkbox" name="localFilter" value="ON" {{#localFilterValue}}checked{{/localFilterValue}} > Locales Comerciales </li>
+				<li><input type="checkbox" name="bankFilter" value="ON" {{#bankFilterValue}}checked{{/bankFilterValue}} > Sucursales de Banco </li>
 			</ul>
 		</div>
 		<div class="filters">
 			<ul>
-				<li><input type="checkbox" name="disponibilityFilter" value="ON" checked> Solo disponible </li>
-				<li><input type="checkbox" name="proximityFilter" value="ON" checked> Solo cercanos </li>
+				<li><input type="checkbox" name="disponibilityFilter" value="ON" {{#disponibilityFilterValue}}checked{{/disponibilityFilterValue}} > Solo disponible </li>
+				<li><input type="checkbox" name="proximityFilter" value="ON" {{#proximityFilterValue}}checked{{/proximityFilterValue}} > Solo cercanos </li>
 			</ul>
 		</div>
 	
 		<div class="manualFilters">
 			Palabra Clave:
-			<input type="text" name="stringFilter"/>
+			<input type="text" name="tagFilter" value= "{{tagFilterValue}}" />
 			<input type="submit" value="Buscar"/>
 		</div>
 	</form>

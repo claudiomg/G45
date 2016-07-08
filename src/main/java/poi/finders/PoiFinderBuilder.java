@@ -112,11 +112,7 @@ public class PoiFinderBuilder {
 	}
 
 	private void setPalabraBuscada() {
-		if ( this.getRequest().hasQueryParam("stringFilter") ) {
-			this.palabraBuscada = this.getRequest().queryParam("stringFilter");
-		} else {
-			this.palabraBuscada = "";
-		}
+		this.palabraBuscada = request.queryParamOrDefault("tagFilter", "");
 	}
 	private String getPalabraBuscada() {
 		return this.palabraBuscada;

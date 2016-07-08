@@ -17,25 +17,41 @@ import spark.Response;
 
 public class BuscadorDePoiController {
 	public ModelAndView render(Request request, Response response){
-		HashMap<String, Object> viewModel = new HashMap<>();
-		Terminal usuario = request.session().attribute("user");
-		viewModel.put("latitud", usuario.getPosicion().getLatitud());
-		viewModel.put("longitud", usuario.getPosicion().getLongitud());
+		RequestMediator requestMediator = new RequestMediator(request);
+		HashMap<String, Object> viewModel = this.configViewModel(requestMediator);
 		viewModel.put("hasResults", false);
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
-	
+
 	public ModelAndView search(Request request, Response response){
-		HashMap<String, Object> viewModel = new HashMap<>();
-		Terminal usuario = request.session().attribute("user");
 		RequestMediator requestMediator = new RequestMediator(request);
 		PoiFinder finder = new PoiFinderBuilder(requestMediator).buildFinder();
 		finder.search();
-		viewModel.put("latitud", usuario.getPosicion().getLatitud());
-		viewModel.put("longitud", usuario.getPosicion().getLongitud());
+		HashMap<String, Object> viewModel = this.configViewModel(requestMediator);
 		viewModel.put("hasResults", !finder.getResults().isEmpty());
 		viewModel.put("results", this.convertPoi(finder.getResults(),request));
 		return new ModelAndView(viewModel, "terminalHome.html");
+	}
+	private HashMap<String, Object> configViewModel(RequestMediator request) {
+		HashMap<String, Object> viewModel = new HashMap<>();
+		Terminal usuario = request.user();
+	//defino valores correspondientes al usuario
+		viewModel.put("accessDisponibilityFilter", usuario.canFilterByDisponibility());
+		viewModel.put("accessProximityFilter", usuario.canFilterByProximity());
+		viewModel.put("accessTagFilter", usuario.canFilterByTag());
+		viewModel.put("latitud", usuario.getPosicion().getLatitud());
+		viewModel.put("longitud", usuario.getPosicion().getLongitud());
+	//defino valores para la vista
+		//defino tipos
+		viewModel.put("cgpFilterValue", request.queryParamOrDefault("cgpFilter","ON",false));
+		viewModel.put("busStopFilterValue", request.queryParamOrDefault("busStopFilter","ON",false));
+		viewModel.put("localFilterValue", request.queryParamOrDefault("localFilter","ON",false));
+		viewModel.put("bankFilterValue", request.queryParamOrDefault("bankFilter","ON",false));
+		//defino acciones
+		viewModel.put("disponibilityFilterValue", request.queryParamOrDefault("disponibilityFilter","ON",false));
+		viewModel.put("proximityFilterValue", request.queryParamOrDefault("proximityFilter","ON",false));
+		viewModel.put("tagFilterValue", request.queryParamOrDefault("tagFilter",""));
+		return viewModel;
 	}
 
 	private List<HashMap<String, Object>> convertPoi(List<POI> results,Request request) {
