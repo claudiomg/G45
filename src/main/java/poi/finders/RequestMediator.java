@@ -7,6 +7,7 @@ import poi.modelo.usuario.UsuarioPOI;
 import poi.repositorios.RepositorioUsuarios;
 import poi.utilidades.Posicion;
 import spark.Request;
+import spark.Session;
 
 public class RequestMediator {
 
@@ -85,5 +86,9 @@ public class RequestMediator {
 	
 	private Request getConcreteRequest() {
 		return this.concreteRequest;
+	}
+
+	public Session session() {
+		return this.concreteRequest.session();
 	}
 }

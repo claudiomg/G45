@@ -69,7 +69,7 @@ public class Main implements WithGlobalEntityManager{
 		//configuracion de terminales
 		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();
 		get("/terminal_configuration", terminalConfiguration::render, engine);
-		post("/update_configuration", terminalConfiguration::updateConfiguration, engine);
+		post("/update_terminal_configuration", terminalConfiguration::updateConfiguration, engine);
 		
 		//REPORTES
 		

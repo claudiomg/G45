@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery-2.2.3.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/updateTerminalConfigurations.js"></script>
 </head>
 <body>
 
@@ -27,9 +28,15 @@
 					{{#each results}}
 						<tr> 
 							<td>{{{nombre}}}</td>
-							<td>{{filterByProximity}}</td>
-							<td>{{filterByDisponibility}}</td>
-							<td>{{filterByTag}}</td>
+							<td>
+								<input type="checkbox" name="filterByProximity" terminal="{{{nombre}}}" {{filterByProximity}} >
+							</td>
+							<td>
+								<input type="checkbox" name="filterByDisponibility" terminal="{{{nombre}}}" {{filterByDisponibility}} >
+							</td>
+							<td>
+								<input type="checkbox" name="filterByTag" terminal="{{{nombre}}}" {{filterByTag}} >
+							</td>
 						</tr>
 					{{~/each}}
 				</tbody>

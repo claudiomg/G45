@@ -30,7 +30,7 @@ public class Terminal extends UsuarioPOI{
 	public void updateFilterByProximity(boolean value) {
 		this.updateAccion("filterByProximity",value);
 	}
-	private void updateAccion(String key, boolean value) {
+	public void updateAccion(String key, boolean value) {
 		acciones.put(key, value);
 	}
 	public boolean canFilterByTag() {
