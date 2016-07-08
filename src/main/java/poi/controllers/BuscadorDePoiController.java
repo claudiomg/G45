@@ -43,13 +43,13 @@ public class BuscadorDePoiController {
 		viewModel.put("longitud", usuario.getPosicion().getLongitud());
 	//defino valores para la vista
 		//defino tipos
-		viewModel.put("cgpFilterValue", request.queryParamOrDefault("cgpFilter","ON",false));
-		viewModel.put("busStopFilterValue", request.queryParamOrDefault("busStopFilter","ON",false));
-		viewModel.put("localFilterValue", request.queryParamOrDefault("localFilter","ON",false));
-		viewModel.put("bankFilterValue", request.queryParamOrDefault("bankFilter","ON",false));
+		viewModel.put("cgpFilterValue", request.customValueForQueryParam("cgpFilter","ON","checked",""));
+		viewModel.put("busStopFilterValue", request.customValueForQueryParam("busStopFilter","ON","checked",""));
+		viewModel.put("localFilterValue", request.customValueForQueryParam("localFilter","ON","checked",""));
+		viewModel.put("bankFilterValue", request.customValueForQueryParam("bankFilter","ON","checked",""));
 		//defino acciones
-		viewModel.put("disponibilityFilterValue", request.queryParamOrDefault("disponibilityFilter","ON",false));
-		viewModel.put("proximityFilterValue", request.queryParamOrDefault("proximityFilter","ON",false));
+		viewModel.put("disponibilityFilterValue", request.customValueForQueryParam("disponibilityFilter","ON","checked",""));
+		viewModel.put("proximityFilterValue", request.customValueForQueryParam("proximityFilter","ON","checked",""));
 		viewModel.put("tagFilterValue", request.queryParamOrDefault("tagFilter",""));
 		return viewModel;
 	}

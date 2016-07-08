@@ -38,6 +38,13 @@ public class RequestMediator {
 		}
 		return defaultValue;
 	}
+	public String customValueForQueryParam(String param, String value, String valueIfTrue, String valueIfFalse) {
+		if ( this.queryParam(param, value)){
+			return valueIfTrue;
+		} else {
+			return valueIfFalse;
+		}
+	}
 	public String queryParamOrDefault(String param, String defaultValue) {
 		//si param viene del cliente devuelvo el valor sino devuelvo el default
 		if (this.hasQueryParam(param)){
@@ -45,6 +52,7 @@ public class RequestMediator {
 		}
 		return defaultValue;
 	}
+	
 	public LocalDateTime getDateAndTimeForDisponibility() {
 		//De ser necesario devolver la fecha y hora seleccionada en el cliente, por ahora solo devuelve la del sistema
 		return LocalDateTime.now();
