@@ -7,9 +7,10 @@ import static spark.SparkBase.staticFileLocation;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import poi.controllers.AdministratorController;
+import poi.controllers.UpdatePoisController;
 import poi.controllers.TerminalController;
 import poi.controllers.LoginController;
+import poi.controllers.QueryReportsController;
 import poi.controllers.ReportePorFechaController;
 import poi.controllers.ReportePorFechaYTerminalController;
 import poi.controllers.ReportePorTerminalController;
@@ -41,28 +42,29 @@ public class Main implements WithGlobalEntityManager{
 		get("/my_home_page", login::redirectUser, engine);//get controla si hay usuario logueado sino hay lo envia al login
 		
 		
-		//HOME DE TERMINAL
+	//HOME DE TERMINAL
 		TerminalController poiBrowser = new TerminalController();
 		post("/my_home_page", poiBrowser::search, engine);//post es usado para las busquedas
 		
 
-		//HOME DE ADMINISTRADOR
-		AdministratorController admin = new AdministratorController();
-		get("/poi_administrator",admin::mostrarABM,engine);
-		get("/query_reports", admin::viewQueryReports, engine);
-		
-		//configuracion de terminales
+	//HOME DE ADMINISTRADOR
+		//ABM POIS
+		UpdatePoisController admin = new UpdatePoisController();
+		get("/poi_administrator",admin::render,engine);
+		//REPORTS
+		QueryReportsController queryReports = new QueryReportsController();
+		get("/query_reports", queryReports::render, engine);
+			//REPORTES
+				ReportePorFechaController reporteFecha = new ReportePorFechaController();
+				get("/BusquedaPorFecha", reporteFecha::mostrar, engine);
+				ReportePorTerminalController reporteTerminal = new ReportePorTerminalController();
+				get("/BusquedaPorTerminal", reporteTerminal::mostrar, engine);
+				ReportePorFechaYTerminalController reporteFechaTerminal = new ReportePorFechaYTerminalController();
+				get("/BusquedaPorFechaYTerminal", reporteFechaTerminal::mostrar,engine);
+		//CONFIG TERMINALS
 		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();
 		get("/terminal_configuration", terminalConfiguration::render, engine);
 		post("/update_terminal_configuration", terminalConfiguration::updateConfiguration, engine);
-		
-		//REPORTES
-		ReportePorFechaController reporteFecha = new ReportePorFechaController();
-		get("/BusquedaPorFecha", reporteFecha::mostrar, engine);
-		ReportePorTerminalController reporteTerminal = new ReportePorTerminalController();
-		get("/BusquedaPorTerminal", reporteTerminal::mostrar, engine);
-		ReportePorFechaYTerminalController reporteFechaTerminal = new ReportePorFechaYTerminalController();
-		get("/BusquedaPorFechaYTerminal", reporteFechaTerminal::mostrar,engine);
 	}
 	 
 }
