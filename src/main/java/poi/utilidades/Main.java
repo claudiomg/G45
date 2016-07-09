@@ -11,9 +11,6 @@ import poi.controllers.UpdatePoisController;
 import poi.controllers.TerminalController;
 import poi.controllers.LoginController;
 import poi.controllers.QueryReportsController;
-import poi.controllers.ReportePorFechaController;
-import poi.controllers.ReportePorFechaYTerminalController;
-import poi.controllers.ReportePorTerminalController;
 import poi.controllers.TerminalConfigurationController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -54,13 +51,10 @@ public class Main implements WithGlobalEntityManager{
 		//REPORTS
 		QueryReportsController queryReports = new QueryReportsController();
 		get("/query_reports", queryReports::render, engine);
-			//REPORTES
-				ReportePorFechaController reporteFecha = new ReportePorFechaController();
-				get("/BusquedaPorFecha", reporteFecha::mostrar, engine);
-				ReportePorTerminalController reporteTerminal = new ReportePorTerminalController();
-				get("/BusquedaPorTerminal", reporteTerminal::mostrar, engine);
-				ReportePorFechaYTerminalController reporteFechaTerminal = new ReportePorFechaYTerminalController();
-				get("/BusquedaPorFechaYTerminal", reporteFechaTerminal::mostrar,engine);
+			get("/query_reports/byDate", queryReports::render, engine);
+			get("/query_reports/byTerminal", queryReports::render, engine);
+			get("/query_reports/byTerminalAndDate", queryReports::render, engine);
+			
 		//CONFIG TERMINALS
 		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();
 		get("/terminal_configuration", terminalConfiguration::render, engine);
