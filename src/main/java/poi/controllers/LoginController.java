@@ -10,32 +10,14 @@ import spark.Response;
 
 public class LoginController{ //implements WithGlobalEntityManager{
 	
-	public ModelAndView validarUsrYPass(Request request, Response response){
-		
+	public String validarUsrYPass(Request request, Response response){
+		//se encarga de validar el usuario y contraseña si puede loguear crea la session y devuelve ok
 		this.autenticationUser(request);
 		UsuarioPOI user = request.session().attribute("user");
 		if (user == null){
-			response.redirect("/login_fail");
-			return null;
+			return "El usuario y la contraseña que has introducido no coinciden.";
 		}
-		response.redirect("/my_home_page");
-		return null;
-
-//		if( (entityManager() 
-//				.createQuery("from Usuario u where u.login like :login and u.password = :password", Terminal.class) 
-//				.setParameter("login", "%" + nombreUsuario + "%") //
-//				.setParameter("password", passwordUsuario)
-//				.getResultList().size()) != 0){	
-//			return new ModelAndView(viewModel, "loginSuccess.html");
-//		}
-//		else {
-//			return new ModelAndView(viewModel, "loginFail.html");
-//		}	
-	}
-
-	public ModelAndView loginFail(Request request, Response response){
-		HashMap<String, Object> viewModel = new HashMap<>();
-		return new ModelAndView(viewModel, "loginFail.html");
+		return "ok";
 	}
 	
 	public ModelAndView redirectUser(Request request, Response response){
@@ -43,7 +25,7 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		UsuarioPOI user = request.session().attribute("user");
 		if (user == null){
 			response.redirect("/");
-			return null;
+			return new ModelAndView(viewModel, "index.html");
 		}
 		
 		if (user.isAdmin()){

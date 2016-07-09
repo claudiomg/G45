@@ -39,14 +39,16 @@ public class Main implements WithGlobalEntityManager{
 		HomeController home = new HomeController();
 		get("/", home::mostrar, engine);
 		get("/index.html", (request, response) -> {
-			response.redirect("/");
+			response.redirect("/",200);
 			return null;
 		});
 		
 		//LOGIN
 		LoginController login = new LoginController();
-		post("/login", login::validarUsrYPass, engine);
-		get("/login_fail", login::loginFail , engine);
+		//post("/login_process", login::validarUsrYPass, engine);
+		post("/login_process", (request, response) -> {
+		    return login.validarUsrYPass(request, response);
+		});
 		
 		//HOME GENERICO DE TERMINAL Y ADMINISTRADOR
 		get("/my_home_page", login::redirectUser, engine);//get controla si hay usuario logueado sino hay lo envia al login
