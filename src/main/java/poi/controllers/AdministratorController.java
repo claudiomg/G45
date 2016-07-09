@@ -8,24 +8,24 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class AdminController {
+public class AdministratorController {
 
 	public ModelAndView mostrarABM(Request request, Response response){
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
-		return new ModelAndView(viewModel, "abmPois.html");
+		return new ModelAndView(viewModel, "poiAdministrator.html");
 	}
 	
-	public ModelAndView mostrarReporte(Request request, Response response){
+	public ModelAndView viewQueryReports(Request request, Response response){
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
-		return new ModelAndView(viewModel, "reportes.html");
+		return new ModelAndView(viewModel, "queryReports.html");
 	}
 	
 	public ModelAndView mostrarAdmTerminal(Request request, Response response){
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
-		return new ModelAndView(viewModel, "adminTerminales.html");
+		return new ModelAndView(viewModel, "terminalConfiguration.html");
 	}
 		
 	

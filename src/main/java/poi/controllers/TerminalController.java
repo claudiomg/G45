@@ -15,7 +15,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class BuscadorDePoiController {
+public class TerminalController {
 	public ModelAndView render(Request request, Response response){
 		RequestMediator requestMediator = new RequestMediator(request);
 		HashMap<String, Object> viewModel = this.configViewModel(requestMediator);

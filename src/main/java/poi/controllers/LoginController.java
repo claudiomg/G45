@@ -8,7 +8,11 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class LoginController{ //implements WithGlobalEntityManager{
+public class LoginController{
+	
+	public ModelAndView render(Request request, Response response){
+		return new ModelAndView(new HashMap<>(), "index.html");
+	}
 	
 	public String validarUsrYPass(Request request, Response response){
 		//se encarga de validar el usuario y contraseña si puede loguear crea la session y devuelve ok
@@ -29,12 +33,11 @@ public class LoginController{ //implements WithGlobalEntityManager{
 		}
 		
 		if (user.isAdmin()){
-			return new ModelAndView(viewModel, "adminIndex.html");
+			return new ModelAndView(viewModel, "administratorHome.html");
 		} else {
-			return new BuscadorDePoiController().render(request, response);
+			return new TerminalController().render(request, response);
 		}
 	}
-	
 
 	private void autenticationUser(Request request) {
 		String userName = request.queryParams("user");
