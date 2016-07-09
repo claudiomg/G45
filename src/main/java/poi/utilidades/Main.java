@@ -51,9 +51,9 @@ public class Main implements WithGlobalEntityManager{
 		//REPORTS
 		QueryReportsController queryReports = new QueryReportsController();
 		get("/query_reports", queryReports::render, engine);
-			get("/query_reports/byDate", queryReports::render, engine);
-			get("/query_reports/byTerminal", queryReports::render, engine);
-			get("/query_reports/byTerminalAndDate", queryReports::render, engine);
+			get("/query_reports/byDate", queryReports::reportByDate, engine);
+			get("/query_reports/byTerminal", queryReports::reportByTerminal, engine);
+			get("/query_reports/byTerminalAndDate", queryReports::reportByTerminalAndDate, engine);
 			
 		//CONFIG TERMINALS
 		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();

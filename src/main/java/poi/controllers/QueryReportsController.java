@@ -12,4 +12,22 @@ public class QueryReportsController {
 		
 		return new ModelAndView(viewModel, "queryReports.html");
 	}
+	
+	public ModelAndView reportByDate(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		return new ModelAndView(viewModel, "queryReports.html");
+	}
+	
+	public ModelAndView reportByTerminal(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		return new ModelAndView(viewModel, "queryReports.html");
+	}
+	
+	public ModelAndView reportByTerminalAndDate(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		return new ModelAndView(viewModel, "queryReports.html");
+	}
 }
