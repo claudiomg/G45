@@ -48,6 +48,7 @@ public class Main implements WithGlobalEntityManager{
 		//ABM POIS
 		UpdatePoisController admin = new UpdatePoisController();
 		get("/poi_administrator",admin::render,engine);
+		
 		//REPORTS
 		QueryReportsController queryReports = new QueryReportsController();
 		get("/query_reports", queryReports::render, engine);
