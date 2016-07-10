@@ -1,33 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<title>Alta/Modificación</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
 <body> 
 
-	<form action="/modificar">
+	<form>
 	
-		<label>POI:</label>
-			<select>
-			<option> ... </option>
-			</select>
-		<br>
-		<br>
-		<label> Agregar Etiqueta:</label>
-			<input type="text" />
-		<label> Eliminar Etiqueta: </label>
-			<select>
-			<option> ... </option>
-			</select>
-		<br>
-		<br>
-		<label> Cambiar ubicaci�n:</label>
-			<input type="text" />
-		<br>
-		<br>
-		
-		<input type="submit" value="Modificar"/>
+		<h1>POI:</h1>
+			
+			<div class="row">
+				<div class="col-lg-6">
+				<label>Nombre:</label>
+			    	<div class="input-group">
+			    		
+			    			<input type="text" class="form-control" placeholder="Nombre">
+			    		<span class="input-group-btn">
+			       	    	<button class="btn btn-info" type="button">Agregar</button>
+			      		</span>
+			      			
+			   		 </div>
+			  	</div>
+			</div>
+			<br>
+			<br>
+			
+			<div class="row">
+				<div class="col-lg-6">
+				<label>Ubicación:</label>
+			    	<div class="input-group">
+			    		<input type="text" class="form-control" placeholder="Etiquetas">
+			    		<span class="input-group-btn">
+			       	    	<button class="btn btn-info" type="button">Agregar</button>
+			      		</span>			      			
+			   		 </div>
+			  	</div>
+			</div>
+			<br>
+			<br>
+			<div class="row">
+				<div class="col-lg-6">
+				<label>Agregar etiquetas:</label>
+			    	<div class="input-group">
+			    		<input type="text" class="form-control" placeholder="Etiquetas">
+			    		<span class="input-group-btn">
+			       	    	<button class="btn btn-info" type="button">Agregar</button>
+			      		</span>
+			      	 </div>
+			  	</div>
+			</div>
+			<br>
+			<br>		
+		<input class="btn btn-info" type="submit" value="Aceptar"/>
 		
 		
 

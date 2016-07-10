@@ -49,7 +49,10 @@ public class Main implements WithGlobalEntityManager{
 		//ABM POIS
 		UpdatePoisController admin = new UpdatePoisController();
 		get("/poi_administrator",admin::render,engine);
+		get("/modificar",admin::modificar,engine);
+		get("/agregar",admin::agregar,engine);
 		
+				
 		//REPORTS
 		QueryReportsController queryReports = new QueryReportsController();
 		get("/query_reports", queryReports::render, engine);
@@ -61,6 +64,10 @@ public class Main implements WithGlobalEntityManager{
 		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();
 		get("/terminal_configuration", terminalConfiguration::render, engine);
 		post("/update_terminal_configuration", terminalConfiguration::updateConfiguration, engine);
+		
 	}
+	
+	
+	
 	 
 }
