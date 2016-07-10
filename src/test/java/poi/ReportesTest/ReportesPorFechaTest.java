@@ -1,6 +1,7 @@
 package poi.ReportesTest;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,7 +48,10 @@ public class ReportesPorFechaTest {
 		repositorio.agregarRegistro(consulta);
 		
 		reporte.dumpReport();
-		Assert.assertTrue(reporte.getResults().get(0).toString().equals("{\"Fecha\":\"2016-06-26\",\"Cantidad\":\"2\"}"));
+		
+		HashMap<String, Object> result = reporte.getResults().get(0);
+		Assert.assertTrue(result.get("Cantidad").equals(2));
+		Assert.assertTrue(result.get("Fecha").equals("2016-06-26"));
 	}
 	
 	@Test
@@ -65,8 +69,13 @@ public class ReportesPorFechaTest {
 		repositorio.agregarRegistro(consulta);
 		
 		reporte.dumpReport();
-		Assert.assertTrue(reporte.getResults().get(0).toString().equals("{\"Fecha\":\"2016-06-26\",\"Cantidad\":\"2\"}"));
-		Assert.assertTrue(reporte.getResults().get(1).toString().equals("{\"Fecha\":\"2016-06-01\",\"Cantidad\":\"1\"}"));
+		
+		HashMap<String, Object> result1 = reporte.getResults().get(0);
+		HashMap<String, Object> result2 = reporte.getResults().get(1);
+		Assert.assertTrue(result2.get("Cantidad").equals(1));
+		Assert.assertTrue(result2.get("Fecha").equals("2016-06-01"));
+		Assert.assertTrue(result1.get("Cantidad").equals(2));
+		Assert.assertTrue(result1.get("Fecha").equals("2016-06-26"));
 	}
 	
 }

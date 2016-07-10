@@ -1,5 +1,7 @@
 package poi.ReportesTest;
 
+import java.util.HashMap;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +45,9 @@ public class ReportesPorTerminalTest {
 		repositorio.agregarRegistro(consulta);
 		
 		reporte.dumpReport();
-		Assert.assertTrue(reporte.getResults().get(0).toString().equals("{\"Cantidad\":\"2\",\"Terminal\":\"Abasto\"}"));
+		HashMap<String, Object> result = reporte.getResults().get(0);
+		Assert.assertTrue(result.get("Cantidad").equals(2));
+		Assert.assertTrue(result.get("Terminal").equals("Abasto"));
 	}
 	
 	@Test
@@ -58,7 +62,15 @@ public class ReportesPorTerminalTest {
 		repositorio.agregarRegistro(consulta);
 		
 		reporte.dumpReport();
-		Assert.assertTrue(reporte.getResults().get(1).toString().equals("{\"Cantidad\":\"2\",\"Terminal\":\"Abasto\"}"));
-		Assert.assertTrue(reporte.getResults().get(0).toString().equals("{\"Cantidad\":\"1\",\"Terminal\":\"Caballito\"}"));
+		
+		reporte.dumpReport();
+		HashMap<String, Object> result1 = reporte.getResults().get(1);
+		HashMap<String, Object> result2 = reporte.getResults().get(0);
+		
+		Assert.assertTrue(result1.get("Cantidad").equals(1));
+		Assert.assertTrue(result1.get("Terminal").equals("Caballito"));
+		
+		Assert.assertTrue(result2.get("Cantidad").equals(2));
+		Assert.assertTrue(result2.get("Terminal").equals("Abasto"));
 	}
 }
