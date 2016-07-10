@@ -10,13 +10,37 @@
 
 		<h1>ABM POI's</h1>
 		
-		<input type="button" value="Alta de POI">
-		<br>
-		<br>
-		<input type="button" value="Baja de POI">
-		<br>
-		<br>
-		<input type="button" value="Modificación de POI">
+			<input type="button" value="Agregar POI"/>
+		
+			{{#hasResults}}	
+		
+			<table>
+			
+				<thead>
+					<tr>					
+						<th> Nombre </th>
+						<th> Eliminar </th>
+						<th> Modificar </th>
+					</tr>
+			    </thead>			    
+			    	<tbody>
+			    		{{#each results}}
+						<tr> 
+							<td>{{{nombre}}}</td>
+							<td>
+								<input type="button" value="Modificar" >
+							</td>
+							<td>
+								<input type="button" value="Eliminar"  >
+							</td>
+							
+						</tr>
+					{{~/each}}
+								    	
+										
+			  		</tbody>
+					
+			</table>
 
 	</form>
 
