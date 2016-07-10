@@ -166,17 +166,82 @@ public class CargaInicial {
 	}
 	
 	private void inicializarConsultas(){
-		Consulta consulta1 = new Consulta(terminal1, "palabra buscada 1");
-		consulta1.setComienzoProceso(LocalDateTime.of(2016, 06, 26, 8, 00));
-		repositorioConsultas.agregarRegistro(consulta1);
-		Consulta consulta2 = new Consulta(terminal1, "palabra buscada 2");
-		consulta2.setComienzoProceso(LocalDateTime.of(2016, 06, 26, 8, 00));
-		repositorioConsultas.agregarRegistro(consulta2);
-		Consulta consulta3 = new Consulta(terminal2, "palabra buscada 3");
-		consulta3.setComienzoProceso(LocalDateTime.of(2016, 06, 1, 15, 22));
-		repositorioConsultas.agregarRegistro(consulta3);
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 8, 01, 8, 00));
+		this.createConsulta(terminal1,"palabra buscada",LocalDateTime.of(2016, 8, 01, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 23, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 23, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 24, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 30, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 4, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 4, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 9, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 9, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 9, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 8, 1, 8, 00));
+		this.createConsulta(terminal2,"palabra buscada",LocalDateTime.of(2016, 8, 2, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 26, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 26, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 27, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 28, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 29, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 06, 29, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 1, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 1, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 1, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 05, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 6, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 8, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 9, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 9, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 15, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 26, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 07, 28, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 8, 5, 8, 00));
+		this.createConsulta(terminal3,"palabra buscada",LocalDateTime.of(2016, 8, 5, 8, 00));
 	}
 	
+	private void createConsulta(Terminal usuario, String palabra,LocalDateTime fecha) {
+		Consulta consulta = new Consulta(usuario, palabra);
+		consulta.setComienzoProceso(fecha);
+		repositorioConsultas.agregarRegistro(consulta);
+	}
 	private void setDireccion(String key, Direccion direccion) {
 		this.direcciones.put(key, direccion);
 	}

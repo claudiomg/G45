@@ -25,13 +25,12 @@ public class LoginController{
 	}
 	
 	public ModelAndView redirectUser(Request request, Response response){
-		HashMap<String, Object> viewModel = new HashMap<>();
 		UsuarioPOI user = request.session().attribute("user");
 		if (user == null){
 			response.redirect("/");
-			return new ModelAndView(viewModel, "index.html");
+			return new ModelAndView(new HashMap<>(), "index.html");
 		}
-		
+		HashMap<String, Object> viewModel = new HashMap<>();
 		if (user.isAdmin()){
 			return new ModelAndView(viewModel, "administratorHome.html");
 		} else {

@@ -3,8 +3,6 @@ package poi.reportes;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-import com.google.gson.JsonObject;
-
 import poi.utilidades.Consulta;
 
 public class ReporteBusquedasPorFecha extends ReporteAbstracto {
@@ -17,8 +15,12 @@ public class ReporteBusquedasPorFecha extends ReporteAbstracto {
 
 
 	private void loadResults(HashMap<LocalDate, Integer> fechas) {
+		//este metodo se encarga de formatear los resultados para que los pueda procesar el controller
 		for (LocalDate fecha : fechas.keySet()){
-			this.createResult(fecha, fechas.get(fecha));
+			HashMap<String, Object> result = new HashMap<>();
+			result.put("Fecha", fecha.toString());
+			result.put("Cantidad", fechas.get(fecha));
+			this.addResult(result);
 		}
 	}
 
@@ -32,11 +34,5 @@ public class ReporteBusquedasPorFecha extends ReporteAbstracto {
 			fechas.put(fecha, newValue);
 		}
 		return fechas;
-	}
-	private JsonObject createResult(LocalDate unaFecha, Integer integer) {
-		HashMap<String, String> columns = new HashMap<String, String>();
-		columns.put("Fecha", unaFecha.toString());
-		columns.put("Cantidad", integer.toString());
-		return super.createResult(columns);
 	}
 }

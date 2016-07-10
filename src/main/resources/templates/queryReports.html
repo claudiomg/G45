@@ -8,8 +8,9 @@
 	<script src="/js/raphael-min.js"></script>
 	<script src="/js/jquery-2.2.3.min.js"></script>
 	<script src="/js/morris-0.4.1.min.js"></script>
-	<script>
+	<script type="text/javascript">
 		$('document').ready(function() {
+			$("#selectReport").val("{{selectReportValue}}").change();
 			$("#selectReport").change(function() {
 				var data = $(this).val();
 				var url = "/query_reports";
@@ -21,7 +22,64 @@
 			});
 		});
 	</script>
-
+	{{#hasResults}}
+	<script type="text/javascript">
+		$('document').ready(function() {
+			var data = [];
+			switch("{{selectReportValue}}") {
+		    case "byDate":
+			    {{#each results}}
+					data.push({"Fecha":"{{Fecha}}","Cantidad":"{{Cantidad}}"});
+				{{~/each}}
+				Morris.Line({
+					  element: 'advancedReportView',
+					  data: data,
+					  xkey: 'Fecha',
+					  ykeys: ['Cantidad'],
+					  labels: ['Cantidad de Busquedas']
+				});
+		        break;
+		    case "byTerminal":
+			    {{#each results}}
+					data.push({"Terminal":"{{Terminal}}","Cantidad":"{{Cantidad}}"});
+				{{~/each}}
+				Morris.Bar({
+					  element: 'advancedReportView',
+					  data: data,
+					  xkey: 'Terminal',
+					  ykeys: ['Cantidad'],
+					  labels: ['Cantidad de Busquedas']
+				});
+		        break;
+		    case "byTerminalAndDate":
+		    	{{#each results}}
+					data.push({
+						{{#each Terminales}}
+							"{{Terminal}}":"{{Cantidad}}",
+						{{~/each}}
+						"Fecha":"{{Fecha}}"
+					});
+				{{~/each}}
+				Morris.Line({
+					  element: 'advancedReportView',
+					  data: data,
+					  xkey: 'Fecha',
+					  ykeys: [
+					  		{{#each terminals}}
+								"{{Terminal}}",
+							{{~/each}}
+						],
+					  labels: [
+					  		{{#each terminals}}
+								"{{Terminal}}",
+							{{~/each}}
+						]
+				});
+		        break;
+			}
+		});
+	</script>
+	{{/hasResults}}
 </head>
 <body>
 	<form id="queryReport-form" >
@@ -35,7 +93,9 @@
 			</select>
 		</div>
 	</form>
-	<div id="advancedReportView"></div>
+	<div id="advancedReportView">
+		
+	</div>
 	<div id="defaultReportView"></div>
 </body>
 </html>

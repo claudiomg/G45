@@ -2,8 +2,6 @@ package poi.reportes;
 
 import java.util.HashMap;
 
-import com.google.gson.JsonObject;
-
 import poi.modelo.usuario.Terminal;
 import poi.utilidades.Consulta;
 
@@ -17,7 +15,10 @@ public class ReporteBusquedasPorTerminal extends ReporteAbstracto {
 	
 	private void loadResults(HashMap<Terminal, Integer> terminales) {
 		for (Terminal terminal : terminales.keySet()){
-			this.createResult(terminal.getUsuario(), terminales.get(terminal));
+			HashMap<String, Object> result = new HashMap<>();
+			result.put("Terminal", terminal.getUsuario());
+			result.put("Cantidad", terminales.get(terminal));
+			this.addResult(result);
 		}
 	}
 
@@ -32,12 +33,4 @@ public class ReporteBusquedasPorTerminal extends ReporteAbstracto {
 		}
 		return terminales;
 	}
-
-	private JsonObject createResult(String unaTerminal, Integer integer) {
-		HashMap<String, String> columns = new HashMap<String, String>();
-		columns.put("Terminal", unaTerminal.toString());
-		columns.put("Cantidad", integer.toString());
-		return super.createResult(columns);
-	}
-
 }

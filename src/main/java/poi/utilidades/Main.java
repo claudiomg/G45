@@ -36,6 +36,7 @@ public class Main implements WithGlobalEntityManager{
 		post("/login_process", (request, response) -> {
 		    return login.validarUsrYPass(request, response);
 		});
+		
 		get("/my_home_page", login::redirectUser, engine);//get controla si hay usuario logueado sino hay lo envia al login
 		
 		
