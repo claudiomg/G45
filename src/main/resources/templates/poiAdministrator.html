@@ -15,8 +15,9 @@
 	<form>
 
 		<h1>ABM POI's</h1>
-		
+			<a href="/agregar" >	
 			<input class="btn btn-info" type="button" value="Agregar POI"/>
+			</a>
 			<br>
 			<br>
 		
@@ -36,7 +37,9 @@
 						<tr> 
 							<td>{{{nombre}}}</td>
 							<td>
+								<a href="/modificar" >
 								<input type="button" class="btn btn-warning" value="Modificar" />
+								</a>
 							</td>
 							<td>
 								<input type="button" class="btn btn-danger" value="Eliminar"  />
@@ -51,6 +54,15 @@
 			</table>
 		{{/hasResults}}
 	</form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $(".btn-danger").on("click", function() { 
+	        var rta = confirm("Está seguro de eliminar?");    
+	        
+	    });        
+	});
+</script>
 
 </body>
 </html>

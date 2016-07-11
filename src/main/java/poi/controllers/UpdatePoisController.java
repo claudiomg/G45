@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import poi.finders.RequestMediator;
 import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioPOI;
 import spark.ModelAndView;
 import spark.Request;
@@ -25,6 +23,20 @@ public class UpdatePoisController {
 		viewModel.put("results", this.convertPois(pois));
 		return new ModelAndView(viewModel, "poiAdministrator.html");
 	}	
+	
+	public ModelAndView modificar(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		
+		return new ModelAndView(viewModel, "modificacionPOI.html");
+	}
+	
+	public ModelAndView agregar(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		
+		return new ModelAndView(viewModel, "modificacionPOI.html");
+	}
 	
 	private List<HashMap<String, Object>> convertPois(List<POI> pois) {
 		List<HashMap<String, Object>> array = new ArrayList<HashMap<String,Object>>();
