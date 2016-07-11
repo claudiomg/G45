@@ -68,15 +68,6 @@ public class RequestMediator {
 	}
 	
 	public Terminal user() {
-		// devuelvo la instancia de usuario alojada en la session
-		// cuando se agregue la session modificar este metodo
-		//return this.getConcreteRequest().session().attribute("user");
-		for ( UsuarioPOI usuario : RepositorioUsuarios.getInstance().getRegistros() ){
-			if (!usuario.isAdmin()){
-				Terminal terminal = (Terminal) usuario;
-				return terminal;
-			}
-		}
 		return this.getConcreteRequest().session().attribute("user");
 	}
 
