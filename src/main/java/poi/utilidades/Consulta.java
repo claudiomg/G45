@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import poi.modelo.usuario.Terminal;
-import poi.modelo.usuario.UsuarioPOI;
+import poi.repositorios.RepositorioConsultas;
 
 public class Consulta {
 	private LocalDateTime comienzoProceso;
@@ -67,5 +67,10 @@ public class Consulta {
 	}
 	public void setDuracionProceso(Duration duracionProceso) {
 		this.duracionProceso = duracionProceso;
+	}
+
+	public void persist() {
+		//me guardo en el repo de consultas
+		RepositorioConsultas.getInstance().agregarRegistro(this);		
 	}
 }

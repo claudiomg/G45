@@ -33,6 +33,7 @@ public class PoiFinder {
 	private void endSearch() {
 		this.getConsulta().setFinProceso(LocalDateTime.now());
 		this.getConsulta().calcularTiempoProceso();
+		this.getConsulta().persist();
 	}
 
 	private void startSearch() {
