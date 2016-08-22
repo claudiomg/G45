@@ -9,7 +9,7 @@ import poi.repositorios.RepositorioPOIsADarDeBaja;
 
 public class ObtenerRegistrosParaDarDeBaja {
 	
-	RepositorioAbstractoPOI repoDeBaja = RepositorioPOIsADarDeBaja.getInstance();
+	RepositorioPOIsADarDeBaja repoDeBaja = RepositorioPOIsADarDeBaja.getInstance();
 	
 	@After
 	public void vaciarRepositorio(){
@@ -19,7 +19,7 @@ public class ObtenerRegistrosParaDarDeBaja {
 	@Test
 	public void probarJson() throws Exception{
 		((RepositorioPOIsADarDeBaja)repoDeBaja).actualizarRepositorio();
-		Assert.assertEquals(2, repoDeBaja.getRegistros().size());
+		Assert.assertEquals(2, repoDeBaja.obtenerRegistros().size());
+	
 	}
-
 }

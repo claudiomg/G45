@@ -4,19 +4,33 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import poi.modelo.puntoDeInteres.DarDeBaja;
+import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
-public class RepositorioPOIsADarDeBaja extends RepositorioPOI {
+public class RepositorioPOIsADarDeBaja extends RepositorioAbstractoPOI{
 	
+	public List<DarDeBaja> registros = new ArrayList <DarDeBaja>();
+	
+	
+	public List<DarDeBaja> obtenerRegistros() {
+		return registros;
+	}
+    public void agregarRegistro(DarDeBaja registros) {
+		this.registros.add(registros);
+	}
+
 	protected static RepositorioPOIsADarDeBaja instance;
 	protected RepositorioPOIsADarDeBaja() { /*Existe para anular la instanciacion*/ };
 	public static RepositorioPOIsADarDeBaja getInstance() {
@@ -60,4 +74,12 @@ public class RepositorioPOIsADarDeBaja extends RepositorioPOI {
 		java.util.Scanner s = new Scanner(stream).useDelimiter("\\A");
 	    return s.hasNext() ? s.next() : "";
 	}
+	
+	
+	public List<Integer> sacarLosIdsDeLosRegistros(List<DarDeBaja> lista){
+    	List<Integer> ids = new ArrayList<Integer>();
+    	ids = lista.stream().map(elem -> elem.getId()).collect(Collectors.toList());
+    	return ids;
+     }
+
 }
