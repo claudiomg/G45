@@ -21,8 +21,8 @@ public class DarDeBaja extends POI{
 	@Override
 	public void inicializarPalabrasClave() {
 		// TODO Auto-generated method stub
-		
-	}
+		}
+	
 
 
 }

@@ -3,7 +3,6 @@ package poi.repositorios;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,10 +13,7 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import poi.modelo.puntoDeInteres.DarDeBaja;
-import poi.modelo.puntoDeInteres.POI;
-import poi.modelo.puntoDeInteres.SucursalBanco;
-import poi.utilidades.Direccion;
-import poi.utilidades.Posicion;
+
 
 public class RepositorioPOIsADarDeBaja extends RepositorioAbstractoPOI{
 	
