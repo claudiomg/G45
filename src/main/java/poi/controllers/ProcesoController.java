@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.usuario.UsuarioPOI;
-import poi.procesos.Proceso3;
+import poi.procesos.ProcesoAgregarAccionesAUsuarios;
 import poi.repositorios.RepositorioPOI;
 import poi.repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
@@ -34,7 +34,7 @@ public class ProcesoController {
 	public ModelAndView updateActions(Request request, Response response) {
 		// HashMap<String, Object> viewModel = new HashMap<>();
 
-		Proceso3 proceso = new Proceso3();
+		ProcesoAgregarAccionesAUsuarios proceso = new ProcesoAgregarAccionesAUsuarios();
 		
 		UsuarioPOI terminal = RepositorioUsuarios.getInstance().getRegistros().stream()
 				.filter(user -> user.getUsuario().equals(request.queryParams("user"))).findFirst().get();
