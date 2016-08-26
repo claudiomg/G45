@@ -24,6 +24,16 @@ public class ProcesoDarDeBajaPois {
 	String nombre;
 	Administrador admin = new Administrador(nombre);
 	
+	public Administrador getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(Administrador admin) {
+		this.admin = admin;
+	}
+
+
 	public void correrProceso() throws Exception{
 		repoDeBaja.cleanRepository();
 		repoDeBaja.actualizarRepositorio();
@@ -36,7 +46,17 @@ public class ProcesoDarDeBajaPois {
 		}
 	
         	
-    public List<String> convertirListaDeIntAListaDeStrings(List<Integer> lista){
+    public PoiFinder getPoiFinder() {
+		return poiFinder;
+	}
+
+
+	public void setPoiFinder(PoiFinder poiFinder) {
+		this.poiFinder = poiFinder;
+	}
+
+
+	public List<String> convertirListaDeIntAListaDeStrings(List<Integer> lista){
     	List<String >listaDeString = new ArrayList<String>();
     	listaDeString = lista.stream().map(elem ->String.valueOf(elem)).collect(Collectors.toList());
     	return listaDeString;

@@ -15,6 +15,14 @@ public class Administrador extends UsuarioPOI {
 	private String mail;
 	private RepositorioPOI repositorio = RepositorioPOI.getInstance();
 
+	public RepositorioPOI getRepositorio() {
+		return repositorio;
+	}
+
+	public void setRepositorio(RepositorioPOI repositorio) {
+		this.repositorio = repositorio;
+	}
+
 	public boolean isAdmin() {
 		return true;
 	}
