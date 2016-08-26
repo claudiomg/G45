@@ -1,7 +1,6 @@
 package poi.utilidades;
 
-import static spark.Spark.post;
-import static spark.Spark.get;
+import static spark.Spark.*;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
@@ -10,6 +9,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import poi.controllers.UpdatePoisController;
 import poi.controllers.TerminalController;
 import poi.controllers.LoginController;
+import poi.controllers.ProcesoController;
 import poi.controllers.QueryReportsController;
 import poi.controllers.TerminalConfigurationController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -64,6 +64,13 @@ public class Main implements WithGlobalEntityManager{
 		TerminalConfigurationController terminalConfiguration = new TerminalConfigurationController();
 		get("/terminal_configuration", terminalConfiguration::render, engine);
 		post("/update_terminal_configuration", terminalConfiguration::updateConfiguration, engine);
+		
+		//PROCESOS
+		ProcesoController process = new ProcesoController();
+		get("/activarProcesos", process::render, engine);
+			post("/proceso/agregarAcciones", process::updateActions, engine);
+			get("/proceso/agregarAcciones", process::agregarAcciones, engine);
+			//put("/proceso/agregarAcciones", process::updateActions, engine);
 		
 	}
 	

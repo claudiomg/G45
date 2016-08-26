@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Agregar acciones</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+
+<br>
+<div class="row">
+	<div class="col-lg-6">
+		<label>Seleccione el POI al que desea agregar la acción:</label>
+	</div>
+</div>
+ <select name="user">
+ 	{{#each results}}
+ 		 <option value="user">{{{nombre}}}</option>
+ 	{{~/each}}
+
+</select> 
+
+<br>
+<div class="row">
+	<div class="col-lg-6">
+		<label>Seleccione las acciones que desea habilitar y deje en blanco las que desea deshabilitar:</label>
+	</div>
+</div>
+
+<form action="/proceso/agregarAcciones" method="post">
+  <input type="checkbox" name="actionTag" value="filterByTag">Filtrar por etiqueta <br>
+  <input type="checkbox" name="actionDisponibility" value="filterByDisponibility">Filtrar por disponibilidad <br>
+  <input type="checkbox" name="actionProximity" value="filterByProximity">Filtrar por cercania <br>
+  <input type="submit" value="Submit">
+</form>
+
+ 
+</body>
+</html>
