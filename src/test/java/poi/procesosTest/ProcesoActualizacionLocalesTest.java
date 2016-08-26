@@ -32,9 +32,7 @@ public class ProcesoActualizacionLocalesTest {
 		LocalComercial unAlmacen = new LocalComercial("Almacen1",null, null, null);
 		repositorioLocal.agregarRegistro(unAlmacen);		
 		proceso.correrProceso();
-		Assert.assertTrue(repositorioLocal.getRegistros().get(1).getNombre().equals(unKiosco.getNombre()));		
 		Assert.assertTrue(repositorioLocal.getRegistros().get(1).getPalabrasClave().size()==4);
 	}
 
-	
 }
