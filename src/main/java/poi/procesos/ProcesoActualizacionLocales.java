@@ -14,11 +14,16 @@ import poi.repositorios.RepositorioPOI;
 
 public class ProcesoActualizacionLocales {
 
+	String ruta = "C:/Users/Claudio/Documents/prueba.txt";
+
+	public ProcesoActualizacionLocales() {
+	}
+
 	public void correrProceso(){
 		List <String> lista = this.cargaLista();
 		String nombre = lista.get(0);		
 		List <String> palabrasClave = new ArrayList<String>();
-		for (int i = 1; i==lista.size() - 1; i++ ){
+		for (int i = 1; i <= (lista.size() - 1); i++ ){
 			palabrasClave.add(lista.get(i));
 		}
 		if(existePOI(nombre)){
@@ -31,7 +36,7 @@ public class ProcesoActualizacionLocales {
 	public void cambiarEtiquetas(String nombre, List<String> etiquetas){
 		RepositorioAbstractoPOI repositorioLocal = RepositorioPOI.getInstance();		
 		repositorioLocal.getRegistros().stream()
-			.filter(local -> ((local.getClass()==LocalComercial.class) && (nombre == local.getNombre())))
+			.filter(local -> ((local.getClass()==LocalComercial.class) && (local.getNombre().equals(nombre))))
 			.findFirst().get().setPalabrasClave(etiquetas);
 	}
 
@@ -43,15 +48,15 @@ public class ProcesoActualizacionLocales {
 	}
 
 	public boolean existePOI(String nombre){
-		RepositorioAbstractoPOI repositorioLocal = RepositorioPOI.getInstance();		
+		RepositorioAbstractoPOI repositorioLocal = RepositorioPOI.getInstance();
 		return repositorioLocal.getRegistros().stream()
-				.anyMatch(local -> ((local.getClass()==LocalComercial.class) && (nombre == local.getNombre())));
+				.anyMatch(local -> ((local.getClass()==LocalComercial.class) && local.getNombre().equals(nombre)));
 	}
 
 	public List<String> cargaLista(){
 		List <String> lista = new ArrayList<String>();
 		try{
-		   FileReader fr = new FileReader("c:/actualizacion.txt");
+		   FileReader fr = new FileReader(ruta);
 		   int caract = fr.read();
 		   String nombre = "";
 		   String etiqueta = "";
@@ -91,5 +96,14 @@ public class ProcesoActualizacionLocales {
 		}				
 		return lista;
 	}
+	
+	public String getRuta() {
+		return ruta;
+	}
+
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
+
 }
 
