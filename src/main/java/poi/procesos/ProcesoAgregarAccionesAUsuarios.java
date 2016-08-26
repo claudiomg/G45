@@ -3,6 +3,7 @@ package poi.procesos;
 import java.util.ArrayList;
 import java.util.List;
 
+import poi.utilidades.Calculo;
 import poi.modelo.puntoDeInteres.DarDeBaja;
 import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
@@ -16,7 +17,7 @@ public class ProcesoAgregarAccionesAUsuarios {
 	}
 
 	RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
-	List<UsuarioPOI> user = null ;
+	List<UsuarioPOI> userGlobal = null ;
 	List<Posicion> comuna = null;
 	List<List<Posicion>> CiudadAutonomaBsAs = null;
 	
@@ -39,11 +40,31 @@ public class ProcesoAgregarAccionesAUsuarios {
 		if (unValor.isEmpty()) {
 			return user;
 		} else {
-			List<UsuarioPOI> userenComuna = user;//removeIf(noestaTerminalEncomuna());
-			// TODO: Filtrar usuarios si estan o no en comuna!
-			return userenComuna;
+			List<UsuarioPOI> toRemove = filterByPosicion(user, unValor);
+			user.removeAll(toRemove);
+			return user;
 		}
 	}
+	
+	public List<UsuarioPOI> filterByPosicion(List<UsuarioPOI> listaUser, List<List<Posicion>> listaComuna){
+		List<UsuarioPOI> toRemove = new ArrayList<UsuarioPOI>();
+		
+		for(UsuarioPOI user: listaUser){
+		Terminal terminal = new Terminal(user.getUsuario());
+		
+
+		for(List<Posicion> cordenada: listaComuna){
+		    if(poi.utilidades.Calculo.coordenadasEnComuna(cordenada, terminal.getPosicion())){}
+		    else{
+		        toRemove.add(user);
+		    }
+		}
+	}
+		
+	
+		return toRemove;		
+	}
+	
 
 	public void actualizarPermisos(UsuarioPOI user, boolean permisoEtiqueta, boolean permisoDisponibilidad,
 			boolean permisoCercania) {
