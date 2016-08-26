@@ -15,7 +15,7 @@ public class ProcessManager implements Runnable {
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
 		//ejecuto cada uno de mis sub procesos
 		for (AbstractDataProcess aProcess : this.getProcesses()) {
 			Thread thread = new Thread(aProcess);

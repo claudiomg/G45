@@ -11,7 +11,7 @@ public class Proceso3 {
 	}
 
 	RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
-
+	List<UsuarioPOI> user = null ;
 	public List<UsuarioPOI> crearActualizacion(List<String> unValor) {
 		List<UsuarioPOI> user = terminales.getTerminals();
 		if (unValor == null) {
