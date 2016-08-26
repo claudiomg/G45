@@ -11,9 +11,9 @@ import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.usuario.Administrador;
 import poi.repositorios.RepositorioPOIsADarDeBaja;
 
-public class Proceso2 {
+public class ProcesoDarDeBajaPois {
 	
-	public Proceso2(){
+	public ProcesoDarDeBajaPois(){
 		
 	}
 	

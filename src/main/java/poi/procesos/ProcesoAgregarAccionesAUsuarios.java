@@ -10,9 +10,9 @@ import poi.repositorios.RepositorioPOIsADarDeBaja;
 import poi.repositorios.RepositorioUsuarios;
 import poi.utilidades.Posicion;
 
-public class Proceso3 {
+public class ProcesoAgregarAccionesAUsuarios {
 
-	public Proceso3() {
+	public ProcesoAgregarAccionesAUsuarios() {
 	}
 
 	RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
