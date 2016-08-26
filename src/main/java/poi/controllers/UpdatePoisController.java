@@ -49,4 +49,10 @@ public class UpdatePoisController {
 		}
 		return array;
 }
+	public ModelAndView excepcion(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		
+		return new ModelAndView(viewModel, "excepcionesHorarias.html");
+	}
 }

@@ -16,10 +16,10 @@ public class ProcesoAgregarAccionesAUsuarios {
 	public ProcesoAgregarAccionesAUsuarios() {
 	}
 
-	RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
-	List<UsuarioPOI> userGlobal = null ;
-	List<Posicion> comuna = null;
-	List<List<Posicion>> CiudadAutonomaBsAs = null;
+	private RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
+
+	private List<Posicion> comuna = null;
+	private List<List<Posicion>> CiudadAutonomaBsAs = null;
 	
 
 	
