@@ -1,9 +1,14 @@
 package poi.procesos;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import poi.modelo.puntoDeInteres.DarDeBaja;
 import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
+import poi.repositorios.RepositorioPOIsADarDeBaja;
 import poi.repositorios.RepositorioUsuarios;
+import poi.utilidades.Posicion;
 
 public class Proceso3 {
 
@@ -12,13 +17,31 @@ public class Proceso3 {
 
 	RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
 	List<UsuarioPOI> user = null ;
-	public List<UsuarioPOI> crearActualizacion(List<String> unValor) {
+	List<Posicion> comuna = null;
+	List<List<Posicion>> CiudadAutonomaBsAs = null;
+	
+
+	
+	public List<Posicion> setComuna(){
+		//TODO: hacer
+
+		return comuna;
+	}
+	
+	public List<List<Posicion>> setCiudadAutonomaBsAs(List<Posicion> unaComuna){
+		//TODO: hacer
+		
+		return CiudadAutonomaBsAs;
+	}
+	
+	public List<UsuarioPOI> crearActualizacion(List<List<Posicion>> unValor) {
 		List<UsuarioPOI> user = terminales.getTerminals();
-		if (unValor == null) {
+		if (unValor.isEmpty()) {
 			return user;
 		} else {
-			// TODO: HAACER LO DE COMUNAS
-			return user;
+			List<UsuarioPOI> userenComuna = user;//removeIf(noestaTerminalEncomuna());
+			// TODO: Filtrar usuarios si estan o no en comuna!
+			return userenComuna;
 		}
 	}
 
@@ -31,7 +54,7 @@ public class Proceso3 {
 		terminal.updateFilterByDisponibility(permisoCercania);
 	}
 
-	public void correrProceso(List<String> unValor,  boolean permisoEtiqueta, boolean permisoDisponibilidad, boolean permisoCercania) throws Exception {
+	public void correrProceso(List<List<Posicion>> unValor,  boolean permisoEtiqueta, boolean permisoDisponibilidad, boolean permisoCercania) throws Exception {
 		for (UsuarioPOI elemento : crearActualizacion(unValor)) {
 			 actualizarPermisos(elemento, permisoEtiqueta,permisoDisponibilidad,
 						permisoCercania);
