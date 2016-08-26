@@ -31,9 +31,10 @@ public class Proceso3 {
 		terminal.updateFilterByDisponibility(permisoCercania);
 	}
 
-	public void correrProceso(List<String> unValor, String accion, boolean value) throws Exception {
+	public void correrProceso(List<String> unValor,  boolean permisoEtiqueta, boolean permisoDisponibilidad, boolean permisoCercania) throws Exception {
 		for (UsuarioPOI elemento : crearActualizacion(unValor)) {
-			((Terminal) elemento).updateAccion(accion, value);
+			 actualizarPermisos(elemento, permisoEtiqueta,permisoDisponibilidad,
+						permisoCercania);
 		}
 	}
 }
