@@ -35,4 +35,13 @@ public class ProcesoActualizacionLocalesTest {
 		Assert.assertTrue(repositorioLocal.getRegistros().get(1).getPalabrasClave().size()==4);
 	}
 
+	@Test
+	public void noExisteArchivo(){
+		LocalComercial unAlmacen = new LocalComercial("Almacen1",null, null, null);
+		repositorioLocal.agregarRegistro(unAlmacen);		
+		proceso.setRuta("C:/prueba.txt");
+		proceso.correrProceso();
+		Assert.assertTrue(repositorioLocal.getRegistros().size() == 1);
+	}
+	
 }

@@ -21,16 +21,18 @@ public class ProcesoActualizacionLocales {
 
 	public void correrProceso(){
 		List <String> lista = this.cargaLista();
-		String nombre = lista.get(0);		
-		List <String> palabrasClave = new ArrayList<String>();
-		for (int i = 1; i <= (lista.size() - 1); i++ ){
-			palabrasClave.add(lista.get(i));
+		if (!lista.isEmpty()) {
+			String nombre = lista.get(0);		
+			List <String> palabrasClave = new ArrayList<String>();
+			for (int i = 1; i <= (lista.size() - 1); i++ ){
+				palabrasClave.add(lista.get(i));
+			}
+			if(existePOI(nombre)){
+				cambiarEtiquetas(nombre, palabrasClave);
+			} else {
+				agregarPOI(nombre, palabrasClave);
+			}
 		}
-		if(existePOI(nombre)){
-			cambiarEtiquetas(nombre, palabrasClave);
-		} else {
-			agregarPOI(nombre, palabrasClave);
-		}	
 	}
 	
 	public void cambiarEtiquetas(String nombre, List<String> etiquetas){
