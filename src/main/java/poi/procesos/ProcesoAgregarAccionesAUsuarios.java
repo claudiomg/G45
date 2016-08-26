@@ -5,9 +5,9 @@ import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
 import poi.repositorios.RepositorioUsuarios;
 
-public class Proceso3 {
+public class ProcesoAgregarAccionesAUsuarios {
 
-	public Proceso3() {
+	public ProcesoAgregarAccionesAUsuarios() {
 	}
 
 	RepositorioUsuarios terminales = RepositorioUsuarios.getInstance();
