@@ -36,6 +36,8 @@ public class ProcesoController {
 
 		ProcesoAgregarAccionesAUsuarios proceso = new ProcesoAgregarAccionesAUsuarios();
 		
+		String sasdf = request.queryParams("user");
+		
 		UsuarioPOI terminal = RepositorioUsuarios.getInstance().getRegistros().stream()
 				.filter(user -> user.getUsuario().equals(request.queryParams("user"))).findFirst().get();
 
