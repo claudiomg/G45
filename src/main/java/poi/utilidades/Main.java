@@ -51,6 +51,7 @@ public class Main implements WithGlobalEntityManager{
 		get("/poi_administrator",admin::render,engine);
 		get("/modificar",admin::modificar,engine);
 		get("/agregar",admin::agregar,engine);
+		get("/excepciones",admin::excepcion,engine);
 		
 				
 		//REPORTS
