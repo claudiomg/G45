@@ -3,24 +3,15 @@ $('document').ready(function() {
 	$("#login-form").validate({
 		rules : {
 			password : {
-				required : true,
+				required : false,
 			},
 			user : {
-				required : true,
-			},
-		},
-		messages : {
-			password : {
-				required : "Ingrese la contraseña"
-			},
-			user : {
-				required : "Ingrese el usuario"
+				required : false,
 			},
 		},
 		submitHandler : submitForm
 	});
 	/* validation */
-
 	/* login submit */
 	function submitForm() {
 		var data = $("#login-form").serialize();
@@ -35,10 +26,10 @@ $('document').ready(function() {
 			},
 			success : function(response) {
 				if (response == "ok") {
-					$("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
-					setTimeout('window.location.href = "my_home_page"; ',1000);
+					$("#btn-login").html('<img class="glyphicon" src="images/btn-ajax-loader2.gif" /> &nbsp; Autenticando...');
+					setTimeout('window.location.href = "my_home_page"; ',300);
 				} else {
-					$("#error").fadeIn(1000,loginError(response));
+					$("#error").fadeIn(300,loginError(response));
 				}
 			}
 		});
