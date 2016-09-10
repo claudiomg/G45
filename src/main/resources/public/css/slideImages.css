@@ -1,0 +1,11 @@
+.main-container{
+	heigth:none;
+}
+.jumbotron {
+	height: 100%;
+	opacity: 0.9;
+}
+
+.jumbotron-main {
+	color: #333;
+}
