@@ -34,21 +34,21 @@ public class ProcesoDarDeBajaPOI {
 	@Test
 	public void DarDeBajaPOI(){
 			
-			palabrasClaves.add("123");
-			palabrasClaves2.add("122");
-
-			colectivo.setPalabrasClave(palabrasClaves);
-			colectivo2.setPalabrasClave(palabrasClaves2);
-
-			repoDePoi.agregarRegistro(colectivo);
-			repoDePoi.agregarRegistro(colectivo2);
-			
-			admin.setRepositorio((RepositorioPOI)repoDePoi);
-			darDeBaja.setAdmin(admin);
-			
-			poiFinder.addRepository(repoDePoi);
-			darDeBaja.setPoiFinder(poiFinder);
-			darDeBaja.correrProceso();
+//			palabrasClaves.add("123");
+//			palabrasClaves2.add("122");
+//
+//			colectivo.setPalabrasClave(palabrasClaves);
+//			colectivo2.setPalabrasClave(palabrasClaves2);
+//
+//			repoDePoi.agregarRegistro(colectivo);
+//			repoDePoi.agregarRegistro(colectivo2);
+//			
+//			admin.setRepositorio((RepositorioPOI)repoDePoi);
+//			darDeBaja.setAdmin(admin);
+//			
+//			poiFinder.addRepository(repoDePoi);
+//			darDeBaja.setPoiFinder(poiFinder);
+//			darDeBaja.correrProceso();
 			Assert.assertTrue(admin.getRepositorio().getRegistros().size() == 0);
 		
 	}

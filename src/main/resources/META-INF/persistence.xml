@@ -7,7 +7,7 @@
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-      	<class>Usuario</class>	
+      	<class>Direccion</class>	
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        

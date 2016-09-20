@@ -24,6 +24,17 @@ public class Main implements WithGlobalEntityManager{
 
 		staticFileLocation("/public");
 		
+		
+//		/** CREAR DIRECCION PERSISTIBLE **/
+//		Direccion dir = new Direccion();
+//		dir.setBarrio("Almagro");
+//		dir.setLocalidad("Chivilcoy");
+//		dir.setCalle("Guemes");
+//		dir.setCodigoPostal("2222");
+//		dir.persistir(dir);
+//		/** BORRAR **/
+		
+		
 		CargaInicial.getInstance().inicializar();
 		
 		// INDEX PRINCIPAL - LOGIN
