@@ -7,7 +7,12 @@
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-      	<class>Direccion</class>	
+      	<class>poi.utilidades.Direccion</class>
+      	<class>poi.modelo.puntoDeInteres.POI</class>
+      	<class>poi.modelo.puntoDeInteres.ParadaColectivo</class>
+		<class>poi.modelo.puntoDeInteres.LocalComercial</class>    
+		<class>poi.modelo.puntoDeInteres.CGP</class>  	
+		<class>poi.modelo.puntoDeInteres.SucursalBanco</class> 	
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        

@@ -5,15 +5,25 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
 import poi.utilidades.Direccion;
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 import poi.utilidades.TimeRange;
 
+@Entity
+@Table(name = "SucursalesBancos")
 public class SucursalBanco extends POI{
-	
+	@Id
+	@GeneratedValue
+	@Column(name = "SucursalBancoId")
+	private Long SucursalBancoId;
 	private String sucursal = new String();
 	private String gerente = new String();
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="SucursalBancoId")
 	private List<String> servicios = new ArrayList<String>();
 	
 	public SucursalBanco(String nombre, Posicion posicion, Direccion direccion) {
