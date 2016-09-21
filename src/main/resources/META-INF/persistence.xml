@@ -13,6 +13,10 @@
 		<class>poi.modelo.puntoDeInteres.LocalComercial</class>    
 		<class>poi.modelo.puntoDeInteres.CGP</class>  	
 		<class>poi.modelo.puntoDeInteres.SucursalBanco</class> 	
+		<class>poi.utilidades.Consulta</class>
+		<class>poi.utilidades.TimeRange</class>
+		<class>poi.utilidades.DisponibilidadHoraria</class>
+		
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
