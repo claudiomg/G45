@@ -1,11 +1,19 @@
 package poi.modelo.usuario;
 
 import java.util.HashMap;
+import java.util.prefs.Preferences;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -19,9 +27,10 @@ public class Terminal extends UsuarioPOI{
 			, fetch = FetchType.EAGER)
 	@JoinColumn(name="id_usuario")
 	private Posicion posicion;
-	@OneToMany(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="id_usuario")
+	@ElementCollection
+    @MapKeyColumn(name="accion")
+    @Column(name="accion")
+    @CollectionTable(name="AccionesPorUsuario", joinColumns=@JoinColumn(name="id_usuario"))
 	private HashMap<String,Boolean> acciones = new HashMap<String,Boolean>();
 	
 	public Terminal(String usuario) {
