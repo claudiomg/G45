@@ -7,7 +7,15 @@ import poi.utilidades.Calculo;
 import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ParadasColectivos")
 public class ParadaColectivo extends POI{
+	@Id
+	@GeneratedValue
+	@Column(name = "ParadaColectivoId")
+	private Long ParadaId;
 	
 	private String linea = new String();
 

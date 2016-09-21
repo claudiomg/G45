@@ -1,12 +1,21 @@
 package poi.modelo.puntoDeInteres;
 
+import javax.persistence.*;
+
 import poi.utilidades.Calculo;
 import poi.utilidades.Direccion;
 import poi.utilidades.Posicion;
 
-
+@Entity
+@Table(name = "LocalesComerciales")
 public class LocalComercial extends POI{
-    
+	@Id
+	@GeneratedValue
+	@Column(name = "LocalComercialId")
+	private Long LocalComercialId;
+	@OneToOne(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="LocalComercialId")
 	private RadioCercania radioDeCercania;
 	
 	public LocalComercial(String nombre, Posicion posicion, Direccion direccion, RadioCercania radioDeLocal) {

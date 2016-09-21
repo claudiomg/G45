@@ -1,8 +1,9 @@
 package poi.modelo.puntoDeInteres;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.time.LocalDateTime;
+
+import javax.persistence.*;
 
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Calculo;
@@ -11,13 +12,37 @@ import poi.utilidades.Posicion;
 import poi.utilidades.ExcepcionSinAtencion;
 import poi.utilidades.ExcepcionHorarioCambiado;
 
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="POIS")
 public abstract class POI {
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "PoiId")
+	private Long PoiId;
+	@Column(name = "NOMBRE_POI")
 	private String nombre = new String();
+	@OneToOne(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private Posicion posicion;
+	@OneToOne(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private Direccion direccion;
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private List<String> palabrasClave = new ArrayList<String>();
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	private ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
