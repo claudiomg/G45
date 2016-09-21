@@ -1,7 +1,20 @@
 package poi.modelo.usuario;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity(name = "Usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class UsuarioPOI {
+	@Id
+	@GeneratedValue
+	@Column(name = "NombreUsuario")
 	private String usuario;
+	@Column(name = "PasswordUsuario")
 	private String password;
 	
 	public boolean isAdmin() {

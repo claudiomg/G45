@@ -4,14 +4,21 @@ import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.Posicion;
 
 import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import poi.modelo.puntoDeInteres.CGP;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.puntoDeInteres.ServicioDeCGP;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.repositorios.RepositorioPOI;
 
+@Entity(name = "Administradores")
+@PrimaryKeyJoinColumn(name = "id_usuario")
 public class Administrador extends UsuarioPOI {
-	
+	@Column(name = "mail")
 	private String mail;
 	private RepositorioPOI repositorio = RepositorioPOI.getInstance();
 
