@@ -12,8 +12,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
@@ -27,20 +29,17 @@ public class Consulta {
 	@GeneratedValue
 	@Column(name="consultaId")
 	private Long consultaId;
-	@Convert(converter=LocalDateTimeConverter.class)	
 	@Column(name = "comienzoProceso")
 	private LocalDateTime comienzoProceso;
-	@Convert(converter=LocalDateTimeConverter.class)
 	@Column(name = "finProceso")
 	private LocalDateTime finProceso;
-	@Convert(converter= Duration.class)
 	@Column(name = "duracionProceso")
 	private Duration duracionProceso;
 	@Column(name="palabraBuscada")
 	private String palabraBuscada;
-	@OneToOne(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="consultaId")
+//	@ManyToOne
+//	@JoinColumn(name="terminalId")
+	@Transient
 	private Terminal user;
 	
 	public Consulta(){};
