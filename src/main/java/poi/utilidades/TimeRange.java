@@ -9,26 +9,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
-
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 @Entity
 @Table(name = "TimeRange")
-public class TimeRange {
+public class TimeRange  implements WithGlobalEntityManager {
 	
 	@Id
 	@GeneratedValue
 	@Column(name = "timeRangeId")
 	private Long timeRangeId;
-	@Convert(converter=LocalDateTimeConverter.class)
+	
 	@Column(name = "endTime")
 	private LocalTime endTime;
-	@Convert(converter=LocalDateTimeConverter.class)
+	
 	@Column(name = "comienzoProceso")
 	private LocalTime startTime;
 	
-	
 	public TimeRange(){};
+	
 	public TimeRange(LocalTime start, LocalTime end) {
 		this.startTime = start;
 		this.endTime = end;
@@ -52,5 +51,11 @@ public class TimeRange {
 	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
+
+	public void persistir(TimeRange time){
+		entityManager().getTransaction().begin();
+		entityManager().persist(time);
+		entityManager().getTransaction().commit();
+	}	
 
 }

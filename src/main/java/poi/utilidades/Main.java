@@ -4,6 +4,9 @@ import static spark.Spark.*;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.controllers.UpdatePoisController;
@@ -22,19 +25,26 @@ public class Main implements WithGlobalEntityManager{
 		
 		port(8080);
 
-		staticFileLocation("/public");
+		staticFileLocation("/public");		
 		
-		
-//		/** CREAR DIRECCION PERSISTIBLE **/
-//		Direccion dir = new Direccion();
-//		dir.setBarrio("Almagro");
-//		dir.setLocalidad("Chivilcoy");
-//		dir.setCalle("Guemes");
-//		dir.setCodigoPostal("2222");
-//		dir.persistir(dir);
-//		/** BORRAR **/
-		
-		
+		/** CREAR DIRECCION PERSISTIBLE **/
+		Direccion dir = new Direccion();
+		dir.setBarrio("Almagro");
+		dir.setLocalidad("Chivilcoy");
+		dir.setCalle("Guemes");
+		dir.setCodigoPostal("2222");
+		dir.persistir(dir);
+		/** BORRAR **/
+
+		/** CREAR DISPONIBILIDAD PERSISTIBLE **/		
+		TimeRange rangoInferiorDeLaSemana = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
+		TimeRange rangoSuperiorDeLaSemana = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
+		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
+		lunes.agregarNuevoRango(rangoInferiorDeLaSemana);
+		lunes.agregarNuevoRango(rangoSuperiorDeLaSemana);
+		lunes.persistir(lunes);
+		/** BORRAR **/
+				
 		CargaInicial.getInstance().inicializar();
 		
 		// INDEX PRINCIPAL - LOGIN
