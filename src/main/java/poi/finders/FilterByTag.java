@@ -1,5 +1,8 @@
 package poi.finders;
 
+import java.util.Arrays;
+import java.util.List;
+
 import poi.modelo.puntoDeInteres.POI;
 
 public class FilterByTag implements PoiFilter {
@@ -12,8 +15,9 @@ public class FilterByTag implements PoiFilter {
 
 	@Override
 	public boolean matches(POI unPOI) {
-		//redefinir este metodo para que devuelva el valor verdadero
-		return unPOI.matches(palabraBuscada);
+		//devuelvo true si alguna palabra de palabra buscada machea con el poi
+		List<String> splited = Arrays.asList(palabraBuscada.split(" "));
+		return splited.stream().anyMatch(string -> unPOI.matches(string));
 	}
 
 	public String getPalabraBuscada() {

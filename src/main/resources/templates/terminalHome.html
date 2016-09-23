@@ -35,34 +35,50 @@
 	<main class="main-container" role="main" style="padding-top: 0px;padding-bottom: 0px;">
 		<div id="wrapper">
 	        <div id="sidebar-wrapper">
-	            <form action="my_home_page" method="post">
-					<div class="filters">
-						<ul>
-							<li><input type="checkbox" name="cgpFilter" value="ON" {{cgpFilterValue}} > Centros de Gestión Comunal </li>
-							<li><input type="checkbox" name="busStopFilter" value="ON" {{busStopFilterValue}} > Paradas de Colectivo </li>
-							<li><input type="checkbox" name="localFilter" value="ON" {{localFilterValue}} > Locales Comerciales </li>
-							<li><input type="checkbox" name="bankFilter" value="ON" {{bankFilterValue}} > Sucursales de Banco </li>
-						</ul>
-					</div>
-					<div class="filters">
-						<ul>
-							{{#accessDisponibilityFilter}}
-							<li><input type="checkbox" name="disponibilityFilter" value="ON" {{disponibilityFilterValue}} > Solo disponible </li>
-							{{/accessDisponibilityFilter}}
-							{{#accessProximityFilter}}
-							<li><input type="checkbox" name="proximityFilter" value="ON" {{proximityFilterValue}} > Solo cercanos </li>
-							{{/accessProximityFilter}}
-						</ul>
-					</div>
-				
-					<div class="manualFilters">
-						{{#accessTagFilter}}
-						Palabra Clave:
-						<input type="text" name="tagFilter" value= "{{tagFilterValue}}" />
-						{{/accessTagFilter}}
-						<input type="submit" value="Buscar"/>
-					</div>
-				</form>
+	        	<div class="sidebar-wrapper-header">
+	        		<h5 style="margin-top: 0px;"> Filtros de Busqueda </h5>
+	        		<button type="button" class="close" aria-hidden="true">×</button>
+	        	</div>
+	        	<div class="sidebar-wrapper-content">
+	        		<div class="checkbox sidebar-wrapper-mode">
+		            	<input id="searchMode" type="checkbox" name="manualMode" value="ON" {{searchModeValue}} >
+		            </div>
+		            <form role="form" action="my_home_page" method="post">
+		            	<div class="advancedFilters">
+							<div class="filters poiFilters row shortcut-row">
+								
+								<ul>
+									<li><input type="checkbox" name="cgpFilter" value="ON" {{cgpFilterValue}} > CGP</li> 
+									<li><input type="checkbox" name="busStopFilter" value="ON" {{busStopFilterValue}} > Paradas de Colectivo </li>
+									<li><input type="checkbox" name="localFilter" value="ON" {{localFilterValue}} > Locales Comerciales </li>
+									<li><input type="checkbox" name="bankFilter" value="ON" {{bankFilterValue}} > Sucursales de Banco </li>
+								</ul>
+							</div>
+							<div class="filters">
+								<ul>
+									{{#accessDisponibilityFilter}}
+									<li><input type="checkbox" name="disponibilityFilter" value="ON" {{disponibilityFilterValue}} > Solo disponible </li>
+									{{/accessDisponibilityFilter}}
+									{{#accessProximityFilter}}
+									<li><input type="checkbox" name="proximityFilter" value="ON" {{proximityFilterValue}} > Solo cercanos </li>
+									{{/accessProximityFilter}}
+								</ul>
+							</div>
+					
+							
+						</div>
+						<div class="manualFilters">
+							{{#accessTagFilter}}
+							<div class="form-group">
+								<label for="tagFilter">Palabra Clave</label>
+								<input id="tagFilter" type="text" name="tagFilter" value= "{{tagFilterValue}}" class="form-control" placeholder="Ingrese una etiqueta">
+							</div>
+							{{/accessTagFilter}}
+						</div>
+						<input class="btn btn-primary" type="submit" value="Buscar"/>
+					</form>
+				</div>
+				<div class="sidebar-wrapper-footer"></div>
             </div>
         </div>
         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
@@ -70,7 +86,7 @@
 	</main>
 	
 	{{#hasResults}}
-		<div id="results">
+		<div id="results" style="display:none">
 			<table class="table table-striped table-bordered table-condensed table-responsive">
 				<thead>
 					<tr>
@@ -125,13 +141,32 @@
 	<script src="bastrap3/jquery.min.js"></script>
 	<script src="bastrap3/bootstrap.min.js"></script>
 	<script src="bastrap3/validator.js"></script> <!-- http://1000hz.github.io/bootstrap-validator -->
+	<script src="bootstrapCheckbox/js/bootstrap-checkbox.min.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBgvn_2I1NSn8nh8z3e2tgI5RUxktygzuc&sensor=false">
 	</script>
 	<script>
+		function updatePoiFilter(){
+			var isManual = $("#searchMode").is(":checked");
+			$(".advancedFilters .poiFilters input").prop('checked', isManual);
+			if(isManual){
+				$(".advancedFilters").hide();
+			}else{
+				$(".advancedFilters").show();
+			}
+		};
+		$("#searchMode").change(updatePoiFilter);
 	    $("#menu-toggle").click(function(e) {
 	        e.preventDefault();
 	        $("#wrapper").toggleClass("toggled");
+	    });
+	    updatePoiFilter();
+	    $("#searchMode").checkboxpicker({
+			html: true,
+			offLabel: 'Avanzado',
+			onLabel: 'Básico',
+	    	offActiveCls: 'btn-primary',
+			onActiveCls: 'btn-primary'
 	    });
     </script>
 	<script>

@@ -18,6 +18,7 @@ public class PoiFinderBuilder {
 	private RequestMediator request;
 	private Terminal user;
 	private String palabraBuscada;
+	private boolean manualMode;
 
 	public PoiFinderBuilder(RequestMediator request) {
 		this.setRequest(request);
@@ -28,6 +29,7 @@ public class PoiFinderBuilder {
 		PoiFinder finder = new PoiFinder();
 		
 		this.setUser();
+		this.setSearchMode();
 		this.setPalabraBuscada();
 		this.setQueryOn(finder);
 		this.setFiltersOn(finder);
@@ -45,7 +47,7 @@ public class PoiFinderBuilder {
 	private void addCgpServiceRepository(PoiFinder finder) {
 		//se agrega solo si se habilito la busqueda en bancos
 		boolean enable = this.getRequest().queryParam("cgpFilter", "ON");
-		if (enable){
+		if (enable || this.isManualMode()){
 			finder.addRepository(RepositorioCGPExternos.getInstance());
 		}
 	}
@@ -53,7 +55,7 @@ public class PoiFinderBuilder {
 	private void addBankRepository(PoiFinder finder) {
 		//se agrega solo si se habilito la busqueda en bancos
 		boolean enable = this.getRequest().queryParam("bankFilter", "ON");
-		if (enable){
+		if (enable || this.isManualMode()){
 			finder.addRepository(RepositorioBancosExternos.getInstance());
 		}
 	}
@@ -100,7 +102,7 @@ public class PoiFinderBuilder {
 		//dependo del request y el usuario
 		boolean hasFilterValue = !this.getPalabraBuscada().isEmpty();
 		boolean hasAccess = this.getUser().canFilterByTag();
-		if (hasAccess && hasFilterValue){
+		if ((hasAccess && hasFilterValue) || this.isManualMode()){
 			finder.addFilter(new FilterByTag(this.getPalabraBuscada()));
 		}
 	}
@@ -121,6 +123,11 @@ public class PoiFinderBuilder {
 	private void setUser() {
 		this.user = this.getRequest().user();
 	}
+	
+	private void setSearchMode() {
+		this.setManualMode((this.getRequest().queryParam("manualMode","ON")));
+	}
+	
 	private Terminal getUser() {
 		return this.user;
 	}
@@ -131,6 +138,14 @@ public class PoiFinderBuilder {
 	
 	private RequestMediator getRequest() {
 		return this.request;
+	}
+
+	public boolean isManualMode() {
+		return manualMode;
+	}
+
+	public void setManualMode(boolean manualMode) {
+		this.manualMode = manualMode;
 	}
 
 }

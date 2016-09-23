@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-@Entity(name = "Usuarios")
+/*@Entity(name = "Usuarios")*/
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class UsuarioPOI {
 	@Id

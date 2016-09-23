@@ -20,6 +20,7 @@ public class TerminalController {
 		RequestMediator requestMediator = new RequestMediator(request);
 		HashMap<String, Object> viewModel = this.configViewModel(requestMediator);
 		viewModel.put("hasResults", false);
+		viewModel.put("searchModeValue", "checked");
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 
@@ -42,7 +43,8 @@ public class TerminalController {
 		viewModel.put("latitud", usuario.getPosicion().getLatitud());
 		viewModel.put("longitud", usuario.getPosicion().getLongitud());
 	//defino valores para la vista
-		//defino tipos
+		//defino tipos 
+		viewModel.put("searchModeValue", request.customValueForQueryParam("manualMode","ON","checked",""));
 		viewModel.put("cgpFilterValue", request.customValueForQueryParam("cgpFilter","ON","checked",""));
 		viewModel.put("busStopFilterValue", request.customValueForQueryParam("busStopFilter","ON","checked",""));
 		viewModel.put("localFilterValue", request.customValueForQueryParam("localFilter","ON","checked",""));
