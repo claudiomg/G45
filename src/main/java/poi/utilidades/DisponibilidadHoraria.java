@@ -11,11 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+import poi.modelo.puntoDeInteres.ServicioDeCGP;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -36,6 +39,9 @@ public class DisponibilidadHoraria implements WithGlobalEntityManager {
 	private DayOfWeek dia;
 	@Column(name="day")	
 	private String day;
+	/*@ManyToOne
+	@JoinColumn (name = "IdServicio")
+	private ServicioDeCGP servicio;*/
 		
 	public DisponibilidadHoraria(){		
 	};
