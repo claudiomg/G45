@@ -59,6 +59,18 @@ public class Direccion implements WithGlobalEntityManager {
 		lista.add(this.getProvincia());
 		return lista;
 	}
+	
+	public Direccion(){
+		
+	}
+	
+	public Long getDireccionId() {
+		return direccionId;
+	}
+
+	public void setDireccionId(Long direccionId) {
+		this.direccionId = direccionId;
+	}
 
 	public String getCalle() {
 		return calle;

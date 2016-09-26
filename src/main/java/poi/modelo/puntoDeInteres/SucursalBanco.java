@@ -14,16 +14,16 @@ import poi.utilidades.TimeRange;
 
 @Entity
 @Table(name = "SucursalesBancos")
+@PrimaryKeyJoinColumn(name = "PoiId")
 public class SucursalBanco extends POI{
-	@Id
-	@GeneratedValue
-	@Column(name = "SucursalBancoId")
-	private Long SucursalBancoId;
+	
 	private String sucursal = new String();
 	private String gerente = new String();
-	@OneToMany(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="SucursalBancoId")
+	@ElementCollection
+	@CollectionTable(
+	        name="servicios",
+	        joinColumns=@JoinColumn(name="PoiId")
+	  )
 	private List<String> servicios = new ArrayList<String>();
 	
 	public SucursalBanco(String nombre, Posicion posicion, Direccion direccion) {

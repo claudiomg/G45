@@ -4,33 +4,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 import poi.utilidades.DisponibilidadHoraria;
 import poi.utilidades.ExcepcionHorarioCambiado;
 import poi.utilidades.ExcepcionSinAtencion;
 
-//@Entity
-//@Table (name = "ServiciosDeCGP")
+@Entity
+@Table (name = "ServiciosDeCGP")
 public class ServicioDeCGP {
 	
-	//@Id
-	//@GeneratedValue
-	//@Column (name = "ServicioCGPId")
-	//private Long ServicioCGPId;
-	//@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	//@JoinColumn (name = "IdServicio")
-	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-    private ExcepcionSinAtencion feriados;
-    private ArrayList<ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+	@Id
+	@GeneratedValue
+	@Column (name = "ServicioCGPId")
+	private Long ServicioCGPId;
+	@ElementCollection
+    @CollectionTable(name="disponibilidadesDeAtencion", joinColumns=@JoinColumn(name="ServicioCGPId"))
+	private List<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	//TODO arreglar
+	@Transient
+	private ExcepcionSinAtencion feriados;
+	@ElementCollection
+    @CollectionTable(name="horariosCambiados", joinColumns=@JoinColumn(name="ServicioCGPId"))
+	private List<ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	private String nombre;
 	
 	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){

@@ -31,19 +31,26 @@ public abstract class POI {
 			, fetch = FetchType.EAGER)
 	@JoinColumn(name="PoiId")
 	private Direccion direccion;
-	@OneToMany(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="PoiId")
+	@ElementCollection
+	@CollectionTable(
+	        name="tags",
+	        joinColumns=@JoinColumn(name="PoiId")
+	  )
 	private List<String> palabrasClave = new ArrayList<String>();
-	@OneToMany(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="PoiId")
-	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	@ElementCollection
+	@CollectionTable(
+	        name="disponibilidadesDeAtencion",
+	        joinColumns=@JoinColumn(name="PoiId")
+	  )
+	private List<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	@Transient
 	private ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
-	@OneToMany(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="PoiId")
-	private ArrayList <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+	@ElementCollection
+	@CollectionTable(
+	        name="horariosCambiados",
+	        joinColumns=@JoinColumn(name="PoiId")
+	  )
+	private List <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
 		double distancia = Calculo.distanciaLineal(this.posicion, posicionUsuario);
@@ -99,7 +106,7 @@ public abstract class POI {
 	}
 
 	public ArrayList<DisponibilidadHoraria> getDisponibilidadesDeAtencion() {
-		return disponibilidadesDeAtencion;
+		return (ArrayList<DisponibilidadHoraria>) disponibilidadesDeAtencion;
 	}
 
 	public void setDisponibilidadesDeAtencion(ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion) {
@@ -134,7 +141,7 @@ public abstract class POI {
 	}
 	
 	public ArrayList<ExcepcionHorarioCambiado> getHorariosCambiados() {
-		return horariosCambiados;
+		return (ArrayList<ExcepcionHorarioCambiado>) horariosCambiados;
 	}
 
 	public void setHorariosCambiados(ArrayList<ExcepcionHorarioCambiado> horariosCambiados) {

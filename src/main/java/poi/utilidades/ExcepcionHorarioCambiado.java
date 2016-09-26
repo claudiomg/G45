@@ -6,8 +6,17 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.*;
 
+@Entity
+@Table (name = "ExcepcionesHorarioCambiado")
 public class ExcepcionHorarioCambiado {
+	@Id
+	@GeneratedValue
+	@Column (name = "ExcepcionHorarioCambiadoId")
+	private Long ExcepcionHorarioCambiadoId;
+	@ElementCollection
+    @CollectionTable(name="rangoCambiado", joinColumns=@JoinColumn(name="ExcepcionHorarioCambiadoId"))
 	private List<TimeRange> rangoCambiado = new ArrayList<TimeRange>();
 	private LocalDate diaYMes;
 	

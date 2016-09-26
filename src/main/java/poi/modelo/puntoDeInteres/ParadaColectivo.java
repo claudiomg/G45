@@ -11,12 +11,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ParadasColectivos")
+@PrimaryKeyJoinColumn(name = "PoiId")
 public class ParadaColectivo extends POI{
-	@Id
-	@GeneratedValue
-	@Column(name = "ParadaColectivoId")
-	private Long ParadaId;
-	
+		
 	private String linea = new String();
 
 	public ParadaColectivo(String linea,Posicion posicion, Direccion direccion) {

@@ -1,6 +1,7 @@
 package poi.modelo.usuario;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.prefs.Preferences;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,7 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 
 import poi.utilidades.Posicion;
 
@@ -29,9 +31,8 @@ public class Terminal extends UsuarioPOI{
 	private Posicion posicion;
 	@ElementCollection
     @MapKeyColumn(name="accion")
-    @Column(name="accion")
     @CollectionTable(name="AccionesPorUsuario", joinColumns=@JoinColumn(name="id_usuario"))
-	private HashMap<String,Boolean> acciones = new HashMap<String,Boolean>();
+	private Map<String,Boolean> acciones = new HashMap<String,Boolean>();
 	
 	public Terminal(String usuario) {
 		this.setUsuario(usuario);
@@ -89,6 +90,6 @@ public class Terminal extends UsuarioPOI{
 	}
 
 	public HashMap<String,Boolean> getAcciones() {
-		return acciones;
+		return (HashMap<String, Boolean>) acciones;
 	}
 }

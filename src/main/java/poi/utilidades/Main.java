@@ -8,6 +8,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import poi.controllers.UpdatePoisController;
 import poi.controllers.TerminalController;
@@ -17,7 +18,7 @@ import poi.controllers.QueryReportsController;
 import poi.controllers.TerminalConfigurationController;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-public class Main implements WithGlobalEntityManager{
+public class Main extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	
 	public static void main(String[] args) {
 		System.out.println("Iniciando servidor");

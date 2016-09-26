@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-/*@Entity(name = "Usuarios")*/
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class UsuarioPOI {
 	@Id
 	@GeneratedValue
+	@Column(name = "id_usuario")
+	private Long UsuarioId;
 	@Column(name = "NombreUsuario")
 	private String usuario;
 	@Column(name = "PasswordUsuario")
