@@ -5,6 +5,7 @@ import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -24,10 +25,18 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8082);
+		port(8084);
 
 		staticFileLocation("/public");		
 		
+		/* PRUEBA */ 
+		ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
+		feriados.agregarFeriados(LocalDateTime.of(0, 7, 9, 0, 0));
+		feriados.agregarFeriados(LocalDateTime.of(0, 5, 1, 0, 0));
+		feriados.persistir();
+		
+		
+				
 		/** CREAR DIRECCION PERSISTIBLE **/
 		Direccion dir = new Direccion();
 		dir.setBarrio("Almagro");
@@ -96,6 +105,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			//put("/proceso/agregarAcciones", process::updateActions, engine);
 		
 	}
+	
 	
 	
 	
