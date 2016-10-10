@@ -24,7 +24,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8082);
+		port(8084);
 
 		staticFileLocation("/public");		
 		
@@ -104,6 +104,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			//put("/proceso/agregarAcciones", process::updateActions, engine);
 		
 	}
+	
 	
 	
 	
