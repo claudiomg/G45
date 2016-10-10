@@ -15,7 +15,7 @@ import poi.repositorios.RepositorioPOI;
 
 @Entity
 @Table (name = "Administradores")
-//@PrimaryKeyJoinColumn(name = "id_usuario")
+@PrimaryKeyJoinColumn(name = "id_usuario")
 public class Administrador extends UsuarioPOI {
 	@Column(name = "mail")
 	private String mail;

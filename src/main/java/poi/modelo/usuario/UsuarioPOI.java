@@ -7,9 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class UsuarioPOI {
+public abstract class UsuarioPOI implements WithGlobalEntityManager {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_usuario")
@@ -36,5 +38,10 @@ public abstract class UsuarioPOI {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void persistir(UsuarioPOI user) {
+		entityManager().getTransaction().begin();
+		entityManager().persist(user);
+		entityManager().getTransaction().commit();
 	}
 }
