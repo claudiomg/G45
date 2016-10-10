@@ -15,8 +15,11 @@ public class ExcepcionSinAtencion {
 	@Column(name = "ExcepcionSinAtencionId")
 	private Long ExcepcionSinAtencionId;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="ExcepcionesSinAtencionId")
+	@ElementCollection
+	@CollectionTable(
+	        name="feriados",
+	        joinColumns=@JoinColumn(name="ExcepcionId")
+	  )
 	private List<LocalDateTime> feriados = new ArrayList<LocalDateTime>();
 
 	public void setFeriados(List<LocalDateTime> feriados) {

@@ -22,7 +22,7 @@ public class ServicioDeCGP {
 	
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn (name = "ServicioCGPId")
-	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	private List<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
 	
 	@OneToOne
 	@JoinColumn (name = "ExcepcionSinAtencionId")
@@ -30,7 +30,7 @@ public class ServicioDeCGP {
 	
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn (name = "ServicioCGPId")
-    private ArrayList<ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+    private List<ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	
 	@Column (name = "Nombre")
 	private String nombre;
