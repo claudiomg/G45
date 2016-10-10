@@ -13,11 +13,15 @@ import javax.persistence.*;
 public class ExcepcionHorarioCambiado {
 	@Id
 	@GeneratedValue
-	@Column (name = "ExcepcionHorarioCambiadoId")
-	private Long ExcepcionHorarioCambiadoId;
-	@ElementCollection
-    @CollectionTable(name="rangoCambiado", joinColumns=@JoinColumn(name="ExcepcionHorarioCambiadoId"))
+	@Column (name = "ExcepcionesHorarioCambiadoId")
+	private Long ExcepcionesHorarioCambiadoId;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="ExcepcionesHorarioCambiadoId")
 	private List<TimeRange> rangoCambiado = new ArrayList<TimeRange>();
+	
+	
+	@Column(name = "diaYMes")
 	private LocalDate diaYMes;
 	
 	public ExcepcionHorarioCambiado(LocalDate unaFecha){
