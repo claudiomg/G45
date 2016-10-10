@@ -14,12 +14,10 @@ import poi.utilidades.Posicion;
 @Table(name = "CGPs")
 @PrimaryKeyJoinColumn(name = "PoiId")
 public class CGP extends POI{
-	
-	@ElementCollection
-	@CollectionTable(
-	        name="verticesComuna",
-	        joinColumns=@JoinColumn(name="PoiId")
-	  )
+
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="CgpId")
 	private List<Posicion> verticesComuna = new ArrayList<Posicion>();
 	@OneToMany(cascade = CascadeType.PERSIST
 			, fetch = FetchType.EAGER)

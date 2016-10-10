@@ -4,7 +4,7 @@ import static spark.Spark.*;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
-import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -24,27 +24,35 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8082);
+		port(8084);
 
 		staticFileLocation("/public");		
 		
-		/** CREAR DIRECCION PERSISTIBLE **/
-		Direccion dir = new Direccion();
-		dir.setBarrio("Almagro");
-		dir.setLocalidad("Chivilcoy");
-		dir.setCalle("Guemes");
-		dir.setCodigoPostal("2222");
-		dir.persistir(dir);
-		/** BORRAR **/
-
-		/** CREAR DISPONIBILIDAD PERSISTIBLE **/		
 		TimeRange rangoInferiorDeLaSemana = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 		TimeRange rangoSuperiorDeLaSemana = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
-		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
-		lunes.agregarNuevoRango(rangoInferiorDeLaSemana);
-		lunes.agregarNuevoRango(rangoSuperiorDeLaSemana);
-		lunes.persistir(lunes);
-		/** BORRAR **/
+		ExcepcionHorarioCambiado excepcion = new ExcepcionHorarioCambiado(LocalDate.now());
+		excepcion.agregarRangoCambiado(rangoInferiorDeLaSemana);
+		excepcion.agregarRangoCambiado(rangoSuperiorDeLaSemana);
+		excepcion.persistir(excepcion);
+		
+		
+//		/** CREAR DIRECCION PERSISTIBLE **/
+//		Direccion dir = new Direccion();
+//		dir.setBarrio("Almagro");
+//		dir.setLocalidad("Chivilcoy");
+//		dir.setCalle("Guemes");
+//		dir.setCodigoPostal("2222");
+//		dir.persistir(dir);
+//		/** BORRAR **/
+//
+//		/** CREAR DISPONIBILIDAD PERSISTIBLE **/		
+//		TimeRange rangoInferiorDeLaSemana = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
+//		TimeRange rangoSuperiorDeLaSemana = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));
+//		DisponibilidadHoraria lunes = new DisponibilidadHoraria(DayOfWeek.MONDAY);
+//		lunes.agregarNuevoRango(rangoInferiorDeLaSemana);
+//		lunes.agregarNuevoRango(rangoSuperiorDeLaSemana);
+//		lunes.persistir(lunes);
+//		/** BORRAR **/
 				
 		CargaInicial.getInstance().inicializar();
 		
@@ -96,6 +104,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			//put("/proceso/agregarAcciones", process::updateActions, engine);
 		
 	}
+	
 	
 	
 	
