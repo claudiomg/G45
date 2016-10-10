@@ -19,15 +19,20 @@ public class ServicioDeCGP {
 	@GeneratedValue
 	@Column (name = "ServicioCGPId")
 	private Long ServicioCGPId;
-	@ElementCollection
-    @CollectionTable(name="disponibilidadesDeAtencion", joinColumns=@JoinColumn(name="ServicioCGPId"))
-	private List<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-	//TODO arreglar
-	@Transient
-	private ExcepcionSinAtencion feriados;
-	@ElementCollection
-    @CollectionTable(name="horariosCambiados", joinColumns=@JoinColumn(name="ServicioCGPId"))
-	private List<ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+	
+	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn (name = "ServicioCGPId")
+	private ArrayList<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
+	
+	@OneToOne
+	@JoinColumn (name = "ExcepcionSinAtencionId")
+    private ExcepcionSinAtencion feriados;
+	
+	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn (name = "ServicioCGPId")
+    private ArrayList<ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
+	
+	@Column (name = "Nombre")
 	private String nombre;
 	
 	public List<DisponibilidadHoraria> getDisponibilidadHoraria(){

@@ -39,9 +39,7 @@ public class DisponibilidadHoraria implements WithGlobalEntityManager {
 	private DayOfWeek dia;
 	@Column(name="day")	
 	private String day;
-	/*@ManyToOne
-	@JoinColumn (name = "IdServicio")
-	private ServicioDeCGP servicio;*/
+	
 		
 	public DisponibilidadHoraria(){		
 	};
