@@ -37,19 +37,16 @@ public abstract class POI {
 	        joinColumns=@JoinColumn(name="PoiId")
 	  )
 	private List<String> palabrasClave = new ArrayList<String>();
-	@ElementCollection
-	@CollectionTable(
-	        name="disponibilidadesDeAtencion",
-	        joinColumns=@JoinColumn(name="PoiId")
-	  )
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private List<DisponibilidadHoraria> disponibilidadesDeAtencion = new ArrayList<DisponibilidadHoraria>();
-	@Transient
+	@OneToOne
+	@JoinColumn (name = "ExcepcionSinAtencionId")
 	private ExcepcionSinAtencion feriados = new ExcepcionSinAtencion();
-	@ElementCollection
-	@CollectionTable(
-	        name="horariosCambiados",
-	        joinColumns=@JoinColumn(name="PoiId")
-	  )
+	@OneToMany(cascade = CascadeType.PERSIST
+			, fetch = FetchType.EAGER)
+	@JoinColumn(name="PoiId")
 	private List <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	
 	public boolean estaCercaDe(Posicion posicionUsuario){
