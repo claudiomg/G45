@@ -8,18 +8,20 @@ import java.time.LocalTime;
 
 import javax.persistence.*;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+
 @Entity
 @Table (name = "ExcepcionesHorarioCambiado")
-public class ExcepcionHorarioCambiado {
+public class ExcepcionHorarioCambiado  extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	@Id
 	@GeneratedValue
 	@Column (name = "ExcepcionesHorarioCambiadoId")
 	private Long ExcepcionesHorarioCambiadoId;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="ExcepcionesHorarioCambiadoId")
 	private List<TimeRange> rangoCambiado = new ArrayList<TimeRange>();
-	
 	
 	@Column(name = "diaYMes")
 	private LocalDate diaYMes;
@@ -48,4 +50,15 @@ public class ExcepcionHorarioCambiado {
 		return this.diaDisponible(unaFechaHora) && this.rangoDisponible(hora);
 		
 	}
+		
+	public Long getExcepcionesHorarioCambiadoId() {
+		return ExcepcionesHorarioCambiadoId;
+	}
+	
+	public void persistir(ExcepcionHorarioCambiado excepcion){
+		entityManager().getTransaction().begin();
+		entityManager().persist(excepcion);
+		entityManager().getTransaction().commit();
+	}
+
 }
