@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import poi.modelo.usuario.Terminal;
@@ -24,7 +25,7 @@ import poi.repositorios.RepositorioConsultas;
 
 @Entity
 @Table(name="Consultas")
-public class Consulta {
+public class Consulta implements WithGlobalEntityManager {
 	@Id
 	@GeneratedValue
 	@Column(name="consultaId")
@@ -98,9 +99,11 @@ public class Consulta {
 	public void setDuracionProceso(Duration duracionProceso) {
 		this.duracionProceso = duracionProceso;
 	}
+	
 
-	public void persist() {
-		//me guardo en el repo de consultas
-		RepositorioConsultas.getInstance().agregarRegistro(this);		
+	public void persistir(Consulta consulta){
+		entityManager().getTransaction().begin();
+		entityManager().persist(consulta);
+		entityManager().getTransaction().commit();
 	}
 }
