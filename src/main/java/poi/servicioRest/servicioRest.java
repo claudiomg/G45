@@ -1,18 +1,12 @@
 package poi.servicioRest;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import com.java.ws.rest.clases.Usuario;
-import com.java.ws.rest.service.Consulta;
-import com.java.ws.rest.service.List;
-import com.java.ws.rest.service.POI;
 
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioConsultas;
@@ -33,7 +27,7 @@ public class servicioRest {
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<POI> busquedaPuntoDeInteres(String criterio){
-		
+		return null;
 	}
 
 	@POST
