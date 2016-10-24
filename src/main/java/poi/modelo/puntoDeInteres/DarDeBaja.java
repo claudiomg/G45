@@ -1,8 +1,6 @@
 package poi.modelo.puntoDeInteres;
 
-import java.util.HashMap;
-
-public class DarDeBaja extends POI{
+public class DarDeBaja{
 	int id;
 	String deleteAt;
 	
@@ -20,14 +18,7 @@ public class DarDeBaja extends POI{
 	public void setDeleteAt(String deleteAt) {
 		this.deleteAt = deleteAt;
 	}
-	@Override
-	public void inicializarPalabrasClave() {
-		// TODO Auto-generated method stub
-		}
-	@Override
-	public void completeViewData(HashMap<String, Object> element) {
-		// no hago nada aca
-	}
+	
 	
 
 
