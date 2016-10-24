@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 
 import poi.finders.FilterByTag;
 import poi.finders.PoiFinder;
+import poi.modelo.puntoDeInteres.DarDeBaja;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.usuario.Administrador;
+import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioPOIsADarDeBaja;
+import poi.utilidades.Consulta;
 
 public class ProcesoDarDeBajaPois {
 	
@@ -17,14 +20,33 @@ public class ProcesoDarDeBajaPois {
 	}
 	
 	
-	RepositorioPOIsADarDeBaja repoDeBaja = RepositorioPOIsADarDeBaja.getInstance();
-	//List<DarDeBaja> POIConRegisstrosParaDarDeBaja = new ArrayList<DarDeBaja>();
-	PoiFinder poiFinder = new PoiFinder();
-	String nombre;
-	Administrador admin = new Administrador(nombre);
+	RepositorioPOIsADarDeBaja repoDeBaja; 
+	List<DarDeBaja> POIConRegisstrosParaDarDeBaja = new ArrayList<DarDeBaja>();
+	PoiFinder poiFinder;
+	Administrador admin;
 	
 	public Administrador getAdmin() {
 		return admin;
+	}
+
+
+	public RepositorioPOIsADarDeBaja getRepoDeBaja() {
+		return repoDeBaja;
+	}
+
+
+	public void setRepoDeBaja(RepositorioPOIsADarDeBaja repoDeBaja) {
+		this.repoDeBaja = repoDeBaja;
+	}
+
+
+	public List<DarDeBaja> getPOIConRegisstrosParaDarDeBaja() {
+		return POIConRegisstrosParaDarDeBaja;
+	}
+
+
+	public void setPOIConRegisstrosParaDarDeBaja(List<DarDeBaja> pOIConRegisstrosParaDarDeBaja) {
+		POIConRegisstrosParaDarDeBaja = pOIConRegisstrosParaDarDeBaja;
 	}
 
 
@@ -36,12 +58,14 @@ public class ProcesoDarDeBajaPois {
 	public void correrProceso() throws Exception{
 		repoDeBaja.cleanRepository();
 		repoDeBaja.actualizarRepositorio();
-		/*List<Integer> idsInt = repoDeBaja.sacarLosIdsDeLosRegistros(repoDeBaja.obtenerRegistros());
+		List<Integer> idsInt = repoDeBaja.sacarLosIdsDeLosRegistros(repoDeBaja.obtenerRegistros());
 		List<String> ids = this.convertirListaDeIntAListaDeStrings(idsInt);
 		List<POI> listaDePoisADarDeBaja = this.filtrarPoisPorListaDePalabras(ids);
-		for(int i = 0;listaDePoisADarDeBaja.size() >= i;i++){
-			admin.removerPOI(listaDePoisADarDeBaja.get(i));
-			}*/
+		int a = 0;
+	    while(a != listaDePoisADarDeBaja.size()){
+			   admin.removerPOI(listaDePoisADarDeBaja.get(a));
+			   a++;
+		   }
 		}
 	
         	
@@ -62,7 +86,10 @@ public class ProcesoDarDeBajaPois {
     	}
     
    public List<POI> filtrarPOIsPorPalabra(String palabra){
-		poiFinder.addFilter(new FilterByTag(palabra));
+	    Terminal usuario = null;
+		Consulta consulta = new Consulta(usuario,palabra);
+		poiFinder.setConsulta(consulta);
+	    poiFinder.addFilter(new FilterByTag(palabra));
 		poiFinder.search();
 		return poiFinder.getResults();
 		}
@@ -77,9 +104,11 @@ public class ProcesoDarDeBajaPois {
    
    public List<POI> devolverLista(List<List<POI>> listaConMasListas){
 	   List<POI> lista = new ArrayList<POI>(); 
-	   for(int i= 0; listaConMasListas.size() >= i; i++){
-        	 lista.addAll(listaConMasListas.get(i));
-        	}
-         return lista;
+	   int i = 0;
+	   while(i != listaConMasListas.size()){
+		   lista.addAll(listaConMasListas.get(i));
+		   i++;
+	   }
+	   return lista; 
    }
 }
