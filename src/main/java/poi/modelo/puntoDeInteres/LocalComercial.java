@@ -1,6 +1,8 @@
 
 package poi.modelo.puntoDeInteres;
 
+import java.util.HashMap;
+
 import javax.persistence.*;
 
 import poi.utilidades.Calculo;
@@ -38,5 +40,15 @@ public class LocalComercial extends POI{
 
 	public void setRadioDeCercania(RadioCercania radioDeCercania) {
 		this.radioDeCercania = radioDeCercania;
+	}
+	@Override
+	public void completeViewData(HashMap<String, Object> element) {
+		element.put("icon", "icons/local32.png");
+		element.put("titulo", "Local Comercial");
+		element.put("latitud", this.getPosicion().getLatitud());
+		element.put("longitud", this.getPosicion().getLongitud());
+		element.put("direccion", this.getDireccion().getCalle() + " " + this.getDireccion().getNumero());
+		element.put("nombre", this.getNombre());
+		element.put("rubro", this.getRadioDeCercania().toString());
 	}
 }

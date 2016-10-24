@@ -1,5 +1,6 @@
 package poi.modelo.puntoDeInteres;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -172,5 +173,7 @@ public abstract class POI {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+
+	public abstract void completeViewData(HashMap<String, Object> element);
 	
 }

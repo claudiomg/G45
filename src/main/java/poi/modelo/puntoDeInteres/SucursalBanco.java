@@ -3,6 +3,7 @@ package poi.modelo.puntoDeInteres;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.*;
@@ -89,6 +90,17 @@ public class SucursalBanco extends POI{
 	
 	public void agregarServicio(String servicio) {
 		this.getServicios().add(servicio);
+	}
+
+	@Override
+	public void completeViewData(HashMap<String, Object> element) {
+		element.put("icon", "icons/banco32.png");
+		element.put("titulo", "Sucursal de Banco");
+		element.put("latitud", this.getPosicion().getLatitud());
+		element.put("longitud", this.getPosicion().getLongitud());
+		element.put("direccion", this.getDireccion().getCalle() + " " + this.getDireccion().getNumero());
+		element.put("zona", this.getDireccion().getBarrio());
+		element.put("servicios", this.getServicios());
 	}
 
 }

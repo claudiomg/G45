@@ -1,6 +1,7 @@
 package poi.modelo.puntoDeInteres;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 import poi.utilidades.Calculo;
@@ -56,6 +57,15 @@ public class ParadaColectivo extends POI{
 	@Override
 	public String getNombre() {
 		return this.getLinea();
+	}
+
+	@Override
+	public void completeViewData(HashMap<String, Object> element) {
+		element.put("icon", "icons/colectivo32.png");
+		element.put("titulo", "Parada de Colectivo");
+		element.put("latitud", this.getPosicion().getLatitud());
+		element.put("longitud", this.getPosicion().getLongitud());
+		element.put("linea", this.getLinea());
 	}
 
 }

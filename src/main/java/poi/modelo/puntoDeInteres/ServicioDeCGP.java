@@ -1,7 +1,9 @@
 package poi.modelo.puntoDeInteres;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.*;
@@ -68,6 +70,17 @@ public class ServicioDeCGP {
 
 	public void agregarDisponibilidadDeAtencion(DisponibilidadHoraria disponibilidadHoraria) {
 		this.disponibilidadesDeAtencion.add(disponibilidadHoraria);
+	}
+	public void completeViewData(HashMap<String, Object> element) {
+		element.put("nombre", this.getNombre());
+		element.put("horarios", this.getHorarios());
+	}
+	private List<String> getHorarios() {
+		List<String> horarios = new ArrayList<String>();
+		for ( DisponibilidadHoraria horario : this.getDisponibilidadHoraria()){
+			horarios.add(horario.asString());
+		}
+		return horarios;
 	}
 	
 }

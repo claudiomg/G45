@@ -2,6 +2,7 @@ package poi.modelo.puntoDeInteres;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.*;
@@ -79,6 +80,23 @@ public class CGP extends POI{
 
 	public void setServicios(List<ServicioDeCGP> servicios) {
 		this.servicios = servicios;
+	}
+
+	@Override
+	public void completeViewData(HashMap<String, Object> element) {
+		element.put("icon", "icons/cgp32.png");
+		element.put("titulo", "CGP");
+		element.put("latitud", this.getPosicion().getLatitud());
+		element.put("longitud", this.getPosicion().getLongitud());
+		element.put("direccion", this.getDireccion().getCalle() + " " + this.getDireccion().getNumero());
+		element.put("zona", this.getDireccion().getBarrio());
+		List<HashMap<String, Object>> servicios = new ArrayList<HashMap<String,Object>>();
+		for ( ServicioDeCGP servicio : this.getServicios()){
+			HashMap<String,Object> elementByService = new HashMap<String,Object>();
+			servicio.completeViewData(elementByService);
+			servicios.add(element);
+		}
+		element.put("servicios", servicios);
 	}
 
 
