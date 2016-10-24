@@ -62,10 +62,12 @@ public class PoiFinderBuilder {
 
 	private void setFiltersOn(PoiFinder finder) {
 		//me encargo de agregar los filtros
-		this.addPoiTypeFilterOn(finder);
 		this.addTagFilterOn(finder);
-		this.addDisponibilityFilterOn(finder);
-		this.addProximityFilterOn(finder);
+		if (!this.manualMode){
+			this.addPoiTypeFilterOn(finder);
+			this.addDisponibilityFilterOn(finder);
+			this.addProximityFilterOn(finder);
+		}
 	}
 
 	private void addPoiTypeFilterOn(PoiFinder finder) {

@@ -20,7 +20,6 @@ public class TerminalController {
 		RequestMediator requestMediator = new RequestMediator(request);
 		HashMap<String, Object> viewModel = this.configViewModel(requestMediator);
 		viewModel.put("hasResults", false);
-		viewModel.put("searchModeValue", "checked");
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 
@@ -62,12 +61,7 @@ public class TerminalController {
 		List<HashMap<String, Object>> array = new ArrayList<HashMap<String,Object>>();
 		for ( POI punto : results){
 			HashMap<String,Object> element = new HashMap<String,Object>();
-			element.put("nombre", punto.getNombre());
-			element.put("latitud", punto.getPosicion().getLatitud());
-			element.put("longitud", punto.getPosicion().getLongitud());
-			element.put("barrio", punto.getDireccion().getBarrio());
-			element.put("calle", punto.getDireccion().getCalle() + " " + punto.getDireccion().getNumero());
-			element.put("cp", punto.getDireccion().getCodigoPostal());
+			punto.completeViewData(element);
 			element.put("estaCerca", punto.estaCercaDe(posicion));
 			element.put("estaDisponible", punto.estaDisponible(fechaHora));
 			array.add(element);

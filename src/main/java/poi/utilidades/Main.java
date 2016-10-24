@@ -11,6 +11,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import poi.controllers.UpdatePoisController;
+import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.controllers.TerminalController;
 import poi.controllers.LoginController;
 import poi.controllers.ProcesoController;
@@ -24,7 +25,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8084);
+		port(8080);
 
 		staticFileLocation("/public");		
 		

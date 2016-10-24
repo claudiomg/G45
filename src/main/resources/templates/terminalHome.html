@@ -33,20 +33,28 @@
 		</div>
 	</header>
 	<main class="main-container" role="main" style="padding-top: 0px;padding-bottom: 0px;">
-		<div id="wrapper">
-	        <div id="sidebar-wrapper">
-	        	<div class="sidebar-wrapper-header">
-	        		<h5 style="margin-top: 0px;"> Filtros de Busqueda </h5>
-	        		<button type="button" class="close" aria-hidden="true">×</button>
-	        	</div>
-	        	<div class="sidebar-wrapper-content">
-	        		<div class="checkbox sidebar-wrapper-mode">
-		            	<input id="searchMode" type="checkbox" name="manualMode" value="ON" {{searchModeValue}} >
-		            </div>
-		            <form role="form" action="my_home_page" method="post">
-		            	<div class="advancedFilters">
+		<div class="sidebar-wrapper col-sm-4 col-md-3 sidebar">
+	    	<div class="mini-submenu">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+	    	</div>
+			<div class="list-group">
+				<div class="sidebar-wrapper-header">
+					<h5 style="margin-top: 0px;"> Filtros de Busqueda </h5>
+					<span href="#" class="pull-right">
+						<span href="#" id="slide-submenu" class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<i class="fa fa-times"></i>
+					</span>
+				</div>	
+				<div class="sidebar-wrapper-content">
+					<form role="form" action="my_home_page" method="post">
+						<div class="checkbox sidebar-wrapper-mode">
+							<input id="searchMode" type="checkbox" name="manualMode" value="ON" {{searchModeValue}} >
+						</div>
+						<div class="advancedFilters">
 							<div class="filters poiFilters row shortcut-row">
-								
+	
 								<ul>
 									<li><input type="checkbox" name="cgpFilter" value="ON" {{cgpFilterValue}} > CGP</li> 
 									<li><input type="checkbox" name="busStopFilter" value="ON" {{busStopFilterValue}} > Paradas de Colectivo </li>
@@ -64,8 +72,8 @@
 									{{/accessProximityFilter}}
 								</ul>
 							</div>
-					
-							
+	
+	
 						</div>
 						<div class="manualFilters">
 							{{#accessTagFilter}}
@@ -75,13 +83,12 @@
 							</div>
 							{{/accessTagFilter}}
 						</div>
-						<input class="btn btn-primary" type="submit" value="Buscar"/>
+						<input id="searchButton" class="btn btn-primary" type="submit" value="Buscar"/>
 					</form>
-				</div>
+				</div> 	
 				<div class="sidebar-wrapper-footer"></div>
-            </div>
-        </div>
-        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+			</div>        
+		</div>
         <div id="googleMap"></div>
 	</main>
 	
@@ -145,50 +152,33 @@
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBgvn_2I1NSn8nh8z3e2tgI5RUxktygzuc&sensor=false">
 	</script>
-	<script>
-		function updatePoiFilter(){
-			var isManual = $("#searchMode").is(":checked");
-			$(".advancedFilters .poiFilters input").prop('checked', isManual);
-			if(isManual){
-				$(".advancedFilters").hide();
-			}else{
-				$(".advancedFilters").show();
-			}
-		};
-		$("#searchMode").change(updatePoiFilter);
-	    $("#menu-toggle").click(function(e) {
-	        e.preventDefault();
-	        $("#wrapper").toggleClass("toggled");
-	    });
-	    updatePoiFilter();
-	    $("#searchMode").checkboxpicker({
-			html: true,
-			offLabel: 'Avanzado',
-			onLabel: 'Básico',
-	    	offActiveCls: 'btn-primary',
-			onActiveCls: 'btn-primary'
-	    });
-    </script>
+	<script src="js/terminalSettings.js"></script>
 	<script>
 		var myCenter=new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
 		function initialize() {
 			//configuracion inicial de mi mapa
-			  	var mapProp = {
-				    center:myCenter,
-				    zoom:10,
-				    mapTypeId:google.maps.MapTypeId.ROADMAP
-			  	};
+		  	var mapProp = {
+			    center:myCenter,
+			    zoom:12,
+			    panControl: true,
+			    zoomControl: true,
+			    mapTypeControl: false,
+			    scaleControl: false,
+			    streetViewControl: true,
+			    overviewMapControl: false,
+			    rotateControl: false
+		  	};
 			
 			//creo el mapa y seteo las propiedad
-		  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 			
 		  	//creo un punto con sus propiedades y animaciones
-				var marker=new google.maps.Marker({
-					position:myCenter,
-					animation : google.maps.Animation.BOUNCE
-				});
+			var markerCenter=new google.maps.Marker({
+				position:myCenter//,
+				//animation : google.maps.Animation.BOUNCE
+			});
 	
-			marker.setMap(map);
+			markerCenter.setMap(map);
 	
 			//creo un popup de informacion
 			var infowindow = new google.maps.InfoWindow({
@@ -196,19 +186,88 @@
 			});
 	
 			//vinculo el pop up con el punto creado
-			infowindow.open(map, marker);
+			infowindow.open(map, markerCenter);
 			
 			//creo los puntos de los resultados
 			{{#hasResults}}
+				var poiContent;
+				var poiPosition;
+				var poiInfowindow;
+				var poiMarker;
 				{{#each results}}
-					new google.maps.Marker({
-						position:(
-							new google.maps.LatLng(
-								parseFloat({{latitud}}),
-								parseFloat({{longitud}})
-							)
-						)
-					}).setMap(map);
+					poiContent = '<div class="modal-content">'+
+						'<div class="modal-header">'+
+							'<h4 class="modal-title" id="myModalLabel">{{titulo}} - {{nombre}}</h4>'+
+						'</div>'+
+						'<div class="modal-body">';
+						if("{{titulo}}"=="Parada de Colectivo") {
+							poiContent = poiContent +
+							'<div class="data-group">'+
+							    '<label>{{linea}}</label>'+
+							'</div>';
+						}else{
+							poiContent = poiContent +
+							'<div class="data-group">'+
+							    '<strong>Dirección:</strong>'+
+							    '<label>{{direccion}}</label>'+
+							'</div>';
+						};
+						if("{{titulo}}"=="CGP") {
+							poiContent = poiContent +
+							'<div class="data-group">'+
+							    '<strong>Zona:</strong>'+
+							    '<label>{{zona}}</label>'+
+							'</div>'+
+							'<div class="data-group">'+
+								'<ul>'+
+									{{#each servicios}}
+										'<li>{{name}}</li>'+
+									{{~/each}}
+								'</ul>'+
+							'</div>';
+						};
+						if("{{titulo}}"=="Sucursal de Banco") {
+							poiContent = poiContent +
+							'<div class="data-group">'+
+							    '<strong>Zona:</strong>'+
+							    '<label>{{zona}}</label>'+
+							'</div>'+
+							'<div class="data-group">'+
+								'<ul>'+
+									{{#each servicios}}
+										'<li>{{name}}</li>'+
+									{{~/each}}
+								'</ul>'+
+							'</div>';
+						};
+						if("{{titulo}}"=="Local Comercial") {
+							poiContent = poiContent +
+							'<div class="data-group">'+
+							    '<strong>Nombre:</strong>'+
+							    '<label>{{nombre}}</label>'+
+							'</div>'+
+							'<div class="data-group">'+
+							    '<strong>Rubro:</strong>'+
+							    '<label>{{rubro}}</label>'+
+							'</div>';
+						};
+						poiContent = poiContent +
+						'</div>'+
+					'</div>';
+					poiPosition = new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
+					poiInfowindow = new google.maps.InfoWindow({
+					 	content: poiContent,
+					 	maxWidth: 300
+					 });
+					 poiMarker = new google.maps.Marker({
+					 	position: poiPosition,
+					 	icon: '{{icon}}',
+					 	map: map,
+					 	title: '{{nombre}}'
+					 });
+					 poiMarker.addListener('click', function() {
+						 poiInfowindow.open(map, this);
+					 });
 				{{~/each}}
 			{{/hasResults}}
 		}

@@ -89,5 +89,9 @@ public class DisponibilidadHoraria implements WithGlobalEntityManager {
 		entityManager().getTransaction().begin();
 		entityManager().persist(disponibilidad);
 		entityManager().getTransaction().commit();
+	}
+
+	public String asString() {
+		return this.getDia().toString(); //+ " " + this.getRangoHorario().asString();
 	}	
 }

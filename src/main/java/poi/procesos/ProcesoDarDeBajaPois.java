@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import poi.finders.FilterByTag;
 import poi.finders.PoiFinder;
-import poi.modelo.puntoDeInteres.DarDeBaja;
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.usuario.Administrador;
 import poi.repositorios.RepositorioPOIsADarDeBaja;
@@ -19,7 +18,7 @@ public class ProcesoDarDeBajaPois {
 	
 	
 	RepositorioPOIsADarDeBaja repoDeBaja = RepositorioPOIsADarDeBaja.getInstance();
-	List<DarDeBaja> POIConRegisstrosParaDarDeBaja = new ArrayList<DarDeBaja>();
+	//List<DarDeBaja> POIConRegisstrosParaDarDeBaja = new ArrayList<DarDeBaja>();
 	PoiFinder poiFinder = new PoiFinder();
 	String nombre;
 	Administrador admin = new Administrador(nombre);
@@ -37,12 +36,12 @@ public class ProcesoDarDeBajaPois {
 	public void correrProceso() throws Exception{
 		repoDeBaja.cleanRepository();
 		repoDeBaja.actualizarRepositorio();
-		List<Integer> idsInt = repoDeBaja.sacarLosIdsDeLosRegistros(repoDeBaja.obtenerRegistros());
+		/*List<Integer> idsInt = repoDeBaja.sacarLosIdsDeLosRegistros(repoDeBaja.obtenerRegistros());
 		List<String> ids = this.convertirListaDeIntAListaDeStrings(idsInt);
 		List<POI> listaDePoisADarDeBaja = this.filtrarPoisPorListaDePalabras(ids);
 		for(int i = 0;listaDePoisADarDeBaja.size() >= i;i++){
 			admin.removerPOI(listaDePoisADarDeBaja.get(i));
-			}
+			}*/
 		}
 	
         	

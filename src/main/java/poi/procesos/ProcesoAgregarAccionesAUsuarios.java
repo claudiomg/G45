@@ -3,11 +3,8 @@ package poi.procesos;
 import java.util.ArrayList;
 import java.util.List;
 
-import poi.utilidades.Calculo;
-import poi.modelo.puntoDeInteres.DarDeBaja;
 import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
-import poi.repositorios.RepositorioPOIsADarDeBaja;
 import poi.repositorios.RepositorioUsuarios;
 import poi.utilidades.Posicion;
 
