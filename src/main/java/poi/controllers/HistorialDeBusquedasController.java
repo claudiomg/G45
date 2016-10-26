@@ -14,7 +14,12 @@ import spark.Response;
 
 public class HistorialDeBusquedasController {
 	
-	public ModelAndView mostrar(Request request, Response response){						
+	public ModelAndView render(Request request, Response response){
+		HashMap<String, Object> viewModel = new HashMap<>();
+		return new ModelAndView(viewModel, "historialDeBusquedasRealizadas.html");
+	}
+	
+	/*public ModelAndView mostrar(Request request, Response response){						
 		ReporteBusquedasPorFecha reporte = new ReporteBusquedasPorFecha();
 		HashMap<LocalDate, Integer> resultado = reporte.recolectarFechas();	
 		HashMap<String, Object> viewModel = new HashMap<>();
@@ -34,6 +39,6 @@ public class HistorialDeBusquedasController {
 			array.add(element);
 		}
 		return array;
-	}
+	}*/
 
 }
