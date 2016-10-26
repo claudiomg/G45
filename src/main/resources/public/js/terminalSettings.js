@@ -16,18 +16,23 @@ $(document).ready(function() {
 		onActiveCls: 'btn-primary'
 	});
 	$("#searchMode").change(updatePoiFilter);
+	
 	updatePoiFilter();
-});
-
-
-$('#slide-submenu').on('click',function() {			        
-	$(this).closest('.list-group').fadeOut('slide',function(){
-		$('.mini-submenu').fadeIn();	
+	
+	$('#slide-submenu').on('click',function() {			        
+		$(this).closest('.list-group').fadeOut('slide',function(){
+			$('.mini-submenu').fadeIn();	
+		});
 	});
+	
+	$('.mini-submenu').on('click',function(){		
+		$(this).next('.list-group').toggle('slide');
+		$('.mini-submenu').hide();
+	});
+
 });
-$('.mini-submenu').on('click',function(){		
-	$(this).next('.list-group').toggle('slide');
-	$('.mini-submenu').hide();
-});
+
+
+
 
 

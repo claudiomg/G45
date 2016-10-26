@@ -95,6 +95,7 @@ public class SucursalBanco extends POI{
 	@Override
 	public void completeViewData(HashMap<String, Object> element) {
 		element.put("icon", "icons/banco32.png");
+		element.put("cssClass", "data-banco");
 		element.put("titulo", "Sucursal de Banco");
 		element.put("latitud", this.getPosicion().getLatitud());
 		element.put("longitud", this.getPosicion().getLongitud());

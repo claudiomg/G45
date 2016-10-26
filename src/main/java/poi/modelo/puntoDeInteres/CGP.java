@@ -85,6 +85,7 @@ public class CGP extends POI{
 	@Override
 	public void completeViewData(HashMap<String, Object> element) {
 		element.put("icon", "icons/cgp32.png");
+		element.put("cssClass", "data-cgp");
 		element.put("titulo", "CGP");
 		element.put("latitud", this.getPosicion().getLatitud());
 		element.put("longitud", this.getPosicion().getLongitud());

@@ -9,6 +9,8 @@ import poi.finders.PoiFinder;
 import poi.finders.PoiFinderBuilder;
 import poi.finders.RequestMediator;
 import poi.modelo.puntoDeInteres.POI;
+import poi.modelo.puntoDeInteres.ParadaColectivo;
+import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
 import poi.utilidades.Posicion;
 import spark.ModelAndView;

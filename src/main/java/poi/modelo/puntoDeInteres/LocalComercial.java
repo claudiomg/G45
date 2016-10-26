@@ -44,6 +44,7 @@ public class LocalComercial extends POI{
 	@Override
 	public void completeViewData(HashMap<String, Object> element) {
 		element.put("icon", "icons/local32.png");
+		element.put("cssClass", "data-local");
 		element.put("titulo", "Local Comercial");
 		element.put("latitud", this.getPosicion().getLatitud());
 		element.put("longitud", this.getPosicion().getLongitud());

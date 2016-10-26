@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="bastrap3/bootstrap.min.css">
 	<link rel="stylesheet" href="bastrap3/bastrap.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/markerInfoWindows.css">
 	<link rel="stylesheet" href="css/sidebar.css" >
 	<link rel="stylesheet" href="css/maps.css" >
 	
@@ -154,124 +155,114 @@
 	</script>
 	<script src="js/terminalSettings.js"></script>
 	<script>
-		var myCenter=new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
-		function initialize() {
-			//configuracion inicial de mi mapa
-		  	var mapProp = {
-			    center:myCenter,
-			    zoom:12,
-			    panControl: true,
-			    zoomControl: true,
-			    mapTypeControl: false,
-			    scaleControl: false,
-			    streetViewControl: true,
-			    overviewMapControl: false,
-			    rotateControl: false
-		  	};
-			
-			//creo el mapa y seteo las propiedad
-	  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-			
-		  	//creo un punto con sus propiedades y animaciones
-			var markerCenter=new google.maps.Marker({
-				position:myCenter//,
-				//animation : google.maps.Animation.BOUNCE
-			});
-	
-			markerCenter.setMap(map);
-	
-			//creo un popup de informacion
-			var infowindow = new google.maps.InfoWindow({
-				content : "Usted esta aquí!"
-			});
-	
-			//vinculo el pop up con el punto creado
-			infowindow.open(map, markerCenter);
-			
-			//creo los puntos de los resultados
-			{{#hasResults}}
-				var poiContent;
-				var poiPosition;
-				var poiInfowindow;
-				var poiMarker;
-				{{#each results}}
-					poiContent = '<div class="modal-content">'+
-						'<div class="modal-header">'+
-							'<h4 class="modal-title" id="myModalLabel">{{titulo}} - {{nombre}}</h4>'+
-						'</div>'+
-						'<div class="modal-body">';
-						if("{{titulo}}"=="Parada de Colectivo") {
-							poiContent = poiContent +
-							'<div class="data-group">'+
-							    '<label>{{linea}}</label>'+
-							'</div>';
-						}else{
-							poiContent = poiContent +
-							'<div class="data-group">'+
-							    '<strong>Dirección:</strong>'+
-							    '<label>{{direccion}}</label>'+
-							'</div>';
-						};
-						if("{{titulo}}"=="CGP") {
-							poiContent = poiContent +
-							'<div class="data-group">'+
-							    '<strong>Zona:</strong>'+
-							    '<label>{{zona}}</label>'+
-							'</div>'+
-							'<div class="data-group">'+
-								'<ul>'+
-									{{#each servicios}}
-										'<li>{{name}}</li>'+
-									{{~/each}}
-								'</ul>'+
-							'</div>';
-						};
-						if("{{titulo}}"=="Sucursal de Banco") {
-							poiContent = poiContent +
-							'<div class="data-group">'+
-							    '<strong>Zona:</strong>'+
-							    '<label>{{zona}}</label>'+
-							'</div>'+
-							'<div class="data-group">'+
-								'<ul>'+
-									{{#each servicios}}
-										'<li>{{name}}</li>'+
-									{{~/each}}
-								'</ul>'+
-							'</div>';
-						};
-						if("{{titulo}}"=="Local Comercial") {
-							poiContent = poiContent +
-							'<div class="data-group">'+
-							    '<strong>Nombre:</strong>'+
-							    '<label>{{nombre}}</label>'+
-							'</div>'+
-							'<div class="data-group">'+
-							    '<strong>Rubro:</strong>'+
-							    '<label>{{rubro}}</label>'+
-							'</div>';
-						};
-						poiContent = poiContent +
-						'</div>'+
-					'</div>';
-					poiPosition = new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
-					poiInfowindow = new google.maps.InfoWindow({
-					 	content: poiContent,
-					 	maxWidth: 300
-					 });
-					 poiMarker = new google.maps.Marker({
-					 	position: poiPosition,
-					 	icon: '{{icon}}',
-					 	map: map,
-					 	title: '{{nombre}}'
-					 });
-					 poiMarker.addListener('click', function() {
-						 poiInfowindow.open(map, this);
-					 });
-				{{~/each}}
-			{{/hasResults}}
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
+		$(document).ready(function() {
+			function removeInfoWindowsFields(className,content){
+				//me encargo de remover los campos que no corresponden a className
+				$.each(content.find(".modal-body .data-group"), function() {
+					if (!($(this).hasClass( className ))){
+						$(this).remove();
+					}
+				});
+			};
+			var myCenter=new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
+			function initialize() {
+				//configuracion inicial de mi mapa
+			  	var mapProp = {
+				    center:myCenter,
+				    zoom:12,
+				    panControl: true,
+				    zoomControl: true,
+				    mapTypeControl: false,
+				    scaleControl: false,
+				    streetViewControl: true,
+				    overviewMapControl: false,
+				    rotateControl: false
+			  	};
+				
+				//creo el mapa y seteo las propiedad
+		  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+				
+			  	//creo un punto con sus propiedades y animaciones
+				var markerCenter=new google.maps.Marker({
+					position:myCenter//,
+					//animation : google.maps.Animation.BOUNCE
+				});
+		
+				markerCenter.setMap(map);
+		
+				//creo un popup de informacion
+				var infowindow = new google.maps.InfoWindow({
+					content : "Usted esta aquí!"
+				});
+		
+				//vinculo el pop up con el punto creado
+				infowindow.open(map, markerCenter);
+				
+				//creo los puntos de los resultados
+				{{#hasResults}}
+					var poiPosition;
+					var poiMarker;
+					{{#each results}}
+						poiPosition = new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
+						poiMarker = new google.maps.Marker({
+						 	position: poiPosition,
+						 	icon: '{{icon}}',
+						 	map: map,
+						 	title: '{{nombre}}'
+						 });
+						 poiMarker.addListener('click', function() {
+							 new google.maps.InfoWindow({
+								 	content: (
+								 		'<div class="modal-content {{cssClass}} col-md-4">'+
+											'<div class="modal-header">'+
+												'<img src="{{icon}}" alt="{{nombre}}" class="img-circle">'+
+												'<h4>{{titulo}}</h4>'+
+											'</div>'+
+											'<div class="modal-body">'+
+												'<div class="data-group data-colectivo">'+
+												    '<label class="data-value">{{linea}}</label>'+
+												'</div>'+
+												'<div class="data-group data-cgp data-local data-banco">'+
+												    '<label class="data-name">Dirección</label>'+
+												    '<label class="data-value">{{direccion}}</label>'+
+												'</div>'+
+												'<div class="data-group data-cgp">'+
+												    '<label class="data-name">Zona</label>'+
+												    '<label class="data-value">{{zona}}</label>'+
+												'</div>'+
+												'<div class="data-group data-cgp">'+
+													'<ul>'+
+														{{#each servicios}}
+															'<li>{{name}}</li>'+
+														{{~/each}}
+													'</ul>'+
+												'</div>'+
+												'<div class="data-group data-banco">'+
+													'<ul>'+
+														{{#each servicios}}
+															'<li>{{name}}</li>'+
+														{{~/each}}
+													'</ul>'+
+												'</div>'+
+												'<div class="data-group data-local">'+
+												    '<label class="data-name">Nombre</label>'+
+												    '<label class="data-value">{{nombre}}</label>'+
+												'</div>'+
+												'<div class="data-group data-local">'+
+												    '<label class="data-name">Rubro</label>'+
+												    '<label class="data-value">{{rubro}}</label>'+
+												'</div>'+
+											'</div>'+
+										'</div>'		
+								 	)
+								 }).open(map, this);
+							 removeInfoWindowsFields("{{cssClass}}",$(".modal-content"));
+						 });
+					{{~/each}}
+				{{/hasResults}}
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+		});
 	</script>
 </body>
 </html>

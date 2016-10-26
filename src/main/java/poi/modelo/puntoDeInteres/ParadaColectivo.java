@@ -62,6 +62,7 @@ public class ParadaColectivo extends POI{
 	@Override
 	public void completeViewData(HashMap<String, Object> element) {
 		element.put("icon", "icons/colectivo32.png");
+		element.put("cssClass", "data-colectivo");
 		element.put("titulo", "Parada de Colectivo");
 		element.put("latitud", this.getPosicion().getLatitud());
 		element.put("longitud", this.getPosicion().getLongitud());
