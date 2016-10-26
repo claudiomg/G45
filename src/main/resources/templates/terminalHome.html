@@ -11,10 +11,13 @@
 	<link rel="shortcut icon" href="bastrap3/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" href="bastrap3/favicon-mobile.png">
 	<link rel="stylesheet" href="bastrap3/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="map-icons-master/dist/css/map-icons.css" >
 	<link rel="stylesheet" href="bastrap3/bastrap.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/markerInfoWindows.css">
 	<link rel="stylesheet" href="css/sidebar.css" >
+	
 	<link rel="stylesheet" href="css/maps.css" >
 	
 </head>
@@ -55,13 +58,42 @@
 						</div>
 						<div class="advancedFilters">
 							<div class="filters poiFilters row shortcut-row">
-	
-								<ul>
-									<li><input type="checkbox" name="cgpFilter" value="ON" {{cgpFilterValue}} > CGP</li> 
-									<li><input type="checkbox" name="busStopFilter" value="ON" {{busStopFilterValue}} > Paradas de Colectivo </li>
-									<li><input type="checkbox" name="localFilter" value="ON" {{localFilterValue}} > Locales Comerciales </li>
-									<li><input type="checkbox" name="bankFilter" value="ON" {{bankFilterValue}} > Sucursales de Banco </li>
-								</ul>
+								<div class="col-md-6 shortcut">
+							        <label class="image-checkbox">
+							            <span class="bg-warning-lt">
+											<span class="map-icon map-icon-museum"></span>
+									    </span>
+									    <h5 class="checkbox-text">CGP</h5>
+							            <input type="checkbox" name="cgpFilter" value="ON" {{cgpFilterValue}}/>
+							        </label>
+							    </div>
+							    <div class="col-md-6 shortcut">
+							        <label class="image-checkbox">
+							            <span class="bg-warning-lt">
+											<span class="map-icon map-icon-bus-station"></span>
+									    </span>
+									    <h5 class="checkbox-text">Paradas de Colectivo</h5>
+							            <input type="checkbox" name="busStopFilter" value="ON" {{busStopFilterValue}}/>
+							        </label>
+							    </div>
+							    <div class="col-md-6 shortcut">
+							        <label class="image-checkbox">
+							            <span class="bg-warning-lt">
+											<span class="map-icon map-icon-department-store"></span>
+									    </span>
+									    <h5 class="checkbox-text">Locales Comerciales</h5>
+							            <input type="checkbox" name="localFilter" value="ON" {{localFilterValue}}/>
+							        </label>
+							    </div>
+							    <div class="col-md-6 shortcut">
+							        <label class="image-checkbox">
+							            <span class="bg-warning-lt">
+											<span class="map-icon map-icon-bank"></span>
+									    </span>
+									    <h5 class="checkbox-text">Sucursales de Banco</h5>
+							            <input type="checkbox" name="bankFilter" value="ON" {{bankFilterValue}}/>
+							        </label>
+							    </div>
 							</div>
 							<div class="filters">
 								<ul>
@@ -92,39 +124,6 @@
 		</div>
         <div id="googleMap"></div>
 	</main>
-	
-	{{#hasResults}}
-		<div id="results" style="display:none">
-			<table class="table table-striped table-bordered table-condensed table-responsive">
-				<thead>
-					<tr>
-						<th> POI </th>
-						<th> Longitud </th>
-						<th> Latitud </th>
-						<th> Barrio </th>
-						<th> Calle </th>
-						<th> Codigo Postal </th>
-						<th> Esta Cerca </th>
-						<th> Esta Disponible </th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each results}}
-						<tr> 
-							<td>{{{nombre}}}</td>
-							<td>{{longitud}}</td>
-							<td>{{latitud}}</td>
-							<td>{{barrio}}</td>
-							<td>{{calle}}</td>
-							<td>{{cp}}</td>
-							<td>{{estaCerca}}</td>
-							<td>{{estaDisponible}}</td>
-						</tr>
-					{{~/each}}
-				</tbody>
-			</table>
-		</div>
-	{{/hasResults}}
 	<footer>
 		<div class="footer" style="padding: 0px 0;">
 			<div class="container">
@@ -154,13 +153,17 @@
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBgvn_2I1NSn8nh8z3e2tgI5RUxktygzuc&sensor=false">
 	</script>
 	<script src="js/terminalSettings.js"></script>
+	<script src="map-icons-master/dist/js/map-icons.js"></script>
 	<script>
 		$(document).ready(function() {
 			function removeInfoWindowsFields(className,content){
 				//me encargo de remover los campos que no corresponden a className
+				content.find(".modal-body .data-group").hide();
 				$.each(content.find(".modal-body .data-group"), function() {
 					if (!($(this).hasClass( className ))){
 						$(this).remove();
+					}else{
+						$(this).show();
 					}
 				});
 			};
@@ -181,22 +184,34 @@
 				
 				//creo el mapa y seteo las propiedad
 		  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-				
+				var icon={
+					path: MAP_PIN,
+					fillColor: '#edaf00',
+					fillOpacity: 1,
+					strokeColor: '#5f4600',
+					strokeWeight: 0.5,
+					size: new google.maps.Size(20, 20)
+				};
 			  	//creo un punto con sus propiedades y animaciones
-				var markerCenter=new google.maps.Marker({
-					position:myCenter//,
-					//animation : google.maps.Animation.BOUNCE
+				var markerCenter = new Marker({
+					map: map,
+					position:myCenter,
+					icon: icon,
+					map_icon_label: '<span class="map-icon map-icon-postal-code-prefix"></span>',
+					title: "Posicion actual"
 				});
-		
-				markerCenter.setMap(map);
 		
 				//creo un popup de informacion
-				var infowindow = new google.maps.InfoWindow({
-					content : "Usted esta aquí!"
+				markerCenter.addListener('click', function() {
+					new google.maps.InfoWindow({
+						content : (
+							'<div class="modal-content">'+
+								'<span class="map-icon marker-center map-icon-postal-code-prefix"></span>'+
+								'<h5 style="display: inline-block;">Usted se encuentra aquí!</h5>'+
+							'</div>'
+						)
+					}).open(map, this);
 				});
-		
-				//vinculo el pop up con el punto creado
-				infowindow.open(map, markerCenter);
 				
 				//creo los puntos de los resultados
 				{{#hasResults}}
@@ -204,51 +219,52 @@
 					var poiMarker;
 					{{#each results}}
 						poiPosition = new google.maps.LatLng(parseFloat({{latitud}}), parseFloat({{longitud}}));
-						poiMarker = new google.maps.Marker({
-						 	position: poiPosition,
-						 	icon: '{{icon}}',
-						 	map: map,
+						poiMarker = new Marker({
+							map: map,
+							position: poiPosition,
+						 	icon: icon,
+							map_icon_label: '<span class="map-icon {{icon}}"></span>',
 						 	title: '{{nombre}}'
 						 });
 						 poiMarker.addListener('click', function() {
 							 new google.maps.InfoWindow({
 								 	content: (
-								 		'<div class="modal-content {{cssClass}} col-md-4">'+
+								 		'<div class="modal-content {{cssClass}}">'+
 											'<div class="modal-header">'+
-												'<img src="{{icon}}" alt="{{nombre}}" class="img-circle">'+
+												'<span class="map-icon {{icon}}"></span>'+
 												'<h4>{{titulo}}</h4>'+
 											'</div>'+
 											'<div class="modal-body">'+
-												'<div class="data-group data-colectivo">'+
+												'<div style="display:none;" class="data-group data-colectivo">'+
 												    '<label class="data-value">{{linea}}</label>'+
 												'</div>'+
-												'<div class="data-group data-cgp data-local data-banco">'+
+												'<div style="display:none;" class="data-group data-cgp data-local data-banco">'+
 												    '<label class="data-name">Dirección</label>'+
 												    '<label class="data-value">{{direccion}}</label>'+
 												'</div>'+
-												'<div class="data-group data-cgp">'+
+												'<div style="display:none;" class="data-group data-cgp">'+
 												    '<label class="data-name">Zona</label>'+
 												    '<label class="data-value">{{zona}}</label>'+
 												'</div>'+
-												'<div class="data-group data-cgp">'+
+												'<div style="display:none;" class="data-group data-cgp">'+
 													'<ul>'+
 														{{#each servicios}}
 															'<li>{{name}}</li>'+
 														{{~/each}}
 													'</ul>'+
 												'</div>'+
-												'<div class="data-group data-banco">'+
+												'<div style="display:none;" class="data-group data-banco">'+
 													'<ul>'+
 														{{#each servicios}}
 															'<li>{{name}}</li>'+
 														{{~/each}}
 													'</ul>'+
 												'</div>'+
-												'<div class="data-group data-local">'+
+												'<div style="display:none;" class="data-group data-local">'+
 												    '<label class="data-name">Nombre</label>'+
 												    '<label class="data-value">{{nombre}}</label>'+
 												'</div>'+
-												'<div class="data-group data-local">'+
+												'<div style="display:none;" class="data-group data-local">'+
 												    '<label class="data-name">Rubro</label>'+
 												    '<label class="data-value">{{rubro}}</label>'+
 												'</div>'+
@@ -256,6 +272,7 @@
 										'</div>'		
 								 	)
 								 }).open(map, this);
+							 setTimeout(function(){},1000);
 							 removeInfoWindowsFields("{{cssClass}}",$(".modal-content"));
 						 });
 					{{~/each}}
