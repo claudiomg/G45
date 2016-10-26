@@ -173,6 +173,10 @@ public abstract class POI {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+	
+	public Long getId() {
+		return PoiId;
+	}
 
 	public abstract void completeViewData(HashMap<String, Object> element);
 	
