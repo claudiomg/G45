@@ -38,9 +38,8 @@ public class Consulta implements WithGlobalEntityManager {
 	private Duration duracionProceso;
 	@Column(name="palabraBuscada")
 	private String palabraBuscada;
-//	@ManyToOne
-//	@JoinColumn(name="terminalId")
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="terminalId")
 	private Terminal user;
 	
 	public Consulta(){};

@@ -51,7 +51,23 @@ public class ProcesoDarDeBajaPOI {
       darDeBaja.correrProceso();
 	  Assert.assertTrue(admin.getRepositorio().getRegistros().size() == 1);
 		
+	} 
+	
+	@Test
+	public void DarDeBajaPOI2() throws Exception{
+      darDeBaja.setAdmin(admin);
+      darDeBaja.setRepoDeBaja(repoDeBaja);
+      darDeBaja.setPoiFinder(poiFinder);
+      palabrasClaves.add("123");
+      colectivo.setPalabrasClave(palabrasClaves);
+      repoDePoi.agregarRegistro(colectivo);
+      admin.setRepositorio(repoDePoi);
+      poiFinder.addRepository(repoDePoi);
+      darDeBaja.correrProceso();
+	  Assert.assertTrue(admin.getRepositorio().getRegistros().size() == 0);
+		
 	}
+	
 	
 
 }

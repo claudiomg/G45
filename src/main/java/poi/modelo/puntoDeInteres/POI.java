@@ -24,13 +24,11 @@ public abstract class POI {
 	private Long PoiId;
 	@Column(name = "NOMBRE_POI")
 	private String nombre = new String();
-	@OneToOne(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="PoiId")
+	@OneToOne
+	@JoinColumn(name="posicionId")
 	private Posicion posicion;
-	@OneToOne(cascade = CascadeType.PERSIST
-			, fetch = FetchType.EAGER)
-	@JoinColumn(name="PoiId")
+	@OneToOne
+	@JoinColumn(name="direccionId")
 	private Direccion direccion;
 	@ElementCollection
 	@CollectionTable(
