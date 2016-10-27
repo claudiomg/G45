@@ -11,13 +11,12 @@
 	<link rel="shortcut icon" href="bastrap3/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" href="bastrap3/favicon-mobile.png">
 	<link rel="stylesheet" href="bastrap3/bootstrap.min.css">
-	
+	<link rel="stylesheet" href="css/ionicons.css" >
 	<link rel="stylesheet" href="map-icons-master/dist/css/map-icons.css" >
 	<link rel="stylesheet" href="bastrap3/bastrap.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/markerInfoWindows.css">
 	<link rel="stylesheet" href="css/sidebar.css" >
-	
 	<link rel="stylesheet" href="css/maps.css" >
 	
 </head>
@@ -37,7 +36,7 @@
 		</div>
 	</header>
 	<main class="main-container" role="main" style="padding-top: 0px;padding-bottom: 0px;">
-		<div class="sidebar-wrapper col-sm-4 col-md-3 sidebar">
+		<div class="sidebar-wrapper col-sm-4 col-md-4 sidebar">
 	    	<div class="mini-submenu">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -58,52 +57,66 @@
 						</div>
 						<div class="advancedFilters">
 							<div class="filters poiFilters row shortcut-row">
-								<div class="col-md-6 shortcut">
+								<div class="col-sm-6 col-md-3 shortcut">
 							        <label class="image-checkbox">
 							            <span class="bg-warning-lt">
 											<span class="map-icon map-icon-museum"></span>
 									    </span>
-									    <h5 class="checkbox-text">CGP</h5>
 							            <input type="checkbox" name="cgpFilter" value="ON" {{cgpFilterValue}}/>
+							            <h6 class="checkbox-text">CGP</h6>
 							        </label>
 							    </div>
-							    <div class="col-md-6 shortcut">
+							    <div class="col-sm-6 col-md-3 shortcut">
 							        <label class="image-checkbox">
 							            <span class="bg-warning-lt">
 											<span class="map-icon map-icon-bus-station"></span>
 									    </span>
-									    <h5 class="checkbox-text">Paradas de Colectivo</h5>
 							            <input type="checkbox" name="busStopFilter" value="ON" {{busStopFilterValue}}/>
+							            <h6 class="checkbox-text">Paradas de Colectivo</h6>
 							        </label>
 							    </div>
-							    <div class="col-md-6 shortcut">
+							    <div class="col-sm-6 col-md-3 shortcut">
 							        <label class="image-checkbox">
 							            <span class="bg-warning-lt">
 											<span class="map-icon map-icon-department-store"></span>
 									    </span>
-									    <h5 class="checkbox-text">Locales Comerciales</h5>
 							            <input type="checkbox" name="localFilter" value="ON" {{localFilterValue}}/>
+							            <h6 class="checkbox-text">Locales Comerciales</h6>
 							        </label>
 							    </div>
-							    <div class="col-md-6 shortcut">
+							    <div class="col-sm-6 col-md-3 shortcut">
 							        <label class="image-checkbox">
 							            <span class="bg-warning-lt">
 											<span class="map-icon map-icon-bank"></span>
 									    </span>
-									    <h5 class="checkbox-text">Sucursales de Banco</h5>
 							            <input type="checkbox" name="bankFilter" value="ON" {{bankFilterValue}}/>
+							            <h6 class="checkbox-text">Sucursales de Banco</h6>
 							        </label>
 							    </div>
 							</div>
-							<div class="filters">
-								<ul>
-									{{#accessDisponibilityFilter}}
-									<li><input type="checkbox" name="disponibilityFilter" value="ON" {{disponibilityFilterValue}} > Solo disponible </li>
-									{{/accessDisponibilityFilter}}
-									{{#accessProximityFilter}}
-									<li><input type="checkbox" name="proximityFilter" value="ON" {{proximityFilterValue}} > Solo cercanos </li>
-									{{/accessProximityFilter}}
-								</ul>
+							<div class="filters row shortcut-row">
+								{{#accessDisponibilityFilter}}
+								<div class="col-sm-6 col-md-6 shortcut">
+							        <label class="image-checkbox">
+							            <span class="bg-warning-lt">
+											<i class="icon ion-clock"></i>
+									    </span>
+							            <input type="checkbox" name="disponibilityFilter" value="ON" {{disponibilityFilterValue}}/>
+							            <h6 class="checkbox-text">Disponible</h6>
+							        </label>
+							    </div>
+								{{/accessDisponibilityFilter}}
+								{{#accessProximityFilter}}
+								<div class="col-sm-6 col-md-6 shortcut">
+							        <label class="image-checkbox">
+							            <span class="bg-warning-lt">
+											<i class="icon ion-map"></i>
+									    </span>
+							            <input type="checkbox" name="proximityFilter" value="ON" {{proximityFilterValue}}/>
+							            <h6 class="checkbox-text">Cercanos</h6>
+							        </label>
+							    </div>
+								{{/accessProximityFilter}}
 							</div>
 	
 	

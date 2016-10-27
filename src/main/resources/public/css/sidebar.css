@@ -8,14 +8,21 @@
     overflow-x: hidden;
  }
  
-.sidebar-wrapper{
-	posicion: fixed;
-	top:30px;
-	padding: 0;
+ .filters.row.shortcut-row {
+	margin-right: 0px;
+	margin-left: 0px;
+ }
+input#searchButton {
+    width: 100%;
 }
-
 .sidebar-wrapper .sidebar-wrapper-content{
-	padding: 20px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.sidebar-wrapper .sidebar-wrapper-content .advancedFilters {
+    height: 225px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sidebar-wrapper .sidebar-wrapper-mode > div{
@@ -70,12 +77,13 @@
 }
 
 .sidebar-wrapper {
+	padding: 0;
     z-index: 1;
     position: fixed;
     left: 260px;
     height: auto;
     margin-left: -250px;
-    top: 15%;
+    top: 10%;
     overflow-y: auto;
     background: #FFF;
     -webkit-transition: all 0.5s ease;
