@@ -32,19 +32,19 @@ public class HistorialDeBusquedasController {
 		//String fechaInicio = request.queryParams("fechaInicio");
 		//String fechaFin = request.queryParams("fechaFin");
 		
-		//Terminal usuario = request.session().attribute("usuario");
+		Terminal usuario = request.session().attribute("usuario");
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		List<Consulta> consultas = RepositorioConsultas.getInstance().getRegistros();
 		
 		viewModel.put("hasResults", !consultas.isEmpty());
-		viewModel.put("result", this.convertConsultas(consultas));
+		viewModel.put("result", this.convertConsultas(consultas, usuario));
 		
 		return new ModelAndView(viewModel, "historialDeBusquedasRealizadas.html");
 		
 	}
-	private List<HashMap<String, Object>> convertConsultas(List<Consulta> consultas ) {
+	private List<HashMap<String, Object>> convertConsultas(List<Consulta> consultas, Terminal usuario ) {
 		
 		List<HashMap<String, Object>> array = new ArrayList<HashMap<String,Object>>();
 		for ( Consulta consulta : consultas){

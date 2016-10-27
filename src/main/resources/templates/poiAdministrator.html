@@ -23,7 +23,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
-					<a class="navbar-brand bac-header" href="index.html">Buenos
+					<a class="navbar-brand bac-header" href="/my_home_page">Buenos
 						Aires Ciudad</a>
 				</div>
 				<div class="col-md-6 col-sm-6">
@@ -50,6 +50,7 @@
 				<thead>
 					<tr>					
 						<th> Nombre </th>
+						<th> Dirección </th>
 						<th> Modificar </th>
 						<th> Eliminar </th>
 					</tr>
@@ -58,6 +59,7 @@
 			    		{{#each results}}
 						<tr> 
 							<td>{{{nombre}}}</td>
+							<td> {{{direccion}}} </td>
 							<td>
 								<a href="/modificar" >
 								<input type="button" class="btn btn-warning" value="Modificar" />
