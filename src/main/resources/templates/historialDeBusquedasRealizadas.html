@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="bastrap3/bastrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/slideImages.css">
+
 </head>
 <body>
 
@@ -22,7 +23,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
-					<a class="navbar-brand bac-header" href="index.html">Buenos
+					<a class="navbar-brand bac-header" href="/my_home_page">Buenos
 						Aires Ciudad</a>
 				</div>
 				<div class="col-md-6 col-sm-6">
@@ -48,10 +49,10 @@
 						<td><input type="text" class="form-control" name="usuario" placeholder="Usuario"/></td>
 						<td><input type="text" class="form-control" name="fechaInicio" placeholder="DD/MM/AAAA"/></td>
 						<td><input type="text" class="form-control" name="fechaFin" placeholder="DD/MM/AAAA"/></td>
-						<td><button type="submit" class="btn btn-primary  btn-lg btn-block" name="btn-login"
-								id="btn-login">
-								<span class="glyphicon glyphicon-log-in"></span> Buscar
-							</button></td>
+						<td><a href="/armarTabla" >
+								<input type="button" class="btn btn-primary" value="Buscar" />
+							</a>
+						</td>
 							
 					</tr>
 														
@@ -75,7 +76,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{{#each resultado}}
+					{{#each result}}
 						<tr> 
 							<td>{{{fecha}}}</td>
 							<td>{{usuario}}</td>
@@ -88,6 +89,8 @@
 		</div>
 		{{/hasResults}}	
 		</div>
+		
+		</main>
 			<footer>
 		<div class="footer" style="padding: 0px 0;">
 			<div class="container">
@@ -108,7 +111,7 @@
 				</div>
 			</div>
 		</div>
-</main>	
+	
 	</footer>
 	
 	<script src="bastrap3/jquery.min.js"></script>

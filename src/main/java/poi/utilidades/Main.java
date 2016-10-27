@@ -108,6 +108,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		//HISTORIAL DE BUSQUEDA
 		HistorialDeBusquedasController historial = new HistorialDeBusquedasController();
 		get("/historial_busquedas", historial::render, engine );
+		get("/armarTabla", historial::mostrarLista, engine);
 		
 	}
 	
