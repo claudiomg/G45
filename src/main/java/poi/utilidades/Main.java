@@ -26,7 +26,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8080);
+		port(8085);
 
 		staticFileLocation("/public");		
 		
