@@ -26,7 +26,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8082);
+		port(8080);
 
 		staticFileLocation("/public");		
 		
@@ -108,7 +108,8 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		//HISTORIAL DE BUSQUEDA
 		HistorialDeBusquedasController historial = new HistorialDeBusquedasController();
 		get("/historial_busquedas", historial::render, engine );
-		get("/armarTabla", historial::mostrarLista, engine);
+		get("/armar-tabla", historial::mostrarLista, engine);
+		
 		
 	}
 	

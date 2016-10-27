@@ -37,6 +37,7 @@
 	
 	<h3>Criterio de Búsqueda</h3>
 	<div>
+	<form action="armar-tabla" method="get" >
 		<table>			
 			<tr>					
 				<td> Usuario </td>
@@ -45,20 +46,22 @@
 				<td></td>
 			</tr>
 			    <tbody>
-			   		<tr> 
-						<td><input type="text" class="form-control" name="usuario" placeholder="Usuario"/></td>
-						<td><input type="text" class="form-control" name="fechaInicio" placeholder="DD/MM/AAAA"/></td>
-						<td><input type="text" class="form-control" name="fechaFin" placeholder="DD/MM/AAAA"/></td>
-						<td><a href="/armarTabla" >
-								<input type="button" class="btn btn-primary" value="Buscar" />
-							</a>
+			     		<tr> 
+			   			
+							<td><input type="text" class="form-control" accesskey="user" id="usuario" name="usuario" placeholder="Usuario"/></td>
+							<td><input type="text" class="form-control" name="fechaInicio" placeholder="DD/MM/AAAA"/></td>
+							<td><input type="text" class="form-control" name="fechaFin" placeholder="DD/MM/AAAA"/></td>
+							<td>
+								<input type="submit" class="btn btn-primary" value="Buscar" />
+								
 						</td>
-							
+						
 					</tr>
 														
 			  	</tbody>
 					
 		</table>
+		</form>
 		</div>
 		
 		<div>

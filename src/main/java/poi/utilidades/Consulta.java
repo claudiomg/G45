@@ -42,6 +42,8 @@ public class Consulta implements WithGlobalEntityManager {
 	@JoinColumn(name="terminalId")
 	private Terminal user;
 	
+	private int cantidadEncontrada;
+	
 	public Consulta(){};
 	
 	public Consulta(Terminal user, String palabraBuscada) {
@@ -99,10 +101,22 @@ public class Consulta implements WithGlobalEntityManager {
 		this.duracionProceso = duracionProceso;
 	}
 	
+	public int getCantidadEncontrada(){
+			
+		return cantidadEncontrada;
+	}
+	
+	public void setCantidadEncontrada(int cantidad) {
+		
+		cantidadEncontrada = cantidad;
+	}
+	
 
 	public void persistir(Consulta consulta){
 		entityManager().getTransaction().begin();
 		entityManager().persist(consulta);
 		entityManager().getTransaction().commit();
 	}
+
+	
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import poi.modelo.puntoDeInteres.POI;
 import poi.modelo.usuario.Terminal;
@@ -32,7 +33,7 @@ public class HistorialDeBusquedasController {
 		//String fechaInicio = request.queryParams("fechaInicio");
 		//String fechaFin = request.queryParams("fechaFin");
 		
-		Terminal usuario = request.session().attribute("usuario");
+		String usuario = request.queryParams("usuario");
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
@@ -44,10 +45,14 @@ public class HistorialDeBusquedasController {
 		return new ModelAndView(viewModel, "historialDeBusquedasRealizadas.html");
 		
 	}
-	private List<HashMap<String, Object>> convertConsultas(List<Consulta> consultas, Terminal usuario ) {
+	private List<HashMap<String, Object>> convertConsultas(List<Consulta> consultas, String usuario ) {
+		
+		List<Consulta> consultasAuxiliar = new ArrayList<>();
+		
+		consultasAuxiliar.addAll(consultas.stream().filter(c -> c.getUser().getUsuario().toLowerCase().equals(usuario.toLowerCase())).collect(Collectors.toList()));
 		
 		List<HashMap<String, Object>> array = new ArrayList<HashMap<String,Object>>();
-		for ( Consulta consulta : consultas){
+		for ( Consulta consulta : consultasAuxiliar){
 			HashMap<String,Object> element = new HashMap<String,Object>();
 			
 			element.put("fecha", consulta.getFecha().toString());
