@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="bastrap3/bastrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/slideImages.css">
+<link rel="stylesheet" href="css/scrollable-table.css">
 
 </head>
 <body>
@@ -69,7 +70,7 @@
 		{{#hasResults}}
 		<div id="string">{{string}}</div>
 		<div style="overflow:auto" id="results">
-			<table  class="table table-striped table-bordered table-condensed table-responsive">
+			<table  class="table table-striped table-bordered table-condensed table-responsive" id="historial">
 				<thead>
 					<tr>
 						<th> Fecha </th>
@@ -124,6 +125,27 @@
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/loginProcess.js"></script>
 	<script src="js/slideImages.js"></script>
+	<script>
+	var $table = $('#historial'),
+    $bodyCells = $table.find('tbody tr:first').children(),
+    colWidth;
+
+$table.addClass('scroll');
+
+// Adjust the width of thead cells when window resizes
+$(window).resize(function () {
+
+    // Get the tbody columns width array
+    colWidth = $bodyCells.map(function () {
+        return $(this).width();
+    }).get();
+
+    // Set the width of thead columns
+    $table.find('thead tr').children().each(function (i, v) {
+        $(v).width(colWidth[i]);
+    });
+
+}).resize(); // Trigger resize handler</script>
 	<!-- JAVASCRIPT EXTRA -->
 		
 
