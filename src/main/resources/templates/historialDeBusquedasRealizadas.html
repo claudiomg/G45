@@ -36,7 +36,7 @@
 	<main class="main-container" role="main" style="padding-top: 0px;padding-bottom: 0px;">
 	
 	<h3>Criterio de Búsqueda</h3>
-	<div>
+	<div >
 	<form action="armar-tabla" method="get" >
 		<table>			
 			<tr>					
@@ -68,8 +68,8 @@
 			<h3>Resultado</h3>	
 		{{#hasResults}}
 		<div id="string">{{string}}</div>
-		<div id="results">
-			<table class="table table-striped table-bordered table-condensed table-responsive">
+		<div style="overflow:auto" id="results">
+			<table  class="table table-striped table-bordered table-condensed table-responsive">
 				<thead>
 					<tr>
 						<th> Fecha </th>
@@ -94,7 +94,8 @@
 		</div>
 		
 		</main>
-			<footer>
+		
+		<footer>
 		<div class="footer" style="padding: 0px 0;">
 			<div class="container">
 				<div class="row">

@@ -1,0 +1,28 @@
+.table-container {
+    height: 10em;
+}
+table-scrollable {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+thead-scrollable {
+    /* head takes the height it requires, 
+    and it's not scaled when table is resized */
+    flex: 0 0 auto;
+    width: calc(100% - 0.9em);
+}
+tbody-scrollable {
+    /* body takes all the remaining available space */
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+}
+tr-scrollable {
+    width: 100%;
+}
+scroll {
+    display: table;
+    table-layout: fixed;
+}
