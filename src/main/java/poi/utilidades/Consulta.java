@@ -3,6 +3,7 @@ package poi.utilidades;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +25,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioConsultas;
+import poi.modelo.puntoDeInteres.POI;
 
 @Entity
 @Table(name="Consultas")
@@ -43,6 +47,11 @@ public class Consulta implements WithGlobalEntityManager {
 	private Terminal user;
 	
 	private int cantidadEncontrada;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="poisEncontrados", 
+	joinColumns=@JoinColumn(name="consultaId"), inverseJoinColumns=@JoinColumn(name="PoiId"))  
+	private List<POI> poisEncontrados;
 	
 	public Consulta(){};
 	
@@ -109,6 +118,10 @@ public class Consulta implements WithGlobalEntityManager {
 	public void setCantidadEncontrada(int cantidad) {
 		
 		cantidadEncontrada = cantidad;
+	}
+	
+	public void setPoisEncontrados (List<POI> pois){
+		poisEncontrados.addAll(pois);
 	}
 	
 
