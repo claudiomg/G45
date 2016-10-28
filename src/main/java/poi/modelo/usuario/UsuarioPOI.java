@@ -44,4 +44,7 @@ public abstract class UsuarioPOI implements WithGlobalEntityManager {
 		entityManager().persist(user);
 		entityManager().getTransaction().commit();
 	}
+	public Long getId(){
+		return UsuarioId;
+	}
 }
