@@ -20,12 +20,13 @@ public class ServicioRest {
 		return instance;
 	}
 
-	public void restBusqueda(List<HashMap<String, Object>> listado){		
+	public void restBusqueda(List<HashMap<String, Object>> listado){				
 		get("/pois", (req, res) -> listado, new JsonTransformer());
 	}
 	
 	public void restHistorial(List<HashMap<String, Object>> listado){		
-		get("/consultas", (req, res) -> listado, new JsonTransformer());		
+		get("/consultas", (req, res) -> {return listado;}, new JsonTransformer());
+		this.instance = null;
 	}	
 	
 }
