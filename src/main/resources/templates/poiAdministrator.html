@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="bastrap3/bastrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/slideImages.css">
+<link rel="stylesheet" href="css/scrollable-table.css">
 
 </head>
 
@@ -43,9 +44,10 @@
 			<br>
 			<br>
 		
+		  	<div>
 			{{#hasResults}}	
-		
-			<table class="table table-striped table-bordered table-condensed table-responsive">
+			<div style="overflow:auto" >
+			<table class="table table-striped table-bordered table-condensed table-responsive" id="pois">
 			
 				<thead>
 					<tr>					
@@ -76,7 +78,10 @@
 			  		</tbody>
 					
 			</table>
+			</div>
 		{{/hasResults}}
+		
+		</div>
 	</form>
 	
 	</main>
@@ -116,6 +121,27 @@
 	    });        
 	});
 </script>
+	<script>
+	var $table = $('#pois'),
+    $bodyCells = $table.find('tbody tr:first').children(),
+    colWidth;
+
+$table.addClass('scroll');
+
+// Adjust the width of thead cells when window resizes
+$(window).resize(function () {
+
+    // Get the tbody columns width array
+    colWidth = $bodyCells.map(function () {
+        return $(this).width();
+    }).get();
+
+    // Set the width of thead columns
+    $table.find('thead tr').children().each(function (i, v) {
+        $(v).width(colWidth[i]);
+    });
+
+}).resize(); // Trigger resize handler</script>
 
 </body>
 </html>
