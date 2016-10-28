@@ -12,7 +12,6 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import poi.controllers.UpdatePoisController;
 import poi.modelo.puntoDeInteres.RadioCercania;
-import poi.servicioRest.NuevoRest;
 import poi.controllers.TerminalController;
 import poi.controllers.ConfigAccionesController;
 import poi.controllers.HistorialDeBusquedasController;

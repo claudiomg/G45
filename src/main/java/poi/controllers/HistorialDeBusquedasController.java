@@ -16,6 +16,7 @@ import poi.reportes.ReporteBusquedasPorTerminal;
 import poi.repositorios.RepositorioConsultas;
 import poi.repositorios.RepositorioPOI;
 import poi.servicioRest.JsonTransformer;
+import poi.servicioRest.ServicioRest;
 import poi.utilidades.Consulta;
 import spark.ModelAndView;
 import spark.Request;
@@ -44,10 +45,9 @@ public class HistorialDeBusquedasController {
 		List<Consulta> consultas = RepositorioConsultas.getInstance().getRegistros();
 				
 		viewModel.put("hasResults", !consultas.isEmpty());
-		viewModel.put("result", this.convertConsultas(consultas, usuario, fechaInicio, fechaFin));
-		
-		get("/consultas", (req, res) -> this.convertConsultas(consultas, usuario, fechaInicio, fechaFin), new JsonTransformer());
-		
+		List<HashMap<String, Object>> listado = this.convertConsultas(consultas, usuario, fechaInicio, fechaFin); 
+		viewModel.put("result", listado);
+		ServicioRest.getInstance().restHistorial(listado);
 		return new ModelAndView(viewModel, "historialDeBusquedasRealizadas.html");
 		
 	}

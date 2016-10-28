@@ -15,6 +15,7 @@ import poi.modelo.puntoDeInteres.ParadaColectivo;
 import poi.modelo.puntoDeInteres.SucursalBanco;
 import poi.modelo.usuario.Terminal;
 import poi.servicioRest.JsonTransformer;
+import poi.servicioRest.ServicioRest;
 import poi.utilidades.Posicion;
 import spark.ModelAndView;
 import spark.Request;
@@ -34,10 +35,9 @@ public class TerminalController {
 		finder.search();
 		HashMap<String, Object> viewModel = this.configViewModel(requestMediator);
 		viewModel.put("hasResults", !finder.getResults().isEmpty());
-		viewModel.put("results", this.convertPoi(finder.getResults(),request));
-		
-		get("/pois", (req, res) -> this.convertPoi(finder.getResults(),request), new JsonTransformer());		
-		
+		List<HashMap<String, Object>> listado = this.convertPoi(finder.getResults(),request);
+		viewModel.put("results", listado);
+		ServicioRest.getInstance().restBusqueda(listado);
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 	private HashMap<String, Object> configViewModel(RequestMediator request) {
