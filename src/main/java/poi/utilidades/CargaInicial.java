@@ -1,7 +1,11 @@
 package poi.utilidades;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import poi.modelo.puntoDeInteres.LocalComercial;
 import poi.modelo.puntoDeInteres.ParadaColectivo;
@@ -13,7 +17,7 @@ import poi.repositorios.RepositorioConsultas;
 import poi.repositorios.RepositorioPOI;
 import poi.repositorios.RepositorioUsuarios;
 
-public class CargaInicial {
+public class CargaInicial implements WithGlobalEntityManager{
 	public static CargaInicial instance = null;
 	RepositorioPOI repositorioPOI = RepositorioPOI.getInstance();
 	private HashMap<String, Direccion> direcciones = new HashMap<String, Direccion>();
@@ -123,6 +127,17 @@ public class CargaInicial {
 		terminal3.setPassword("palermo");
 		((Terminal) terminal3).setPosicion(new Posicion(-34.588315, -58.410690));
 		repositorio.agregarRegistro(terminal3);
+		
+		List<UsuarioPOI> usuariosRepo = new ArrayList<UsuarioPOI>();
+		usuariosRepo = repositorio.getInstance().getTerminals();
+		
+		for(UsuarioPOI terminal: usuariosRepo)
+		{
+			entityManager().getTransaction().begin();
+			entityManager().persist(terminal);
+			entityManager().getTransaction().commit();	
+		}
+		
 	}
 	
 	private void inicializarPosiciones() {

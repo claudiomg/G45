@@ -14,6 +14,7 @@ import poi.controllers.UpdatePoisController;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.servicioRest.NuevoRest;
 import poi.controllers.TerminalController;
+import poi.controllers.ConfigAccionesController;
 import poi.controllers.HistorialDeBusquedasController;
 import poi.controllers.LoginController;
 import poi.controllers.ProcesoController;
@@ -113,6 +114,13 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		get("/armar-tabla", historial::mostrarLista, engine);
 		
 		
+			
+		//CONFIG ACCIONES EN CONSULTA
+		ConfigAccionesController configAcciones = new ConfigAccionesController();
+		get("/configAccionesXUsuario",configAcciones::render, engine);
+		get("/configAcciones",configAcciones::renderUsuario, engine);
+		post("/configAcciones",configAcciones::agregarAcciones, engine);
+		get("/configAcciones_Eliminar", configAcciones::eliminarAcciones, engine);
 	}
 	
 	
