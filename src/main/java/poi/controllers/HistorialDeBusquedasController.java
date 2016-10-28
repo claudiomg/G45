@@ -15,10 +15,14 @@ import poi.reportes.ReporteBusquedasPorFecha;
 import poi.reportes.ReporteBusquedasPorTerminal;
 import poi.repositorios.RepositorioConsultas;
 import poi.repositorios.RepositorioPOI;
+import poi.servicioRest.JsonTransformer;
 import poi.utilidades.Consulta;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
+
+import static spark.Spark.get;
 
 public class HistorialDeBusquedasController {
 	
@@ -30,7 +34,7 @@ public class HistorialDeBusquedasController {
 	}
 	
 	public ModelAndView mostrarLista(Request request, Response response){
-				
+
 		String fechaInicio = request.queryParams("fechaInicio");
 		String fechaFin = request.queryParams("fechaFin");
 		String usuario = request.queryParams("usuario");
@@ -38,9 +42,11 @@ public class HistorialDeBusquedasController {
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		List<Consulta> consultas = RepositorioConsultas.getInstance().getRegistros();
-		
+				
 		viewModel.put("hasResults", !consultas.isEmpty());
 		viewModel.put("result", this.convertConsultas(consultas, usuario, fechaInicio, fechaFin));
+		
+		get("/consultas", (req, res) -> this.convertConsultas(consultas, usuario, fechaInicio, fechaFin), new JsonTransformer());
 		
 		return new ModelAndView(viewModel, "historialDeBusquedasRealizadas.html");
 		
