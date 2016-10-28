@@ -44,6 +44,7 @@ public class UpdatePoisController {
 			HashMap<String,Object> element = new HashMap<String,Object>();
 			
 			element.put("nombre", poi.getNombre());
+			element.put("direccion", poi.getDireccion().getCalle().concat(" ").concat(poi.getDireccion().getNumero()));
 			
 			array.add(element);
 		}

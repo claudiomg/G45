@@ -1,0 +1,17 @@
+table.scroll tbody,
+table.scroll thead { display: block; }
+
+table.scroll tbody {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 300px;
+}
+
+table.scroll tr {
+    display: flex;
+}
+
+table.scroll tr > td {
+    flex-grow: 1;
+    flex-basis: 0;
+}

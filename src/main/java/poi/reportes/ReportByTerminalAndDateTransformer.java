@@ -18,7 +18,7 @@ public class ReportByTerminalAndDateTransformer {
 	}
 
 	private void createResults() {
-		//devo transformar la lista nativa a una lista con el siguiente formato
+		//debo transformar la lista nativa a una lista con el siguiente formato
 		//Lista de hashMap
 			// key: "Fecha" value: "fecha"
 			// key: "Terminales" value: Lista de hashMap

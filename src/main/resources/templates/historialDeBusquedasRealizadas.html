@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="bastrap3/bastrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/slideImages.css">
+<link rel="stylesheet" href="css/scrollable-table.css">
 
 </head>
 <body>
@@ -36,7 +37,8 @@
 	<main class="main-container" role="main" style="padding-top: 0px;padding-bottom: 0px;">
 	
 	<h3>Criterio de Búsqueda</h3>
-	<div>
+	<div >
+	<form action="armar-tabla" method="get" >
 		<table>			
 			<tr>					
 				<td> Usuario </td>
@@ -45,28 +47,30 @@
 				<td></td>
 			</tr>
 			    <tbody>
-			   		<tr> 
-						<td><input type="text" class="form-control" name="usuario" placeholder="Usuario"/></td>
-						<td><input type="text" class="form-control" name="fechaInicio" placeholder="DD/MM/AAAA"/></td>
-						<td><input type="text" class="form-control" name="fechaFin" placeholder="DD/MM/AAAA"/></td>
-						<td><a href="/armarTabla" >
-								<input type="button" class="btn btn-primary" value="Buscar" />
-							</a>
+			     		<tr> 
+			   			
+							<td><input type="text" class="form-control" accesskey="user" id="usuario" name="usuario" placeholder="Usuario"/></td>
+							<td><input type="text" class="form-control" accesskey="fi" id="fechaInicio" name="fechaInicio" placeholder="DD-MM-AAAA"/></td>
+							<td><input type="text" class="form-control" accesskey="ff" id="fechaFin" name="fechaFin" placeholder="DD-MM-AAAA"/></td>
+							<td>
+								<input type="submit" class="btn btn-primary" value="Buscar" />
+								
 						</td>
-							
+						
 					</tr>
 														
 			  	</tbody>
 					
 		</table>
+		</form>
 		</div>
 		
 		<div>
 			<h3>Resultado</h3>	
 		{{#hasResults}}
 		<div id="string">{{string}}</div>
-		<div id="results">
-			<table class="table table-striped table-bordered table-condensed table-responsive">
+		<div style="overflow:auto" id="results">
+			<table  class="table table-striped table-bordered table-condensed table-responsive" id="historial">
 				<thead>
 					<tr>
 						<th> Fecha </th>
@@ -91,7 +95,8 @@
 		</div>
 		
 		</main>
-			<footer>
+		
+		<footer>
 		<div class="footer" style="padding: 0px 0;">
 			<div class="container">
 				<div class="row">
@@ -120,6 +125,27 @@
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/loginProcess.js"></script>
 	<script src="js/slideImages.js"></script>
+	<script>
+	var $table = $('#historial'),
+    $bodyCells = $table.find('tbody tr:first').children(),
+    colWidth;
+
+$table.addClass('scroll');
+
+// Adjust the width of thead cells when window resizes
+$(window).resize(function () {
+
+    // Get the tbody columns width array
+    colWidth = $bodyCells.map(function () {
+        return $(this).width();
+    }).get();
+
+    // Set the width of thead columns
+    $table.find('thead tr').children().each(function (i, v) {
+        $(v).width(colWidth[i]);
+    });
+
+}).resize(); // Trigger resize handler</script>
 	<!-- JAVASCRIPT EXTRA -->
 		
 
