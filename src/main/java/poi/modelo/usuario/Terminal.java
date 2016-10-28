@@ -30,6 +30,10 @@ public class Terminal extends UsuarioPOI{
     @CollectionTable(name="AccionesPorUsuario", joinColumns=@JoinColumn(name="id_usuario"))
 	private Map<String,Boolean> acciones = new HashMap<String,Boolean>();
 	
+	public Terminal(){
+		
+	}
+	
 	public Terminal(String usuario) {
 		this.setUsuario(usuario);
 		this.inicializarAcciones();
@@ -85,7 +89,7 @@ public class Terminal extends UsuarioPOI{
 		this.posicion = posicion;
 	}
 
-	public HashMap<String,Boolean> getAcciones() {
-		return (HashMap<String, Boolean>) acciones;
+	public Map<String,Boolean> getAcciones() {
+		return (Map<String, Boolean>) acciones;
 	}
 }
