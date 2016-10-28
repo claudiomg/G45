@@ -1,5 +1,18 @@
-main.main-container {
-    height: 80%;
+body {
+	height: 100%;
+}
+body header{
+	height: 8%;
+}
+body footer{
+	height: 10%;
+}
+body main {
+	height: 80%;
+}
+
+main #googleMap {
+	height: 100%;
 }
 
 .list-group-item:before {
@@ -10,8 +23,15 @@ main.main-container {
 	opacity: 1;
 }
 
-.advancedFilters .image-checkbox{
-	
+.advancedFilters .shortcut-row .shortcut {
+	padding: 5px;
+}
+.advancedFilters .shortcut-row .shortcut label {
+	margin: 0px;
+}
+.advancedFilters .shortcut-row .shortcut h6 {
+	margin-bottom: 0px;
+    margin-top: 5px;
 }
 .shortcut .image-checkbox span {
 	width: 50px;
@@ -19,16 +39,17 @@ main.main-container {
 	padding-top: 5px;
 }
 .advancedFilters .image-checkbox .bg-warning-lt {
-	background-image: linear-gradient(to bottom, #ffd300 0%, #ffbc00 100%);
+	background-image: linear-gradient(to bottom, #f0f0f0 0%, #888 100%);
 	margin-bottom: 0px !important;
+	color: #292202;
     text-align: center;
     margin: 0 auto 24px auto;
-    width: 75px;
-    height: 75px;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
     position: relative;
     display: block;
-    font-size: 45px;
+    font-size: 35px;
 }
 
 .advancedFilters .image-checkbox {
@@ -42,9 +63,9 @@ main.main-container {
 
 .image-checkbox input[type="checkbox"]{
 	display: none;
-	}
+}
 
-.image-checkbox-checked {
-	border-color: #f58723;
+.advancedFilters .image-checkbox.image-checkbox-checked .bg-warning-lt {
+	background-image: linear-gradient(to bottom, #ffd300 0%, #ff9300 100%);
 }
 

@@ -14,6 +14,7 @@ import poi.controllers.UpdatePoisController;
 import poi.modelo.puntoDeInteres.RadioCercania;
 import poi.controllers.TerminalController;
 import poi.controllers.ConfigAccionesController;
+import poi.controllers.HistorialDeBusquedasController;
 import poi.controllers.LoginController;
 import poi.controllers.ProcesoController;
 import poi.controllers.QueryReportsController;
@@ -26,7 +27,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8080);
+		port(8085);
 
 		staticFileLocation("/public");		
 		
@@ -104,6 +105,12 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			post("/proceso/agregarAcciones", process::updateActions, engine);
 			get("/proceso/agregarAcciones", process::agregarAcciones, engine);
 			//put("/proceso/agregarAcciones", process::updateActions, engine);
+			
+		//HISTORIAL DE BUSQUEDA
+		HistorialDeBusquedasController historial = new HistorialDeBusquedasController();
+		get("/historial_busquedas", historial::render, engine );
+		get("/armar-tabla", historial::mostrarLista, engine);
+		
 		
 			
 		//CONFIG ACCIONES EN CONSULTA

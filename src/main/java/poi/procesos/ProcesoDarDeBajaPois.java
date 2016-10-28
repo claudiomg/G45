@@ -56,8 +56,13 @@ public class ProcesoDarDeBajaPois {
 
 
 	public void correrProceso() throws Exception{
-		repoDeBaja.cleanRepository();
-		repoDeBaja.actualizarRepositorio();
+		try {
+	    repoDeBaja.cleanRepository();
+		repoDeBaja.actualizarRepositorio();}
+		catch (Exception e){
+			   System.out.println("Error de datos del servicio rest");
+			}	
+		
 		List<Integer> idsInt = repoDeBaja.sacarLosIdsDeLosRegistros(repoDeBaja.obtenerRegistros());
 		List<String> ids = this.convertirListaDeIntAListaDeStrings(idsInt);
 		List<POI> listaDePoisADarDeBaja = this.filtrarPoisPorListaDePalabras(ids);
