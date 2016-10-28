@@ -12,6 +12,7 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import poi.controllers.UpdatePoisController;
 import poi.modelo.puntoDeInteres.RadioCercania;
+import poi.servicioRest.NuevoRest;
 import poi.controllers.TerminalController;
 import poi.controllers.HistorialDeBusquedasController;
 import poi.controllers.LoginController;
@@ -26,7 +27,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8085);
+		port(8080);
 
 		staticFileLocation("/public");		
 		
@@ -57,7 +58,8 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 //		/** BORRAR **/
 				
 		CargaInicial.getInstance().inicializar();
-		
+		new NuevoRest();	
+				
 		// INDEX PRINCIPAL - LOGIN
 		LoginController login = new LoginController();
 		get("/", login::render, engine);
