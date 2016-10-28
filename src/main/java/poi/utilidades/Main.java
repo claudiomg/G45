@@ -1,9 +1,8 @@
 package poi.utilidades;
 
 import static spark.Spark.*;
-import static spark.SparkBase.port;
-import static spark.SparkBase.staticFileLocation;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,7 +10,12 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import poi.controllers.UpdatePoisController;
-import poi.modelo.puntoDeInteres.RadioCercania;
+import poi.dataImport.BankImport;
+import poi.dataImport.BankImportService;
+import poi.dataImport.ColectivoImportService;
+import poi.dataImport.DataImportService;
+import poi.dataImport.KioscoImportService;
+import poi.dataImport.LibraryImportService;
 import poi.controllers.TerminalController;
 import poi.controllers.HistorialDeBusquedasController;
 import poi.controllers.LoginController;
@@ -26,9 +30,16 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		System.out.println("Iniciando servidor");
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
-		port(8085);
+		port(8080);
 
-		staticFileLocation("/public");		
+		staticFileLocation("/public");
+		
+		
+		//new BankImportService().importData();
+		//new LibraryImportService().importData();
+		//new KioscoImportService().importData();
+		//new ColectivoImportService().importData();
+		//new BankImport().importData("/home/juan/DDS/eclipse/G45/src/main/resources/public/dataImport/bank.csv",";");
 		
 		TimeRange rangoInferiorDeLaSemana = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));
 		TimeRange rangoSuperiorDeLaSemana = new TimeRange(LocalTime.of(17,0,0),LocalTime.of(20,30,0));

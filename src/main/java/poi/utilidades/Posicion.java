@@ -2,6 +2,9 @@ package poi.utilidades;
 
 import javax.persistence.*;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 @Entity
 @Table(name = "Posiciones")
 public class Posicion {
@@ -19,6 +22,15 @@ public class Posicion {
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
+	public Posicion(JSONObject locationJson) {
+		try {
+			this.longitud = new Double(locationJson.getString("lng"));
+			this.latitud = new Double(locationJson.getString("lat"));
+		} catch (NumberFormatException | JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public double getLatitud() {
 		return latitud;
 	}
