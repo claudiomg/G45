@@ -17,6 +17,7 @@ import poi.dataImport.DataImportService;
 import poi.dataImport.KioscoImportService;
 import poi.dataImport.LibraryImportService;
 import poi.controllers.TerminalController;
+import poi.controllers.ConfigAccionesController;
 import poi.controllers.HistorialDeBusquedasController;
 import poi.controllers.LoginController;
 import poi.controllers.ProcesoController;
@@ -68,7 +69,7 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 //		/** BORRAR **/
 				
 		CargaInicial.getInstance().inicializar();
-		
+				
 		// INDEX PRINCIPAL - LOGIN
 		LoginController login = new LoginController();
 		get("/", login::render, engine);
@@ -122,6 +123,13 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		get("/armar-tabla", historial::mostrarLista, engine);
 		
 		
+			
+		//CONFIG ACCIONES EN CONSULTA
+		ConfigAccionesController configAcciones = new ConfigAccionesController();
+		get("/configAccionesXUsuario",configAcciones::render, engine);
+		get("/configAcciones",configAcciones::renderUsuario, engine);
+		post("/configAcciones",configAcciones::agregarAcciones, engine);
+		get("/configAcciones_Eliminar", configAcciones::eliminarAcciones, engine);
 	}
 	
 	

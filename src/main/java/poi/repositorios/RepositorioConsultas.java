@@ -46,4 +46,12 @@ public class RepositorioConsultas {
 			.filter(consulta-> (consulta.getUser()  == terminal))
 			.collect(Collectors.toList());
 	}
+	
+    public List<Consulta> busquedaHistorialConsultas(LocalDate fechaInicio,LocalDate fechaFinal,Terminal usu){
+		List<Consulta> consultas = this.filtraConsultaPorTerminal(this.getRegistros(), usu);
+		return consultas
+				.stream()
+				.filter(consulta -> ( consulta.getFecha().isAfter(fechaInicio) && consulta.getFecha().isBefore(fechaFinal)))
+				.collect(Collectors.toList());
+	}	
 }

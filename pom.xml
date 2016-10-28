@@ -83,7 +83,7 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<dependency>
+	<dependency>
     	<groupId>com.sun.jersey</groupId>
     	<artifactId>jersey-core</artifactId>
     	<version>1.19</version>
