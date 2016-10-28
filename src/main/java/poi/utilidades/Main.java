@@ -59,7 +59,6 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 //		/** BORRAR **/
 				
 		CargaInicial.getInstance().inicializar();
-		new NuevoRest();	
 				
 		// INDEX PRINCIPAL - LOGIN
 		LoginController login = new LoginController();
