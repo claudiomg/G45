@@ -31,18 +31,18 @@ public class CambioDeNombreUsuario implements WithGlobalEntityManager{
 
 					entityManager()
 					.createQuery("from UsuarioPOI l where l.usuario like :usuario", UsuarioPOI.class)
-					.setParameter("usuario", "%" + UsuarioABuscar + "%").getSingleResult().getUsuarioId();
+					.setParameter("usuario", "%" + UsuarioABuscar + "%").getSingleResult().getId();
 			
 			// ModificarCombreDeNombreUsuario
 					entityManager().getTransaction().begin();
-					UsuarioPOI usu2 = entityManager().find(UsuarioPOI.class, user.getUsuarioId());
+					UsuarioPOI usu2 = entityManager().find(UsuarioPOI.class, user.getId());
 					usu2.setUsuario("carlos");
 					entityManager().getTransaction().commit();
 					
 
 		    // ConfirmarCambioDeNombre
 
-			      	Assert.assertEquals(entityManager().find(UsuarioPOI.class, user.getUsuarioId()).getUsuario(),"carlos");
+			      	Assert.assertEquals(entityManager().find(UsuarioPOI.class, user.getId()).getUsuario(),"carlos");
 			
 			      //	createQuery("from UsuarioPOI l where l.UsuarioId = :id", UsuarioPOI.class)
 				//	.setParameter("id", idRecuperado).getSingleResult()
