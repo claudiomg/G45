@@ -44,9 +44,7 @@ public class CambioDeNombreUsuario implements WithGlobalEntityManager{
 
 			      	Assert.assertEquals(entityManager().find(UsuarioPOI.class, user.getId()).getUsuario(),"carlos");
 			
-			      //	createQuery("from UsuarioPOI l where l.UsuarioId = :id", UsuarioPOI.class)
-				//	.setParameter("id", idRecuperado).getSingleResult()
-					
+			    	
 					}
 	}
 
