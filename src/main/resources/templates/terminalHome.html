@@ -216,9 +216,10 @@
 		
 				//creo un popup de informacion
 				markerCenter.addListener('click', function() {
+					$(".map-content.modal-content").remove();
 					new google.maps.InfoWindow({
 						content : (
-							'<div class="modal-content">'+
+							'<div class="map-content modal-content">'+
 								'<span class="map-icon marker-center map-icon-postal-code-prefix"></span>'+
 								'<h5 style="display: inline-block;">Usted se encuentra aquí!</h5>'+
 							'</div>'
@@ -242,7 +243,7 @@
 						 poiMarker.addListener('click', function() {
 							 new google.maps.InfoWindow({
 								 	content: (
-								 		'<div class="modal-content {{cssClass}}">'+
+								 		'<div class="map-content modal-content {{cssClass}}">'+
 											'<div class="modal-header">'+
 												'<span class="map-icon {{icon}}"></span>'+
 												'<h4>{{titulo}}</h4>'+
@@ -267,9 +268,10 @@
 													'</ul>'+
 												'</div>'+
 												'<div style="display:none;" class="data-group data-banco">'+
+													'<h5> Servicios Disponibles </h5>'+
 													'<ul>'+
 														{{#each servicios}}
-															'<li>{{name}}</li>'+
+															'<li>{{this}}</li>'+
 														{{~/each}}
 													'</ul>'+
 												'</div>'+
@@ -285,7 +287,6 @@
 										'</div>'		
 								 	)
 								 }).open(map, this);
-							 setTimeout(function(){},1000);
 							 removeInfoWindowsFields("{{cssClass}}",$(".modal-content"));
 						 });
 					{{~/each}}

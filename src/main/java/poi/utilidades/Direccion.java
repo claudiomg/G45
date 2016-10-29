@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 @Entity
@@ -64,6 +67,26 @@ public class Direccion implements WithGlobalEntityManager {
 		
 	}
 	
+	public Direccion(JSONArray addressComponents) {
+		// genero una direccion a partir del json de google
+		try {
+			for (int i = 0; i < addressComponents.length(); i++) {
+	            JSONObject component = addressComponents.getJSONObject(i);  
+	            String types = component.getJSONArray("types").toString();
+	            if(types.matches("(.*)street_number(.*)")) numero = component.getString("long_name");
+	            if(types.matches("(.*)route(.*)")) calle = component.getString("long_name");
+	            if(types.matches("(.*)sublocality(.*)")) barrio = component.getString("long_name");
+	            if(types.matches("(.*)administrative_area_level_1(.*)")) localidad = component.getString("long_name");
+	            if(types.matches("(.*)locality(.*)")) provincia = component.getString("long_name");
+	            if(types.matches("(.*)country(.*)")) pais = component.getString("long_name");
+	            if(types.matches("(.*)postal_code(.*)")) codigoPostal = component.getString("long_name");
+	        }
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public Long getDireccionId() {
 		return direccionId;
 	}
