@@ -255,6 +255,7 @@ public class CargaInicial implements WithGlobalEntityManager{
 	private void createConsulta(Terminal usuario, String palabra,LocalDateTime fecha) {
 		Consulta consulta = new Consulta(usuario, palabra);
 		consulta.setComienzoProceso(fecha);
+		consulta.setCantidadEncontrada(2);
 		repositorioConsultas.agregarRegistro(consulta);
 	}
 	private void setDireccion(String key, Direccion direccion) {

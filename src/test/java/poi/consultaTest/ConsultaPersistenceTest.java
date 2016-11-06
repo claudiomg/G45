@@ -1,4 +1,4 @@
-/*package poi.consultaTest;
+package poi.consultaTest;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -107,10 +107,14 @@ public class ConsultaPersistenceTest implements WithGlobalEntityManager {
 				.createQuery("from UsuarioPOI l where l.usuario like :user", UsuarioPOI.class)
 				.setParameter("user", nombreABuscar).getResultList().get(0).getId();
 		
+		Terminal term = new Terminal();
+		
+		
+		
 		nombre = entityManager()
 				.createQuery("from Consulta l where l.user = :terminalId", Consulta.class)
 				.setParameter("terminalId", idTermina).getResultList().get(0).getUser().getUsuario();
 		
 		Assert.assertTrue(nombreABuscar == nombre);
 	}
-}*/
+}

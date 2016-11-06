@@ -73,6 +73,7 @@ public class HistorialDeBusquedasController {
 			element.put("fecha", consulta.getFecha().toString());
 			element.put("usuario", consulta.getUser().getUsuario());
 			element.put("parametros", consulta.getPalabraBuscada());
+			element.put("pois", consulta.getCantidadEncontrada());
 			
 			array.add(element);
 		}
@@ -128,6 +129,7 @@ public class HistorialDeBusquedasController {
 				element.put("fecha", consulta.getFecha().toString());
 				element.put("usuario", consulta.getUser().getUsuario());
 				element.put("parametros", consulta.getPalabraBuscada());
+				element.put("pois", consulta.getCantidadEncontrada());
 				
 				array.add(element);
 			}
