@@ -126,6 +126,10 @@ public class Consulta implements WithGlobalEntityManager {
 		poisEncontrados.addAll(pois);
 	}
 	
+	public List<POI> getPois(){
+		return poisEncontrados;
+	}
+	
 
 	public void persistir(Consulta consulta){
 		entityManager().getTransaction().begin();

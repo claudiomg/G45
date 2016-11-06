@@ -101,19 +101,22 @@ public class ConsultaPersistenceTest implements WithGlobalEntityManager {
 		String nombreABuscar = "Belgrano";
 		String nombre;
 		
-		Long idTermina;
+		Long idTerminal;
 		
-		idTermina = entityManager()
+		idTerminal = entityManager()
 				.createQuery("from UsuarioPOI l where l.usuario like :user", UsuarioPOI.class)
 				.setParameter("user", nombreABuscar).getResultList().get(0).getId();
 		
 		Terminal term = new Terminal();
 		
+		term = entityManager()
+				.createQuery("from Terminal l where l.user like :user", Terminal.class)
+				.setParameter("user", idTerminal).getResultList().get(0);
 		
 		
 		nombre = entityManager()
 				.createQuery("from Consulta l where l.user = :terminalId", Consulta.class)
-				.setParameter("terminalId", idTermina).getResultList().get(0).getUser().getUsuario();
+				.setParameter("terminalId", term).getResultList().get(0).getUser().getUsuario();
 		
 		Assert.assertTrue(nombreABuscar == nombre);
 	}

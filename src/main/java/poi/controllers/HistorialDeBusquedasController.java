@@ -74,6 +74,7 @@ public class HistorialDeBusquedasController {
 			element.put("usuario", consulta.getUser().getUsuario());
 			element.put("parametros", consulta.getPalabraBuscada());
 			element.put("pois", consulta.getCantidadEncontrada());
+			element.put("detallePois","aca va el detalle de los pois");
 			
 			array.add(element);
 		}
