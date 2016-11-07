@@ -17,21 +17,19 @@ public class ProcesoAgregarAccionesAUsuarios {
 
 	private List<Posicion> comuna = null;
 	private List<List<Posicion>> CiudadAutonomaBsAs = null;
-	
 
-	
-	public List<Posicion> setComuna(){
-		//TODO: hacer
+	public List<Posicion> setComuna() {
+		// TODO: hacer
 
 		return comuna;
 	}
-	
-	public List<List<Posicion>> setCiudadAutonomaBsAs(List<Posicion> unaComuna){
-		//TODO: hacer
-		
+
+	public List<List<Posicion>> setCiudadAutonomaBsAs(List<Posicion> unaComuna) {
+		// TODO: hacer
+
 		return CiudadAutonomaBsAs;
 	}
-	
+
 	public List<UsuarioPOI> crearActualizacion(List<List<Posicion>> unValor) {
 		List<UsuarioPOI> user = terminales.getTerminals();
 		if (unValor.isEmpty()) {
@@ -42,26 +40,23 @@ public class ProcesoAgregarAccionesAUsuarios {
 			return user;
 		}
 	}
-	
-	public List<UsuarioPOI> filterByPosicion(List<UsuarioPOI> listaUser, List<List<Posicion>> listaComuna){
-		List<UsuarioPOI> toRemove = new ArrayList<UsuarioPOI>();
-		
-		for(UsuarioPOI user: listaUser){
-		Terminal terminal = new Terminal(user.getUsuario());
-		
 
-		for(List<Posicion> cordenada: listaComuna){
-		    if(poi.utilidades.Calculo.coordenadasEnComuna(cordenada, terminal.getPosicion())){}
-		    else{
-		        toRemove.add(user);
-		    }
+	public List<UsuarioPOI> filterByPosicion(List<UsuarioPOI> listaUser, List<List<Posicion>> listaComuna) {
+		List<UsuarioPOI> toRemove = new ArrayList<UsuarioPOI>();
+
+		for (UsuarioPOI user : listaUser) {
+			Terminal terminal = new Terminal(user.getUsuario());
+
+			for (List<Posicion> cordenada : listaComuna) {
+				if (poi.utilidades.Calculo.coordenadasEnComuna(cordenada, terminal.getPosicion())) {
+				} else {
+					toRemove.add(user);
+				}
+			}
 		}
+
+		return toRemove;
 	}
-		
-	
-		return toRemove;		
-	}
-	
 
 	public void actualizarPermisos(UsuarioPOI user, boolean permisoEtiqueta, boolean permisoDisponibilidad,
 			boolean permisoCercania) {
@@ -72,10 +67,14 @@ public class ProcesoAgregarAccionesAUsuarios {
 		terminal.updateFilterByDisponibility(permisoCercania);
 	}
 
-	public void correrProceso(List<List<Posicion>> unValor,  boolean permisoEtiqueta, boolean permisoDisponibilidad, boolean permisoCercania) throws Exception {
-		for (UsuarioPOI elemento : crearActualizacion(unValor)) {
-			 actualizarPermisos(elemento, permisoEtiqueta,permisoDisponibilidad,
-						permisoCercania);
+	public void correrProceso(List<List<Posicion>> unValor, boolean permisoEtiqueta, boolean permisoDisponibilidad,
+			boolean permisoCercania) throws Exception {
+		try {
+			for (UsuarioPOI elemento : crearActualizacion(unValor)) {
+				actualizarPermisos(elemento, permisoEtiqueta, permisoDisponibilidad, permisoCercania);
+			}
+		} catch (Exception e) {
+			System.out.println("Error al buscar terminal");
 		}
 	}
 }
