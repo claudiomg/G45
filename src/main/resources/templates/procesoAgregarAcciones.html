@@ -44,7 +44,7 @@
   				<label for="user">Seleccione el Usuario al que desea agregar la acción:</label>
   					<select class="form-control" name ="user" id="user">
 			 			{{#each results}}
- 		 					<option value={{{nombre}}}>{{{nombre}}}</option>
+ 		 					<option value="{{{nombre}}}">{{{nombre}}}</option>
  						{{~/each}}
 					</select> 
 			</div>
@@ -76,6 +76,11 @@
 					</div>
 				</div>
 </form>
+
+<br>
+		<div style="width:800px; margin:0 auto; color:green;">
+			<h4><label>{{message}}</label></h4>
+		</div>
 </main>
 	<footer>
 		<div class="footer" style="padding: 0px 0;">

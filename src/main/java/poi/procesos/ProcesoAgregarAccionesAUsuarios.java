@@ -3,12 +3,14 @@ package poi.procesos;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import poi.modelo.usuario.Terminal;
 import poi.modelo.usuario.UsuarioPOI;
 import poi.repositorios.RepositorioUsuarios;
 import poi.utilidades.Posicion;
 
-public class ProcesoAgregarAccionesAUsuarios {
+public class ProcesoAgregarAccionesAUsuarios implements WithGlobalEntityManager{
 
 	public ProcesoAgregarAccionesAUsuarios() {
 	}
@@ -30,25 +32,25 @@ public class ProcesoAgregarAccionesAUsuarios {
 		return CiudadAutonomaBsAs;
 	}
 
-	public List<UsuarioPOI> crearActualizacion(List<List<Posicion>> unValor) {
-		List<UsuarioPOI> user = terminales.getTerminals();
+	public List<Terminal> crearActualizacion(List<List<Posicion>> unValor) {
+		List<Terminal> user = entityManager().createQuery("from Terminal t ",Terminal.class).getResultList(); 
+		
 		if (unValor.isEmpty()) {
 			return user;
 		} else {
-			List<UsuarioPOI> toRemove = filterByPosicion(user, unValor);
+			List<Terminal> toRemove = filterByPosicion(user, unValor);
 			user.removeAll(toRemove);
 			return user;
 		}
 	}
 
-	public List<UsuarioPOI> filterByPosicion(List<UsuarioPOI> listaUser, List<List<Posicion>> listaComuna) {
-		List<UsuarioPOI> toRemove = new ArrayList<UsuarioPOI>();
+	public List<Terminal> filterByPosicion(List<Terminal> listaUser, List<List<Posicion>> listaComuna) {
+		List<Terminal> toRemove = new ArrayList<Terminal>();
 
-		for (UsuarioPOI user : listaUser) {
-			Terminal terminal = new Terminal(user.getUsuario());
+		for (Terminal user : listaUser) {
 
 			for (List<Posicion> cordenada : listaComuna) {
-				if (poi.utilidades.Calculo.coordenadasEnComuna(cordenada, terminal.getPosicion())) {
+				if (poi.utilidades.Calculo.coordenadasEnComuna(cordenada, user.getPosicion())) {
 				} else {
 					toRemove.add(user);
 				}
@@ -58,9 +60,8 @@ public class ProcesoAgregarAccionesAUsuarios {
 		return toRemove;
 	}
 
-	public void actualizarPermisos(UsuarioPOI user, boolean permisoEtiqueta, boolean permisoDisponibilidad,
+	public void actualizarPermisos(Terminal terminal, boolean permisoEtiqueta, boolean permisoDisponibilidad,
 			boolean permisoCercania) {
-		Terminal terminal = new Terminal(user.getUsuario());
 
 		terminal.updateFilterByTag(permisoEtiqueta);
 		terminal.updateFilterByDisponibility(permisoDisponibilidad);
@@ -70,7 +71,7 @@ public class ProcesoAgregarAccionesAUsuarios {
 	public void correrProceso(List<List<Posicion>> unValor, boolean permisoEtiqueta, boolean permisoDisponibilidad,
 			boolean permisoCercania) throws Exception {
 		try {
-			for (UsuarioPOI elemento : crearActualizacion(unValor)) {
+			for (Terminal elemento : crearActualizacion(unValor)) {
 				actualizarPermisos(elemento, permisoEtiqueta, permisoDisponibilidad, permisoCercania);
 			}
 		} catch (Exception e) {

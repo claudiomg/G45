@@ -133,9 +133,13 @@ public class CargaInicial implements WithGlobalEntityManager{
 		
 		for(UsuarioPOI terminal: usuariosRepo)
 		{
-			entityManager().getTransaction().begin();
-			entityManager().persist(terminal);
-			entityManager().getTransaction().commit();	
+			if( entityManager().createQuery("from UsuarioPOI U where U.usuario = :nombre", UsuarioPOI.class)
+					.setParameter("nombre", terminal.getUsuario()).getResultList().isEmpty() )
+			{
+				entityManager().getTransaction().begin();
+				entityManager().persist(terminal);
+				entityManager().getTransaction().commit();
+			}
 		}
 		
 	}
