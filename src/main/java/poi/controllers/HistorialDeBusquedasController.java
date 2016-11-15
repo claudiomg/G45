@@ -47,7 +47,6 @@ public class HistorialDeBusquedasController {
 		viewModel.put("hasResults", !consultas.isEmpty());
 		List<HashMap<String, Object>> listado = this.convertConsultas(consultas, usuario, fechaInicio, fechaFin); 
 		viewModel.put("result", listado);
-		ServicioRest.getInstance().restHistorial(listado);
 		return new ModelAndView(viewModel, "historialDeBusquedasRealizadas.html");
 		
 	}

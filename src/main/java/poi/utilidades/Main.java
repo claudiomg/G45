@@ -5,6 +5,8 @@ import static spark.Spark.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.List;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
@@ -16,6 +18,9 @@ import poi.dataImport.ColectivoImportService;
 import poi.dataImport.DataImportService;
 import poi.dataImport.KioscoImportService;
 import poi.dataImport.LibraryImportService;
+import poi.servicioRest.JsonTransformer;
+import poi.servicioRest.ResponseError;
+import poi.servicioRest.ServicioRest;
 import poi.controllers.TerminalController;
 import poi.controllers.ConfigAccionesController;
 import poi.controllers.HistorialDeBusquedasController;
@@ -130,10 +135,29 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		get("/configAcciones",configAcciones::renderUsuario, engine);
 		post("/configAcciones",configAcciones::agregarAcciones, engine);
 		get("/configAcciones_Eliminar", configAcciones::eliminarAcciones, engine);
-	}
+	
+		//REST
+		get("/consultas/:usuario", (request, response) -> {
+			String terminal = request.params(":usuario");
+			List<HashMap<String, Object>> listado = ServicioRest.getInstance().restBusquedaUsuario(terminal); 
+			if (listado != null){
+				return listado;
+			}			
+			response.status(400);
+			return new ResponseError("No se encuentra el usuario '%s'", terminal);		    		
+		}, new JsonTransformer());		
+	
+		get("/consultas/:finicio/:ffin", (request, response) -> {
+			String finicio = request.params(":finicio");
+			String ffin = request.params(":ffin");			
+			List<HashMap<String, Object>> listado = ServicioRest.getInstance().restBusquedaFechas(finicio, ffin); 
+			if (listado != null){
+				return listado;
+			}			
+			response.status(400);
+			return new ResponseError("No hay consultas entre las fechas indicadas");		    		
+		}, new JsonTransformer());		
 	
 	
-	
-	
-	 
+	}	 
 }

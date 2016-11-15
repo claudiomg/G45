@@ -37,7 +37,6 @@ public class TerminalController {
 		viewModel.put("hasResults", !finder.getResults().isEmpty());
 		List<HashMap<String, Object>> listado = this.convertPoi(finder.getResults(),request);
 		viewModel.put("results", listado);
-		ServicioRest.getInstance().restBusqueda(listado);
 		return new ModelAndView(viewModel, "terminalHome.html");
 	}
 	private HashMap<String, Object> configViewModel(RequestMediator request) {
