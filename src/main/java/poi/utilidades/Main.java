@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.jetty.http.HttpTester.Request;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
@@ -158,6 +159,26 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			return new ResponseError("No hay consultas entre las fechas indicadas");		    		
 		}, new JsonTransformer());		
 	
+		
+		get("/pois/porNombre/:nombre",(request,response) -> {
+			String nombre = request.params(":nombre");
+			List<HashMap<String,Object>> listado = ServicioRest.getInstance().restBusquedaPOIsPorNombre(nombre);
+			if (listado != null){
+				return listado;
+			}
+			response.status(400);
+			return new ResponseError("No hay pois con ese nombre");
+			},new JsonTransformer());
+		
+		get("/pois/porPalabraClave/:palabraClave",(request,response) -> {
+			String palabraClave = request.params(":palabraClave)");
+			List<HashMap<String,Object>> listado = ServicioRest.getInstance().restBusquedaPOIsPorPalabraClave(palabraClave);
+			if(listado != null ){
+				return listado;
+			}
+			response.status(400);
+			return new ResponseError("No hay pois con esa palabra clave");
+			},new JsonTransformer());
 	
 	}	 
 }

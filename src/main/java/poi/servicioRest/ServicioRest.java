@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import poi.modelo.puntoDeInteres.POI;
 import poi.repositorios.RepositorioConsultas;
+import poi.repositorios.RepositorioPOI;
 import poi.utilidades.Consulta;
 
 public class ServicioRest {
+	private static final int ArrayList = 0;
 	protected static ServicioRest instance;
 	protected ServicioRest() { /*Existe para anular la instanciacion*/ };
 	
@@ -34,6 +37,52 @@ public class ServicioRest {
 				this.convertConsultasPorFecha(consultas, fechaInicio, fechaFin);
 		return listado;
 	}	
+	
+	public List<HashMap<String, Object>> restBusquedaPOIsPorNombre(String nombre) {
+		List<POI> pois = RepositorioPOI.getInstance().getRegistros();
+		List<HashMap<String, Object>> listado = 
+				this.convertPOIsPorNombre(pois, nombre);
+		return listado;
+	}
+	
+	
+	public List<HashMap<String, Object>> restBusquedaPOIsPorPalabraClave(String palabraClave) {
+	   List<POI> pois = RepositorioPOI.getInstance().getRegistros();
+	   List<HashMap<String,Object>> listado =
+			   this.convertPOIsPorPalabraClave(pois, palabraClave);
+	   return listado;
+	}
+	
+	private List<HashMap<String, Object>> convertPOIsPorPalabraClave(List<POI> pois, String palabraClave) {
+		List<POI> poisAuxiliar = new ArrayList<>();
+	     poisAuxiliar.addAll(pois.stream().filter(poi1 -> poi1.getPalabrasClave().contains(palabraClave) ).collect(Collectors.toList()));
+	     List<HashMap<String,Object>> array = new ArrayList<HashMap<String,Object>>();
+	     for (POI poi : poisAuxiliar){
+	    	 HashMap<String,Object> element = new HashMap<String,Object>();		
+				element.put("nombre", poi.getNombre());
+				element.put("posicion", poi.getPosicion().toString());
+				element.put("direccion",poi.getDireccion().toString());
+				element.put("palabrasClaves",poi.getPalabrasClave());
+				array.add(element);
+	    	   }
+	     return array;
+	}
+
+	private List<HashMap<String, Object>> convertPOIsPorNombre(List<POI> pois, String nombre) {
+	     List<POI> poisAuxiliar = new ArrayList<>();
+	     poisAuxiliar.addAll(pois.stream().filter(poi1 -> (poi1.getNombre() == nombre)).collect(Collectors.toList()));
+	     List<HashMap<String,Object>> array = new ArrayList<HashMap<String,Object>>();
+	     for (POI poi : poisAuxiliar){
+	    	 HashMap<String,Object> element = new HashMap<String,Object>();		
+				element.put("nombre", poi.getNombre());
+				element.put("posicion", poi.getPosicion().toString());
+				element.put("direccion",poi.getDireccion().toString());
+				element.put("palabrasClaves",poi.getPalabrasClave());
+				array.add(element);
+	    	 
+	     }
+	     return array;
+	}
 	
 	public List<HashMap<String, Object>> convertConsultasPorTerminal(List<Consulta> consultas, String usuario ){
 		List<Consulta> consultasAuxiliar = new ArrayList<>();
@@ -104,5 +153,23 @@ public class ServicioRest {
 		}
 		return array;
 	}
+
+	
+
+	
 		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
