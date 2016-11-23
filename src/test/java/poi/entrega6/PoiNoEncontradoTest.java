@@ -46,13 +46,8 @@ public class PoiNoEncontradoTest implements WithGlobalEntityManager {
 		entityManager().persist(kiosco);
 		entityManager().getTransaction().commit();
 
-		// Recupera POI
-		String nombreABuscar = "kiosco1";
-		Long idRecuperado;
-
-		idRecuperado = entityManager()
-				.createQuery("from LocalComercial l where l.nombre like :nombre", LocalComercial.class)
-				.setParameter("nombre", "%" + nombreABuscar + "%").getSingleResult().getId();
+		// Recupera POI ID
+		Long idRecuperado = kiosco.getId();
 
 		// Elimina POI
 		entityManager().getTransaction().begin();
