@@ -67,16 +67,16 @@ public class ServicioRest {
 	    	   }
 	     return array;
 	}
-
+	
 	private List<HashMap<String, Object>> convertPOIsPorNombre(List<POI> pois, String nombre) {
 	     List<POI> poisAuxiliar = new ArrayList<>();
-	     poisAuxiliar.addAll(pois.stream().filter(poi1 -> (poi1.getNombre() == nombre)).collect(Collectors.toList()));
+	     poisAuxiliar.addAll(pois.stream().filter(poi1 -> (poi1.getNombre().toLowerCase().equals(nombre.toLowerCase()))).collect(Collectors.toList()));
 	     List<HashMap<String,Object>> array = new ArrayList<HashMap<String,Object>>();
 	     for (POI poi : poisAuxiliar){
 	    	 HashMap<String,Object> element = new HashMap<String,Object>();		
 				element.put("nombre", poi.getNombre());
-				element.put("posicion", poi.getPosicion().toString());
-				element.put("direccion",poi.getDireccion().toString());
+				element.put("posicion", poi.getPosicion());
+				element.put("direccion",poi.getDireccion());
 				element.put("palabrasClaves",poi.getPalabrasClave());
 				array.add(element);
 	    	 
