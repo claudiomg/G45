@@ -61,7 +61,15 @@ public class ActualizarCoordenadasDePoiTest implements WithGlobalEntityManager{
 		banco.getPosicion().setLongitud(45.0);
 		
 		Assert.assertTrue(query.getResultList().size()==1);
-		//POI poi = query.get
-		//Assert.assertTrue(query.getFirstResult());
+		
+		Query query2 = entityManager().createNativeQuery(
+				"SELECT *"+
+				"from Posiciones INNER JOIN POIS " +
+				"ON Posiciones.PosicionId = POIS.posicionId" +
+				"WHERE POIS.NOMBRE_POI = :nombre AND Posiciones.lalitud = :latitud AND Posiciones.longitud = :longitud");
+		query2.setParameter("nombre", "Sucursal Prueba 1");
+		query2.setParameter("latitud", "36.0");
+		query2.setParameter("longitud", "45.0");
+		Assert.assertTrue(query2.getResultList().size()==1);
 	}
 }
