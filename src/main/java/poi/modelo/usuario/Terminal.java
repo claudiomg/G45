@@ -30,6 +30,7 @@ public class Terminal extends UsuarioPOI{
     @CollectionTable(name="AccionesPorUsuario", joinColumns=@JoinColumn(name="id_usuario"))
 	private Map<String,Boolean> acciones = new HashMap<String,Boolean>();
 	
+	
 	public Terminal(){
 		
 	}

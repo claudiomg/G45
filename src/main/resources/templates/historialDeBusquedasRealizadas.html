@@ -65,11 +65,11 @@
 		</form>
 		</div>
 		
-		<div>
+		<div  >
 			<h3>Resultado</h3>	
 		{{#hasResults}}
 		<div id="string">{{string}}</div>
-		<div style="overflow:auto" id="results">
+		<div style="overflow:auto" id="results" >
 			<table  class="table table-striped table-bordered table-condensed table-responsive" id="historial">
 				<thead>
 					<tr>
@@ -85,7 +85,7 @@
 							<td>{{{fecha}}}</td>
 							<td>{{usuario}}</td>
 							<td><label>nombre</label> = {{parametros}}</td>
-							<td> {{pois}}</td>
+							<td><label> {{pois}}</label></td>
 						</tr>
 					{{~/each}}
 				</tbody>
@@ -127,6 +127,7 @@
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/loginProcess.js"></script>
 	<script src="js/slideImages.js"></script>
+	<script src="js/tooltip.js"></script>
 	<script>
 	var $table = $('#historial'),
     $bodyCells = $table.find('tbody tr:first').children(),
@@ -148,7 +149,30 @@ $(window).resize(function () {
     });
 
 }).resize(); // Trigger resize handler</script>
+
 	<!-- JAVASCRIPT EXTRA -->
+	<style>
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
 		
 
 </body>

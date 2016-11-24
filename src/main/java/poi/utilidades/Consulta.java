@@ -60,7 +60,9 @@ public class Consulta implements WithGlobalEntityManager {
 		this.setUser(user);
 		this.setPalabraBuscada(palabraBuscada);
 	}
-	
+	public Long getId (){
+		return consultaId;
+	}
 	public void calcularTiempoProceso() {
 		Duration duration = Duration.between(this.getComienzoProceso(), this.getFinProceso());
 		Duration maximoPermitido = PoiSystemConfiguration.getInstance().getTiempoProcesamientoMaximo();
