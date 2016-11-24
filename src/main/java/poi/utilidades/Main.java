@@ -170,9 +170,9 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			return new ResponseError("No hay pois con ese nombre");
 			},new JsonTransformer());
 		
-		get("/pois/porPalabraClave/:palabraClave",(request,response) -> {
-			String palabraClave = request.params(":palabraClave)");
-			List<HashMap<String,Object>> listado = ServicioRest.getInstance().restBusquedaPOIsPorPalabraClave(palabraClave);
+		get("/pois/porCalle/:calle",(request,response) -> {
+			String calle = request.params(":calle");
+			List<HashMap<String,Object>> listado = ServicioRest.getInstance().restBusquedaPOIsPorCalle(calle);
 			if(listado != null ){
 				return listado;
 			}

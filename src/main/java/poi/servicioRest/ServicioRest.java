@@ -46,22 +46,22 @@ public class ServicioRest {
 	}
 	
 	
-	public List<HashMap<String, Object>> restBusquedaPOIsPorPalabraClave(String palabraClave) {
+	public List<HashMap<String, Object>> restBusquedaPOIsPorCalle(String calle) {
 	   List<POI> pois = RepositorioPOI.getInstance().getRegistros();
 	   List<HashMap<String,Object>> listado =
-			   this.convertPOIsPorPalabraClave(pois, palabraClave);
+			   this.convertPOIsPorCalle(pois, calle);
 	   return listado;
 	}
 	
-	private List<HashMap<String, Object>> convertPOIsPorPalabraClave(List<POI> pois, String palabraClave) {
+	private List<HashMap<String, Object>> convertPOIsPorCalle(List<POI> pois, String calle) {
 		List<POI> poisAuxiliar = new ArrayList<>();
-	     poisAuxiliar.addAll(pois.stream().filter(poi1 -> poi1.getPalabrasClave().contains(palabraClave) ).collect(Collectors.toList()));
+	     poisAuxiliar.addAll(pois.stream().filter(p -> p.getDireccion().getCalle().toLowerCase().equals(calle.toLowerCase())).collect(Collectors.toList()));
 	     List<HashMap<String,Object>> array = new ArrayList<HashMap<String,Object>>();
 	     for (POI poi : poisAuxiliar){
 	    	 HashMap<String,Object> element = new HashMap<String,Object>();		
 				element.put("nombre", poi.getNombre());
-				element.put("posicion", poi.getPosicion().toString());
-				element.put("direccion",poi.getDireccion().toString());
+				element.put("posicion", poi.getPosicion());
+				element.put("direccion",poi.getDireccion());
 				element.put("palabrasClaves",poi.getPalabrasClave());
 				array.add(element);
 	    	   }
