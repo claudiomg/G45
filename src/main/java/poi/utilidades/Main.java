@@ -179,6 +179,19 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 			response.status(400);
 			return new ResponseError("No hay pois con esa palabra clave");
 			},new JsonTransformer());
-	
+		
+		get("/pois/porCalleYNombre/:calle/:nombre",(request,response) -> {
+			String calle = request.params(":calle");
+			String nombre = request.params(":nombre");
+			List<HashMap<String,Object>> listado = ServicioRest.getInstance().restBusquedaPOIsPorCalleYNombre(calle,nombre);
+			if(listado != null ){
+				return listado;
+			}
+			response.status(400);
+			return new ResponseError("No hay pois con esa palabra clave");
+			},new JsonTransformer());
 	}	 
+	
+ 	
+
 }

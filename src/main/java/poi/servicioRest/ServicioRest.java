@@ -53,6 +53,30 @@ public class ServicioRest {
 	   return listado;
 	}
 	
+	public List<HashMap<String, Object>> restBusquedaPOIsPorCalleYNombre(String calle, String nombre) {
+		List<POI> pois = RepositorioPOI.getInstance().getRegistros();
+		   List<HashMap<String,Object>> listado =
+				   this.convertPOIsPorCalleYNombre(pois, calle,nombre);
+		   return listado;
+	}
+	
+	private List<HashMap<String, Object>> convertPOIsPorCalleYNombre(List<POI> pois, String calle, String nombre) {
+		List<POI> poisAuxiliar = new ArrayList<>();
+	     poisAuxiliar.addAll(pois.stream().filter(p -> ((p.getDireccion().getCalle().toLowerCase().equals(calle.toLowerCase())) &&
+	    		 (p.getNombre().toLowerCase().equals(nombre.toLowerCase())))).collect(Collectors.toList()));
+	     List<HashMap<String,Object>> array = new ArrayList<HashMap<String,Object>>();
+	     for (POI poi : poisAuxiliar){
+	    	 HashMap<String,Object> element = new HashMap<String,Object>();		
+				element.put("nombre", poi.getNombre());
+				element.put("posicion", poi.getPosicion());
+				element.put("direccion",poi.getDireccion());
+				element.put("palabrasClaves",poi.getPalabrasClave());
+				array.add(element);
+	    	   }
+	     return array;
+		
+	}
+
 	private List<HashMap<String, Object>> convertPOIsPorCalle(List<POI> pois, String calle) {
 		List<POI> poisAuxiliar = new ArrayList<>();
 	     poisAuxiliar.addAll(pois.stream().filter(p -> p.getDireccion().getCalle().toLowerCase().equals(calle.toLowerCase())).collect(Collectors.toList()));
@@ -153,6 +177,8 @@ public class ServicioRest {
 		}
 		return array;
 	}
+
+	
 
 	
 
