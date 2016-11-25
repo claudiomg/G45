@@ -48,6 +48,9 @@ public abstract class POI {
 	@JoinColumn(name="PoiId")
 	private List <ExcepcionHorarioCambiado> horariosCambiados = new ArrayList<ExcepcionHorarioCambiado>();
 	
+	public POI() {
+	}
+	
 	public boolean estaCercaDe(Posicion posicionUsuario){
 		double distancia = Calculo.distanciaLineal(this.posicion, posicionUsuario);
 		double distanciaLineal = Calculo.distanciaLineal(this.posicion, posicionUsuario);

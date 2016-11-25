@@ -27,6 +27,10 @@ public class SucursalBanco extends POI{
 	  )
 	private List<String> servicios = new ArrayList<String>();
 	
+	public  SucursalBanco() {
+		
+	}
+	
 	public SucursalBanco(String nombre, Posicion posicion, Direccion direccion) {
 		this.setNombre(nombre);
 		this.setPosicion(posicion);
