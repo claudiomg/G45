@@ -85,7 +85,7 @@
 							<td>{{{fecha}}}</td>
 							<td>{{usuario}}</td>
 							<td><label>nombre</label> = {{parametros}}</td>
-							<td><label> {{pois}}</label></td>
+							<td><a data-toggle="popover" ><label> {{pois}}</label></a></td>
 						</tr>
 					{{~/each}}
 				</tbody>
@@ -127,7 +127,7 @@
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/loginProcess.js"></script>
 	<script src="js/slideImages.js"></script>
-	<script src="js/tooltip.js"></script>
+	
 	<script>
 	var $table = $('#historial'),
     $bodyCells = $table.find('tbody tr:first').children(),
@@ -148,31 +148,36 @@ $(window).resize(function () {
         $(v).width(colWidth[i]);
     });
 
-}).resize(); // Trigger resize handler</script>
+}).resize(); // Trigger resize handler
+</script>
 
-	<!-- JAVASCRIPT EXTRA -->
-	<style>
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
+<script>
 
-/* Tooltip text */
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
- 
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-}
+$(document).ready(function() {
+	  $('[data-toggle="popover"]').popover({
+	    placement: 'right',
+	    title: 'Pois encontrados:',
+	    content: 'Acá debería aparecer los pois encontrados', //resultados,
+	    trigger: 'hover',
+	  });
+	});
+//var resultados = new Array();
+/*resultados = function mostrarResultados('hover',
+	
+		({{#hasResults}}
+'<div class="row">' + 
+'table  class="table table-striped table-bordered table-condensed table-responsive" >'+
+	'<tbody>' +
+	{{#each usuario}}
+	'<tr>' + 
+		'<td><label> {{usuario}}</label></a></td>' +
+	'</tr>').show();
+
+{{~/each}}
+{{/hasResults}}	
+return resultados)*/
+</script>
+
 		
 
 </body>
