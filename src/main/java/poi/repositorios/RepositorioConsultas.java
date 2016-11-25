@@ -5,32 +5,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
+
+import com.mongodb.MongoClient;
+
 import poi.modelo.usuario.Terminal;
 import poi.utilidades.Consulta;
 
 public class RepositorioConsultas {
 	
 	protected static RepositorioConsultas instance;
+	private static Datastore datastore;
+	private static Morphia morphia;
+	private static MongoClient cliente;
 	protected RepositorioConsultas() { /*Existe para anular la instanciacion*/ };
 	public static RepositorioConsultas getInstance() {
 		if(instance == null) {
 			instance = new RepositorioConsultas();
+			cliente = new MongoClient();
+			morphia = new Morphia();
+			morphia.mapPackage("poi.repositorios");
+			datastore = morphia.createDatastore(cliente, "Grupo45_POIs");
 		}
 		return instance;
 	}
 	public List<Consulta> registros = new ArrayList <Consulta>(); 
 
 	public void agregarRegistro(Consulta unRegistro){
-		this.registros.add(unRegistro);
+		datastore.save(unRegistro);
 	}
 	public void eliminarRegistro(Consulta unRegistro){
-		this.registros.remove(unRegistro);
+		datastore.delete(unRegistro);
 	}
 	public void cleanRepository() {
-		this.registros = new ArrayList <Consulta>();
+		this.getRegistros().stream().forEach(consulta -> this.quitarRegistroDeLaBase(consulta));
 	}
 	public List<Consulta> getRegistros() {
-		return this.registros;
+		return datastore.createQuery(Consulta.class).asList();
+	}
+	public Consulta getRegistroPorId(ObjectId id){
+		return datastore.get(Consulta.class, id);
+	}
+	public void quitarRegistroDeLaBase(Consulta unRegistro){
+		Query<Consulta> query = datastore.createQuery(Consulta.class).filter("_id", unRegistro.getId());
+		datastore.delete(query);
 	}
 
 	public List<Consulta> filtrarConsultaPorFecha(List<Consulta> lista, LocalDate fecha) {

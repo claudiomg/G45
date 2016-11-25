@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -20,7 +21,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+*/
 
+
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.bson.types.ObjectId;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
@@ -28,30 +35,21 @@ import poi.modelo.usuario.Terminal;
 import poi.repositorios.RepositorioConsultas;
 import poi.modelo.puntoDeInteres.POI;
 
-@Entity
-@Table(name="Consultas")
+@Entity("Consultas")
 public class Consulta implements WithGlobalEntityManager {
 	@Id
-	@GeneratedValue
-	@Column(name="consultaId")
-	private Long consultaId;
-	@Column(name = "comienzoProceso")
+	private  ObjectId consultaId;
 	private LocalDateTime comienzoProceso;
-	@Column(name = "finProceso")
 	private LocalDateTime finProceso;
-	@Column(name = "duracionProceso")
 	private Duration duracionProceso;
-	@Column(name="palabraBuscada")
 	private String palabraBuscada;
-	@ManyToOne
-	@JoinColumn(name="terminalId")
+	
+	@Embedded
 	private Terminal user;
 	
 	private int cantidadEncontrada;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="poisEncontrados", 
-	joinColumns=@JoinColumn(name="consultaId"), inverseJoinColumns=@JoinColumn(name="PoiId"))  
+	@Embedded
 	private List<POI> poisEncontrados;
 	
 	public Consulta(){};
@@ -60,7 +58,7 @@ public class Consulta implements WithGlobalEntityManager {
 		this.setUser(user);
 		this.setPalabraBuscada(palabraBuscada);
 	}
-	public Long getId (){
+	public ObjectId getId (){
 		return consultaId;
 	}
 	public void calcularTiempoProceso() {
