@@ -16,7 +16,7 @@ public class ColectivoImportService extends DataImportService {
 	String getRadarSearchUri() {
 		return "https://maps.googleapis.com/maps/api/place/radarsearch/json?" +
 				"location=-34.634757,-58.498956&" +
-				"radius=1000&" +
+				"radius=300&" +
 				"types=bus_station&" +
 				"key=" + this.keyGoogleApi();
 	}

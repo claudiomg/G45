@@ -47,7 +47,7 @@ public class KioscoImportService extends DataImportService {
 	String getRadarSearchUri() {
 		return "https://maps.googleapis.com/maps/api/place/radarsearch/json?" +
 				"location=-34.634757,-58.498956&" +
-				"radius=5000&" +
+				"radius=100&" +
 				"types=store&" +
 				"key=" + this.keyGoogleApi();
 	}

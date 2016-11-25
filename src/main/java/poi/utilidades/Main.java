@@ -42,10 +42,10 @@ public class Main extends AbstractPersistenceTest implements WithGlobalEntityMan
 		staticFileLocation("/public");
 		
 		
-		//new BankImportService().importData();
-		//new LibraryImportService().importData();
-		//new KioscoImportService().importData();
-		//new ColectivoImportService().importData();
+		new BankImportService().importData();
+		new LibraryImportService().importData();
+		new KioscoImportService().importData();
+		new ColectivoImportService().importData();
 		//new BankImport().importData("/home/juan/DDS/eclipse/G45/src/main/resources/public/dataImport/bank.csv",";");
 		
 		TimeRange rangoInferiorDeLaSemana = new TimeRange(LocalTime.of(10,0,0),LocalTime.of(13,0,0));

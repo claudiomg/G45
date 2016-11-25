@@ -48,7 +48,7 @@ public class LibraryImportService extends DataImportService {
 	String getRadarSearchUri() {
 		return "https://maps.googleapis.com/maps/api/place/radarsearch/json?" +
 				"location=-34.659603,-58.468883&" +
-				"radius=5000&" +
+				"radius=2000&" +
 				"types=library&" +
 				"key=" + this.keyGoogleApi();
 	}
